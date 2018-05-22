@@ -29,11 +29,6 @@
                         <nav class="c-mega-menu c-pull-right c-mega-menu-dark c-mega-menu-dark-mobile c-fonts-uppercase c-fonts-bold">
                             <ul class="nav navbar-nav c-theme-nav">
                                 <li>
-                                    <a href="<?=base_url();?>" class="c-link dropdown-toggle">INICIO
-                                        <span class="c-arrow c-toggler"></span>
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="<?=base_url('infocyt');?>" class="c-link dropdown-toggle">INFOCYT
                                         <span class="c-arrow c-toggler"></span>
                                     </a>

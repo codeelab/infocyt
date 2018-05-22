@@ -2,9 +2,13 @@
 THEME COLOR - DEFAULT
 *********************/
 a {
-  color: #3f444a; }
+  color: #ce93d8; }
   a:active, a:hover, a:focus {
     color: #32c5d2; }
+
+.c-theme-text-align{
+  text-align: justify;
+}
 
 .c-theme-link:focus, .c-theme-link:active, .c-theme-link:hover {
   color: #32c5d2 !important; }
@@ -69,7 +73,15 @@ a {
   color: #32c5d2 !important; }
   .c-theme-font > i,
   .c-theme-color > i {
-    color: #32c5d2 !important; }
+    color: #32c5d2; }
+
+.c-theme-font-new,
+.c-theme-color-new {
+  color: #ce93d8 !important; }
+  .c-theme-font-new > i,
+  .c-theme-color-new > i {
+    color: #ce93d8 !important; }
+
 
 .c-theme-font-hover:hover {
   color: #32c5d2 !important; }
