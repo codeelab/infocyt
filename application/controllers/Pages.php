@@ -19,12 +19,25 @@ class Pages extends CI_Controller {
             show_404();
         }
         
+        $data['estados'] = $this->Pages_model->getEstados();
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
-        $this->load->view('pages/'.$pages);
+        $this->load->view('pages/'.$pages, $data);
         $this->load->view('theme/footer');
     }
 
-
+    function getCidades($id_estado)
+    {
+        $this->load->model('Pages_model');
+        $cidades = $this->Pages_model->getCidades($id_estado);
+        if( empty ( $cidades ) )
+            return '{ "nombre": "No hay municipios disponibles" }';
+        $arr_cidade = array();
+        foreach ($cidades as $cidade) {
+            $arr_cidade[] = '{"id_municipio":' . $cidade->id_municipio . ',"nombre":"' . $cidade->nombre_mun . '"}';
+        }
+        echo '[ ' . implode(",",$arr_cidade) . ']';
+        return;
+    }
 
 }

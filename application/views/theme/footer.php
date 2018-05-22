@@ -54,6 +54,9 @@
         <script src="<?=base_url();?>assets/js/components.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/components-shop.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/app.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/ajax.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/funciones.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/zxcvbn.js" type="text/javascript"></script>
         <script>
             $(document).ready(function()
             {
