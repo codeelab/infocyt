@@ -106,7 +106,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-text" for="institucion">Institución</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="a_materno" name="a_materno" placeholder="Apellido Materno">
+                                            <input type="text" class="form-control c-theme c-square input-lg" id="institucion" name="institucion" placeholder="Apellido Materno">
 
                                         </div>
                                         <div class="col-md-4">
