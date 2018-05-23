@@ -23,9 +23,18 @@
         <!-- BEGIN: LAYOUT/BASE/BOTTOM -->
         <!-- BEGIN: CORE PLUGINS -->
         <!--[if lt IE 9]>
-    <script src="../../assets/global/plugins/excanvas.min.js"></script> 
+    <script src="<?=base_url();?>assets/global/plugins/excanvas.min.js"></script> 
     <![endif]-->
         <script src="<?=base_url();?>assets/js/jquery.min.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/funciones.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/dataTables.responsive.min.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/html5shiv.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/jquery-ui.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/jquery-validate.js" type="text/javascript"></script>
+        
+        <script src="<?=base_url();?>assets/js/particles.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/zxcvbn.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/jquery-migrate.min.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/jquery.easing.min.js" type="text/javascript"></script>
@@ -54,9 +63,6 @@
         <script src="<?=base_url();?>assets/js/components.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/components-shop.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/app.js" type="text/javascript"></script>
-        <script src="<?=base_url();?>assets/js/ajax.js" type="text/javascript"></script>
-        <script src="<?=base_url();?>assets/js/funciones.js" type="text/javascript"></script>
-        <script src="<?=base_url();?>assets/js/zxcvbn.js" type="text/javascript"></script>
         <script>
             $(document).ready(function()
             {

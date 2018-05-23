@@ -20,6 +20,8 @@ class Pages extends CI_Controller {
         }
         
         $data['estados'] = $this->Pages_model->getEstados();
+        $data['nac'] = $this->Pages_model->nacionalidad();
+        $data['gen'] = $this->Pages_model->sexo();
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('pages/'.$pages, $data);
@@ -39,5 +41,9 @@ class Pages extends CI_Controller {
         echo '[ ' . implode(",",$arr_cidade) . ']';
         return;
     }
+
+
+
+
 
 }

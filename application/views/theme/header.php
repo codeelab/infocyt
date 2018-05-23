@@ -41,6 +41,10 @@
         <link href="<?=base_url();?>assets/css/default.css" rel="stylesheet" id="style_theme" type="text/css" />
         <link href="<?=base_url();?>assets/css/custom.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="<?=base_url();?>assets/css/galano.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrapValidator.min.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.responsive.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/jquery-ui.css">
         <!-- END THEME STYLES -->
         <!-- Favicon -->
         <link rel="apple-touch-icon" href="<?=base_url()?>assets/images/Icon-60.png">

@@ -1,1 +1,51 @@
-function sumar(e){var a=0;e=parseInt(e),a=null==(a=document.getElementById("promedio").innerHTML)||void 0==a||""==a?0:a,a=parseInt(a)+parseInt(e),document.getElementById("promedio").innerHTML=a}function mostrar(){document.getElementById("oculto").style.display="block"}$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip()}),$(document).ready(function(){$("#table").DataTable({responsive:!0,ordering:!1,lengthMenu:[[5,15,25,-1],[5,15,25,"All"]],pageLength:5,orderCellsTop:!0,language:{url:"//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"}});$("#table thead").on("click",".form-control",function(e){e.stopPropagation()}),$("#table thead").on("keyup change",".form-control",function(e){var a=$(this).attr("data-column"),s=$(this).val();$("#table").DataTable().columns(a).search(s).draw()})}),$(document).ready(function(){function e(){var e=a.val(),n=s.val();i.show().removeClass(),e!=n&&i.text(t).addClass("text-danger"),0!=e.length&&""!=e||i.text(r).addClass("text-warning"),0!=e.length&&e==n&&i.text(o).removeClass("text-danger").addClass("text-success")}var a=$("[name=email]"),s=$("[name=email2]"),o="Los correos si coinciden",t="No coinciden ambos correos",r="El campo no puede estar vacío",i=$("<span></span>").insertAfter(s);i.hide(),s.keyup(function(){e()})}),$(document).ready(function(){$("#registro").bootstrapValidator({message:"Este valor no es válido",feedbackIcons:{valid:"fa fa-check",invalid:"fa fa-remove",validating:"fa fa-refresh"},fields:{nombre:{validators:{notEmpty:{message:"Es requerido el nombre del Ponente. "},regexp:{regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,message:"Solo está permitido el uso caracteres alfabeticos."}}},a_paterno:{validators:{notEmpty:{message:"Es requerido el apellido paterno. "},regexp:{regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,message:"Solo está permitido el uso caracteres alfabeticos."}}},a_materno:{validators:{notEmpty:{message:"Es requerido el apellido materno. "},regexp:{regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,message:"Solo está permitido el uso caracteres alfabeticos."}}},email:{validators:{notEmpty:{message:"Es requerido su correo personal. "},emailAddress:{message:"Su correo no pertenece a un dominio valido."},regexp:{regexp:/^[A-Z0-9._%+-]+@(?:[A-Z]{4}|gmail|yahoo|outlook|hotmail)+\.(com|mx|es|com.mx)+$/i,message:"Solo está permitido el uso de los siguientes dominios: Gmail, Yahoo, Outlook, Hotmail."}}},email2:{validators:{notEmpty:{message:"Es requerido su correo personal. "},emailAddress:{message:"Su correo no pertenece a un dominio valido."},regexp:{regexp:/^[A-Z0-9._%+-]+@(?:[A-Z]{4}|gmail|yahoo|outlook|hotmail)+\.(com|mx|es|com.mx)+$/i,message:"Solo está permitido el uso de los siguientes dominios: Gmail, Yahoo, Outlook, Hotmail."}}},genero:{validators:{notEmpty:{message:"Es requerido su genero."}}},username:{validators:{notEmpty:{message:"Es requerido su usuario."},regexp:{regexp:/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i,message:"No es un usuario valido"}}},nacionalidad:{validators:{notEmpty:{message:"Es requerida su nacionalidad."}}},estado:{validators:{notEmpty:{message:"Es requerido su estado."}}},municipio:{validators:{notEmpty:{message:"Es requerido su municipio."}}},mesa:{validators:{notEmpty:{message:"Es requerido seleccione su área temática."}}},nivel:{validators:{notEmpty:{message:"Es requerido seleccione su nivel educativo."}}},institucion:{validators:{notEmpty:{message:"Es requerido elija una institución educativa."}}},facultad:{validators:{notEmpty:{message:"Es requerido seleccione su facultad."}}},mailing:{validators:{notEmpty:{message:"Especifique al menos una opción de las dos mencionadas."}}},titulo:{validators:{notEmpty:{message:"Agrege el nombre del título del proyecto."}}},autor:{validators:{notEmpty:{message:"Agrege el nombre del autor del proyecto."}}},coautores:{validators:{notEmpty:{message:"Agrege el (los) nombre (es) de los coautores del proyecto."}}},asesor:{validators:{notEmpty:{message:"Agrege el nombre de asesor del proyecto."}}},tipo_trabajo_id:{validators:{notEmpty:{message:"Elige el tipo de ponencia."}}},mesa_id:{validators:{notEmpty:{message:"Elige un área temática."}}},area_id:{validators:{notEmpty:{message:"Elige el área de apoyo."}}},userfile:{validators:{notEmpty:{message:"Es obligatorio subir su resumen."}}},password:{validators:{notEmpty:{message:"La contraseña es obligatoria y no puede estar vacía."},callback:{callback:function(e,a,s){var o=s.val();if(""==o)return!0;var t=zxcvbn(o),r=t.score,i=t.feedback.warning||"La contraseña es demasiado débil.",n=$("#strengthBar");switch(r){case 0:n.attr("class","progress-bar progress-bar-danger").css("width","1%");break;case 1:n.attr("class","progress-bar progress-bar-danger").css("width","25%");break;case 2:n.attr("class","progress-bar progress-bar-danger").css("width","50%");break;case 3:n.attr("class","progress-bar progress-bar-warning").css("width","75%");break;case 4:n.attr("class","progress-bar progress-bar-success").css("width","100%")}return!(r<4)||{valid:!1,message:i}}}}},password2:{validators:{notEmpty:{message:"La contraseña de confirmación es obligatoria y no puede estar vacía."},identical:{field:"password",message:"La contraseña y su confirmación deben ser los mismos"}}}}}).on("keyup",'[name="password"]',function(){var e=""==$(this).val();$("#registro").bootstrapValidator("enableFieldValidators","password",!e).bootstrapValidator("enableFieldValidators","password2",!e),1==$(this).val().length&&$("#registro").bootstrapValidator("validateField","password").bootstrapValidator("validateField","password2")})}); 
+$(function() {
+    $("select[id=estado]").change(function() {
+        estado = $(this).val();
+        if (estado === '') return false;
+        resetaCombo('municipio');
+        $.getJSON('Pages/getCidades/' + estado, function(data) {
+            var option = new Array();
+            $.each(data, function(i, obj) {
+                option[i] = document.createElement('option');
+                $(option[i]).attr({
+                    value: obj.id_municipio
+                });
+                $(option[i]).append(obj.nombre);
+                $("select[id='municipio']").append(option[i]);
+            });
+        });
+    });
+});
+
+function resetaCombo(el) {
+    $("select[id='" + el + "']").empty();
+    var option = document.createElement('option');
+    $(option).attr({
+        value: ''
+    });
+    $(option).append('Elija Municipio');
+    $("select[id='" + el + "']").append(option);
+}
+
+$(document).ready(function() {
+    $('#Loading').hide();
+    $('#username').blur(function() {
+        var a = $("#username").val();
+        var filter = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
+        if (filter.test(a)) {
+            $('#Loading').show();
+            $.post("checar_usuario", {
+                username: $('#username').val()
+            }, function(response) {
+                $('#Loading').hide();
+                setTimeout("finishAjax('Loading', '" + escape(response) + "')", 400);
+            });
+            return false;
+        }
+    });
+});
+
+function finishAjax(id, response) {
+    $('#' + id).html(unescape(response));
+    $('#' + id).fadeIn();
+}

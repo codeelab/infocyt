@@ -59,17 +59,6 @@ class Pages_model extends CI_Model {
          }
     }
 
-function check_username_availablity()
-{
-    $username = trim($this->input->post('username'));
-
-    $query = $this->db->query('SELECT * FROM usuarios where username="'.$username.'"');
-
-    if($query->num_rows() > 0)
-    return false;
-    else
-    return true;
-}
 
 
 }

@@ -28,7 +28,7 @@
                             <div class="c-line-left"></div>
                         </div>
                             <?php $atrib = array('name' => 'form1', 'id' => 'registro');
-                            echo form_open('inicio/registro_ponente', $atrib); ?>
+                            echo form_open('registro/registros', $atrib); ?>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-text" for="nombre">Nombre</label>
@@ -57,18 +57,18 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="estado">Estado</label>
-                                          <?php
-                                            $options = array ('' => 'Elija estado de procedencia');
-                                            foreach($estados as $estado)
-                                                $options[$estado->id_estado] = $estado->nombre_est;
-                                            echo form_dropdown('estado', $options, ' ', 'class="form-control c-theme c-square input-lg" id="estado" name="estado"');
-                                            ?>
+                                              <?php
+                                                $options = array ('' => 'Elija estado de procedencia');
+                                                foreach($estados as $estado)
+                                                    $options[$estado->id_estado] = $estado->nombre_est;
+                                                echo form_dropdown('estado', $options, ' ', 'class="form-control c-theme c-square input-lg" id="estado" name="estado"');
+                                                ?>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="municipio">Municipio</label>
                                              <?php
                                                 $options = array(''=>'Elija un estado');
-                                                echo form_dropdown('municipio', $options, ' ', 'class="form-control c-theme c-square input-lg" id="municipio" name="municipio" ');
+                                                echo form_dropdown('municipio', $options, ' ', 'class="form-control" id="municipio" name="municipio" ');
                                             ?>
                                         </div>
                                     </div>
@@ -106,14 +106,12 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-text" for="institucion">Institución</label>
+                                            <input type="text" class="form-control c-theme c-square input-lg" id="a_materno" name="a_materno" placeholder="Apellido Materno">
 
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="facultad">Facultad</label>
-                                             <?php
-                                                $options = array(''=>'Elija su carrera', 'id' => 'facultad','name' => 'facultad');
-                                                echo form_dropdown('facultad', $options, '', 'class="form-control c-theme c-square input-lg" id="facultad" name="facultad"');
-                                            ?>
+                                             
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="mailing">Mailing</label>
@@ -141,7 +139,7 @@
                                         <div class="col-md-4">
                                             <label class="form-text" for="usuario">Usuario</label>
                                             <input type="text" class="form-control c-theme c-square input-lg" id="username" name="username" placeholder="Usuario">
-                                            <span id="Loading"><img src="../assets/img/loader.gif" /></span> 
+                                            <span id="Loading"><img src="<?=base_url();?>assets/img/loader.gif" /></span> 
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="password">Contraseña</label>
