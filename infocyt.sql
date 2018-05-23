@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-05-2018 a las 18:30:39
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 5.6.36
+-- Tiempo de generación: 23-05-2018 a las 22:12:30
+-- Versión del servidor: 10.1.30-MariaDB
+-- Versión de PHP: 5.6.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -70,6 +70,28 @@ INSERT INTO `estado` (`id_estado`, `nombre_est`) VALUES
 (30, 'Veracruz de Ignacio de la Llave'),
 (31, 'Yucatán'),
 (32, 'Zacatecas');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado_civil`
+--
+
+CREATE TABLE `estado_civil` (
+  `id_civil` int(11) NOT NULL,
+  `nombre_civil` tinytext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `estado_civil`
+--
+
+INSERT INTO `estado_civil` (`id_civil`, `nombre_civil`) VALUES
+(1, 'Casado(a)'),
+(2, 'Divorciado(a)'),
+(3, 'Soltero(a)'),
+(4, 'Unión Libre'),
+(5, 'Viudo(a)');
 
 -- --------------------------------------------------------
 
@@ -3052,24 +3074,28 @@ CREATE TABLE `usuarios` (
   `rfc` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `curp` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `fecha_nac` date DEFAULT NULL,
+  `edad` text COLLATE utf8_unicode_ci NOT NULL,
   `estado_civil` int(5) DEFAULT NULL,
   `nacionalidad` int(5) DEFAULT NULL,
   `correo_laboral` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `correo_personal` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tel_lab` int(20) DEFAULT NULL,
-  `tel_part` int(25) DEFAULT NULL,
+  `tel_lab` text COLLATE utf8_unicode_ci,
+  `tel_part` text COLLATE utf8_unicode_ci,
+  `tel_cel` text COLLATE utf8_unicode_ci NOT NULL,
   `direccion` text COLLATE utf8_unicode_ci,
+  `numero_dom` text COLLATE utf8_unicode_ci NOT NULL,
   `grado_academico_id` int(5) DEFAULT NULL,
-  `colonia` int(5) DEFAULT NULL,
-  `cp` int(20) DEFAULT NULL,
+  `colonia` text COLLATE utf8_unicode_ci,
+  `cp` text COLLATE utf8_unicode_ci,
   `pais_id` int(5) DEFAULT NULL,
   `estado_id` int(5) DEFAULT NULL,
   `municipio_id` int(5) DEFAULT NULL,
   `localidad` mediumtext COLLATE utf8_unicode_ci,
   `estado_sni` int(5) DEFAULT NULL,
-  `num_rim` int(50) DEFAULT NULL,
+  `num_rim` text COLLATE utf8_unicode_ci,
   `sexo_id` int(5) NOT NULL,
   `rol_id` int(5) DEFAULT NULL,
+  `mailing` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `username` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `update_recovery` int(11) DEFAULT NULL,
@@ -3080,8 +3106,8 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `a_paterno`, `a_materno`, `rfc`, `curp`, `fecha_nac`, `estado_civil`, `nacionalidad`, `correo_laboral`, `correo_personal`, `tel_lab`, `tel_part`, `direccion`, `grado_academico_id`, `colonia`, `cp`, `pais_id`, `estado_id`, `municipio_id`, `localidad`, `estado_sni`, `num_rim`, `sexo_id`, `rol_id`, `username`, `password`, `update_recovery`, `status_id`) VALUES
-(1, 'Joel', 'Álvarez', 'García', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '1986-03-16', 1, 1, 'informatica.cecti@gmail.com', 'softcodec@gmail.com', 3140482, 3156139, 'curtidores de termendo 1056', 1, 1, 58240, 1, 16, 567, 'Morelia', 4, NULL, 1, 3, 'joel', 'be9b16e50121a086f9e35698d839dd9c3cd7e27b', 0, 1);
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `a_paterno`, `a_materno`, `rfc`, `curp`, `fecha_nac`, `edad`, `estado_civil`, `nacionalidad`, `correo_laboral`, `correo_personal`, `tel_lab`, `tel_part`, `tel_cel`, `direccion`, `numero_dom`, `grado_academico_id`, `colonia`, `cp`, `pais_id`, `estado_id`, `municipio_id`, `localidad`, `estado_sni`, `num_rim`, `sexo_id`, `rol_id`, `mailing`, `username`, `password`, `update_recovery`, `status_id`) VALUES
+(1, 'Joel', 'Álvarez', 'García', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '1986-03-16', '32', 1, 1, 'informatica.cecti@gmail.com', 'softcodec@gmail.com', '3140482', '3156139', '2147483647', 'curtidores de termendo 1056', '', 1, '1', '58240', 1, 16, 567, 'Morelia', 4, NULL, 1, 3, '', 'joel', 'be9b16e50121a086f9e35698d839dd9c3cd7e27b', 0, 1);
 
 --
 -- Índices para tablas volcadas
@@ -3092,6 +3118,12 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `a_paterno`, `a_materno`, `rfc`,
 --
 ALTER TABLE `estado`
   ADD PRIMARY KEY (`id_estado`);
+
+--
+-- Indices de la tabla `estado_civil`
+--
+ALTER TABLE `estado_civil`
+  ADD PRIMARY KEY (`id_civil`);
 
 --
 -- Indices de la tabla `genero`
@@ -3138,6 +3170,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `estado`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT de la tabla `estado_civil`
+--
+ALTER TABLE `estado_civil`
+  MODIFY `id_civil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`

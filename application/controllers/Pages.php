@@ -22,6 +22,7 @@ class Pages extends CI_Controller {
         $data['estados'] = $this->Pages_model->getEstados();
         $data['nac'] = $this->Pages_model->nacionalidad();
         $data['gen'] = $this->Pages_model->sexo();
+        $data['civil'] = $this->Pages_model->civil();
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('pages/'.$pages, $data);
@@ -43,7 +44,19 @@ class Pages extends CI_Controller {
     }
 
 
+//---------------------------------
+// VERIFICAR LA DISPONIBILIDAD DEL USUARIO
+//---------------------------------
+function checar_usuario()
+{
+    $this->load->model('Pages_model');
+    $get_result = $this->Pages_model->disponibilidad_usuario();
 
+    if(!$get_result )
+    echo '<span class="text-danger">Ya existe ese nombre de usuario ¿Quieres volver a intentarlo?.</span>';
+    else
+    echo '<span class="text-success">Usuario disponible</span>';
+}
 
 
 }
