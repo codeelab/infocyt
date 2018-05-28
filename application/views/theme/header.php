@@ -15,37 +15,39 @@
         <meta name="keywords" content="portal,oficial,gobierno,estado,michoacan,gob,mexico">
         <meta name="author" content="Instituto de Ciencia, Tecnología e Innovación del Estado de Michoacán">
 
-        <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700&amp;subset=all' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.12/css/all.css">
-        <link href="<?=base_url();?>assets/css/socicon.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/bootstrap-social.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/animate.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <!-- END GLOBAL MANDATORY STYLES -->
-        <!-- BEGIN: BASE PLUGINS  -->
-        <link href="<?=base_url();?>assets/css/settings.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/layers.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/navigation.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/cubeportfolio.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/owl.carousel.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/slider.css" rel="stylesheet" type="text/css" />
-        <!-- END: BASE PLUGINS -->
-        <!-- BEGIN: PAGE STYLES -->
-        <link href="<?=base_url();?>assets/css/ilightbox.css" rel="stylesheet" type="text/css" />
-        <!-- END: PAGE STYLES -->
         <!-- BEGIN THEME STYLES -->
-        <link href="<?=base_url();?>assets/css/plugins.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>assets/css/default.css" rel="stylesheet" id="style_theme" type="text/css" />
-        <link href="<?=base_url();?>assets/css/custom.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/custom.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/plugins.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/components.css" id="style_components"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/default.css" id="style_theme"/>
+        
         <link rel="stylesheet" href="<?=base_url();?>assets/css/galano.css">
+
         <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrapValidator.min.css">
         <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.bootstrap.css">
         <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.responsive.css">
         <link rel="stylesheet" href="<?=base_url();?>assets/css/jquery-ui.css">
+
         <!-- END THEME STYLES -->
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/socicon.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap-social.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/animate.min.css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN: BASE PLUGINS  -->
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/settings.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/layers.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/navigation.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/cubeportfolio.min.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/jquery.fancybox.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/slider.css"/>
+        <!-- END: BASE PLUGINS -->
+        <!-- BEGIN: PAGE STYLES -->
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/ilightbox.css"/>
+        <!-- END: PAGE STYLES -->
         <!-- Favicon -->
         <link rel="apple-touch-icon" href="<?=base_url()?>assets/images/Icon-60.png">
         <link rel="apple-touch-icon" sizes="76x76" href="<?=base_url()?>assets/images/Icon-76.png">

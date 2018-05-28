@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Registro_model extends CI_Model {
 
-    
+
 
 }
 

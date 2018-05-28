@@ -36,41 +36,43 @@
                     </div>
                 <?php } ?>
                         </div>
-                            <?php $atrib = array('name' => 'form1', 'id' => 'registro');
-                            echo form_open('registro/registros', $atrib); ?>
+                            <?php $atrib = array('name' => 'form1', 'id' => 'registro', 'autocomplete'=> 'off');
+                            echo form_open('registro/investigador', $atrib); ?>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-text" for="nombre">Nombre</label>
                                             <input type="text" class="form-control c-theme c-square input-lg" id="nombre" name="nombre" placeholder="Nombre">
-                                             <?php echo form_error('nombre', '<div class="alert alert-danger"><b>', '</b></div>'); ?>
+                                             <?php echo form_error('nombre', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="a_paterno">Apellido Paterno</label>
                                             <input type="text" class="form-control c-theme c-square input-lg" id="a_paterno" name="a_paterno" placeholder="Apellido Paterno">
-                                            <?php echo form_error('a_paterno', '<div class="alert alert-danger"><b>', '</b></div>'); ?>
+                                            <?php echo form_error('a_paterno', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="a_paterno">Apellido Materno</label>
                                             <input type="text" class="form-control c-theme c-square input-lg" id="a_materno" name="a_materno" placeholder="Apellido Materno">
-                                             <?php echo form_error('a_materno', '<div class="alert alert-danger"><b>', '</b></div>'); ?>
+                                             <?php echo form_error('a_materno', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-text" for="nombre">RFC</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="rfc" name="rfc" placeholder="RFC">
-                                            <?php echo form_error('rfc', '<div class="alert alert-danger"><b>', '</b></div>'); ?>
+                                            <input type="text" class="form-control" id="rfc" name="rfc" placeholder="RFC" oninput="validarInputRFC(this)" >
+                                             <div id="resultadoRFC"></div>
+                                            <?php echo form_error('rfc', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="a_paterno">CURP</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="curp" name="curp" placeholder="CURP">
-                                            <?php echo form_error('curp', '<div class="alert alert-danger"><b>', '</b></div>'); ?>
+                                            <input type="text" class="form-control" id="curp" name="curp" placeholder="CURP" oninput="validarInput(this)">
+                                             <div id="resultadoCURP"></div>
+                                            <?php echo form_error('curp', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="a_paterno">Fecha de Nacimiento</label>
-                                            <input type="date" class="form-control c-theme c-square input-lg" id="fecha_nac" name="fecha_nac" placeholder="Fecha de Nacimiento">
-                                            <?php echo form_error('fecha_nac', '<div class="alert alert-danger"><b>', '</b></div>'); ?>
+                                            <input type="text" class="form-control c-theme c-square input-lg" id="fecha_nac" name="fecha_nac" placeholder="MES / DÍA / AÑO" data-date-format="DD-MM-YYYY">
+                                            <?php echo form_error('fecha_nac', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                     </div>
 
@@ -84,6 +86,7 @@
                                                echo '<option value="',$i,'">',$nacionalidad,'</option>';
                                             ?>
                                             </select>
+                                            <?php echo form_error('nacionalidad', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="form-text" for="estado">Estado</label>
@@ -91,30 +94,31 @@
                                                 $options = array ('' => 'Elija estado de procedencia');
                                                 foreach($estados as $estado)
                                                     $options[$estado->id_estado] = $estado->nombre_est;
-                                                echo form_dropdown('estado', $options, ' ', 'class="form-control c-theme c-square input-lg" id="estado_id" name="estado_id"');
+                                                echo form_dropdown('estado_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="estado_id"');
                                                 ?>
+                                                <?php echo form_error('estado_id', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="form-text" for="municipio">Municipio</label>
                                              <?php
                                                 $options = array(''=>'Elija un estado');
-                                                echo form_dropdown('municipio', $options, ' ', 'class="form-control c-theme c-square input-lg" id="municipio_id" name="municipio_id" ');
+                                                echo form_dropdown('municipio_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="municipio_id"');
                                             ?>
+                                            <?php echo form_error('municipio_id', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="form-text" for="a_paterno">Localidad</label>
                                             <input type="text" class="form-control c-theme c-square input-lg" id="localidad" name="localidad" placeholder="Localidad">
+                                            <?php echo form_error('localidad', '<div class="alert alert-danger">', '</div>'); ?>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-text" for="edad">Edad</label>
-                                      <div class="range range-info c-theme c-square input-lg">
-                                        <input type="range" name="edad" id="edad" min="18" max="100" value="18" onchange="rangeInfo.value=value">
-                                        <output id="rangeInfo">18</output>
+                                            <input type="text" class="form-control c-theme c-square input-lg" id="edad" name="edad" placeholder="Edad">
+                                            <?php echo form_error('edad', '<div class="alert alert-danger">', '</div>'); ?>
                                       </div>
-                                        </div>
                                         <div class="col-md-4">
                                             <label class="form-text" for="genero">Genero</label>
                                             <select name="sexo_id" id="sexo_id" class="form-control c-theme c-square input-lg">
@@ -199,10 +203,10 @@
                                         <div class="col-md-4">
                                             <label class="form-text" for="escolaridad">Estatus en el SNI</label>
                                             <select name="estado_sni" id="estado_sni" class="form-control c-theme c-square input-lg">
-                                            <option value="">No definido</option>
+                                            <option value="">Elija un estado SNI</option>
                                             <?php
-                                            foreach ($civil as $i => $civil)
-                                               echo '<option value="',$i,'">',$civil,'</option>';
+                                            foreach ($sni as $s => $sni)
+                                               echo '<option value="',$i,'">',$sni,'</option>';
                                             ?>
                                             </select>
                                         </div>
@@ -220,9 +224,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-text" for="usuario">Usuario</label>

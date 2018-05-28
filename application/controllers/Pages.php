@@ -19,17 +19,18 @@ class Pages extends CI_Controller {
             show_404();
         }
         
-        $data['estados'] = $this->Pages_model->getEstados();
-        $data['nac'] = $this->Pages_model->nacionalidad();
-        $data['gen'] = $this->Pages_model->sexo();
-        $data['civil'] = $this->Pages_model->civil();
+        $data['estados']    = $this->Pages_model->getEstados();
+        $data['nac']        = $this->Pages_model->nacionalidad();
+        $data['gen']        = $this->Pages_model->sexo();
+        $data['civil']      = $this->Pages_model->civil();
+        $data['sni']        = $this->Pages_model->estado_sni();
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('pages/'.$pages, $data);
         $this->load->view('theme/footer');
     }
 
-    function getCidades($id_estado)
+    function municipio($id_estado)
     {
         $this->load->model('Pages_model');
         $cidades = $this->Pages_model->getCidades($id_estado);
@@ -44,19 +45,25 @@ class Pages extends CI_Controller {
     }
 
 
-//---------------------------------
-// VERIFICAR LA DISPONIBILIDAD DEL USUARIO
-//---------------------------------
-function checar_usuario()
-{
-    $this->load->model('Pages_model');
-    $get_result = $this->Pages_model->disponibilidad_usuario();
+    //---------------------------------
+    // VERIFICAR LA DISPONIBILIDAD DEL USUARIO
+    //---------------------------------
+    function checar_usuario()
+    {
+        $this->load->model('Pages_model');
+        $get_result = $this->Pages_model->disponibilidad_usuario();
 
-    if(!$get_result )
-    echo '<span class="text-danger">Ya existe ese nombre de usuario ¿Quieres volver a intentarlo?.</span>';
-    else
-    echo '<span class="text-success">Usuario disponible</span>';
-}
+        if(!$get_result )
+        echo '<span class="text-danger">Ya existe ese nombre de usuario ¿Quieres volver a intentarlo?.</span>';
+        else
+        echo '<span class="text-success">Usuario disponible</span>';
+    }
+
+
+
+
+
+
 
 
 }

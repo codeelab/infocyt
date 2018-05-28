@@ -7,55 +7,77 @@ class Registro extends CI_Controller {
     {
         parent::__construct();
         $this->load->model(array('Registro_model','Pages_model'));
-        $this->load->helper('url','form','security');
+        $this->load->library(array('session','form_validation','email','user_agent'));
+        $this->load->helper(array('url','form','security'));
         $this->load->database('default');
     }
 
 
-        public function registros()
-    {
+        public function investigador()
+       {
+            $this->load->model("Correo_model");
 
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required');
-        $this->form_validation->set_rules('a_paterno', 'Apellido Paterno', 'required');
-        $this->form_validation->set_rules('a_materno', 'Apellido Materno', 'required');
+                    $datos = array(
+                        'nombre'       => $this->security->xss_clean($this->input->post('nombre')),
+                        'a_paterno'    => $this->security->xss_clean($this->input->post('a_paterno')),
+                        'a_materno'    => $this->security->xss_clean($this->input->post('a_materno')),
+                        'username'     => $this->security->xss_clean($this->input->post('username')),
+                        'password'    => $this->security->xss_clean($this->input->post('password'))
+                    );
+                    $datas = array(
+                        'matricula'    => $this->security->xss_clean($this->input->post('matricula')),
+                        'nombre'       => $this->security->xss_clean($this->input->post('nombre')),
+                        'a_paterno'    => $this->security->xss_clean($this->input->post('a_paterno')),
+                        'a_materno'    => $this->security->xss_clean($this->input->post('a_materno')),
+                        'c_personal'   => $this->security->xss_clean($this->input->post('c_personal')),
+                        'username'     => $this->security->xss_clean($this->input->post('username')),
+                        'password'     => $this->security->xss_clean(do_hash($this->input->post('password'))),
+                        'terminos'     => $this->security->xss_clean($this->input->post('terminos')),
+                        'rol_id'       => $this->security->xss_clean($this->input->post('rol_id')),
+                        'status_id'    => $this->security->xss_clean($this->input->post('status_id'))
+                    );
+                    $correo     = $this->input->post('correo_personal');
+                    $emails     = $this->Correo_model->registro($datos);
+                    $estado     = 'Bienvenid@ al SISTEMA DE INFORMACIÓN CIENTÍFICA Y TECNOLÓGICA DEL ESTADO DE MICHOACÁN '.date('Y').'';
 
-        $this->form_validation->set_rules('correo_personal', 'Email Principal', 'required|valid_email');
-        $this->form_validation->set_rules('correo_personal2', 'Email Alterno', 'required|valid_email');
-        $this->form_validation->set_rules('correo_particular', 'Email Principal', 'required|valid_email');
-        $this->form_validation->set_rules('correo_particular2', 'Email Alterno', 'required|valid_email');
-        $this->form_validation->set_rules('username', 'Usuario', 'required');
-        $this->form_validation->set_rules('password', 'Contraseña', 'required');
-        $this->form_validation->set_rules('password2', 'Contraseña de verificación', 'required');
+                    $config['protocol']     = 'smtp';
+                    $config["smtp_host"]    = 'mail.icti.mx';
+                    $config["smtp_user"]    = 'infocyt@icti.mx';
+                    $config["smtp_pass"]    = 'infocyt2018';
+                    $config["smtp_port"]    = '587';
+                    $config['smtp_crypto']  = 'tls';
+                    $config['charset']      = 'utf-8';
+                    $config['wordwrap']     = TRUE;
+                    $config['validate']     = true;
+                    $config['mailtype']     = 'html';
+                    $config['smtp_timeout'] = '5';
+                    $config['priority']     = '1';
+                    $this->load->library('email');
+                    $this->email->initialize($config);
+                    $this->email->from('infocyt@icti.mx', 'SISTEMA DE INFORMACIÓN CIENTÍFICA Y TECNOLÓGICA DEL ESTADO DE MICHOACÁN  '.date('Y').'');
+                    $this->email->reply_to('informatica.cecti@gmail.com', 'INFORMATICA REGISTRO '.date('Y').'');
+                    $this->email->to($correo);
+                    $this->email->subject($estado);
+                    $this->email->message($emails);
 
 
-        $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+                    if($this->email->send())
+                    {
+                        //echo $this->email->print_debugger();
+                        $this->Registro_model->registro_usuarios($datas);
+                        $this->session->set_flashdata("success", "HAS COMPLETADO TU REGISTRO DE ALUMNA ENE CON ÉXITO!");
+                        redirect('exito');
 
+                    }else
+                    {
 
-
-        if ($this->form_validation->run() == FALSE)
-        {
-            
-           $this->session->set_flashdata('error', 'Ha habido un error al intentar registrar la información, intente nuevamente corrigiendo las alertas mostradas!');
-            redirect(site_url().'registro');
+                       //echo $this->email->print_debugger();
+                       $this->session->set_flashdata("error", "Se ha generado un error al intentar registrarse, por lo cual no se ha enviado el correo indicando su registro!, favor de intentar nuevamente.");
+                       redirect('registro');
+                    }
 
         }
-        else
-        {
-            if($this->Inicio_model->isDuplicate($this->input->post('username'))){
-                $this->session->set_flashdata('flash_message', 'Ya existe ese nombre de usuario');
-                redirect(site_url().'registro');
-            }else
-            {
-            $this->session->set_flashdata('flash_message', 'Registro Exitoso!');
-            redirect(site_url().'registro');
-            exit;
-            }
 
-        }
-
-
-
-    }
 
 
 

@@ -94,11 +94,23 @@ class Pages_model extends CI_Model {
     }
 
 
+    function estado_sni()
+    {
+        $query = $this->db-> query('SELECT * FROM status_sni');
+
+        if ($query->num_rows() > 0)
+        {
+            // almacenamos en una matriz bidimensional
+            foreach($query->result() as $row)
+               $arrDatos[htmlspecialchars($row->id_sni, ENT_QUOTES)] = htmlspecialchars($row->nombre_sni, ENT_QUOTES);
+                $query->free_result();
+                return $arrDatos;
+         }
+    }
 
 
 
 
-    
 
 }
 

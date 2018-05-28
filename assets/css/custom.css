@@ -99,3 +99,19 @@
 .range.range-info input[type="range"] {
     outline-color: #32c5d2;
 }
+#resultadoCURP {
+    color: #d05163;
+}
+#resultadoCURP.ok {
+    color: #5cb85c;
+}
+#resultadoRFC{
+    color: #d05163;
+}
+#resultadoRFC.ok{
+    color: #5cb85c;
+}
+.help-block {
+    color: #d05163 !important;
+    font-size: 15px;
+}

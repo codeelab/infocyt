@@ -1,9 +1,9 @@
 $(function() {
-    $("select[id=estado]").change(function() {
+    $("select[id=estado_id]").change(function() {
         estado = $(this).val();
         if (estado === '') return false;
-        resetaCombo('municipio');
-        $.getJSON('Pages/getCidades/' + estado, function(data) {
+        resetaCombo('municipio_id');
+        $.getJSON('pages/municipio/' + estado, function(data) {
             var option = new Array();
             $.each(data, function(i, obj) {
                 option[i] = document.createElement('option');
@@ -11,7 +11,7 @@ $(function() {
                     value: obj.id_municipio
                 });
                 $(option[i]).append(obj.nombre);
-                $("select[id='municipio']").append(option[i]);
+                $("select[id='municipio_id']").append(option[i]);
             });
         });
     });
@@ -76,209 +76,489 @@ $(document).ready(function() {
     })
 })
 
-$(document).ready(function() {
+
+
+function curpValida(curp) {
+    var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+        validado = curp.match(re);
+    if (!validado)  //Coincide con el formato general?
+      return false;
+    //Validar que coincida el dígito verificador
+    function digitoVerificador(curp17) {
+        //Fuente https://consultas.curp.gob.mx/CurpSP/
+        var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
+            lngSuma      = 0.0,
+            lngDigito    = 0.0;
+        for(var i=0; i<17; i++)
+            lngSuma = lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
+        lngDigito = 10 - lngSuma % 10;
+        if (lngDigito == 10) return 0;
+        return lngDigito;
+    }
+    if (validado[2] != digitoVerificador(validado[1])) 
+      return false;
+    return true; //Validado
+}
+
+
+//Handler para el evento cuando cambia el input
+//Lleva la CURP a mayúsculas para validarlo
+function validarInput(input) {
+    var curp = input.value.toUpperCase(),
+        resultado = document.getElementById("resultadoCURP"),
+        valido = "No válido";
+        
+    if (curpValida(curp)) { // ⬅️ Acá se comprueba
+      valido = "Válido";
+        resultado.classList.add("ok");
+    } else {
+      resultado.classList.remove("ok");
+    }
+        
+    resultado.innerText = "Curp: "+ curp 
+                          + "\nFormato: " + valido;
+}
+
+
+//Función para validar un RFC
+// Devuelve el RFC sin espacios ni guiones si es correcto
+// Devuelve false si es inválido
+// (debe estar en mayúsculas, guiones y espacios intermedios opcionales)
+function rfcValido(rfc, aceptarGenerico = true) {
+    const re       = /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
+    var   validado = rfc.match(re);
+
+    if (!validado)  //Coincide con el formato general del regex?
+        return false;
+
+    //Separar el dígito verificador del resto del RFC
+    const digitoVerificador = validado.pop(),
+          rfcSinDigito      = validado.slice(1).join(''),
+          len               = rfcSinDigito.length,
+
+    //Obtener el digito esperado
+          diccionario       = "0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ Ñ",
+          indice            = len + 1;
+    var   suma,
+          digitoEsperado;
+
+    if (len == 12) suma = 0
+    else suma = 481; //Ajuste para persona moral
+
+    for(var i=0; i<len; i++)
+        suma += diccionario.indexOf(rfcSinDigito.charAt(i)) * (indice - i);
+    digitoEsperado = 11 - suma % 11;
+    if (digitoEsperado == 11) digitoEsperado = 0;
+    else if (digitoEsperado == 10) digitoEsperado = "A";
+
+    //El dígito verificador coincide con el esperado?
+    // o es un RFC Genérico (ventas a público general)?
+    if ((digitoVerificador != digitoEsperado)
+     && (!aceptarGenerico || rfcSinDigito + digitoVerificador != "XAXX010101000"))
+        return false;
+    else if (!aceptarGenerico && rfcSinDigito + digitoVerificador == "XEXX010101000")
+        return false;
+    return rfcSinDigito + digitoVerificador;
+}
+
+
+//Handler para el evento cuando cambia el input
+// -Lleva la RFC a mayúsculas para validarlo
+// -Elimina los espacios que pueda tener antes o después
+function validarInputRFC(input) {
+    var rfc         = input.value.trim().toUpperCase(),
+        resultado   = document.getElementById("resultadoRFC"),
+        valido;
+    var rfcCorrecto = rfcValido(rfc);   // ⬅️ Acá se comprueba
+    if (rfcCorrecto) {
+      valido = "Válido";
+      resultado.classList.add("ok");
+    } else {
+      valido = "No válido"
+      resultado.classList.remove("ok");
+    }
+    resultado.innerText = "RFC: " + rfc
+                        + "\nFormato: " + valido;
+}
+
+
+  $(document).ready(function(){
+    var date_input=$('input[name="fecha_nac"]'); //our date input has the name "date"
+    var container=$('.form1 form').length>0 ? $('.form1-iso form').parent() : "body";
+    date_input.datepicker({
+      format: 'DD-MM-YYYY',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    })
+  })
+
+
+
+
+
+
+
+$(document).ready(function(){
     $("#registro").bootstrapValidator({
-        message: "Este valor no es válido",
-        feedbackIcons: {
-            valid: "fa fa-check",
-            invalid: "fa fa-remove",
-            validating: "fa fa-refresh"
+        message:"Este valor no es válido",feedbackIcons:{
+            valid:"",
+            invalid:"fa fa-remove",
+            validating:"fa fa-refresh"
         },
-        fields: {
-            nombre: {
+        fields:{
+            nombre:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido el Nombre. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            a_paterno:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido el Apellido Paterno. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            a_materno:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido el Apellido Materno. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            rfc: {
                 validators: {
                     notEmpty: {
-                        message: "Es requerido el Nombre. "
+                        message: 'Ingrese los 13 caracteres alfanuméricos de su RFC.'
                     },
                     regexp: {
-                        regexp: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
-                        message: "Solo está permitido el uso caracteres alfabeticos."
+                      regexp: /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/,
+                      message: 'No es un RFC correcto'
                     }
                 }
             },
-            a_paterno: {
+            curp: {
                 validators: {
                     notEmpty: {
-                        message: "Es requerido el Apellido Paterno. "
+                        message: 'Ingrese los 18 caracteres alfanuméricos de su CURP.'
                     },
                     regexp: {
-                        regexp: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
-                        message: "Solo está permitido el uso caracteres alfabeticos."
+                      regexp: /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+                      message: 'No es una curp correcta'
                     }
                 }
             },
-            a_materno: {
+            fecha_nac: {
                 validators: {
                     notEmpty: {
-                        message: "Es requerido el Apellido Materno. "
+                        message: 'Ingrese Fecha de Nacimiento'
+                    }
+                }
+            },
+            nacionalidad:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerida su nacionalidad."
+                    }
+                }
+            },
+            estado:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido su estado."
+                    }
+                }
+            },
+            municipio:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido su municipio."
+                    }
+                }
+            },
+            localidad:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerida la Localidad. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            edad: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese su edad.'
                     },
                     regexp: {
-                        regexp: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
-                        message: "Solo está permitido el uso caracteres alfabeticos."
+                        regexp:  /^([0-9])*$/,
+                        message: 'No es un valor válido.'
                     }
                 }
             },
-            nacionalidad: {
-                validators: {
-                    notEmpty: {
-                        message: "Es requerida su Nacionalidad."
-                    }
+            sexo_id: {
+              validators: {
+                notEmpty: {
+                  message: 'Es requerido su genero.'
                 }
+              }
             },
-            puesto: {
-                validators: {
-                    notEmpty: {
-                        message: "Es requerido su Tipo de Registro."
-                    }
+            estado_civil: {
+              validators: {
+                notEmpty: {
+                  message: 'Es requerido su genero.'
                 }
+              }
             },
-            estado: {
-                validators: {
-                    notEmpty: {
-                        message: "Es requerido su Estado."
-                    }
-                }
-            },
-            municipio: {
-                validators: {
-                    notEmpty: {
-                        message: "Es requerido su Municipio."
-                    }
-                }
-            },
-            genero: {
-                validators: {
-                    notEmpty: {
-                        message: "Es requerido su genero."
-                    }
-                }
-            },
-            nivel: {
-                validators: {
-                    notEmpty: {
-                        message: "Es requerido seleccione su nivel educativo."
-                    }
-                }
-            },
-            institucion: {
-                validators: {
-                    notEmpty: {
-                        message: "Es requerido elija una Institución Educativa."
-                    }
-                }
-            },
-            facultad: {
-                validators: {
-                    notEmpty: {
-                        message: "Es requerido seleccione su Facultad."
-                    }
-                }
-            },
-            mailing: {
-                validators: {
-                    notEmpty: {
-                        message: "Especifique al menos una opción de las dos mencionadas."
-                    }
-                }
-            },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: "Es requerido su Correo Personal. "
+            correo_personal:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido su correo personal. "
                     },
-                    emailAddress: {
-                        message: "Su correo no pertenece a un dominio valido."
+                    emailAddress:{
+                        message:"Su correo no pertenece a un dominio válido."
                     },
-                    regexp: {
-                        regexp: /^[A-Z0-9._%+-]+@(?:[A-Z]{4}|gmail|yahoo|outlook|hotmail)+\.(com|mx|es|com.mx)+$/i,
-                        message: "Solo está permitido el uso de los siguientes dominios: Gmail, Yahoo, Outlook, Hotmail."
+                    regexp:{
+                        regexp:/^[A-Z0-9._%+-]+@(?:[A-Z]{4}|gmail|yahoo|outlook|hotmail)+\.(com|mx|es|com.mx)+$/i,
+                        message:"Solo está permitido el uso de los siguientes dominios: Gmail, Yahoo, Outlook, Hotmail."
                     }
                 }
             },
-            email2: {
+            correo_laboral:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido su correo Laboral. "
+                    },
+                    emailAddress:{
+                        message:"Su correo no pertenece a un dominio válido."
+                    },
+                    regexp:{
+                        regexp:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/i,
+                        message:"Está permitido el uso de cualquier dominio válido."
+                    }
+                }
+            },
+            correo_personal2:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido su correo personal. "
+                    },
+                    emailAddress:{
+                        message:"Su correo no pertenece a un dominio válido."
+                    },
+                    regexp:{
+                        regexp:/^[A-Z0-9._%+-]+@(?:[A-Z]{4}|gmail|yahoo|outlook|hotmail)+\.(com|mx|es|com.mx)+$/i,
+                        message:"Solo está permitido el uso de los siguientes dominios: Gmail, Yahoo, Outlook, Hotmail."
+                    }
+                }
+            },
+            correo_laboral2:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido su correo Laboral. "
+                    },
+                    emailAddress:{
+                        message:"Su correo no pertenece a un dominio válido."
+                    },
+                    regexp:{
+                        regexp:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/i,
+                        message:"Está permitido el uso de cualquier dominio válido."
+                    }
+                }
+            },
+            tel_part: {
                 validators: {
                     notEmpty: {
-                        message: "Es requerido su Correo Personal. "
-                    },
-                    emailAddress: {
-                        message: "Su correo no pertenece a un dominio valido."
+                        message: 'Ingrese su Número de Teléfono Particular.'
                     },
                     regexp: {
-                        regexp: /^[A-Z0-9._%+-]+@(?:[A-Z]{4}|gmail|yahoo|outlook|hotmail)+\.(com|mx|es|com.mx)+$/i,
-                        message: "Solo está permitido el uso de los siguientes dominios: Gmail, Yahoo, Outlook, Hotmail."
+                        regexp: /\(?([0-9]{3})\)?([ .-]?)([0-9]{2})\2([0-9]{2})/,
+                        message: 'No es un teléfono válido.'
+                    }
+                }
+            },
+            tel_lab: {
+                validators: {
+                    notEmpty: {
+                       message: 'Ingrese su Número de Teléfono Laboral.'
+                    },
+                    regexp: {
+                        regexp: /\(?([0-9]{3})\)?([ .-]?)([0-9]{2})\2([0-9]{2})/,
+                        message: 'No es un teléfono válido.'
+                    }
+                }
+            },
+            tel_cel: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese su Número de Celular.'
+                    },
+                    regexp: {
+                        regexp:  /^([0-9])*$/,
+                        message: 'No es un telefono válido.'
+                    }
+                }
+            },
+            direccion:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido su Domicilio. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            numero_dom: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese su Número de domicilio.'
+                    },
+                    regexp: {
+                        regexp:  /^([0-9])*$/,
+                        message: 'No es un número válido.'
+                    }
+                }
+            },
+            colonia:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerida su Colonia. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            cp: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese su Código Postal.'
+                    },
+                    regexp: {
+                        regexp:  /^([1-9]{2}|[0-9][1-9]|[1-9][0-9])[0-9]{3}$/,
+                        message: 'No es un código válido.'
+                    }
+                }
+            },
+            estado_sni:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido su estado de SNI."
+                    }
+                }
+            },
+            num_rim: {
+                message: 'Ingrese su Número RIM.',
+                validators: {
+                    stringLength: {
+                        min: 12,
+                        max: 15,
+                        message: 'Su número de registro debe tener al menos 12 caracteres.'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_-]{12,15}$/,
+                        message: 'El número de RIM solo puede incluir caracteres alfanuméricos (A-Z, 0-9).'
+                    }
+                }
+            },
+            mailing:{
+                validators:{
+                    notEmpty:{
+                        message:"Especifique al menos una opción de las dos mencionadas."
                     }
                 }
             },
             username: {
+                message: 'The username is not valid',
                 validators: {
                     notEmpty: {
-                        message: "Es requerido su Usuario."
+                        message: 'El Usuario es requerido y no puede estar vacío.'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 20,
+                        message: 'Su nombre de usuario debe tener al menos 6 caracteres y hasta 20 caracteres.'
                     },
                     regexp: {
-                        regexp: /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i,
-                        message: "No es un Usuario Valido"
-                    },
-                    different: {
-                            field: 'password',
-                            message: 'El nombre de Usuario y la Contraseña no pueden ser iguales entre sí.'
+                        regexp:/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i,
+                        message: 'El nombre de usuario solo puede incluir caracteres alfanuméricos (A-Z, 0-9), puntos (".") y guión bajo (_).'
                     }
                 }
             },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: "La contraseña es obligatoria y no puede estar vacía."
+            password:{
+                validators:{
+                    notEmpty:{
+                        message:"La contraseña es obligatoria y no puede estar vacía."
                     },
-                    callback: {
-                        callback: function(e, a, s) {
-                            var o = s.val();
-                            if ("" == o) return !0;
-                            var t = zxcvbn(o),
-                                r = t.score,
-                                i = t.feedback.warning || "La contraseña es demasiado débil.",
-                                n = $("#strengthBar");
-                            switch (r) {
+                    callback:{
+                        callback:function(e,a,s){
+                            var o=s.val();
+                            if(""==o)return!0;
+                            var t=zxcvbn(o),
+                            r=t.score,
+                            i=t.feedback.warning||"La contraseña es demasiado débil.",
+                            n=$("#strengthBar");
+                            switch(r){
                                 case 0:
-                                    n.attr("class", "progress-bar progress-bar-danger").css("width", "1%");
-                                    break;
+                                n.attr("class","progress-bar progress-bar-danger").css("width","1%");
+                                break;
                                 case 1:
-                                    n.attr("class", "progress-bar progress-bar-danger").css("width", "25%");
-                                    break;
+                                n.attr("class","progress-bar progress-bar-danger").css("width","25%");
+                                break;
                                 case 2:
-                                    n.attr("class", "progress-bar progress-bar-danger").css("width", "50%");
-                                    break;
+                                n.attr("class","progress-bar progress-bar-danger").css("width","50%");
+                                break;
                                 case 3:
-                                    n.attr("class", "progress-bar progress-bar-warning").css("width", "75%");
-                                    break;
+                                n.attr("class","progress-bar progress-bar-warning").css("width","75%");
+                                break;
                                 case 4:
-                                    n.attr("class", "progress-bar progress-bar-success").css("width", "100%")
+                                n.attr("class","progress-bar progress-bar-success").css("width","100%")
                             }
-                            return !(r < 4) || {
-                                valid: !1,
-                                message: i
+                            return!(r<4)||{
+                                valid:!1,
+                                message:i
                             }
                         }
-                    },
-                    different: {
-                            field: 'username',
-                            message: 'La Contraseña no puede ser igual que el nombre de Usuario.'
                     }
                 }
             },
-            password2: {
-                validators: {
-                    notEmpty: {
-                        message: "La contraseña de confirmación es obligatoria y no puede estar vacía."
+            password2:{
+                validators:{
+                    notEmpty:{
+                        message:"La contraseña de confirmación es obligatoria y no puede estar vacía."
                     },
-                    identical: {
-                        field: "password",
-                        message: "La contraseña y su confirmación deben ser los mismos"
+                    identical:{
+                        field:"password",
+                        message:"La contraseña y su confirmación deben ser los mismos"
                     }
                 }
             }
         }
-    }).on("keyup", '[name="password"]', function() {
-        var e = "" == $(this).val();
-        $("#registro").bootstrapValidator("enableFieldValidators", "password", !e).bootstrapValidator("enableFieldValidators", "password2", !e), 1 == $(this).val().length && $("#registro").bootstrapValidator("validateField", "password").bootstrapValidator("validateField", "password2")
-    })
+    }
+    ).on("keyup",'[name="password"]',
+    function(){
+        var e=""==$(this).val();
+        $("#registro").bootstrapValidator("enableFieldValidators","password",!e).bootstrapValidator("enableFieldValidators","password2",!e),
+        1==$(this).val().length&&$("#registro").bootstrapValidator("validateField","password").bootstrapValidator("validateField","password2")
+    }
+    )
 });
