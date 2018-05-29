@@ -31,6 +31,12 @@ class Pages_model extends CI_Model {
                         ->get()->result();
     }
 
+    function paises()
+    {
+        return $this->db->get('paises')->result();
+    }
+
+
     function sexo()
     {
         $query = $this->db-> query('SELECT id_genero,nombre_gen FROM genero');

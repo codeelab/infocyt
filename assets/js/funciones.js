@@ -182,21 +182,6 @@ function validarInputRFC(input) {
 }
 
 
-  $(document).ready(function(){
-    var date_input=$('input[name="fecha_nac"]'); //our date input has the name "date"
-    var container=$('.form1 form').length>0 ? $('.form1-iso form').parent() : "body";
-    date_input.datepicker({
-      format: 'DD-MM-YYYY',
-      container: container,
-      todayHighlight: true,
-      autoclose: true,
-    })
-  })
-
-
-
-
-
 
 
 $(document).ready(function(){
@@ -269,24 +254,31 @@ $(document).ready(function(){
                     }
                 }
             },
+            pais_id:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido su País de Nacimineto."
+                    }
+                }
+            },
             nacionalidad:{
                 validators:{
                     notEmpty:{
-                        message:"Es requerida su nacionalidad."
+                        message:"Es requerida su Nacionalidad."
                     }
                 }
             },
-            estado:{
+            estado_id:{
                 validators:{
                     notEmpty:{
-                        message:"Es requerido su estado."
+                        message:"Es requerido su Estado."
                     }
                 }
             },
-            municipio:{
+            municipio_id:{
                 validators:{
                     notEmpty:{
-                        message:"Es requerido su municipio."
+                        message:"Es requerido su Municipio."
                     }
                 }
             },
@@ -297,42 +289,42 @@ $(document).ready(function(){
                     },
                     regexp:{
                         regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
-                        message:"Solo está permitido el uso caracteres alfabeticos."
+                        message:"Solo está permitido el uso Caracteres Alfabeticos."
                     }
                 }
             },
             edad: {
                 validators: {
                     notEmpty: {
-                        message: 'Ingrese su edad.'
+                        message: 'Ingrese su Edad.'
                     },
                     regexp: {
                         regexp:  /^([0-9])*$/,
-                        message: 'No es un valor válido.'
+                        message: 'No es un valor Válido.'
                     }
                 }
             },
             sexo_id: {
               validators: {
                 notEmpty: {
-                  message: 'Es requerido su genero.'
+                  message: 'Es requerido su Sexo.'
                 }
               }
             },
             estado_civil: {
               validators: {
                 notEmpty: {
-                  message: 'Es requerido su genero.'
+                  message: 'Es requerido su Genéro.'
                 }
               }
             },
             correo_personal:{
                 validators:{
                     notEmpty:{
-                        message:"Es requerido su correo personal. "
+                        message:"Es requerido su Correo Personal. "
                     },
                     emailAddress:{
-                        message:"Su correo no pertenece a un dominio válido."
+                        message:"Su correo no pertenece a un Dominio Válido."
                     },
                     regexp:{
                         regexp:/^[A-Z0-9._%+-]+@(?:[A-Z]{4}|gmail|yahoo|outlook|hotmail)+\.(com|mx|es|com.mx)+$/i,
@@ -343,10 +335,10 @@ $(document).ready(function(){
             correo_laboral:{
                 validators:{
                     notEmpty:{
-                        message:"Es requerido su correo Laboral. "
+                        message:"Es requerido su Correo Laboral. "
                     },
                     emailAddress:{
-                        message:"Su correo no pertenece a un dominio válido."
+                        message:"Su correo no pertenece a un Dominio Válido."
                     },
                     regexp:{
                         regexp:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/i,
@@ -357,10 +349,10 @@ $(document).ready(function(){
             correo_personal2:{
                 validators:{
                     notEmpty:{
-                        message:"Es requerido su correo personal. "
+                        message:"Es requerido su Correo Personal. "
                     },
                     emailAddress:{
-                        message:"Su correo no pertenece a un dominio válido."
+                        message:"Su correo no pertenece a un Dominio Válido."
                     },
                     regexp:{
                         regexp:/^[A-Z0-9._%+-]+@(?:[A-Z]{4}|gmail|yahoo|outlook|hotmail)+\.(com|mx|es|com.mx)+$/i,
@@ -371,14 +363,14 @@ $(document).ready(function(){
             correo_laboral2:{
                 validators:{
                     notEmpty:{
-                        message:"Es requerido su correo Laboral. "
+                        message:"Es requerido su Correo Laboral. "
                     },
                     emailAddress:{
-                        message:"Su correo no pertenece a un dominio válido."
+                        message:"Su correo no pertenece a un Dominio Válido."
                     },
                     regexp:{
                         regexp:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/i,
-                        message:"Está permitido el uso de cualquier dominio válido."
+                        message:"Está permitido el uso de cualquier Dominio Válido."
                     }
                 }
             },

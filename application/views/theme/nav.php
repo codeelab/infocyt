@@ -34,6 +34,11 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="<?=base_url('rim');?>" class="c-link dropdown-toggle">RIM
+                                        <span class="c-arrow c-toggler"></span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="<?=base_url('registro');?>" class="c-link dropdown-toggle">REGISTRO
                                         <span class="c-arrow c-toggler"></span>
                                     </a>

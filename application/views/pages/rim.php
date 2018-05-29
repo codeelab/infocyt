@@ -4,12 +4,12 @@
 <div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
     <div class="container">
         <div class="c-page-title c-pull-left">
-            <h3 class="c-font-uppercase c-font-bold c-font-dark c-font-20 c-font-slim">Registro</h3>
+            <h3 class="c-font-uppercase c-font-bold c-font-dark c-font-20 c-font-slim">Registro RIM</h3>
         </div>
         <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
             <li><a href="<?=base_url();?>" class="c-font-dark">Inicio</a></li>
             <li class="c-font-dark">/</li>
-            <li><a href="<?=base_url('registro');?>" class="c-font-dark">Registro</a></li>                    
+            <li><a href="<?=base_url('registro');?>" class="c-font-dark">Registro RIM</a></li>                    
         </ul>
     </div>
 </div>
@@ -82,7 +82,7 @@
                             <div class="c-line-left"></div>
                         </div>
                             <?php $atrib = array('name' => 'form1', 'id' => 'registro', 'autocomplete'=> 'off');
-                            echo form_open('registro/investigador', $atrib); ?>
+                            echo form_open('', $atrib); ?>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-text" for="nombre">Nombre</label>

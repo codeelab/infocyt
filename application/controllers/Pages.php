@@ -21,6 +21,7 @@ class Pages extends CI_Controller {
         
         $data['estados']    = $this->Pages_model->getEstados();
         $data['nac']        = $this->Pages_model->nacionalidad();
+        $data['pais']       = $this->Pages_model->paises();
         $data['gen']        = $this->Pages_model->sexo();
         $data['civil']      = $this->Pages_model->civil();
         $data['sni']        = $this->Pages_model->estado_sni();

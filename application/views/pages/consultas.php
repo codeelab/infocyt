@@ -15,15 +15,97 @@
 </div>
 
 
-<!-- BEGIN: PAGE CONTENT -->
+<!-- BEGIN: CONTENT/STEPS/STEPS-1 -->
+<div class="c-content-box c-size-md c-bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="c-content-title-1 c-margin-b-60">
+                    <h3 class="c-center c-font-uppercase c-font-bold">
+                        Área de Consultas y Búsquedas del Sistema INFOCyT Michoacán
+                    </h3>                   
+                    <div class="c-line-center"></div>
+                    <p class="c-center c-font-uppercase" style="font-size: 20px;">
+                        Bienvenido(a) al área de Consultas y Búsquedas del Sistema de Información Cientifica y Tecnológica del Estado de Michoacán (INFOCYT).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- END: CONTENT/STEPS/STEPS-1 -->
 
- 
 
+
+<div class="c-content-box c-size-md c-bg-grey-1">
+    <div class="container">
+        <!-- Begin: Testimonals 1 component -->
+        <div class="c-content-team-1-slider" data-slider="owl" data-items="3">
+            <div class="row">
+
+                <div class="col-md-3 col-sm-6 c-margin-b-30">
+                    <div class="c-content-person-1 c-option-2">
+                        <div class="c-caption c-content-overlay">
+                            <div class="c-overlay-wrapper">
+                                <div class="c-overlay-content">
+                                    <p class="c-name c-font-uppercase c-font-bold c-font-white">Investigadores</p>
+                                </div>
+                            </div>
+                            <img class="c-overlay-object img-responsive" src="<?=base_url('assets/images/011.jpg');?>" alt="">
+                        </div>
+                        <button class="btn c-btn-square c-theme-btn c-btn-uppercase c-btn-bold btn-block">ACCEDER</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 c-margin-b-30">
+                    <div class="c-content-person-1 c-option-2">
+                        <div class="c-caption c-content-overlay">
+                            <div class="c-overlay-wrapper">
+                                <div class="c-overlay-content">
+                                    <p class="c-name c-font-uppercase c-font-bold c-font-white">Instituciones de Educación Superior Centros de Investigación</p>
+                                </div>
+                            </div>
+                            <img class="c-overlay-object img-responsive" src="<?=base_url('assets/images/011.jpg');?>" alt="">
+                        </div>
+                            <button class="btn c-btn-square c-theme-btn c-btn-uppercase c-btn-bold btn-block">ACCEDER</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 c-margin-b-30">
+                    <div class="c-content-person-1 c-option-2">
+                        <div class="c-caption c-content-overlay">
+                            <div class="c-overlay-wrapper">
+                                <div class="c-overlay-content">
+                                    <p class="c-name c-font-uppercase c-font-bold c-font-white">Proyectos de Investigación</p>
+                                </div>
+                            </div>
+                            <img class="c-overlay-object img-responsive" src="<?=base_url('assets/images/011.jpg');?>" alt="">
+                        </div>
+                        <button class="btn c-btn-square c-theme-btn c-btn-uppercase c-btn-bold btn-block">ACCEDER</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 c-margin-b-30">
+                    <div class="c-content-person-1 c-option-2">
+                        <div class="c-caption c-content-overlay">
+                            <div class="c-overlay-wrapper">
+                                <div class="c-overlay-content">
+                                    <p class="c-name c-font-uppercase c-font-bold c-font-white">Dependencias de Gobierno</p>
+                                </div>
+                            </div>
+                            <img class="c-overlay-object img-responsive" src="<?=base_url('assets/images/011.jpg');?>" alt="">
+                        </div>
+                        <button class="btn c-btn-square c-theme-btn c-btn-uppercase c-btn-bold btn-block">ACCEDER</button>
+                    </div>
+                </div>
+
+            
+            <!-- End-->
+        </div>
+        <!-- End-->
+    </div>
+</div><!-- END: CONTENT/MISC/TEAM-3 -->
   
-<!-- END: PAGE CONTENT -->
-
-
-
-
-
-</div><!-- END: PAGE CONTAINER -->
+        <!-- END: PAGE CONTENT -->
+    </div>
+  
+    </div><!-- END: PAGE CONTAINER -->

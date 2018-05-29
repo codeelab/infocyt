@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-05-2018 a las 22:12:30
+-- Tiempo de generación: 30-05-2018 a las 00:16:28
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 5.6.33
 
@@ -21,6 +21,44 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `infocyt`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `area_conocimiento`
+--
+
+CREATE TABLE `area_conocimiento` (
+  `id_area_conocimiento` int(11) NOT NULL,
+  `nombre_area` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `area_conocimiento`
+--
+
+INSERT INTO `area_conocimiento` (`id_area_conocimiento`, `nombre_area`) VALUES
+(1, 'Agricultura, silvicultura, piscicultura y otras'),
+(2, 'Biotecnología'),
+(3, 'Ciencias Físicas'),
+(4, 'Ciencias Ambientales y de la Tierra'),
+(5, 'Ciencias Biológicas'),
+(6, 'Ciencias de la Educación'),
+(7, 'Ciencias de la salud'),
+(8, 'Ciencias Químicas'),
+(9, 'Economía'),
+(10, 'Historia'),
+(11, 'Idiomas y literatura'),
+(12, 'Ingeniería Civil y Arquitectura'),
+(13, 'Ingeniería Eléctrica y Electrónica'),
+(14, 'Matemáticas y Ciencias de la Computación'),
+(15, 'Medicina Básica'),
+(16, 'Medicina Clínica'),
+(17, 'Medicina Veterinaria'),
+(18, 'Psicología'),
+(19, 'Otras Ciencias Ingenieriles'),
+(20, 'Otras Ciencias Sociales'),
+(21, 'Otras Humanidades');
 
 -- --------------------------------------------------------
 
@@ -109,8 +147,8 @@ CREATE TABLE `genero` (
 --
 
 INSERT INTO `genero` (`id_genero`, `nombre_gen`) VALUES
-(1, 'Masculino'),
-(2, 'Femenino');
+(1, 'Hombre'),
+(2, 'Mujer');
 
 -- --------------------------------------------------------
 
@@ -2786,6 +2824,26 @@ INSERT INTO `nacionalidad` (`id_nacionalidad`, `nombre_nac`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `nivel_academico`
+--
+
+CREATE TABLE `nivel_academico` (
+  `id_nivel_academico` int(11) NOT NULL,
+  `nombre_nivel_academico` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `nivel_academico`
+--
+
+INSERT INTO `nivel_academico` (`id_nivel_academico`, `nombre_nivel_academico`) VALUES
+(1, 'Licenciatura'),
+(2, 'Maestría'),
+(3, 'Doctorado');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `paises`
 --
 
@@ -3063,6 +3121,30 @@ INSERT INTO `rol` (`id_rol`, `nombre_rol`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `status_sni`
+--
+
+CREATE TABLE `status_sni` (
+  `id_sni` int(11) NOT NULL,
+  `nombre_sni` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `opcion_sni` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `status_sni`
+--
+
+INSERT INTO `status_sni` (`id_sni`, `nombre_sni`, `opcion_sni`) VALUES
+(1, 'En trámite', 1),
+(2, 'Cándidatos', 1),
+(3, 'SNI 1', 1),
+(4, 'SNI 2', 1),
+(5, 'SNI 3', 1),
+(6, 'SNI Emérito', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -3084,7 +3166,6 @@ CREATE TABLE `usuarios` (
   `tel_cel` text COLLATE utf8_unicode_ci NOT NULL,
   `direccion` text COLLATE utf8_unicode_ci,
   `numero_dom` text COLLATE utf8_unicode_ci NOT NULL,
-  `grado_academico_id` int(5) DEFAULT NULL,
   `colonia` text COLLATE utf8_unicode_ci,
   `cp` text COLLATE utf8_unicode_ci,
   `pais_id` int(5) DEFAULT NULL,
@@ -3106,12 +3187,25 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `a_paterno`, `a_materno`, `rfc`, `curp`, `fecha_nac`, `edad`, `estado_civil`, `nacionalidad`, `correo_laboral`, `correo_personal`, `tel_lab`, `tel_part`, `tel_cel`, `direccion`, `numero_dom`, `grado_academico_id`, `colonia`, `cp`, `pais_id`, `estado_id`, `municipio_id`, `localidad`, `estado_sni`, `num_rim`, `sexo_id`, `rol_id`, `mailing`, `username`, `password`, `update_recovery`, `status_id`) VALUES
-(1, 'Joel', 'Álvarez', 'García', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '1986-03-16', '32', 1, 1, 'informatica.cecti@gmail.com', 'softcodec@gmail.com', '3140482', '3156139', '2147483647', 'curtidores de termendo 1056', '', 1, '1', '58240', 1, 16, 567, 'Morelia', 4, NULL, 1, 3, '', 'joel', 'be9b16e50121a086f9e35698d839dd9c3cd7e27b', 0, 1);
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `a_paterno`, `a_materno`, `rfc`, `curp`, `fecha_nac`, `edad`, `estado_civil`, `nacionalidad`, `correo_laboral`, `correo_personal`, `tel_lab`, `tel_part`, `tel_cel`, `direccion`, `numero_dom`, `colonia`, `cp`, `pais_id`, `estado_id`, `municipio_id`, `localidad`, `estado_sni`, `num_rim`, `sexo_id`, `rol_id`, `mailing`, `username`, `password`, `update_recovery`, `status_id`) VALUES
+(1, 'Joel', 'Álvarez', 'García', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '1986-03-16', '32', 1, 1, 'informatica.cecti@gmail.com', 'softcodec@gmail.com', '3140482', '3156139', '2147483647', 'curtidores de termendo 1056', '', '1', '58240', 1, 16, 567, 'Morelia', 4, NULL, 1, 3, '', 'joel', 'be9b16e50121a086f9e35698d839dd9c3cd7e27b', 0, 1),
+(2, 'Omar', 'Jaimes', 'Brito', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '0000-00-00', '32', 3, 282, 'informatica.cecti@gmail.com', 'informatica.cecti@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '250', 'Erendira', '58188', NULL, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'joel1986', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
+(3, 'Said', 'Guerra', 'Ibarra', 'GUIS730818LG7', 'GUIS730818HMNRBD04', '0000-00-00', '44', 4, 282, 'saidguerrai2017@gmail.com', 'saidguerrai2017@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '289', 'Guadalupe', '58188', NULL, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'said1973', '9b140708e3bca313acbb87ac2bfb1d8281949de7', NULL, 1),
+(4, 'Joel', 'Alvarez', 'Garcia', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '0000-00-00', '32', 3, 282, 'informatica@gmail.com', 'informatica@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '234', 'Erendira', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'joel23', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
+(5, 'Joel', 'Alvarez', 'Garcia', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '1986-03-16', '32', 4, 282, 'informatica.cecti@gmail.com', 'informatica.cecti@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '280', 'Erendira', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'joel34', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
+(6, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-10', '32', 3, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita ', '234', 'eRENDIRA', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'JOEL45', 'fbb9d393d5c2d48231df7ed0baf3dc7ba81b136c', NULL, 1),
+(7, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-03', '32', 2, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '345', 'eRENDIRA', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'JOEL78', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
+(8, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-08', '32', 2, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '34', 'ERDSFDFF', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'JOELW34', '0681595ffb9efad26d75dc410e01e05c38f5641b', NULL, 1);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `area_conocimiento`
+--
+ALTER TABLE `area_conocimiento`
+  ADD PRIMARY KEY (`id_area_conocimiento`);
 
 --
 -- Indices de la tabla `estado`
@@ -3144,6 +3238,12 @@ ALTER TABLE `nacionalidad`
   ADD PRIMARY KEY (`id_nacionalidad`);
 
 --
+-- Indices de la tabla `nivel_academico`
+--
+ALTER TABLE `nivel_academico`
+  ADD PRIMARY KEY (`id_nivel_academico`);
+
+--
 -- Indices de la tabla `paises`
 --
 ALTER TABLE `paises`
@@ -3156,6 +3256,12 @@ ALTER TABLE `rol`
   ADD PRIMARY KEY (`id_rol`);
 
 --
+-- Indices de la tabla `status_sni`
+--
+ALTER TABLE `status_sni`
+  ADD PRIMARY KEY (`id_sni`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -3164,6 +3270,12 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `area_conocimiento`
+--
+ALTER TABLE `area_conocimiento`
+  MODIFY `id_area_conocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -3196,6 +3308,12 @@ ALTER TABLE `nacionalidad`
   MODIFY `id_nacionalidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=362;
 
 --
+-- AUTO_INCREMENT de la tabla `nivel_academico`
+--
+ALTER TABLE `nivel_academico`
+  MODIFY `id_nivel_academico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `paises`
 --
 ALTER TABLE `paises`
@@ -3208,10 +3326,16 @@ ALTER TABLE `rol`
   MODIFY `id_rol` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `status_sni`
+--
+ALTER TABLE `status_sni`
+  MODIFY `id_sni` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

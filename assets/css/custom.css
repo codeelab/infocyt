@@ -113,5 +113,6 @@
 }
 .help-block {
     color: #d05163 !important;
-    font-size: 15px;
+    font-size: 18px !important;
+    font-weight: 400; 
 }
