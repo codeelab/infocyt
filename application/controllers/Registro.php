@@ -106,9 +106,6 @@ class Registro extends CI_Controller {
 
 
 
-
-
-
 }
 
 /* End of file Registro.php */

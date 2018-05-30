@@ -114,6 +114,16 @@ class Pages_model extends CI_Model {
          }
     }
 
+    function area_conocimiento()
+    {
+        return $this->db->get('area_conocimiento')->result();
+    }
+
+    function nivel_academico()
+    {
+        return $this->db->get('nivel_academico')->result();
+    }
+
 
 
 
