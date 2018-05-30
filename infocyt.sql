@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 30-05-2018 a las 00:16:28
--- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 5.6.33
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-05-2018 a las 07:47:36
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 5.6.36
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,35 +30,36 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `area_conocimiento` (
   `id_area_conocimiento` int(11) NOT NULL,
-  `nombre_area` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `nombre_area` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `clave_area` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `area_conocimiento`
 --
 
-INSERT INTO `area_conocimiento` (`id_area_conocimiento`, `nombre_area`) VALUES
-(1, 'Agricultura, silvicultura, piscicultura y otras'),
-(2, 'Biotecnología'),
-(3, 'Ciencias Físicas'),
-(4, 'Ciencias Ambientales y de la Tierra'),
-(5, 'Ciencias Biológicas'),
-(6, 'Ciencias de la Educación'),
-(7, 'Ciencias de la salud'),
-(8, 'Ciencias Químicas'),
-(9, 'Economía'),
-(10, 'Historia'),
-(11, 'Idiomas y literatura'),
-(12, 'Ingeniería Civil y Arquitectura'),
-(13, 'Ingeniería Eléctrica y Electrónica'),
-(14, 'Matemáticas y Ciencias de la Computación'),
-(15, 'Medicina Básica'),
-(16, 'Medicina Clínica'),
-(17, 'Medicina Veterinaria'),
-(18, 'Psicología'),
-(19, 'Otras Ciencias Ingenieriles'),
-(20, 'Otras Ciencias Sociales'),
-(21, 'Otras Humanidades');
+INSERT INTO `area_conocimiento` (`id_area_conocimiento`, `nombre_area`, `clave_area`) VALUES
+(1, 'Agricultura, silvicultura, piscicultura y otras', 'AGR'),
+(2, 'Biotecnología', 'BTG'),
+(3, 'Ciencias Físicas', 'FIS'),
+(4, 'Ciencias Ambientales y de la Tierra', 'GEO'),
+(5, 'Ciencias Biológicas', 'BIO'),
+(6, 'Ciencias de la Educación', 'EDU'),
+(7, 'Ciencias de la salud', 'SLD'),
+(8, 'Ciencias Químicas', 'QUM'),
+(9, 'Economía', 'ECN'),
+(10, 'Historia', 'HIS'),
+(11, 'Idiomas y literatura', 'LNG'),
+(12, 'Ingeniería Civil y Arquitectura', 'INC'),
+(13, 'Ingeniería Eléctrica y Electrónica', 'INE'),
+(14, 'Matemáticas y Ciencias de la Computación', 'MAT'),
+(15, 'Medicina Básica', 'MED'),
+(16, 'Medicina Clínica', 'CLI'),
+(17, 'Medicina Veterinaria', 'VET'),
+(18, 'Psicología', 'PSI'),
+(19, 'Otras Ciencias Ingenieriles', 'INO'),
+(20, 'Otras Ciencias Sociales', 'SOC'),
+(21, 'Otras Humanidades', 'HMN');
 
 -- --------------------------------------------------------
 
