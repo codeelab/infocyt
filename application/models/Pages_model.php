@@ -45,7 +45,7 @@ class Pages_model extends CI_Model {
         {
             // almacenamos en una matriz bidimensional
             foreach($query->result() as $row)
-               $arrDatos[htmlspecialchars($row->id_genero, ENT_QUOTES)] = htmlspecialchars($row->nombre_gen, ENT_QUOTES);
+               $arrDatos[htmlspecialchars(substr($row->nombre_gen,0,1), ENT_QUOTES)] = htmlspecialchars($row->nombre_gen, ENT_QUOTES);
                 $query->free_result();
                 return $arrDatos;
          }
@@ -124,9 +124,34 @@ class Pages_model extends CI_Model {
         return $this->db->get('nivel_academico')->result();
     }
 
+    function genero()
+    {
+        return $this->db->get('genero')->result();
+    }
 
 
+    public function login($username,$password)
+    {
+        $this->db->where('username',$username);
+        $this->db->where('password',$password);
+        $query = $this->db->get('usuarios');
+        if($query->num_rows() == 1)
+        {
+            return $query->row();
 
+        }else{
+            $this->session->set_flashdata('error','El usuario o la contraseña son incorrectos. Por favor intenténtelo nuevamente.');
+            redirect('login');
+        }
+    }
+
+    public function recovery($pa)
+    {
+       $sql = ("UPDATE usuarios SET password = '$pa', update_recovery  = update_recovery + 1 ");
+
+       $this->db->query($sql); 
+
+    }
 
 }
 

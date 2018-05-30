@@ -30,7 +30,7 @@
                     <div class="col-sm-offset-4 col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="c-center">Instituto de Ciencia, Tecnología e Innovación del Estado de Michoacán</h3>
+                                Instituto de Ciencia, Tecnología e Innovación del Estado de Michoacán
                             </div>
                             <div class="panel-body">
 
@@ -45,40 +45,35 @@
                                     <?php } ?>
 
 
-                                 <?php $atrib = array('id' => 'loggin', 'autocomplete'=> 'off');
-                                    echo form_open('login/acceso', $atrib); ?>
-                                   <div class="form-group">
-                                        <label for="usuario" class="col-sm-3 form-text">Usuario</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" name="username" id="username" class="form-control c-theme c-square input-lg" value="<?php echo set_value('username') ?>">
-                                        <?php echo form_error('username', '<div class="alert alert-danger">', '</div>'); ?>
-                                    </div>
 
-                                  </div>
+                                 <?=form_open(base_url().'login/recovery')?>
                                   <div class="form-group">
-                                        <label for="password" class="col-sm-3 form-text">Contraseña</label>
+                                        <label for="email" class="col-sm-3 control-label">Correo</label>
                                     <div class="col-sm-12">
-                                        <input type="password" name="password" id="password" class="form-control c-theme c-square input-lg">
-                                        <?php echo form_error('password', '<div class="alert alert-danger">', '</div>'); ?>
+                                        <input type="text" name="correo_personal" id="correo_personal" class="form-control">
+                                        <?php echo form_error('correo_personal', '<div class="alert alert-danger">', '</div>'); ?>
                                     </div>
                                   </div>
                                   <div class="form-group">
-                                        <label for="password" class="col-sm-3 control-label"></label>
+                                        <label for="recuperacion" class="col-sm-3 control-label"></label>
                                     <div class="col-sm-12">
-                                        <input type="submit" value="Inicio de sesión" class="btn c-theme-btn c-btn-uppercase btn-lg c-btn-square btn-block">
+                                        <input type="submit" value="Recuperación" class="btn btn-success btn-block">
+                                    </div>
+                                  </div>
+                                    <div class="form-group">
+                                        <label for="login" class="col-sm-3 control-label"></label>
+                                    <div class="col-sm-12">
+                                        <a href="<?=base_url('login');?>">Inicio de sesión</a>
                                     </div>
                                   </div>
                                     <?php echo form_close(); ?>
 
-                                    <div class="form-group">
-                                        <label for="recuperacion" class="col-sm-3 control-label"></label>
-                                    <div class="col-sm-12">
-                                        <a href="<?=base_url('recuperacion');?>">Olvidaste tu contraseña?</a>
-                                    </div>
-                                  </div>
+                                    
                             </div>
                         </div>
                     </div>
+
+
                 </div>
 
   

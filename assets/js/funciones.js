@@ -188,8 +188,8 @@ $(document).ready(function(){
     $("#registro").bootstrapValidator({
         message:"Este valor no es válido",feedbackIcons:{
             valid:"",
-            invalid:"fa fa-remove",
-            validating:"fa fa-refresh"
+            invalid:"far fa-remove",
+            validating:"far fa-refresh"
         },
         fields:{
             nombre:{
@@ -461,13 +461,16 @@ $(document).ready(function(){
             num_rim: {
                 message: 'Ingrese su Número RIM.',
                 validators: {
+                    notEmpty:{
+                        message:"Es requerido su número de RIM. <a href='rim' target='_blank'>¿Solicitar RIM?<a>"
+                    },
                     stringLength: {
                         min: 12,
-                        max: 15,
+                        max: 12,
                         message: 'Su número de registro debe tener al menos 12 caracteres.'
                     },
                     regexp: {
-                        regexp: /^[a-zA-Z0-9_-]{12,15}$/,
+                        regexp: /^[A-Z0-9_-]{12,12}$/,
                         message: 'El número de RIM solo puede incluir caracteres alfanuméricos (A-Z, 0-9).'
                     }
                 }
@@ -553,4 +556,85 @@ $(document).ready(function(){
         1==$(this).val().length&&$("#registro").bootstrapValidator("validateField","password").bootstrapValidator("validateField","password2")
     }
     )
+});
+
+
+$(document).ready(function() {
+    $('#loggin').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-remove',
+            validating: 'fa fa-refresh'
+        },
+        fields: {
+            username: {
+                message: 'El usuario no es valido',
+                validators: {
+                    notEmpty: {
+                        message: 'El Usuario es requerido y no puede estar vacío.'
+                    },
+                    regexp: {
+                        regexp:/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i,
+                        message: 'El nombre de usuario solo puede incluir caracteres alfanuméricos (A-Z, 0-9), puntos (".") y guión bajo (_).'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'El campo Contraseña es obligatorio'
+                    },
+                    regexp: {
+                        regexp:/^([a-zA-Z0-9])*$/,
+                        message: 'Se ha generado un error.'
+                    }
+                }
+            }
+        }
+    });
+});
+
+  $(document).ready(function (){
+    $('#rfc').on('keyup', function(){
+            var rfc = $('#rfc').val();
+            $('#rfc1').text(rfc);
+        });
+    $('#sexo_id').on('change', function(){
+            var sexo_id = $('#sexo_id').val();
+            $('#sexo1').text(sexo_id);
+        });
+    $('#nivel').on('change', function(){
+            var nivel = $('#nivel').val();
+            $('#nivel1').text(nivel);
+        });
+    $('#area').on('change', function(){
+            var area = $('#area').val();
+            $('#area1').text(area);
+        });
+
+
+  });
+
+
+$(document).ready(function (){
+
+function rand_code(chars, lon){
+code = "";
+for (x=0; x < lon; x++)
+{
+rand = Math.floor(Math.random()*chars.length);
+code += chars.substr(rand, 1);
+}
+return code;
+}
+
+caracteres = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+longitud = 1;
+
+ale = rand_code(caracteres, longitud);
+
+$('#rim').text(ale);
+//devuelve una cadena aleatoria de 20 caracteres
+
+
 });

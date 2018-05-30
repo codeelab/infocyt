@@ -85,6 +85,7 @@
         <script src="<?=base_url();?>assets/js/jquery-ui.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/jquery-validate.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/particles.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/particulas.js" type="text/javascript"></script>
      <!-- END: PAGE SCRIPTS -->
 
 <!-- END: LAYOUT/BASE/BOTTOM -->

@@ -44,6 +44,7 @@
         <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.css"/>
         <link rel="stylesheet" href="<?=base_url();?>assets/css/jquery.fancybox.css"/>
         <link rel="stylesheet" href="<?=base_url();?>assets/css/slider.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/animations.css">
         <!-- END: BASE PLUGINS -->
         <!-- BEGIN: PAGE STYLES -->
         <link rel="stylesheet" href="<?=base_url();?>assets/css/ilightbox.css"/>
