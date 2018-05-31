@@ -28,7 +28,7 @@ class Login extends CI_Controller
                 redirect(base_url().'jefe');
                 break;
             case '3':
-                redirect(base_url().'lider');
+                redirect(base_url().'personacyt');
                 break;
             default:
                 $this->session->set_flashdata('error', 'Usuario no registrado!');
@@ -62,6 +62,7 @@ class Login extends CI_Controller
             'username'          =>      $check_user->username
             );
             $this->session->set_userdata($data);
+            $this->session->set_flashdata('success', 'Bienvenido al Sistema de Información Científica y Tecnológica del Estado de Michoacán.');
             $this->index();
         }else {
             $this->session->set_flashdata('error', 'Usuario no registrado!');
@@ -75,7 +76,7 @@ class Login extends CI_Controller
         $array_sesiones = array('id_usuario' => '', 'nombre' => '', 'a_paterno' => '', 'a_materno' => '', 'correo' => '', 'username' => '', 'rol_id' => '', 'sexo_id' => '', 'area_id' => '');
         $this->session->unset_userdata($array_sesiones);
         $this->session->sess_destroy();
-        redirect('login','refresh');
+        redirect('login');
     }
 
 

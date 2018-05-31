@@ -70,7 +70,7 @@
 
                             <div class="row">
                                  <div class="col-md-6">
-                                     <p class="c-font-uppercase c-font-bold c-font-dark" style="font-size: 30pt"><i class="fas fa-id-card"></i>    RIM_<span id="rfc1"></span><span id="sexo1"></span><span id="nivel1"></span><span id="area1"></span><span id="rim"></span></p>
+                                     <p class="c-font-uppercase c-font-bold c-font-dark" style="font-size: 30pt"><i class="fas fa-id-card"></i>    RIM: <span id="rfc1"></span><span id="sexo1"></span><span id="nivel1"></span><span id="area1"></span><span id="rim"></span></p>
                                 </div>                             
                             </div>
 <br>

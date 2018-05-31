@@ -585,7 +585,7 @@ $(document).ready(function() {
                         message: 'El campo Contraseña es obligatorio'
                     },
                     regexp: {
-                        regexp:/^([a-zA-Z0-9])*$/,
+                        regexp:/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i,
                         message: 'Se ha generado un error.'
                     }
                 }
