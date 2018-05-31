@@ -59,6 +59,7 @@ class Login extends CI_Controller
             'a_paterno'         =>      $check_user->a_paterno,
             'a_materno'         =>      $check_user->a_materno,
             'correo_personal'   =>      $check_user->correo_personal,
+            'num_rim'           =>      $check_user->num_rim,
             'username'          =>      $check_user->username
             );
             $this->session->set_userdata($data);

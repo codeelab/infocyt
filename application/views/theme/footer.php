@@ -1,19 +1,27 @@
-    <!-- BEGIN: LAYOUT/FOOTERS/FOOTER-6 -->
+<!-- BEGIN: LAYOUT/FOOTERS/FOOTER-6 -->
 <a name="footer"></a>
-        <footer class="c-layout-footer c-layout-footer-6 c-bg-grey-1">
-            <div class="c-postfooter c-bg-dark-2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 c-col">
-                            <p class="c-copyright c-font-grey"> © Instituto de Ciencia, Tecnología e Innovación del Estado de Michoacán | <a href="http://icti.michoacan.gob.mx/" target="_blank"> </a>
-                                <span class="c-font-grey-3">Gobierno del Estado de Michoacán 2015 - 2021</span>
-                                <!-- Programado por Joel Álvarez | CODEELAB.COM -->
-                            </p>
-                        </div>
-                    </div>
+<footer class="c-layout-footer c-layout-footer-1 c-bg-grey-1">
+    <div class="c-postfooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-sm-9">
+                    <p class="c-copyright c-font-oswald c-font-16">
+                        © Instituto de Ciencia, Tecnología e Innovación del Estado de Michoacán | <a href="http://icti.michoacan.gob.mx/" target="_blank"> </a><span class="c-font-grey-3">Gobierno del Estado de Michoacán 2015 - 2021</span>
+                        <!-- Programado por Joel Álvarez | CODEELAB.COM -->
+                    </p>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                    <ul class="c-socials">
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
+        </div>
+    </div>
+</footer>
 <!-- END: LAYOUT/FOOTERS/FOOTER-6 -->
 
     <!-- BEGIN: LAYOUT/FOOTERS/GO2TOP -->
