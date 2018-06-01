@@ -9,6 +9,38 @@
       $rim              = $this->session->userdata('num_rim');
       $nombre_completo  = $nombre .' '.$a_paterno .' '.$a_materno;
 
+
+
+    $fecha1="2018";
+    $fecha="01-07-2018";
+    $diff = strtotime($fecha) - strtotime(date('d-m-Y'));
+    $dias = $diff/(60*60*24);
+    $ano = $fecha1 - date('Y');
+
+    $a = intval($ano);
+    $d = intval($dias); 
+
+    if ($a >= 0) 
+    {
+        if ($a == 1) {$verificacion = " En: <b>". $a ." Año</b>";} else {$verificacion = " En: <b>". $a ." Años</b>";}
+        
+    }
+    if ($a <= 0) {
+        if ($d == 1) {$verificacion = " En: <b>". $d ." Día</b>";} else {$verificacion = " En: <b>". $d ." Dias</b>";}
+    }
+
+    if ($d == 0) {$verificacion = "<b class='text-orange'>Hoy último día</b>";} else if($d <= 0) {$verificacion = " <b class='text-red'>Vencido</b>";}
+
+      $rim_u = 1;
+
+      if ($rim_u == 1 AND $a >= 0 AND $a <= 0 AND $d == 0) {
+          $u_rim = '<i class="far fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">RIM_'.$rim.'</a>';
+      }else if ($rim_u == 2) {
+          $u_rim = '<b class="text-orange">Pendiente: </b> RIM_'.$rim;
+      }else if ($rim_u == 1 AND $d <= 0){
+        $u_rim = '<b class="text-red">Vencido: </b> RIM_'.$rim;
+      }
+
     if(!$user)
     {
       redirect('login','refresh');
@@ -33,15 +65,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 col-md-6 col-xs-12 col-sm-12">
-            <?php if($this->session->flashdata('success')){ ?>
-
+            <?php if($d == 0 OR $d <= 0){ ?>
                     <!-- BEGIN: CONTENT/MISC/COOKIES-5 -->
-                    <div class="c-cookies-bar c-cookies-bar-2 c-cookies-bar-top-left c-theme-bg c-rounded wow animate fadeInLeft" data-wow-delay=".5s">
+                    <div class="c-cookies-bar c-cookies-bar-2 c-cookies-bar-top-left c-bg-red c-rounded wow animate fadeInLeft" data-wow-delay=".5s">
                         <div class="c-cookies-bar-container">
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="c-cookies-bar-content c-font-white c-font-lowercase">
-                                        <?php echo $this->session->flashdata('success'); ?>
+                                        Estimado usuario, el registro de investigador se encuentra próximo a vencer o actualmente esta vencido, le sugerimos realice la renovación del mismo.
                                     </div>
                                 </div>
 
@@ -57,7 +88,6 @@
             <?php } ?>
 
             </div>
-
         </div>
     </div>
 
@@ -84,17 +114,9 @@
                                 <div class="c-head">
                                     <div class="c-name c-font-uppercase c-font-bold c-center"><?=$nombre_completo?></div>
                                 </div>
-                                    <p class="c-center c-font-15"> <span>Pendiente: </span>   RIM_<?=$rim?> </p>
-                                    <p class="c-center c-font-15"> <span>Renovación: </span> <br> 
-                                        <?php $fecha1="27-10-2011 09:49:10";
-                                            $fecha="03-06-2018";
-                                            $diff = strtotime($fecha) - strtotime(date('d-m-Y'));
-                                            $dias = $diff/(60*60*24);
-                                            $fecha1="2018";
-                                            $ano = $fecha1 - date('Y');
-                                            echo "".intval($ano)." Años ";
-                                            echo "(".intval($dias)." dias) "; 
-                                        ?>
+                                    <p class="c-center"> <?=$u_rim?> </p>
+                                    <p class="c-center"> <span style="font-size: 13px;">Próxima Renovación: </span> <br> 
+                                        <?=$verificacion;?>
                                     </p>
                                 </div>
                             </div>
@@ -118,24 +140,42 @@
 
 
 
+        <div class="row" >
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-cogs fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-17 c-font-bold c-font-uppercase c-center">
+                                    Opciones
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-address-card fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-17 c-font-bold c-font-uppercase c-center">
+                                    Datos Generales
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
 
-                                        <div class="c-content-feature-2-grid" data-auto-height="true" data-mode="base-height">
 
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="c-content-feature-2 c-bg-grey-1 wow fadeInDown  c-center" data-height="height" style="height: 10px;">
-                                                        <h3 class="c-font-uppercase c-title c-font-20 c-font-uppercase c-font-black c-font-bold c-center"> <i class="fas fa-cogs fa-3x"></i><br>Opciones</h3>
-                                                        <a href="#" class="btn  c-btn-green c-font-uppercase c-font-bold c-btn-border-1x"><i class="far fa-share-square"></i> Ir</a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="c-content-feature-2 c-bg-grey-1 wow fadeInDown  c-center" data-height="height" style="height: 20px;">
-                                                        <h3 class="c-font-uppercase c-title c-font-20 c-font-uppercase c-font-black c-font-bold c-center"> <i class="fas fa-address-card fa-3x"></i><br>Datos Generales</h3>
-                                                        <a href="#" class="btn  c-btn-green c-font-uppercase c-font-bold c-btn-border-1x"><i class="far fa-share-square"></i> Ir</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
+                </div>
 
 
 
@@ -144,25 +184,410 @@
 
                                 </div>
                                 <div class="tab-pane fade" id="tab_18_2">
-                                    <p>
-                                     Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. 
-                                     Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson
-                                      artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, 
-                                      commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
-                                      Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. 
-                                      Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. 
-                                      Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean .
-                                    </p>
+
+
+                                             
+        <div class="row" >
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-tags fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-16 c-font-bold c-font-uppercase c-center">
+                                    Congresos
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-list-alt fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-15 c-font-bold c-font-uppercase c-center">
+                                    Reconocimientos
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-language fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-16 c-font-bold c-font-uppercase c-center">
+                                   Idiomas
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                                                    
+        <div class="row" >
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="far fa-id-badge fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-15 c-font-bold c-font-uppercase c-center">
+                                    Preparación Académica
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-list-alt fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-15 c-font-bold c-font-uppercase c-center">
+                                    Estancias de Investigación
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
                                 </div>
                                 <div class="tab-pane fade" id="tab_18_3">
-                                    <p>
-                                         Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.
-                                    </p>
+
+
+
+
+        <div class="row" >
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-briefcase fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-16 c-font-bold c-font-uppercase c-center">
+                                    Adscripción Actual
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-rocket fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-15 c-font-bold c-font-uppercase c-center">
+                                    Desarrollos Tecnológicos
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-copy fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-16 c-font-bold c-font-uppercase c-center">
+                                   Difusión y Divulgación
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                                                    
+        <div class="row" >
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-graduation-cap fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-15 c-font-bold c-font-uppercase c-center">
+                                    Experiencia Profesional
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-university fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-15 c-font-bold c-font-uppercase c-center">
+                                    Docencia
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-file-alt fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-15 c-font-bold c-font-uppercase c-center">
+                                    Tesís
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
                                 </div>
                                 <div class="tab-pane fade" id="tab_18_4">
-                                    <p>
-                                     Trust fund seitan letterpress, keytar raw denim keffiyehluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.
-                                    </p>
+
+
+
+
+        <div class="row" >
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-book fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-17 c-font-bold c-font-uppercase c-center">
+                                    Captitulo de Libro
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-bookmark fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-17 c-font-bold c-font-uppercase c-center">
+                                   Publicación de Articulos
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-book fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-17 c-font-bold c-font-uppercase c-center">
+                                   Publicación de Libro
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                                                    
+        <div class="row" >
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-clipboard fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-17 c-font-bold c-font-uppercase c-center">
+                                    Reporte Técnico
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-file fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-18 c-font-bold c-font-uppercase c-center">
+                                    Reseña
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+                                </div>
+                                <div class="tab-pane fade" id="tab_18_5">
+
+
+
+
+        <div class="row" >
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-money-bill-alt fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-20 c-font-bold c-font-uppercase c-center">
+                                    Financiamiento
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-users fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-20 c-font-bold c-font-uppercase c-center">
+                                   Grupos
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                                                    
+        <div class="row" >
+
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-certificate fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-20 c-font-bold c-font-uppercase c-center">
+                                   Patentes
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue"">
+                                   <i class="fas fa-list fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue"">
+                                <div class="circle-tile-description text-faded c-font-uppercase c-title c-font-20 c-font-bold c-font-uppercase c-center">
+                                   Proyectos
+                                </div>
+                                <br>
+                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -171,20 +596,17 @@
                                 <li class="active">
                                     <a href="#tab_18_1" data-toggle="tab" aria-expanded="true">Generales</a>
                                 </li>
-                                <li>
+                                <li >
                                     <a href="#tab_18_2" data-toggle="tab">Preparación Académica</a>
                                 </li>
-                                <li>
-                                    <a href="#tab_18_3" data-toggle="tab">
-                                    Actividad Profesional </a>
+                                <li >
+                                    <a href="#tab_18_3" data-toggle="tab">Actividad Profesional </a>
                                 </li>
                                 <li>
-                                    <a href="#tab_18_4" data-toggle="tab">
-                                    Publicaciones </a>
+                                    <a href="#tab_18_4" data-toggle="tab">Publicaciones </a>
                                 </li>
                                 <li>
-                                    <a href="#tab_18_4" data-toggle="tab">
-                                    Investigación </a>
+                                    <a href="#tab_18_5" data-toggle="tab">Investigación </a>
                                 </li>
                             </ul>
                         </div>  

@@ -133,30 +133,24 @@ margin-top:0px;
 }
 
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    #particles-js{
-       width: 100%;
-       height: 65%;
-    }
+@media screen and (min-width: 481px) and (max-width: 768px) 
+{
+    #particles-js{width: 100%;height: 65%;}
+    .circle-tile {margin-bottom: 30px;}
 }
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    #particles-js{
-       width: 100%;
-       height: 65%;
-    }
+@media screen and (min-width: 768px) and (max-width: 1024px) 
+{
+    #particles-js{width: 100%;height: 65%;}
 }
 
 /* ----------- Non-Retina Screens ----------- */
 @media screen 
   and (min-device-width: 1200px) 
   and (max-device-width: 1600px) 
-  and (-webkit-min-device-pixel-ratio: 1) { 
-
-    #particles-js{
-       width: 100%;
-       height: 73%;
-    }
+  and (-webkit-min-device-pixel-ratio: 1) 
+{ 
+    #particles-js{width: 100%;height: 73%;}
 }
 
 /* ----------- Retina Screens ----------- */
@@ -164,10 +158,145 @@ margin-top:0px;
   and (min-device-width: 1200px) 
   and (max-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 2)
-  and (min-resolution: 192dpi) { 
+  and (min-resolution: 192dpi) 
+{ 
 
-    #particles-js{
-       width: 100%;
-       height: 73%;
-    }
+    #particles-js{width: 100%;height: 73%;}
+}
+
+
+
+/* -- Background Helper Classes */
+
+
+
+.circle-tile {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.circle-tile-heading {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto -40px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 100%;
+    color: #fff;
+    transition: all ease-in-out .3s;
+}
+
+
+
+ .dark-blue {
+    background-color: #34495e;
+}
+
+.green {
+    background-color: #16a085;
+}
+
+.blue {
+    background-color: #82a8ce;
+}
+
+.orange {
+    background-color: #f39c12;
+}
+
+.red {
+    background-color: #e74c3c;
+}
+
+.purple {
+    background-color: #8e44ad;
+}
+
+.dark-gray {
+    background-color: #7f8c8d;
+}
+
+.gray {
+    background-color: #95a5a6;
+}
+
+.light-gray {
+    background-color: #bdc3c7;
+}
+
+.yellow {
+    background-color: #f1c40f;
+}
+
+/* -- Text Color Helper Classes */
+
+ .text-dark-blue {
+    color: #34495e;
+}
+
+.text-green {
+    color: #16a085;
+}
+
+.text-blue {
+    color: #2980b9;
+}
+
+.text-orange {
+    color: #f39c12;
+}
+
+.text-red {
+    color: #e74c3c;
+}
+
+.text-purple {
+    color: #8e44ad;
+}
+
+.text-faded {
+    color: rgba(255,255,255,0.7);
+}
+
+
+
+.circle-tile-heading .fa {
+    line-height: 80px;
+}
+
+.circle-tile-content {
+    padding-top: 50px;
+}
+.circle-tile-description {
+    text-transform: uppercase;
+}
+
+.text-faded {
+    color: rgba(255,255,255,0.7);
+}
+
+.circle-tile-number {
+    padding: 5px 0 15px;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.circle-tile-footer {
+    display: block;
+    padding: 5px;
+    color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.1);
+    transition: all ease-in-out .3s;
+}
+
+.circle-tile-footer:hover {
+    text-decoration: none;
+    color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.2);
+}
+.fa-fw {
+    width: 1.28571429em;
+    text-align: center;
+    margin-top: 10px;
 }
