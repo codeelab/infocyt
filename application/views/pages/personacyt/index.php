@@ -10,35 +10,52 @@
       $nombre_completo  = $nombre .' '.$a_paterno .' '.$a_materno;
 
 
-
+$rim_u = 1;
     $fecha1="2018";
-    $fecha="01-07-2018";
+    $fecha="12-08-2017";
     $diff = strtotime($fecha) - strtotime(date('d-m-Y'));
     $dias = $diff/(60*60*24);
-    $ano = $fecha1 - date('Y');
+    $ano = $fecha - date('Y');
 
     $a = intval($ano);
     $d = intval($dias); 
 
     if ($a >= 0) 
     {
-        if ($a == 1) {$verificacion = " En: <b>". $a ." Año</b>";} else {$verificacion = " En: <b>". $a ." Años</b>";}
+        if ($a == 1 AND $rim_u == 1) {
+            $verificacion = " En: <b>". $a ." Año</b>"; 
+            $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">RIM_'.$rim.'</a>';
+        } else {
+            $verificacion = " En: <b>". $a ." Años</b>"; 
+            $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">RIM_'.$rim.'</a>';
+        }
+
         
     }
     if ($a <= 0) {
-        if ($d == 1) {$verificacion = " En: <b>". $d ." Día</b>";} else {$verificacion = " En: <b>". $d ." Dias</b>";}
+        if ($d == 1 AND $rim_u == 1) {
+            $verificacion = " En: <b>". $d ." Día</b>";
+            $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
+        } else {
+            $verificacion = " En: <b>". $d ." Dias</b>";
+            $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
+        }
     }
 
-    if ($d == 0) {$verificacion = "<b class='text-orange'>Hoy último día</b>";} else if($d <= 0) {$verificacion = " <b class='text-red'>Vencido</b>";}
+    if ($d == 0) {
+        $verificacion = "<b class='text-orange'>Hoy último día</b>";
+        $u_rim = '<i class="fas fa-times"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
+    } else if($d <= 0 AND $rim_u == 1) {
+        $verificacion = "<i class='fas fa-times'></i> <span class='text-red'> Vencido</span>";
+        $u_rim = '<i class="fas fa-times"></i><span class="text-red"> Vencido: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
+    }
 
-      $rim_u = 1;
+      
 
-      if ($rim_u == 1 AND $a >= 0 AND $a <= 0 AND $d == 0) {
-          $u_rim = '<i class="far fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">RIM_'.$rim.'</a>';
+      if ( $a >= 0 AND $a <= 0 AND $d == 0) {
+          
       }else if ($rim_u == 2) {
-          $u_rim = '<b class="text-orange">Pendiente: </b> RIM_'.$rim;
-      }else if ($rim_u == 1 AND $d <= 0){
-        $u_rim = '<b class="text-red">Vencido: </b> RIM_'.$rim;
+          $u_rim = '<i class="fas fa-times"></i> <b class="text-orange"> Pendiente: </b> RIM_'.$rim;
       }
 
     if(!$user)
@@ -153,7 +170,7 @@
                                     Opciones
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/opciones" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>

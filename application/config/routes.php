@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$route['lider/estadisticas'] = 'lider/estadisticas';
 //$route['lider/municipios'] = 'lider/municipios';
 //$route['lider/eventos'] = 'lider/eventos';
-//$route['personacyt/inicio'] = 'personacyt/inicio';
+$route['personacyt/generales/opciones'] = 'personacyt/generales/opciones';
 
 $route['personacyt/(:any)'] = 'personacyt/view/$1';
 $route['personacyt'] = 'personacyt/index';

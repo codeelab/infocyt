@@ -20,27 +20,19 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
 
-        //$data['usuarios']   = $this->Lider_model->usuarios();
-        //$data['theme']    = $this->Lider_model->theme();
-        //$data['municipios'] = $this->Lider_model->municipios();
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('pages/personacyt/index');
         $this->load->view('theme/footer');
     }
 
-    public function usuarios()
+    public function opciones()
     {
-        $data['usuarios'] = $this->Lider_model->getUsuarios();
-
-        if (empty($data['usuarios'])){
-           redirect('lider');
-        }
 
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
-        $this->load->view('lider/usuarios', $data);
-        $this->load->view('template/footers');
+        $this->load->view('pages/personacyt/generales/opciones');
+        $this->load->view('theme/footer');
     }
 
     public function theme()
@@ -51,10 +43,10 @@ class Personacyt extends CI_Controller {
             redirect('lider');
         }
 
-        $this->load->view('template/header');
-        $this->load->view('template/nav');
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
         $this->load->view('lider/theme', $data);
-        $this->load->view('template/footers');
+        $this->load->view('theme/footer');
     }
 
 
@@ -66,10 +58,10 @@ class Personacyt extends CI_Controller {
             redirect('lider');
         }
 
-        $this->load->view('template/header');
-        $this->load->view('template/nav');
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
         $this->load->view('lider/municipios', $data);
-        $this->load->view('template/footers');
+        $this->load->view('theme/footer');
     }
 
     public function estadisticas()
@@ -80,10 +72,10 @@ class Personacyt extends CI_Controller {
         $data['cor']        = $this->Lider_model->getUsuariosCo();
         $data['theme']    = $this->Lider_model->theme();
         $data['municipios'] = $this->Lider_model->municipios();
-        $this->load->view('template/header');
-        $this->load->view('template/nav');
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
         $this->load->view('lider/estadisticas',$data);
-        $this->load->view('template/footers');
+        $this->load->view('theme/footer');
     }
 
 
@@ -94,20 +86,20 @@ class Personacyt extends CI_Controller {
         $data['mun']        = $this->Lider_model->selectMunicipios();
         $data['tipo']       = $this->Lider_model->selectUsuario();
         $data['theme']    = $this->Lider_model->selectEventos();
-        $this->load->view('template/header');
-        $this->load->view('template/nav');
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
         $this->load->view('lider/r_talleristas',$data);
-        $this->load->view('template/footers');
+        $this->load->view('theme/footer');
     }
 
     public function registro_eventos()
     {
 
         $data['mun']        = $this->Lider_model->selectMunicipios();
-        $this->load->view('template/header');
-        $this->load->view('template/nav');
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
         $this->load->view('lider/r_eventos',$data);
-        $this->load->view('template/footers');
+        $this->load->view('theme/footer');
     }
 
 
@@ -195,10 +187,10 @@ class Personacyt extends CI_Controller {
         if (empty($data['usuarios'])){
             redirect('lider');
         }
-        $this->load->view('template/header');
-        $this->load->view('template/nav');
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
         $this->load->view('lider/edit_usuarios',$data);
-        $this->load->view('template/footers');
+        $this->load->view('theme/footer');
     }
 
 
@@ -209,10 +201,10 @@ class Personacyt extends CI_Controller {
         $data['tipo']       = $this->Lider_model->selectUsuario();
         $data['theme']    = $this->Lider_model->selectEventos();
 
-        $this->load->view('template/header');
-        $this->load->view('template/nav');
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
         $this->load->view('lider/edit_u',$data);
-        $this->load->view('template/footers');
+        $this->load->view('theme/footer');
     }
 
     public function update_tallerista()
@@ -278,10 +270,10 @@ class Personacyt extends CI_Controller {
         if (empty($data['theme'])){
             redirect('lider');
         }
-        $this->load->view('template/header');
-        $this->load->view('template/nav');
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
         $this->load->view('lider/edit_eventos',$data);
-        $this->load->view('template/footers');
+        $this->load->view('theme/footer');
     }
 
 
@@ -297,10 +289,10 @@ class Personacyt extends CI_Controller {
             redirect('lider/editar_eventos');
         }
 
-        $this->load->view('template/header');
-        $this->load->view('template/nav');
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
         $this->load->view('lider/edit_e',$data);
-        $this->load->view('template/footers');
+        $this->load->view('theme/footer');
     }
 
     public function update_evento()
