@@ -4,6 +4,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Personacyt_model extends CI_Model {
 
     
+    public function usuario($id)
+    {
+        $this->db->select('*');
+        $this->db->from('usuarios');
+        $this->db->join('paises','pais_id = id_paises','inner');
+        $this->db->join('estado_civil','estado_civil = id_civil','inner');
+        $this->db->join('nacionalidad','nacionalidad = id_nacionalidad','inner');
+        $this->db->join('estado','estado_id = id_estado','inner');
+        $this->db->join('municipio','municipio_id = id_municipio','inner');
+        $this->db->where('id_usuario',$id);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+
+
+    }
+
+
+
     public function usuarios()
     {
         $query = $this->db->query('SELECT COUNT(id_constancias) as usuarios FROM constancias');

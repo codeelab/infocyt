@@ -17,6 +17,26 @@ $(function() {
     });
 });
 
+$(function() {
+    $("select[id=estado_id]").change(function() {
+        estado = $(this).val();
+        if (estado === '') return false;
+        resetaCombo('municipio_id');
+        $.getJSON('municipio/' + estado, function(data) {
+            var option = new Array();
+            $.each(data, function(i, obj) {
+                option[i] = document.createElement('option');
+                $(option[i]).attr({
+                    value: obj.id_municipio
+                });
+                $(option[i]).append(obj.nombre);
+                $("select[id='municipio_id']").append(option[i]);
+            });
+        });
+    });
+});
+
+
 function resetaCombo(el) {
     $("select[id='" + el + "']").empty();
     var option = document.createElement('option');

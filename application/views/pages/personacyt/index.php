@@ -160,7 +160,7 @@ $rim_u = 1;
         <div class="row" >
                     <div class="col-lg-6 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/opciones">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-cogs fa-fw fa-3x"></i>
                                 </div>
@@ -176,7 +176,7 @@ $rim_u = 1;
                     </div>
                     <div class="col-lg-6 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/generales">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-address-card fa-fw fa-3x"></i>
                                 </div>
@@ -186,7 +186,7 @@ $rim_u = 1;
                                     Datos Generales
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/generales" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
@@ -207,7 +207,7 @@ $rim_u = 1;
         <div class="row" >
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/congresos">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-tags fa-fw fa-3x"></i>
                                 </div>
@@ -217,13 +217,13 @@ $rim_u = 1;
                                     Congresos
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/congresos" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/reconocimientos">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-list-alt fa-fw fa-3x"></i>
                                 </div>
@@ -233,14 +233,14 @@ $rim_u = 1;
                                     Reconocimientos
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/reconocimientos" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/idiomas">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-language fa-fw fa-3x"></i>
                                 </div>
@@ -250,7 +250,7 @@ $rim_u = 1;
                                    Idiomas
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/idiomas" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
@@ -261,7 +261,7 @@ $rim_u = 1;
         <div class="row" >
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/academica">
                                 <div class="circle-tile-heading blue"">
                                    <i class="far fa-id-badge fa-fw fa-3x"></i>
                                 </div>
@@ -271,13 +271,13 @@ $rim_u = 1;
                                     Preparación Académica
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/academica" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/investigacion">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-list-alt fa-fw fa-3x"></i>
                                 </div>
@@ -287,7 +287,7 @@ $rim_u = 1;
                                     Estancias de Investigación
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/investigacion" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>

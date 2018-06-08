@@ -6,7 +6,7 @@ class Personacyt extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Personacyt_model'));
+        $this->load->model(array('Personacyt_model','Pages_model'));
         $this->load->library(array('session','form_validation','user_agent','encrypt'));
         $this->load->helper(array('url','form','security'));
         $this->load->database('default');
@@ -28,56 +28,53 @@ class Personacyt extends CI_Controller {
 
     public function opciones()
     {
-
+        if (!file_exists(APPPATH.'views/pages/personacyt/generales/opciones.php')) 
+        {
+            redirect('personacyt');
+        }
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('pages/personacyt/generales/opciones');
         $this->load->view('theme/footer');
     }
 
-    public function theme()
-    {
-        $data['theme'] = $this->Lider_model->getEvent();
 
-        if (empty($data['theme'])){
-            redirect('lider');
+    public function generales()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/generales/generales.php')) 
+        {
+            redirect('personacyt');
         }
+        $id                 = $this->session->userdata('id_usuario');
+        $data['usuario']    = $this->Personacyt_model->Usuario($id);
+        $data['estados']    = $this->Pages_model->getEstados();
+        $data['nac']        = $this->Pages_model->nacionalidad();
+        $data['pais']       = $this->Pages_model->paises();
+        $data['gen']        = $this->Pages_model->sexo();
+        $data['civil']      = $this->Pages_model->civil();
+        $data['sni']        = $this->Pages_model->estado_sni();
 
+        $data['area']       = $this->Pages_model->area_conocimiento();
+        $data['nivel']      = $this->Pages_model->nivel_academico();
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
-        $this->load->view('lider/theme', $data);
+        $this->load->view('pages/personacyt/generales/generales', $data);
         $this->load->view('theme/footer');
     }
 
-
-    public function municipios()
-    {
-        $data['municipios'] = $this->Lider_model->getMunicipios();
-
-        if (empty($data['municipios'])){
-            redirect('lider');
-        }
-
-        $this->load->view('theme/header');
-        $this->load->view('theme/nav');
-        $this->load->view('lider/municipios', $data);
-        $this->load->view('theme/footer');
-    }
-
-    public function estadisticas()
-    {
-
-        $data['usuarios']   = $this->Lider_model->usuarios();
-        $data['tal']        = $this->Lider_model->getUsuariosTa();
-        $data['cor']        = $this->Lider_model->getUsuariosCo();
-        $data['theme']    = $this->Lider_model->theme();
-        $data['municipios'] = $this->Lider_model->municipios();
-        $this->load->view('theme/header');
-        $this->load->view('theme/nav');
-        $this->load->view('lider/estadisticas',$data);
-        $this->load->view('theme/footer');
-    }
-
+            function municipio($id_estado)
+            {
+                $this->load->model('Pages_model');
+                $cidades = $this->Pages_model->getCidades($id_estado);
+                if( empty ( $cidades ) )
+                    return '{ "nombre": "No hay municipios disponibles" }';
+                $arr_cidade = array();
+                foreach ($cidades as $cidade) {
+                    $arr_cidade[] = '{"id_municipio":' . $cidade->id_municipio . ',"nombre":"' . $cidade->nombre_mun . '"}';
+                }
+                echo '[ ' . implode(",",$arr_cidade) . ']';
+                return;
+            }
 
     public function registro_talleristas()
     {
@@ -89,7 +86,7 @@ class Personacyt extends CI_Controller {
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('lider/r_talleristas',$data);
-        $this->load->view('theme/footer');
+        $this->load->view('theme/footers');
     }
 
     public function registro_eventos()
@@ -99,7 +96,7 @@ class Personacyt extends CI_Controller {
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('lider/r_eventos',$data);
-        $this->load->view('theme/footer');
+        $this->load->view('theme/footers');
     }
 
 
@@ -190,7 +187,7 @@ class Personacyt extends CI_Controller {
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('lider/edit_usuarios',$data);
-        $this->load->view('theme/footer');
+        $this->load->view('theme/footers');
     }
 
 
@@ -204,7 +201,7 @@ class Personacyt extends CI_Controller {
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('lider/edit_u',$data);
-        $this->load->view('theme/footer');
+        $this->load->view('theme/footers');
     }
 
     public function update_tallerista()
@@ -273,7 +270,7 @@ class Personacyt extends CI_Controller {
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('lider/edit_eventos',$data);
-        $this->load->view('theme/footer');
+        $this->load->view('theme/footers');
     }
 
 
@@ -292,7 +289,7 @@ class Personacyt extends CI_Controller {
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('lider/edit_e',$data);
-        $this->load->view('theme/footer');
+        $this->load->view('theme/footers');
     }
 
     public function update_evento()
@@ -318,6 +315,12 @@ class Personacyt extends CI_Controller {
         redirect('lider/editar_eventos');
 
     }
+
+
+
+
+
+
 
 
 
