@@ -1,5 +1,8 @@
  <?php
-
+//https://github.com/vitalets/x-editable/blob/gh-pages/backend-samples/php/post.php
+ //https://vitalets.github.io/x-editable/docs.html#editable
+ //https://www.youtube.com/watch?v=rng1bQUFaCA
+ 
       $user             = $this->session->userdata('id_usuario');
       $nombre           = $this->session->userdata('nombre');
       $a_paterno        = $this->session->userdata('a_paterno');
@@ -70,7 +73,7 @@ foreach ($usuario as $us)
     $paterno        = $us->a_paterno;
     $materno        = $us->a_materno;
     $fechas         = $us->fecha_nac;
-    $paiss          = $us->nombre;
+    $paiss          = $us->nombre_pa;
     $edad           = $us->edad;
     $estado_c       = $us->nombre_civil;
     $nacionalida    = $us->nombre_nac;
@@ -206,176 +209,129 @@ foreach ($usuario as $us)
                             <h3 class="c-font-uppercase c-font-bold">Actualización de Información</h3>
                             <div class="c-line-left"></div>
                         </div>
-                            <?php $atrib = array('name' => 'form1', 'id' => 'registro', 'autocomplete'=> 'off');
-                            echo form_open('registro/investigador', $atrib); ?>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="nombre">Nombre</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="nombre" name="nombre" placeholder="<?=$nombree;?>">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="a_paterno">Apellido Paterno</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="a_paterno" name="a_paterno" placeholder="<?=$paterno;?>">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="a_paterno">Apellido Materno</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="a_materno" name="a_materno" placeholder="<?=$materno;?>">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="fecha_nac">Fecha de Nacimiento</label>
-                                            <input type="text"  step="1" class="form-control c-theme c-square input-lg" id="fecha_nac" name="fecha_nac" placeholder="<?=$fechas;?>">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="pais">País de Nacimiento</label>
-                                              <?php
-                                                $options = array ('' => $paiss);
-                                                foreach($pais as $pa)
-                                                    $options[$pa->id_paises] = $pa->nombre;
+                        <form action="" id="registro">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-text" for="nombre">Nombre</label>
+                                    <p id="nombre" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$nombree;?></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-text" for="a_paterno">Apellido Paterno</label>
+                                    <p id="a_paterno" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$paterno;?></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-text" for="a_materno">Apellido Materno</label>
+                                    <p id="a_materno" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$materno;?></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="form-text" for="fecha_nac">Fecha de Nacimiento</label>
+                                    <p id="fecha_nac" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$fechas;?></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-text" for="pais">País de Nacimiento</label>
+                                    <?php
+                                        $options = array ('' => $paiss);
+                                        foreach($pais as $pa)
+                                            $options[$pa->id_paises] = $pa->nombre_pa;
                                                 echo form_dropdown('pais_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="pais_id"');
-                                                ?>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="edad">Edad</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="edad" name="edad" placeholder="<?=$edad;?>">
-                                            <?php echo form_error('edad', '<div class="alert alert-danger">', '</div>'); ?>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="escolaridad">Estado Civil</label>
-                                            <select name="estado_civil" id="estado_civil" class="form-control c-theme c-square input-lg">
-                                            <option value=""><?=$estado_c;?></option>
-                                            <?php
+                                    ?>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-text" for="edad">Edad</label>
+                                    <p id="edad" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$edad;?></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-text" for="escolaridad">Estado Civil</label>
+                                    <select name="estado_civil" id="estado_civil" class="form-control c-theme c-square input-lg">
+                                        <option value=""><?=$estado_c;?></option>
+                                        <?php
                                             foreach ($civil as $i => $civil)
                                                echo '<option value="',$i,'">',$civil,'</option>';
-                                            ?>
-                                            </select>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="nacionalidad">Nacionalidad</label>
-                                            <select name="nacionalidad" id="nacionalidad" class="form-control c-theme c-square input-lg">
-                                            <option value=""><?=$nacionalida;?></option>
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="form-text" for="nacionalidad">Nacionalidad</label>
+                                    <select name="nacionalidad" id="nacionalidad" class="form-control c-theme c-square input-lg">
+                                        <option value=""><?=$nacionalida;?></option>
                                             <?php
                                             foreach ($nac as $i => $nacionalidad)
                                                echo '<option value="',$i,'">',$nacionalidad,'</option>';
                                             ?>
-                                            </select>
-                                            <?php echo form_error('nacionalidad', '<div class="alert alert-danger">', '</div>'); ?>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="estado">Estado</label>
-                                              <?php
-                                                $options = array ('' => $estadoos);
-                                                foreach($estados as $estado)
-                                                    $options[$estado->id_estado] = $estado->nombre_est;
-                                                echo form_dropdown('estado_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="estado_id"');
-                                                ?>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="municipio">Municipio</label>
-                                             <?php
-                                                $options = array(''=> $municipios);
-                                                echo form_dropdown('municipio_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="municipio_id"');
-                                            ?>
-                                            <?php echo form_error('municipio_id', '<div class="alert alert-danger">', '</div>'); ?>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="a_paterno">Localidad</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="localidad" name="localidad" placeholder="<?=$localidad;?>">
-                                            <?php echo form_error('localidad', '<div class="alert alert-danger">', '</div>'); ?>
-                                        </div>
-                                    </div>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-text" for="estado">Estado</label>
+                                    <?php
+                                        $options = array ('' => $estadoos);
+                                        foreach($estados as $estado)
+                                        $options[$estado->id_estado] = $estado->nombre_est;
+                                        echo form_dropdown('estado_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="estado_id"');
+                                    ?>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-text" for="municipio">Municipio</label>
+                                    <?php
+                                        $options = array(''=> $municipios);
+                                        echo form_dropdown('municipio_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="municipio_id"');
+                                    ?>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-text" for="a_paterno">Localidad</label>
+                                    <p id="localidad" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$localidad;?></p>
+                                </div>
+                            </div>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-text" for="email">Correo Personal</label>
+                                    <p id="correo_personal" data-type="email" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$c_personal;?></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-text" for="email">CorreoLaboral</label>
+                                    <p id="correo_laboral" data-type="email" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$c_laboral;?></p>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="email">Correo Personal</label>
-                                            <input type="email" class="form-control c-theme c-square input-lg" id="correo_personal" name="correo_personal" placeholder="<?=$c_personal;?>" autofocus="autofocus">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="email">Confirmar Correo</label>
-                                            <input type="email" class="form-control c-theme c-square input-lg" id="correo_personal2" name="correo_personal2" placeholder="Correo Personal">
-                                        </div>
-                                      <div class="col-md-3">
-                                            <label class="form-text" for="email">Correo Laboral</label>
-                                            <input type="email" class="form-control c-theme c-square input-lg" id="correo_laboral" name="correo_laboral" placeholder="<?=$c_laboral;?>" autofocus="autofocus">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-text" for="email">Confirmar Correo</label>
-                                            <input type="email" class="form-control c-theme c-square input-lg" id="correo_laboral2" name="correo_laboral2" placeholder="Correo Laboral">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-text" for="email">Teléfono Particular</label>
+                                    <p id="tel_part" data-type="tel" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$telpart;?></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-text" for="email">Celular</label>
+                                    <p id="tel_cel" data-type="tel" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$telcel;?></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-text" for="email">Teléfono Laboral</label>
+                                    <p id="tel_lab" data-type="tel" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$tellabo;?></p>
+                                </div>
+                            </div>
 
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-text" for="institucion">Domicilio Particular</label>
+                                    <p id="direccion" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$dom;?></p>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-text" for="facultad">Número</label>
+                                    <p id="numero_dom" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$nume;?></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-text" for="mailing">Colónia</label>
+                                    <p id="colonia" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$colo;?></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-text" for="mailing">Código Postal</label>
+                                    <p id="cp" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$cp;?></p>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="email">Teléfono Particular</label>
-                                            <input type="tel" class="form-control c-theme c-square input-lg" id="tel_part" name="tel_part" placeholder="<?=$telpart;?>" autofocus="autofocus">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="email">Celular</label>
-                                            <input type="tel" class="form-control c-theme c-square input-lg" id="tel_cel" name="tel_cel" placeholder="<?=$telcel;?>">
-                                        </div>
-                                      <div class="col-md-4">
-                                            <label class="form-text" for="email">Teléfono Laboral</label>
-                                            <input type="tel" class="form-control c-theme c-square input-lg" id="tel_lab" name="tel_lab" placeholder="<?=$tellabo;?>" autofocus="autofocus">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="institucion">Domicilio Particular</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="direccion" name="direccion" placeholder="<?=$dom;?>">
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label class="form-text" for="facultad">Número</label>
-                                            <input type="num" class="form-control c-theme c-square input-lg" id="numero_dom" name="numero_dom" placeholder="<?=$nume;?>">
-                                             
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="mailing">Colónia</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="colonia" name="colonia" placeholder="<?=$colo;?>">
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label class="form-text" for="mailing">Código Pos.</label>
-                                            <input type="num" class="form-control c-theme c-square input-lg" id="cp" name="cp" placeholder="<?=$cp;?>">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="usuario">Usuario</label>
-                                            <input type="text" class="form-control c-theme c-square input-lg" id="username" name="username" placeholder="Usuario">
-                                            <span id="Loading"><img src="<?=base_url();?>assets/img/loader.gif" /></span> 
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="password">Contraseña</label>
-                                            <input type="password" class="form-control c-theme c-square input-lg" id="password" name="password" placeholder="Contraseña" data-bv-integer-message="Solo está permitido el uso de caracteres alfanuméricos">
-                                        <div class="progress password-progress form-progres">
-                                            <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
-                                        </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-text" for="password">Confirmar Contraseña</label>
-                                            <input type="password" class="form-control c-theme c-square input-lg" name="password2" id="password2" placeholder="Confirmar Contraseña">
-
-                                        </div>
-                                    </div>
-
-
-                            <?php echo form_hidden("rol_id", "3"); ?>
-                            <?php echo form_hidden("status_id", "1"); ?>
-                            <button type="submit" class="btn c-theme-btn c-btn-uppercase btn-lg c-btn-square btn-block">ACTUALIZAR</button>
-                            <?php form_close()?>
+                        </form>
              
 
 

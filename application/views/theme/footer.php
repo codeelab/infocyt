@@ -38,6 +38,7 @@
     <script src="<?=base_url();?>assets/js/jquery.min.js" type="text/javascript" ></script>
     <script src="<?=base_url();?>assets/js/jquery-migrate.min.js" type="text/javascript" ></script>
     <script src="<?=base_url();?>assets/js/bootstrap.min.js" type="text/javascript" ></script>
+    <script src="<?=base_url();?>assets/js/bootstrap-editable.min.js" type="text/javascript"></script>
     <script src="<?=base_url();?>assets/js/bootstrapValidator.min.js" type="text/javascript"></script>
     <script src="<?=base_url();?>assets/js/jquery.easing.min.js" type="text/javascript" ></script>
     <script src="<?=base_url();?>assets/js/wow.js" type="text/javascript" ></script>

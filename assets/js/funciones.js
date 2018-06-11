@@ -658,3 +658,118 @@ $('#rim').text(ale);
 
 
 });
+
+$(document).ready(function() {
+    //toggle `popup` / `inline` mode
+    $.fn.editable.defaults.mode = 'popup';     
+    $('#nombre, #a_paterno, #a_materno, #localidad, #direccion, #colonia').editable({
+        url: 'update_personacyt',
+        validate: function(value)
+        {
+            if ($.trim(value) == '')
+            {
+                return 'Este campo es requerido';
+            }
+            var expression = /^[a-zA-Z áéíóúÁÉÍÓÚñÑ]+$/;
+            if (!expression.test(value))
+            {
+                return 'Debe contener sólo caracteres';
+            }
+        }
+
+    });
+
+    $('#fecha_nac').editable({
+        url: 'update_personacyt',
+        validate: function(value)
+        {
+            if ($.trim(value) == '')
+            {
+                return 'Este campo es requerido';
+            }
+        }
+    });
+
+    $('#edad, #numero_dom, #cp').editable({
+        url: 'update_personacyt',
+        validate: function(value)
+        {
+            if ($.trim(value) == '')
+            {
+                return 'Este campo es requerido';
+            }
+            var expression = /^([0-9])*$/;
+            if (!expression.test(value))
+            {
+                return 'Debe contener sólo números';
+            }
+        }
+    });
+
+    $('#correo_personal').editable({
+        url: 'update_personacyt',
+        validate: function(value)
+        {
+            if ($.trim(value) == '')
+            {
+                return 'Este campo es requerido';
+            }
+            var expression = /^[A-Z0-9._%+-]+@(?:[A-Z]{4}|gmail|yahoo|outlook|hotmail)+\.(com|mx|es|com.mx)+$/i;
+            if (!expression.test(value))
+            {
+                return 'Solo está permitido el uso de los siguientes dominios: Gmail, Yahoo, Outlook, Hotmail.';
+            }
+        }
+    });
+
+    $('#correo_laboral').editable({
+        url: 'update_personacyt',
+        validate: function(value)
+        {
+            if ($.trim(value) == '')
+            {
+                return 'Este campo es requerido';
+            }
+            var expression = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/i;
+            if (!expression.test(value))
+            {
+                return 'Su correo no pertenece a un Dominio Válido.';
+            }
+        }
+    });
+
+    $('#tel_part, #tel_cel, #tel_lab').editable({
+        url: 'update_personacyt',
+        validate: function(value)
+        {
+            if ($.trim(value) == '')
+            {
+                return 'Este campo es requerido';
+            }
+            var expression = /\(?([0-9]{3})\)?([ .-]?)([0-9]{2})\2([0-9]{2})+$/;
+            if (!expression.test(value))
+            {
+                return 'No es un telefono válido.';
+            }
+        }
+    });
+
+    $('#username').editable({
+        url: 'update_personacyt',
+        validate: function(value)
+        {
+            if ($.trim(value) == '')
+            {
+                return 'Este campo es requerido';
+            }
+            var expression = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
+            if (!expression.test(value))
+            {
+                return 'No es un telefono válido.';
+            }
+        }
+    });
+
+
+
+});

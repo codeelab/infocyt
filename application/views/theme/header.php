@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrapValidator.min.css">
         <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.bootstrap.css">
         <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.responsive.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap-editable.css"/>
         <link rel="stylesheet" href="<?=base_url();?>assets/css/jquery-ui.css">
 
         <!-- END THEME STYLES -->
@@ -57,6 +58,7 @@
         <link rel="icon" type="image/png" sizes="96x96" href="<?=base_url()?>assets/images/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url()?>assets/images/favicon-16x16.png">
         <link rel="icon" type="image/png" href="<?=base_url()?>assets/images/favicon.png" />
+
     </head>
 
     <body class="c-layout-header-fixed c-layout-header-mobile-fixed">

@@ -8,7 +8,7 @@ class Personacyt_model extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('usuarios');
-        $this->db->join('paises','pais_id = id_paises','inner');
+        $this->db->join('paises p','pais_id = p.id_paises','inner');
         $this->db->join('estado_civil','estado_civil = id_civil','inner');
         $this->db->join('nacionalidad','nacionalidad = id_nacionalidad','inner');
         $this->db->join('estado','estado_id = id_estado','inner');
