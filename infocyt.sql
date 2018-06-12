@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2018 a las 07:47:36
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 5.6.36
+-- Servidor: localhost
+-- Tiempo de generación: 12-06-2018 a las 22:05:34
+-- Versión del servidor: 10.1.30-MariaDB
+-- Versión de PHP: 5.6.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -60,6 +60,34 @@ INSERT INTO `area_conocimiento` (`id_area_conocimiento`, `nombre_area`, `clave_a
 (19, 'Otras Ciencias Ingenieriles', 'INO'),
 (20, 'Otras Ciencias Sociales', 'SOC'),
 (21, 'Otras Humanidades', 'HMN');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `congresos`
+--
+
+CREATE TABLE `congresos` (
+  `id_congresos` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
+  `titulo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `anio_publicacion` int(11) NOT NULL,
+  `descr_mezcla` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_final` date NOT NULL,
+  `nombre_organizador` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `paises_id` int(11) DEFAULT NULL,
+  `fecha_captura` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `congresos`
+--
+
+INSERT INTO `congresos` (`id_congresos`, `usuario_id`, `titulo`, `anio_publicacion`, `descr_mezcla`, `fecha_inicio`, `fecha_final`, `nombre_organizador`, `paises_id`, `fecha_captura`) VALUES
+(1, 2, 'LOS VALORES ESTETICOS DE LA FLORA DE MEXICO', 1993, 'PRIMER SIMPOSIO NACIONAL SOBRE PLANTAS NATIVAS DE MEXICO CONPOTENCIAL ORNAMENTAL', '2018-05-31', '2018-06-09', 'UCLA', 6, NULL),
+(2, 2, 'rfrfrfrfrfr', 1960, 'rfrfrfrrf', '2018-06-01', '2018-06-06', 'rfrfrfrfrf', 5, '2018-06-12'),
+(3, 2, 'etrhthdhrthrthrhrhr', 1961, 'thrrhrrhrhr', '2018-06-07', '2018-05-30', 'rthrhrthtrhtrt', 6, '2018-06-12');
 
 -- --------------------------------------------------------
 
@@ -2850,14 +2878,14 @@ INSERT INTO `nivel_academico` (`id_nivel_academico`, `nombre_nivel_academico`) V
 
 CREATE TABLE `paises` (
   `id_paises` int(11) NOT NULL,
-  `nombre` varchar(80) DEFAULT NULL
+  `nombre_pa` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `paises`
 --
 
-INSERT INTO `paises` (`id_paises`, `nombre`) VALUES
+INSERT INTO `paises` (`id_paises`, `nombre_pa`) VALUES
 (1, 'Afganistán'),
 (2, 'Islas Gland'),
 (3, 'Albania'),
@@ -3175,7 +3203,7 @@ CREATE TABLE `usuarios` (
   `localidad` mediumtext COLLATE utf8_unicode_ci,
   `estado_sni` int(5) DEFAULT NULL,
   `num_rim` text COLLATE utf8_unicode_ci,
-  `sexo_id` int(5) NOT NULL,
+  `sexo_id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `rol_id` int(5) DEFAULT NULL,
   `mailing` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `username` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
@@ -3189,14 +3217,14 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `a_paterno`, `a_materno`, `rfc`, `curp`, `fecha_nac`, `edad`, `estado_civil`, `nacionalidad`, `correo_laboral`, `correo_personal`, `tel_lab`, `tel_part`, `tel_cel`, `direccion`, `numero_dom`, `colonia`, `cp`, `pais_id`, `estado_id`, `municipio_id`, `localidad`, `estado_sni`, `num_rim`, `sexo_id`, `rol_id`, `mailing`, `username`, `password`, `update_recovery`, `status_id`) VALUES
-(1, 'Joel', 'Álvarez', 'García', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '1986-03-16', '32', 1, 1, 'informatica.cecti@gmail.com', 'softcodec@gmail.com', '3140482', '3156139', '2147483647', 'curtidores de termendo 1056', '', '1', '58240', 1, 16, 567, 'Morelia', 4, NULL, 1, 3, '', 'joel', 'be9b16e50121a086f9e35698d839dd9c3cd7e27b', 0, 1),
-(2, 'Omar', 'Jaimes', 'Brito', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '0000-00-00', '32', 3, 282, 'informatica.cecti@gmail.com', 'informatica.cecti@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '250', 'Erendira', '58188', NULL, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'joel1986', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
-(3, 'Said', 'Guerra', 'Ibarra', 'GUIS730818LG7', 'GUIS730818HMNRBD04', '0000-00-00', '44', 4, 282, 'saidguerrai2017@gmail.com', 'saidguerrai2017@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '289', 'Guadalupe', '58188', NULL, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'said1973', '9b140708e3bca313acbb87ac2bfb1d8281949de7', NULL, 1),
-(4, 'Joel', 'Alvarez', 'Garcia', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '0000-00-00', '32', 3, 282, 'informatica@gmail.com', 'informatica@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '234', 'Erendira', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'joel23', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
-(5, 'Joel', 'Alvarez', 'Garcia', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '1986-03-16', '32', 4, 282, 'informatica.cecti@gmail.com', 'informatica.cecti@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '280', 'Erendira', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'joel34', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
-(6, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-10', '32', 3, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita ', '234', 'eRENDIRA', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'JOEL45', 'fbb9d393d5c2d48231df7ed0baf3dc7ba81b136c', NULL, 1),
-(7, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-03', '32', 2, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '345', 'eRENDIRA', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'JOEL78', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
-(8, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-08', '32', 2, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '34', 'ERDSFDFF', '58188', 146, 16, 835, 'Morelia', 5, '', 1, 3, 'SI', 'JOELW34', '0681595ffb9efad26d75dc410e01e05c38f5641b', NULL, 1);
+(1, 'Abraham Joel', 'Álvarez', 'García', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-06-16', '32', 1, 282, 'informatica.cecti@gmail.com', 'softcodec@gmail.com', '3140482', '3156139', '2147483647', 'curtidores de teremendo', '250', 'Eréndira', '58240', 146, 16, 835, 'Morelia', 5, 'AAGA86HLMAT0', 'H', 3, 'NO', 'joel', 'be9b16e50121a086f9e35698d839dd9c3cd7e27b', 0, 1),
+(2, 'Omar', 'Jaimes', 'Brito', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '0000-00-00', '32', 3, 282, 'informatica.cecti@gmail.com', 'informatica.cecti@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '250', 'Erendira', '58188', NULL, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'joel1986', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
+(3, 'Said', 'Guerra', 'Ibarra', 'GUIS730818LG7', 'GUIS730818HMNRBD04', '0000-00-00', '44', 4, 282, 'saidguerrai2017@gmail.com', 'saidguerrai2017@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '289', 'Guadalupe', '58188', NULL, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'said1973', '9b140708e3bca313acbb87ac2bfb1d8281949de7', NULL, 1),
+(4, 'Joel', 'Alvarez', 'Garcia', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '0000-00-00', '32', 3, 282, 'informatica@gmail.com', 'informatica@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '234', 'Erendira', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'joel23', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
+(5, 'Joel', 'Alvarez', 'Garcia', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '1986-03-16', '32', 4, 282, 'informatica.cecti@gmail.com', 'informatica.cecti@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '280', 'Erendira', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'joel34', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
+(6, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-10', '32', 3, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita ', '234', 'eRENDIRA', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'JOEL45', 'fbb9d393d5c2d48231df7ed0baf3dc7ba81b136c', NULL, 1),
+(7, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-03', '32', 2, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '345', 'eRENDIRA', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'JOEL78', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
+(8, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-08', '32', 2, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '34', 'ERDSFDFF', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'JOELW34', '0681595ffb9efad26d75dc410e01e05c38f5641b', NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -3207,6 +3235,12 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `a_paterno`, `a_materno`, `rfc`,
 --
 ALTER TABLE `area_conocimiento`
   ADD PRIMARY KEY (`id_area_conocimiento`);
+
+--
+-- Indices de la tabla `congresos`
+--
+ALTER TABLE `congresos`
+  ADD PRIMARY KEY (`id_congresos`);
 
 --
 -- Indices de la tabla `estado`
@@ -3277,6 +3311,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `area_conocimiento`
   MODIFY `id_area_conocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de la tabla `congresos`
+--
+ALTER TABLE `congresos`
+  MODIFY `id_congresos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`

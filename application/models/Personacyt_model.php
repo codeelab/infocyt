@@ -28,6 +28,13 @@ class Personacyt_model extends CI_Model {
 
     }
 
+ //--------------------------------------------------------------------------
+ // 
+ // CONTENIDO PARA VENTANA GENERALES
+ //
+ //--------------------------------------------------------------------------
+
+
 
  //--------------------------------------------------------------------------
  // LISTA EL CONTENIDO POR PAÍS
@@ -60,14 +67,47 @@ class Personacyt_model extends CI_Model {
 
     }
 
- //--------------------------------------------------------------------------
- // LISTA EL CONTENIDO POR ESTADOS
- //--------------------------------------------------------------------------
-    function estados(){
 
-        $query = $this->db->query('SELECT * FROM nacionalidad');
-        return $query->result_array();
 
+
+
+ //--------------------------------------------------------------------------
+ // 
+ // CONTENIDO PARA VENTANA ACADÉMICA
+ //
+ //--------------------------------------------------------------------------
+
+    //LISTA TODOS LOS CONGRESOS REGISTRADOS POR USUARIO
+    public function congresos($id)
+    {
+        $this->db->select('*');
+        $this->db->from('congresos');
+        $this->db->join('paises p','paises_id = p.id_paises','inner');
+        $this->db->where('usuario_id',$id);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    //REGISTRA EL CONTENIDO PARA LOS CONGRESOS
+    public function alta_congreso($data)
+    {
+        return $this->db->insert('congresos', $data);
+    }
+
+    //ELIMINA EL CONTENIDO PARA LOS CONGRESOS
+    public function delete_congreso($id)
+    {
+        $this->db->where('id_congresos',$id);
+        $this->db->delete('congresos');
+        return true;
     }
 
 

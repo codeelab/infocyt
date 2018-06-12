@@ -88,14 +88,28 @@
         <script src="<?=base_url();?>assets/js/revolution.extension.parallax.min.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/funciones.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/zxcvbn.js" type="text/javascript"></script>
-        <script src="<?=base_url();?>assets/js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="<?=base_url();?>assets/js/dataTables.responsive.min.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/html5shiv.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/jquery-ui.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/jquery-validate.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/particles.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/particulas.js" type="text/javascript"></script>
      <!-- END: PAGE SCRIPTS -->
+
+     <!-- Datatables -->
+        <script src="<?=base_url();?>assets/js/dataTables/jquery.dataTables.min.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/dataTables.buttons.min.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/buttons.flash.min.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/jszip.min.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/pdfmake.min.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/vfs_fonts.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/buttons.html5.min.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/buttons.print.min.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/dataTables.bootstrap.min.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/dataTables.responsive.min.js"></script>
+        <script src="<?=base_url();?>assets/js/dataTables/buttons.bootstrap.min.js"></script>
+
+
+
 
 <!-- END: LAYOUT/BASE/BOTTOM -->
 </body>

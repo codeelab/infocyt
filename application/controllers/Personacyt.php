@@ -26,6 +26,14 @@ class Personacyt extends CI_Controller {
         $this->load->view('theme/footer');
     }
 
+
+
+
+///////////////////////////////////////////////////////////////////////////
+//
+// PESTAÑA DE OPCIONES GENERALES
+//
+///////////////////////////////////////////////////////////////////////////
     public function opciones()
     {
         if (!file_exists(APPPATH.'views/pages/personacyt/generales/opciones.php')) 
@@ -137,15 +145,60 @@ class Personacyt extends CI_Controller {
                 echo json_encode($na);  
             }
 
-            public function estado()
+///////////////////////////////////////////////////////////////////////////
+//
+// PESTAÑA DE PREPARACIÓN ACADÉMICA
+//
+///////////////////////////////////////////////////////////////////////////
+
+    public function congresos()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/academica/congresos.php')) 
+        {
+            redirect('personacyt');
+        }
+        $id = $this->session->userdata('id_usuario');
+        $data['pais']        = $this->Pages_model->paises();
+        $data['congresos']   = $this->Personacyt_model->congresos($id);
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
+        $this->load->view('pages/personacyt/academica/congresos',$data);
+        $this->load->view('theme/footer');
+    }
+
+            public function alta_congreso()
             {
-                $estados = $this->Personacyt_model->estados();
-                $es = array();
-                foreach ($estados as $r) 
+                if($this->input->method() === 'post')
                 {
-                    $es[] = array('value' => $r['id_estado'], 'text' => $r['nombre_est']);
+                    $titulo         = $this->security->xss_clean($this->input->post('titulo'));
+                    $publicacion    = $this->security->xss_clean($this->input->post('anio_publicacion'));
+                    $descripcion    = $this->security->xss_clean($this->input->post('descr_mezcla'));
+                    $organizador    = $this->security->xss_clean($this->input->post('nombre_organizador'));
+                    $fecha_ini      = $this->security->xss_clean($this->input->post('fecha_inicio'));
+                    $fecha_fin      = $this->security->xss_clean($this->input->post('fecha_final'));
+                    $pais           = $this->security->xss_clean($this->input->post('paises_id'));
+                    $usuario        = $this->security->xss_clean($this->input->post('usuario_id'));
+
+                    $data = array(
+                        'titulo'                => $titulo,
+                        'anio_publicacion'      => $publicacion,
+                        'descr_mezcla'          => $descripcion,
+                        'nombre_organizador'    => $organizador,
+                        'fecha_inicio'          => $fecha_ini,
+                        'fecha_final'           => $fecha_fin,
+                        'paises_id'             => $pais,
+                        'usuario_id'            => $usuario,
+                        'fecha_captura'         => date('Y-m-d')
+                    );
+                    $this->session->set_flashdata('success', 'Se ha registrado correctamente el congreso.');
+                    $this->Personacyt_model->alta_congreso($data);
+                    redirect('personacyt/congresos');
                 }
-                echo json_encode($es);  
+                else
+                {
+                    $this->session->set_flashdata('error', 'No se ha podido registrar el congreso.');
+                    redirect('personacyt/congresos');
+                }
             }
 
 

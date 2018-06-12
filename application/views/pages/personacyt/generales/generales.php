@@ -77,8 +77,6 @@ foreach ($usuario as $us)
     $nacionalida    = $us->nombre_nac;
     $nacion         = $us->id_nacionalidad;
     $estadoos       = $us->nombre_est;
-    $estado         = $us->id_estado;
-    $municipios     = $us->nombre_mun;
     $localidad      = $us->localidad;
     $c_personal     = $us->correo_personal;
     $c_laboral      = $us->correo_laboral;
@@ -242,33 +240,20 @@ foreach ($usuario as $us)
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label class="form-text" for="nacionalidad">Nacionalidad</label>
                                     <p id="nacionalidad" data-type="select" data-pk="<?=$user;?>" data-source="nacion/<?=$nacion;?>" data-title="Nacionalidad" data-value="<?=$nacion;?>" class="c-theme c-square input-lg"><?=$nacionalida;?></p>
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-text" for="estado">Estado</label>
-                                    <p id="estado_id" data-type="select" data-pk="<?=$user;?>" data-source="estado/<?=$estado;?>" data-title="Estado" data-value="<?=$estado;?>" class="c-theme c-square input-lg"><?=$estadoos;?></p>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-text" for="municipio">Municipio</label>
-                                    <?php
-                                        $options = array(''=> $municipios);
-                                        echo form_dropdown('municipio_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="municipio_id"');
-                                    ?>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-text" for="a_paterno">Localidad</label>
+                                <div class="col-md-2">
+                                    <label class="form-text" for="localidad">Localidad</label>
                                     <p id="localidad" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$localidad;?></p>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label class="form-text" for="email">Correo Personal</label>
                                     <p id="correo_personal" data-type="email" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$c_personal;?></p>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label class="form-text" for="email">CorreoLaboral</label>
                                     <p id="correo_laboral" data-type="email" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$c_laboral;?></p>
                                 </div>
@@ -276,15 +261,15 @@ foreach ($usuario as $us)
 
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label class="form-text" for="email">Teléfono Particular</label>
+                                    <label class="form-text" for="tel_part">Teléfono Particular</label>
                                     <p id="tel_part" data-type="tel" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$telpart;?></p>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-text" for="email">Celular</label>
+                                    <label class="form-text" for="tel_cel">Celular</label>
                                     <p id="tel_cel" data-type="tel" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$telcel;?></p>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-text" for="email">Teléfono Laboral</label>
+                                    <label class="form-text" for="tel_lab">Teléfono Laboral</label>
                                     <p id="tel_lab" data-type="tel" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$tellabo;?></p>
                                 </div>
                             </div>

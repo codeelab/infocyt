@@ -25,8 +25,9 @@
         <link rel="stylesheet" href="<?=base_url();?>assets/css/galano.css">
 
         <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrapValidator.min.css">
-        <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.bootstrap.css">
-        <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.responsive.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables/responsive.bootstrap.min.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables/buttons.bootstrap.min.css">
         <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap-editable.css"/>
         <link rel="stylesheet" href="<?=base_url();?>assets/css/jquery-ui.css">
 

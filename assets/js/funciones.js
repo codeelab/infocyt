@@ -206,10 +206,10 @@ function validarInputRFC(input) {
 
 $(document).ready(function(){
     $("#registro").bootstrapValidator({
-        message:"Este valor no es válido",feedbackIcons:{
-            valid:"",
-            invalid:"far fa-remove",
-            validating:"far fa-refresh"
+        feedbackIcons: {
+            valid: 'fas fa-check',
+            invalid: 'fas fa-times',
+            validating: 'fas fa-redo'
         },
         fields:{
             nombre:{
@@ -502,6 +502,71 @@ $(document).ready(function(){
                     }
                 }
             },
+            titulo:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido el Título. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            anio_publicacion: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese el año del Evento.'
+                    },
+                    regexp: {
+                        regexp:  /^([0-9])*$/,
+                        message: 'No es un número válido.'
+                    }
+                }
+            },
+            descr_mezcla:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerida la descripción del Congreso. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            nombre_organizador:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido el Nombre del Oganizador. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            fecha_inicio: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese la fecha de Inicio.'
+                    }
+                }
+            },
+            fecha_final: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese la fecha de Clausura.'
+                    }
+                }
+            },
+            paises_id:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido el País del Evento."
+                    }
+                }
+            },
             username: {
                 message: 'The username is not valid',
                 validators: {
@@ -703,7 +768,7 @@ $(document).ready(function() {
 
 
 
-    $('#pais_id, #estado_civil, #nacionalidad, #estado_id').editable({
+    $('#pais_id, #estado_civil, #nacionalidad').editable({
 
         url: 'update_personacyt',
         validate: function(value)
@@ -779,6 +844,87 @@ $(document).ready(function() {
             }
         }
     });
+
+
+});
+
+//TABLA SOLO USUARIOS DE LA LISTA GENERAL CON 4 COLUMNAS
+
+$(document).ready(function() {
+    // Function to convert an img URL to data URL
+    function getBase64FromImageUrl(url) {
+    var img = new Image();
+        img.crossOrigin = "anonymous";
+    img.onload = function () {
+        var canvas = document.createElement("canvas");
+        canvas.width =this.width;
+        canvas.height =this.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(this, 0, 0);
+        var dataURL = canvas.toDataURL("image/png");
+        return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    };
+    img.src = url;
+    }
+
+var buttonCommon = {
+  exportOptions: {
+    format: {
+      body: function(data, column, row) {
+        data = data.replace(/<br\s*\/?>/ig, "\r\n");
+        data = data.replace(/<.*?>/g, "");
+        data = data.replace("&amp;", "&");
+        data = data.replace("&nbsp;", "");
+        data = data.replace("&nbsp;", "");
+        return data;
+      }
+    }
+  }
+};
+$.extend(true, $.fn.dataTable.defaults, {
+  "lengthChange": false,
+  "pageLength": 100,
+  "orderClasses": false,
+  "stripeClasses": [],
+  dom: 'Bfrtip',
+  buttons: [
+  'print','csvHtml5', 'pdfHtml5',
+    $.extend(true, {}, buttonCommon, {
+      extend: 'excelHtml5',
+      exportOptions: {
+        columns: [0, 1, 2, 3, 4]
+      },
+      customize: function(xlsx) {
+        var sheet = xlsx.xl.worksheets['personacyt.xml'];
+        $('row c[r^="A"]', sheet).attr( 's', '50' ); //<-- left aligned text
+        $('row c[r^="C"]', sheet).attr( 's', '55' ); //<-- wrapped text
+        $('row:first c', sheet).attr( 's', '32' );
+      }
+    })
+  ]
+});
+});
+
+$(document).ready(function() {
+
+ $("#tablePersonacyt").DataTable({
+  responsive: true,
+  processing: true,
+  pagingType: "simple",
+  ordering: !1,
+  pageLength: 5,
+  orderCellsTop: !0,
+  language: {
+   url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+  }
+ });
+ $("#tablePersonacyt thead").on("click", ".form-control", function(e) {
+  e.stopPropagation()
+ }), $("#tablePersonacyt thead").on("keyup change", ".form-control", function(e) {
+  var a = $(this).attr("data-column"),
+   s = $(this).val();
+  $("#tablePersonacyt").DataTable().columns(a).search(s).draw()
+ });
 
 
 });
