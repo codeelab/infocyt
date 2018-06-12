@@ -46,10 +46,10 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id                 = $this->session->userdata('id_usuario');
+        
         $data['usuario']    = $this->Personacyt_model->Usuario($id);
         $data['estados']    = $this->Pages_model->getEstados();
         $data['nac']        = $this->Pages_model->nacionalidad();
-        $data['pais']       = $this->Pages_model->paises();
         $data['gen']        = $this->Pages_model->sexo();
         $data['civil']      = $this->Pages_model->civil();
         $data['sni']        = $this->Pages_model->estado_sni();
@@ -103,26 +103,50 @@ class Personacyt extends CI_Controller {
             }
 
 
-    //---------------------------------
-    // VERIFICAR LA DISPONIBILIDAD DEL USUARIO
-    //---------------------------------
-    function checar_usuario()
-    {
-        $this->load->model('Pages_model');
-        $get_result = $this->Pages_model->disponibilidad_usuario();
+            public function pais()
+            {
+                $paises = $this->Personacyt_model->getDatosPais();
+                $pa = array();
+                foreach ($paises as $r) 
+                {
+                    $pa[] = array('value' => $r['id_paises'], 'text' => $r['nombre_pa']);
+                }
+                echo json_encode($pa);
 
-        if(!$get_result )
-        echo '<span class="text-danger">Ya existe ese nombre de usuario ¿Quieres volver a intentarlo?.</span>';
-        else
-        echo '<span class="text-success">Usuario disponible</span>';
-    }
+            }
 
+            public function estadoCivil()
+            {
+                $civil = $this->Personacyt_model->getDatosCivil();
+                $ci = array();
+                foreach ($civil as $r) 
+                {
+                    $ci[] = array('value' => $r['id_civil'], 'text' => $r['nombre_civil']);
+                }
+                echo json_encode($ci);  
+            }
 
+            public function nacion()
+            {
+                $nacional = $this->Personacyt_model->nacionalidad();
+                $na = array();
+                foreach ($nacional as $r) 
+                {
+                    $na[] = array('value' => $r['id_nacionalidad'], 'text' => $r['nombre_nac']);
+                }
+                echo json_encode($na);  
+            }
 
-
-
-
-
+            public function estado()
+            {
+                $estados = $this->Personacyt_model->estados();
+                $es = array();
+                foreach ($estados as $r) 
+                {
+                    $es[] = array('value' => $r['id_estado'], 'text' => $r['nombre_est']);
+                }
+                echo json_encode($es);  
+            }
 
 
 

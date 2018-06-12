@@ -661,7 +661,10 @@ $('#rim').text(ale);
 
 $(document).ready(function() {
     //toggle `popup` / `inline` mode
-    $.fn.editable.defaults.mode = 'popup';     
+    $.fn.editable.defaults.mode = 'popup'; 
+
+
+
     $('#nombre, #a_paterno, #a_materno, #localidad, #direccion, #colonia').editable({
         url: 'update_personacyt',
         validate: function(value)
@@ -679,7 +682,29 @@ $(document).ready(function() {
 
     });
 
+
     $('#fecha_nac').editable({
+        url: 'update_personacyt',
+        format: 'yyyy-mm-dd',    
+        viewformat: 'dd/mm/yyyy',    
+        datepicker:
+        {
+            weekStart: 1
+        },
+        validate: function(value)
+        {
+            if ($.trim(value) == '')
+            {
+                return 'Este campo es requerido';
+            }
+        }
+
+    });
+
+
+
+    $('#pais_id, #estado_civil, #nacionalidad, #estado_id').editable({
+
         url: 'update_personacyt',
         validate: function(value)
         {
@@ -688,6 +713,7 @@ $(document).ready(function() {
                 return 'Este campo es requerido';
             }
         }
+
     });
 
     $('#edad, #numero_dom, #cp').editable({
@@ -753,23 +779,6 @@ $(document).ready(function() {
             }
         }
     });
-
-    $('#username').editable({
-        url: 'update_personacyt',
-        validate: function(value)
-        {
-            if ($.trim(value) == '')
-            {
-                return 'Este campo es requerido';
-            }
-            var expression = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
-            if (!expression.test(value))
-            {
-                return 'No es un telefono válido.';
-            }
-        }
-    });
-
 
 
 });

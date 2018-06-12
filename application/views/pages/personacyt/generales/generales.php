@@ -1,8 +1,4 @@
- <?php
-//https://github.com/vitalets/x-editable/blob/gh-pages/backend-samples/php/post.php
- //https://vitalets.github.io/x-editable/docs.html#editable
- //https://www.youtube.com/watch?v=rng1bQUFaCA
- 
+ <?php 
       $user             = $this->session->userdata('id_usuario');
       $nombre           = $this->session->userdata('nombre');
       $a_paterno        = $this->session->userdata('a_paterno');
@@ -74,10 +70,14 @@ foreach ($usuario as $us)
     $materno        = $us->a_materno;
     $fechas         = $us->fecha_nac;
     $paiss          = $us->nombre_pa;
+    $paisss         = $us->pais_id;
     $edad           = $us->edad;
     $estado_c       = $us->nombre_civil;
+    $estado_cc      = $us->id_civil;
     $nacionalida    = $us->nombre_nac;
+    $nacion         = $us->id_nacionalidad;
     $estadoos       = $us->nombre_est;
+    $estado         = $us->id_estado;
     $municipios     = $us->nombre_mun;
     $localidad      = $us->localidad;
     $c_personal     = $us->correo_personal;
@@ -90,8 +90,6 @@ foreach ($usuario as $us)
     $colo           = $us->colonia;
     $cp             = $us->cp;
 }
-
-
 
 ?>
 <!-- BEGIN: PAGE CONTAINER -->
@@ -203,7 +201,6 @@ foreach ($usuario as $us)
                 <div class="c-content-media-2-slider wow  fadeInRight animated" data-slider="owl" style="visibility: visible; animation-name: fadeInRight; opacity: 1;">
                       
                         
-                        
                     <div class="c-contact">
                         <div class="c-content-title-1">
                             <h3 class="c-font-uppercase c-font-bold">Actualización de Información</h3>
@@ -227,16 +224,13 @@ foreach ($usuario as $us)
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="form-text" for="fecha_nac">Fecha de Nacimiento</label>
-                                    <p id="fecha_nac" data-type="text" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$fechas;?></p>
+                                    <div id="sandbox-container">
+                                        <p id="fecha_nac" data-type="date" data-pk="<?=$user;?>" class="c-theme c-square input-lg"><?=$fechas;?></p>
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-text" for="pais">País de Nacimiento</label>
-                                    <?php
-                                        $options = array ('' => $paiss);
-                                        foreach($pais as $pa)
-                                            $options[$pa->id_paises] = $pa->nombre_pa;
-                                                echo form_dropdown('pais_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="pais_id"');
-                                    ?>
+                                    <p id="pais_id" data-type="select" data-pk="<?=$user;?>" data-source="pais/<?=$paisss;?>" data-title="País de Nacimiento" data-value="<?=$paisss;?>" class="c-theme c-square input-lg"><?=$paiss;?></p>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-text" for="edad">Edad</label>
@@ -244,34 +238,17 @@ foreach ($usuario as $us)
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-text" for="escolaridad">Estado Civil</label>
-                                    <select name="estado_civil" id="estado_civil" class="form-control c-theme c-square input-lg">
-                                        <option value=""><?=$estado_c;?></option>
-                                        <?php
-                                            foreach ($civil as $i => $civil)
-                                               echo '<option value="',$i,'">',$civil,'</option>';
-                                        ?>
-                                    </select>
+                                    <p id="estado_civil" data-type="select" data-pk="<?=$user;?>" data-source="estadoCivil/<?=$estado_cc;?>" data-title="Estado Civil" data-value="<?=$estado_cc;?>" class="c-theme c-square input-lg"><?=$estado_c;?></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="form-text" for="nacionalidad">Nacionalidad</label>
-                                    <select name="nacionalidad" id="nacionalidad" class="form-control c-theme c-square input-lg">
-                                        <option value=""><?=$nacionalida;?></option>
-                                            <?php
-                                            foreach ($nac as $i => $nacionalidad)
-                                               echo '<option value="',$i,'">',$nacionalidad,'</option>';
-                                            ?>
-                                    </select>
+                                    <p id="nacionalidad" data-type="select" data-pk="<?=$user;?>" data-source="nacion/<?=$nacion;?>" data-title="Nacionalidad" data-value="<?=$nacion;?>" class="c-theme c-square input-lg"><?=$nacionalida;?></p>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-text" for="estado">Estado</label>
-                                    <?php
-                                        $options = array ('' => $estadoos);
-                                        foreach($estados as $estado)
-                                        $options[$estado->id_estado] = $estado->nombre_est;
-                                        echo form_dropdown('estado_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="estado_id"');
-                                    ?>
+                                    <p id="estado_id" data-type="select" data-pk="<?=$user;?>" data-source="estado/<?=$estado;?>" data-title="Estado" data-value="<?=$estado;?>" class="c-theme c-square input-lg"><?=$estadoos;?></p>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-text" for="municipio">Municipio</label>
