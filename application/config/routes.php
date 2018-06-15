@@ -21,6 +21,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$route['lider/municipios'] = 'lider/municipios';
 
 //PESTAÑA PREPARACIÓN ACADÉMICA
+$route['personacyt/alta_academica'] = 'personacyt/alta_academica';
+$route['personacyt/academica'] = 'personacyt/academica';
+$route['personacyt/alta_idiomas'] = 'personacyt/alta_idiomas';
+$route['personacyt/idiomas'] = 'personacyt/idiomas';
+$route['personacyt/alta_reconocimientos'] = 'personacyt/alta_reconocimientos';
+$route['personacyt/reconocimientos'] = 'personacyt/reconocimientos';
 $route['personacyt/alta_congreso'] = 'personacyt/alta_congreso';
 $route['personacyt/congresos'] = 'personacyt/congresos';
 

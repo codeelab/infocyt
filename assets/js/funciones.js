@@ -1,5 +1,5 @@
 $(function() {
-    $("select[id=estado_id]").change(function() {
+    $("select[id=campo_id]").change(function() {
         estado = $(this).val();
         if (estado === '') return false;
         resetaCombo('municipio_id');
@@ -524,6 +524,17 @@ $(document).ready(function(){
                     }
                 }
             },
+            anio_reconocimiento: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese el año del Evento.'
+                    },
+                    regexp: {
+                        regexp:  /^([0-9])*$/,
+                        message: 'No es un número válido.'
+                    }
+                }
+            },
             descr_mezcla:{
                 validators:{
                     notEmpty:{
@@ -532,6 +543,96 @@ $(document).ready(function(){
                     regexp:{
                         regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
                         message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            descripcion:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerida la descripción del Congreso. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            inst_otorga:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido el Nombre del Oganizador. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            dependencia:{
+                validators:{
+                    notEmpty:{
+                        message:"Es requerido el Nombre del Oganizador. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            lenguaje_id: {
+                validators: {
+                    notEmpty: {
+                        message: 'Es necesario elija un Idioma'
+                    }
+                }
+            },
+            nivel_habla_id: {
+                validators: {
+                    notEmpty: {
+                        message: 'Elija una opción.'
+                    }
+                }
+            },
+            nivel_lectura_id: {
+                validators: {
+                    notEmpty: {
+                        message: 'Elija una opción.'
+                    }
+                }
+            },
+            nivel_escritura_id: {
+                validators: {
+                    notEmpty: {
+                        message: 'Elija una opción.'
+                    }
+                }
+            },
+            fecha_acreditacion: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese año de acreditación.'
+                    }
+                }
+            },
+            titulo_obtenido:{
+                validators:{
+                    notEmpty:{
+                        message:"Nombre del Título obtenido. "
+                    },
+                    regexp:{
+                        regexp:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
+                        message:"Solo está permitido el uso caracteres alfabeticos."
+                    }
+                }
+            },
+            puntos_idioma: {
+                validators: {
+                    notEmpty: {
+                        message: 'Ingrese el puntaje.'
+                    },
+                    regexp: {
+                        regexp:  /^([0-9])*$/,
+                        message: 'No es un número válido.'
                     }
                 }
             },
@@ -911,6 +1012,7 @@ $(document).ready(function() {
   responsive: true,
   processing: true,
   pagingType: "simple",
+  "info": false,
   ordering: !1,
   pageLength: 5,
   orderCellsTop: !0,
@@ -928,3 +1030,93 @@ $(document).ready(function() {
 
 
 });
+
+
+
+$(function() {
+    $("select[id=campo_id]").change(function() {
+        sub = $(this).val();
+        if (sub === '') return false;
+        resetaCombo('disciplina_id');
+        $.getJSON('disciplina/' + sub, function(data) {
+            var option = new Array();
+            $.each(data, function(i, obj) {
+                option[i] = document.createElement('option');
+                $(option[i]).attr({
+                    value: obj.id_disciplina
+                });
+                $(option[i]).append(obj.nombre);
+                $("select[id='disciplina_id']").append(option[i]);
+            });
+        });
+    });
+});
+
+function resetaCombo(el) {
+    $("select[id='" + el + "']").empty();
+    var option = document.createElement('option');
+    $(option).attr({
+        value: ''
+    });
+    $(option).append('Elija una Disciplina');
+    $("select[id='" + el + "']").append(option);
+}
+
+
+$(function() {
+    $("select[id=disciplina_id]").change(function() {
+        dis = $(this).val();
+        if (dis === '') return false;
+        resetaCombo('subdisciplina_id');
+        $.getJSON('subdisciplina/' + dis, function(data) {
+            var option = new Array();
+            $.each(data, function(i, obj) {
+                option[i] = document.createElement('option');
+                $(option[i]).attr({
+                    value: obj.id_subdisciplinas
+                });
+                $(option[i]).append(obj.nombre);
+                $("select[id='subdisciplina_id']").append(option[i]);
+            });
+        });
+    });
+});
+
+function resetaCombo(el) {
+    $("select[id='" + el + "']").empty();
+    var op = document.createElement('op');
+    $(op).attr({
+        value: ''
+    });
+    $(op).append('Elija una Subdisciplina');
+    $("select[id='" + el + "']").append(op);
+}
+
+$(function() {
+    $("select[id=dependencia_id]").change(function() {
+        dis = $(this).val();
+        if (dis === '') return false;
+        resetaCombo('departamento_id');
+        $.getJSON('departamentos/' + dis, function(data) {
+            var option = new Array();
+            $.each(data, function(i, obj) {
+                option[i] = document.createElement('option');
+                $(option[i]).attr({
+                    value: obj.id_departamentos
+                });
+                $(option[i]).append(obj.nombre);
+                $("select[id='departamento_id']").append(option[i]);
+            });
+        });
+    });
+});
+
+function resetaCombo(el) {
+    $("select[id='" + el + "']").empty();
+    var op = document.createElement('op');
+    $(op).attr({
+        value: ''
+    });
+    $(op).append('Elija un Departamento');
+    $("select[id='" + el + "']").append(op);
+}

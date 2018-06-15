@@ -73,7 +73,7 @@ $rim_u = 1;
             <h3 class="c-font-uppercase c-font-bold c-font-dark c-font-20 c-font-slim">PERSONACYT</h3>
         </div>
         <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-            <li><a href="<?=base_url('personacyt');?>">Inicio</a></li> | <li><a href="<?=base_url('personacyt/congresos');?>" class="c-font-dark">Congresos</a></li>
+            <li><a href="<?=base_url('personacyt');?>">Inicio</a></li> | <li><a href="<?=base_url('personacyt/idiomas');?>" class="c-font-dark">Idiomas</a></li>
         </ul>
     </div>
 </div>
@@ -171,11 +171,11 @@ $rim_u = 1;
                       
                      <div class="c-contact">
                         <div class="c-content-title-1">
-                            <h3 class="c-font-uppercase c-font-bold">Listado de Congresos</h3>
+                            <h3 class="c-font-uppercase c-font-bold">Listado de Idiomas</h3>
                         </div>                
                         <div style="margin: 15px;">
                             <button class="btn btn-sm c-btn-purple c-btn-square c-btn-border-2x" data-toggle="modal" data-target="#mascongreso">
-                                <i class="fas fa-check-circle"></i> Agregar Congreso
+                                <i class="fas fa-check-circle"></i> Agregar Idioma
                             </button>
 
                         </div>
@@ -185,26 +185,26 @@ $rim_u = 1;
                             <table class="table display responsive no-wrap" width="100%" id="tablePersonacyt">
                                  <thead>
                              <tr>
-                                <th><i class='fas fa-map-marker-alt' aria-hidden='true'></i>  PAÍS</th>
+                                <th><i class='fas fa-calendar' aria-hidden='true'></i>  ACREDITACIÓN</th>
+                                <th><i class='fas fa-language' aria-hidden='true'></i>  IDIOMA</th>
                                 <th><i class='fas fa-book' aria-hidden='true'></i>  TÍTULO</th>
-                                <th><i class='fas fa-calendar' aria-hidden='true'></i>  PUBLICACIÓN</th>
                                 <th><i class='fas fa-file-pdf' aria-hidden='true'></i>   CONSTANCIA</th>
                              </tr>
                              </thead>
                              <tbody>
                     <?php
 
-                        if($congresos !== FALSE) 
+                        if($idiomas !== FALSE) 
                         {
-                            foreach ($congresos as $e) 
+                            foreach ($idiomas as $i) 
                             {
 
                                 echo '
                                     <tr>
-                                        <td>'.$e->nombre_pa.'</td>
-                                        <td>'.$e->titulo.'</td>
-                                        <td>'.$e->anio_publicacion.'</td>
-                                        <td class="center"><a href="'.base_url('pdf/').$e->id_congresos.'" target="_blank"><button type="button" class="btn btn-md c-btn-red c-btn-square c-btn-border-2x btn-block" data-toggle="tooltip" data-placement="bottom" title="'.$e->titulo.'"><i class="far fa-file-pdf" aria-hidden="true"></i></button></a></td>
+                                        <td>'.$i->fecha_acreditacion.'</td>
+                                        <td>'.$i->nombre_leng.'</td>
+                                        <td>'.$i->titulo_obtenido.'</td>
+                                        <td class="center"><a href="'.base_url('pdf/').$i->id_idiomas.'" target="_blank"><button type="button" class="btn btn-md c-btn-red c-btn-square c-btn-border-2x btn-block" data-toggle="tooltip" data-placement="bottom" title="'.$i->nombre_leng.'"><i class="far fa-file-pdf" aria-hidden="true"></i></button></a></td>
                                     </tr>
                                 ';
                             }
@@ -241,7 +241,7 @@ $rim_u = 1;
                        <span class="sr-only">Close</span>
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-                    DATOS DEL CONGRESO
+                    DATOS DEL RECONOCIMIENTO
                 </h4>
             </div>
             
@@ -249,51 +249,78 @@ $rim_u = 1;
             <div class="modal-body">
                 
                 <?php $atrib = array('id' => 'registro', 'autocomplete'=> 'off');
-                            echo form_open('personacyt/alta_congreso', $atrib); ?>
+                            echo form_open('personacyt/alta_idiomas', $atrib); ?>
                     <div class="row">
                         <div class="col-md-12">
-                            <label class="form-text" for="TITULO">TÍTULO:</label>
-                            <input type="text" class="form-control c-theme c-square input-lg" id="titulo" name="titulo" placeholder="Título del Congreso"/>
-                        </div>     
-                    </div>
-                     <div class="row">
-                        <div class="col-md-12">
-                            <label class="form-text" for="TITULO">AÑO DE PUBLICACIÓN:</label>
-                            <input type="date" min="1960" max="2025" step="1" class="form-control c-theme c-square input-lg" id="anio_publicacion" name="anio_publicacion" placeholder="2018"/>
-                        </div>     
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label class="form-text" for="TITULO">DESCRIPCIÓN DEL CONGRESO:</label>
-                            <textarea rows="4" id="descr_mezcla" name="descr_mezcla" placeholder="Descripción del congreso" class="form-control c-theme c-square input-lg"></textarea>
-                        </div>     
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label class="form-text" for="TITULO">NOMBRE DE LA INSTITUCIÓN QUE ORGANIZA:</label>
-                            <input type="text" class="form-control c-theme c-square input-lg" id="nombre_organizador" name="nombre_organizador" placeholder="Título del Congreso"/>
-                        </div>     
-                    </div>
-                     <div class="row">
-                        <div class="col-md-4">
-                            <label class="form-text" for="TITULO">INICIO:</label>
-                            <input type="date"  step="1" class="form-control c-theme c-square input-lg" id="fecha_inicio" name="fecha_inicio" placeholder="DIA/MES/AÑO"/>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-text" for="TITULO">TERMINACIÓN:</label>
-                            <input type="date"  step="1" class="form-control c-theme c-square input-lg" id="fecha_final" name="fecha_final" placeholder="DIA/MES/AÑO"/>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-text" for="pais">UBICACIÓN:</label>
+                            <label class="form-text" for="descripcion">LENGUAJE:</label>
                                 <?php
-                                    $options = array ('' => 'Elija País de evento');
-                                    foreach($pais as $pa)
-                                        $options[$pa->id_paises] = $pa->nombre_pa;
-                                        echo form_dropdown('paises_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="paises_id"');
+                                    $options = array ('' => 'Elija Lenguaje');
+                                    foreach($lenguaje as $l)
+                                        $options[$l->id_lenguaje] = $l->descr_corta;
+                                        echo form_dropdown('lenguaje_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="lenguaje_id"');
                                 ?>
                         </div>     
                     </div>
-
+                    <br>
+                     <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-text" for="obtencion">IDIOMA NATIVO:</label>
+                            <?php $data = array('name'=>'idioma_nativo','id'=>'idioma_nativo','value'=>'Si','checked'=>TRUE);echo form_checkbox($data); ?>
+                        </div>     
+                        <div class="col-md-4">
+                            <label class="form-text" for="otorgante">ES TRADUCTOR:</label>
+                            <?php $data = array('name'=>'traductor','id'=>'traductor','value'=>'Si','checked'=>TRUE);echo form_checkbox($data); ?>
+                        </div>     
+                        <div class="col-md-4">
+                            <label class="form-text" for="otorgante">ES PROFESOR:</label>
+                            <?php $data = array('name'=>'profesor','id'=>'profesor','value'=>'Si','checked'=>TRUE);echo form_checkbox($data); ?>
+                        </div>     
+                    </div>
+                    <br>
+                     <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-text" for="pais">HABLA:</label>
+                                <?php
+                                    $options = array ('' => 'Elija Nivel de Habla');
+                                    foreach($nivel as $n)
+                                        $options[$n->id_niveles] = $n->nombre_nivel;
+                                        echo form_dropdown('nivel_habla_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="nivel_habla_id"');
+                                ?>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-text" for="pais">LECTURA:</label>
+                                <?php
+                                    $options = array ('' => 'Elija Nivel de Lectura');
+                                    foreach($nivel as $n)
+                                        $options[$n->id_niveles] = $n->nombre_nivel;
+                                        echo form_dropdown('nivel_lectura_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="nivel_lectura_id"');
+                                ?>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-text" for="pais">ESCRITURA:</label>
+                                <?php
+                                    $options = array ('' => 'Elija Nivel de Escritura');
+                                    foreach($nivel as $n)
+                                        $options[$n->id_niveles] = $n->nombre_nivel;
+                                        echo form_dropdown('nivel_escritura_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="nivel_escritura_id"');
+                                ?>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-text" for="otorgante">FECHA DE ACREDITACIÓN:</label>
+                            <input type="date" min="1960" max="2025" step="1" class="form-control c-theme c-square input-lg" id="fecha_acreditacion" name="fecha_acreditacion" placeholder="2021"/>
+                        </div>     
+                        <div class="col-md-4">
+                            <label class="form-text" for="otorgante">TÍTULO OBTENIDO:</label>
+                            <input type="text" class="form-control c-theme c-square input-lg" id="titulo_obtenido" name="titulo_obtenido" placeholder="Título Obtenido"/>
+                        </div>     
+                        <div class="col-md-4">
+                            <label class="form-text" for="otorgante">PUNTOS DE IDIOMA:</label>
+                            <input type="number" class="form-control c-theme c-square input-lg" id="puntos_idioma" name="puntos_idioma" placeholder="50"/>
+                        </div>     
+                    </div>
                     <br> 
                   <div class="row">
                     <div class="col-sm-offset-6 col-sm-6">

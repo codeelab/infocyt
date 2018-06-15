@@ -202,5 +202,234 @@ class Personacyt extends CI_Controller {
             }
 
 
+    public function reconocimientos()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/academica/reconocimientos.php')) 
+        {
+            redirect('personacyt');
+        }
+        $id = $this->session->userdata('id_usuario');
+        $data['pais']              = $this->Pages_model->paises();
+        $data['reconocimientos']   = $this->Personacyt_model->reconocimientos($id);
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
+        $this->load->view('pages/personacyt/academica/reconocimientos',$data);
+        $this->load->view('theme/footer');
+    }
+
+            public function alta_reconocimientos()
+            {
+                if($this->input->method() === 'post')
+                {
+                    $descripcion    = $this->security->xss_clean($this->input->post('descripcion'));
+                    $publicacion    = $this->security->xss_clean($this->input->post('anio_reconocimiento'));
+                    $organizador    = $this->security->xss_clean($this->input->post('inst_otorga'));
+                    $dependencia    = $this->security->xss_clean($this->input->post('dependencia'));
+                    $pais           = $this->security->xss_clean($this->input->post('paises_id'));
+                    $usuario        = $this->security->xss_clean($this->input->post('usuario_id'));
+
+                    $data = array(
+                        'anio_reconocimiento'   => $publicacion,
+                        'descripcion'           => $descripcion,
+                        'inst_otorga'           => $organizador,
+                        'dependencia'           => $dependencia,
+                        'paises_id'             => $pais,
+                        'usuario_id'            => $usuario,
+                        'fecha_captura'         => date('Y-m-d')
+                    );
+                    $this->session->set_flashdata('success', 'Se ha registrado correctamente el congreso.');
+                    $this->Personacyt_model->alta_reconocimientos($data);
+                    redirect('personacyt/reconocimientos');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'No se ha podido registrar el congreso.');
+                    redirect('personacyt/reconocimientos');
+                }
+            }
+
+    public function idiomas()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/academica/idiomas.php')) 
+        {
+            redirect('personacyt');
+        }
+        $id = $this->session->userdata('id_usuario');
+        $data['lenguaje']   = $this->Personacyt_model->lenguaje();
+        $data['nivel']      = $this->Personacyt_model->nivel();
+        $data['idiomas']    = $this->Personacyt_model->idiomas($id);
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
+        $this->load->view('pages/personacyt/academica/idiomas',$data);
+        $this->load->view('theme/footer');
+    }
+
+            public function alta_idiomas()
+            {
+                if($this->input->method() === 'post')
+                {
+                    $lenguaje           = $this->security->xss_clean($this->input->post('lenguaje_id'));
+                    $idioma_nativo      = $this->security->xss_clean($this->input->post('idioma_nativo'));
+                    $traductor          = $this->security->xss_clean($this->input->post('traductor'));
+                    $profesor           = $this->security->xss_clean($this->input->post('profesor'));
+                    $nivel_habla_id     = $this->security->xss_clean($this->input->post('nivel_habla_id'));
+                    $nivel_lectura_id   = $this->security->xss_clean($this->input->post('nivel_lectura_id'));
+                    $nivel_escritura_id = $this->security->xss_clean($this->input->post('nivel_escritura_id'));
+                    $fecha_acreditacion = $this->security->xss_clean($this->input->post('fecha_acreditacion'));
+                    $titulo_obtenido    = $this->security->xss_clean($this->input->post('titulo_obtenido'));
+                    $puntos_idioma      = $this->security->xss_clean($this->input->post('puntos_idioma'));
+                    $usuario            = $this->security->xss_clean($this->input->post('usuario_id'));
+
+                    $data = array(
+                        'lenguaje_id'           => $lenguaje,
+                        'idioma_nativo'         => $idioma_nativo,
+                        'traductor'             => $traductor,
+                        'profesor'              => $profesor,
+                        'nivel_habla_id'        => $nivel_habla_id,
+                        'nivel_lectura_id'      => $nivel_lectura_id,
+                        'nivel_escritura_id'    => $nivel_escritura_id,
+                        'fecha_acreditacion'    => $fecha_acreditacion,
+                        'titulo_obtenido'       => $titulo_obtenido,
+                        'puntos_idioma'         => $puntos_idioma,
+                        'usuario_id'            => $usuario,
+                        'fecha_captura'         => date('Y-m-d')
+                    );
+                    $this->session->set_flashdata('success', 'Se ha registrado correctamente el Idioma.');
+                    $this->Personacyt_model->alta_idiomas($data);
+                    redirect('personacyt/idiomas');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'No se ha podido registrar el Idioma.');
+                    redirect('personacyt/idiomas');
+                }
+            }
+
+
+    public function academica()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/academica/academica.php')) 
+        {
+            redirect('personacyt');
+        }
+        $id = $this->session->userdata('id_usuario');
+        $data['grados']         = $this->Personacyt_model->academica($id);
+        $data['grado']          = $this->Personacyt_model->grado();
+        $data['pais']           = $this->Pages_model->paises();
+        $data['estados']        = $this->Pages_model->getEstados();
+        $data['conocimiento']   = $this->Personacyt_model->conocimiento();
+        $data['est_grado']      = $this->Personacyt_model->est_grado();
+        $data['sector']         = $this->Personacyt_model->sector();
+        $data['dependencia']    = $this->Personacyt_model->dependencias();
+
+        $this->load->view('theme/header');
+        $this->load->view('theme/nav');
+        $this->load->view('pages/personacyt/academica/academica',$data);
+        $this->load->view('theme/footer');
+    }
+
+
+        function disciplina($campo_id)
+        {
+            $sub = $this->Personacyt_model->dis($campo_id);
+            if( empty ( $sub ) )
+                return '{ "nombre": "No hay Disciplinas disponibles" }';
+            $data = array();
+            foreach ($sub as $s) {
+                $data[] = '{"id_disciplina":' . $s->id_disciplina . ',"nombre":"' . $s->descr_disciplina . '"}';
+            }
+            echo '[ ' . implode(",",$data) . ']';
+            return;
+        }
+
+        function subdisciplina($disciplina_id)
+        {
+            $dis = $this->Personacyt_model->sub($disciplina_id);
+            if( empty ( $dis ) )
+                return '{ "nombre": "No hay Subdisciplinas disponibles" }';
+            $data = array();
+            foreach ($dis as $s) {
+                $data[] = '{"id_subdisciplinas":' . $s->id_subdisciplinas . ',"nombre":"' . $s->descr_subdisciplinas . '"}';
+            }
+            echo '[ ' . implode(",",$data) . ']';
+            return;
+        }
+
+        function departamentos($dependencia_id)
+        {
+            $dep = $this->Personacyt_model->departamentos($dependencia_id);
+            if( empty ( $dep ) )
+                return '{ "nombre": "No hay Departamento disponibles" }';
+            $data = array();
+            foreach ($dep as $s) {
+                $data[] = '{"id_departamentos":' . $s->id_departamentos . ',"nombre":"' . $s->descr_departamentos . '"}';
+            }
+            echo '[ ' . implode(",",$data) . ']';
+            return;
+        }
+
+
+
+
+            public function alta_academica()
+            {
+                if($this->input->method() === 'post')
+                {
+                    $fecha_terminacion           = $this->security->xss_clean($this->input->post('fecha_terminacion'));
+                    $grado_id      = $this->security->xss_clean($this->input->post('grado_id'));
+                    $completado          = $this->security->xss_clean($this->input->post('completado'));
+                    $descr_grado           = $this->security->xss_clean($this->input->post('descr_grado'));
+                    $paises_id     = $this->security->xss_clean($this->input->post('paises_id'));
+                    $estados_id   = $this->security->xss_clean($this->input->post('estados_id'));
+                    $campo_id = $this->security->xss_clean($this->input->post('campo_id'));
+                    $disciplina_id = $this->security->xss_clean($this->input->post('disciplina_id'));
+                    $subdisciplina_id    = $this->security->xss_clean($this->input->post('subdisciplina_id'));
+                    $estatus_id      = $this->security->xss_clean($this->input->post('estatus_id'));
+                    $num_cedula      = $this->security->xss_clean($this->input->post('num_cedula'));
+                    $sector_id      = $this->security->xss_clean($this->input->post('sector_id'));
+                    $institucion      = $this->security->xss_clean($this->input->post('institucion'));
+                    $dependencia_id      = $this->security->xss_clean($this->input->post('dependencia_id'));
+                    $departamento_id      = $this->security->xss_clean($this->input->post('departamento_id'));
+                    $descripcion_tesis      = $this->security->xss_clean($this->input->post('descripcion_tesis'));
+                    $usuario            = $this->security->xss_clean($this->input->post('usuario_id'));
+
+                    $data = array(
+                        'fecha_terminacion'         => $fecha_terminacion,
+                        'grado_id'                  => $grado_id,
+                        'completado'                => $completado,
+                        'descr_grado'               => $descr_grado,
+                        'paises_id'                 => $paises_id,
+                        'estados_id'                => $estados_id,
+                        'campo_id'                  => $campo_id,
+                        'disciplina_id'             => $disciplina_id,
+                        'subdisciplina_id'          => $subdisciplina_id,
+                        'estatus_id'                => $estatus_id,
+                        'num_cedula'                => $num_cedula,
+                        'sector_id'                 => $sector_id,
+                        'institucion'               => $institucion,
+                        'dependencia_id'            => $dependencia_id,
+                        'departamento_id'           => $departamento_id,
+                        'descripcion_tesis'         => $descripcion_tesis,
+                        'usuario_id'                => $usuario,
+                        'fecha_captura'             => date('Y-m-d')
+                    );
+                    $this->session->set_flashdata('success', 'Se ha registrado correctamente el Grado Acádemico.');
+                    $this->Personacyt_model->alta_academica($data);
+                    redirect('personacyt/academica');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'No se ha podido registrar el Grado Acádemico.');
+                    redirect('personacyt/academica');
+                }
+            }
+
+
+
+
+
+
+
+
 
 }

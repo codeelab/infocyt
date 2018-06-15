@@ -73,7 +73,7 @@ $rim_u = 1;
             <h3 class="c-font-uppercase c-font-bold c-font-dark c-font-20 c-font-slim">PERSONACYT</h3>
         </div>
         <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-            <li><a href="<?=base_url('personacyt');?>">Inicio</a></li> | <li><a href="<?=base_url('personacyt/congresos');?>" class="c-font-dark">Congresos</a></li>
+            <li><a href="<?=base_url('personacyt');?>">Inicio</a></li> | <li><a href="<?=base_url('personacyt/reconocimientos');?>" class="c-font-dark">Reconocimientos</a></li>
         </ul>
     </div>
 </div>
@@ -171,11 +171,11 @@ $rim_u = 1;
                       
                      <div class="c-contact">
                         <div class="c-content-title-1">
-                            <h3 class="c-font-uppercase c-font-bold">Listado de Congresos</h3>
+                            <h3 class="c-font-uppercase c-font-bold">Listado de Reconocimientos</h3>
                         </div>                
                         <div style="margin: 15px;">
                             <button class="btn btn-sm c-btn-purple c-btn-square c-btn-border-2x" data-toggle="modal" data-target="#mascongreso">
-                                <i class="fas fa-check-circle"></i> Agregar Congreso
+                                <i class="fas fa-check-circle"></i> Agregar Reconocimiento
                             </button>
 
                         </div>
@@ -185,26 +185,24 @@ $rim_u = 1;
                             <table class="table display responsive no-wrap" width="100%" id="tablePersonacyt">
                                  <thead>
                              <tr>
-                                <th><i class='fas fa-map-marker-alt' aria-hidden='true'></i>  PAÍS</th>
-                                <th><i class='fas fa-book' aria-hidden='true'></i>  TÍTULO</th>
                                 <th><i class='fas fa-calendar' aria-hidden='true'></i>  PUBLICACIÓN</th>
+                                <th><i class='fas fa-book' aria-hidden='true'></i>  TÍTULO</th>
                                 <th><i class='fas fa-file-pdf' aria-hidden='true'></i>   CONSTANCIA</th>
                              </tr>
                              </thead>
                              <tbody>
                     <?php
 
-                        if($congresos !== FALSE) 
+                        if($reconocimientos !== FALSE) 
                         {
-                            foreach ($congresos as $e) 
+                            foreach ($reconocimientos as $e) 
                             {
 
                                 echo '
                                     <tr>
-                                        <td>'.$e->nombre_pa.'</td>
-                                        <td>'.$e->titulo.'</td>
-                                        <td>'.$e->anio_publicacion.'</td>
-                                        <td class="center"><a href="'.base_url('pdf/').$e->id_congresos.'" target="_blank"><button type="button" class="btn btn-md c-btn-red c-btn-square c-btn-border-2x btn-block" data-toggle="tooltip" data-placement="bottom" title="'.$e->titulo.'"><i class="far fa-file-pdf" aria-hidden="true"></i></button></a></td>
+                                        <td>'.$e->anio_reconocimiento.'</td>
+                                        <td>'.$e->descripcion.'</td>
+                                        <td class="center"><a href="'.base_url('pdf/').$e->id_reconocimientos.'" target="_blank"><button type="button" class="btn btn-md c-btn-red c-btn-square c-btn-border-2x btn-block" data-toggle="tooltip" data-placement="bottom" title="'.$e->descripcion.'"><i class="far fa-file-pdf" aria-hidden="true"></i></button></a></td>
                                     </tr>
                                 ';
                             }
@@ -241,7 +239,7 @@ $rim_u = 1;
                        <span class="sr-only">Close</span>
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-                    DATOS DEL CONGRESO
+                    DATOS DEL RECONOCIMIENTO
                 </h4>
             </div>
             
@@ -249,49 +247,39 @@ $rim_u = 1;
             <div class="modal-body">
                 
                 <?php $atrib = array('id' => 'registro', 'autocomplete'=> 'off');
-                            echo form_open('personacyt/alta_congreso', $atrib); ?>
+                            echo form_open('personacyt/alta_reconocimientos', $atrib); ?>
                     <div class="row">
                         <div class="col-md-12">
-                            <label class="form-text" for="TITULO">TÍTULO:</label>
-                            <input type="text" class="form-control c-theme c-square input-lg" id="titulo" name="titulo" placeholder="Título del Congreso"/>
+                            <label class="form-text" for="descripcion">DESCRIPCIÓN:</label>
+                            <input type="text" class="form-control c-theme c-square input-lg" id="descripcion" name="descripcion" placeholder="Descripción del Reconocimiento"/>
                         </div>     
                     </div>
                      <div class="row">
                         <div class="col-md-12">
-                            <label class="form-text" for="TITULO">AÑO DE PUBLICACIÓN:</label>
-                            <input type="date" min="1960" max="2025" step="1" class="form-control c-theme c-square input-lg" id="anio_publicacion" name="anio_publicacion" placeholder="2018"/>
+                            <label class="form-text" for="obtencion">AÑO DE OBTENCIÓN:</label>
+                            <input type="number" min="1960" max="2025" step="1" class="form-control c-theme c-square input-lg" id="anio_reconocimiento" name="anio_reconocimiento" placeholder="2018"/>
                         </div>     
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <label class="form-text" for="TITULO">DESCRIPCIÓN DEL CONGRESO:</label>
-                            <textarea rows="4" id="descr_mezcla" name="descr_mezcla" placeholder="Descripción del congreso" class="form-control c-theme c-square input-lg"></textarea>
-                        </div>     
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label class="form-text" for="TITULO">NOMBRE DE LA INSTITUCIÓN QUE ORGANIZA:</label>
-                            <input type="text" class="form-control c-theme c-square input-lg" id="nombre_organizador" name="nombre_organizador" placeholder="Título del Congreso"/>
+                            <label class="form-text" for="otorgante">INSTITUCIÓN OTORGANTE:</label>
+                            <input type="text" class="form-control c-theme c-square input-lg" id="inst_otorga" name="inst_otorga" placeholder="Institución Otorgante"/>
                         </div>     
                     </div>
                      <div class="row">
-                        <div class="col-md-4">
-                            <label class="form-text" for="TITULO">INICIO:</label>
-                            <input type="date"  step="1" class="form-control c-theme c-square input-lg" id="fecha_inicio" name="fecha_inicio" placeholder="DIA/MES/AÑO"/>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-text" for="TITULO">TERMINACIÓN:</label>
-                            <input type="date"  step="1" class="form-control c-theme c-square input-lg" id="fecha_final" name="fecha_final" placeholder="DIA/MES/AÑO"/>
-                        </div>
                         <div class="col-md-4">
                             <label class="form-text" for="pais">UBICACIÓN:</label>
                                 <?php
-                                    $options = array ('' => 'Elija País de evento');
+                                    $options = array ('' => 'Elija País sede de la Institución');
                                     foreach($pais as $pa)
                                         $options[$pa->id_paises] = $pa->nombre_pa;
                                         echo form_dropdown('paises_id', $options, ' ', 'class="form-control c-theme c-square input-lg" id="paises_id"');
                                 ?>
-                        </div>     
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-text" for="institucion">DEPENDENCIA OTORGANTE:</label>
+                            <input type="text" class="form-control c-theme c-square input-lg" id="dependencia" name="dependencia" placeholder="Dependencia Otorgante"/>
+                        </div>      
                     </div>
 
                     <br> 

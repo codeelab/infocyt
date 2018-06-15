@@ -112,6 +112,166 @@ class Personacyt_model extends CI_Model {
 
 
 
+    //LISTA TODOS LOS RECONOCIMIENTOS REGISTRADOS POR USUARIO
+    public function reconocimientos($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reconocimientos');
+        $this->db->join('paises p','paises_id = p.id_paises','inner');
+        $this->db->where('usuario_id',$id);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+            //REGISTRA EL CONTENIDO PARA LOS RECONOCIMIENTOS
+            public function alta_reconocimientos($data)
+            {
+                return $this->db->insert('reconocimientos', $data);
+            }
+
+
+    //LISTA TODOS LOS IDIOMAS REGISTRADOS POR USUARIO
+    public function idiomas($id)
+    {
+        $this->db->select('*');
+        $this->db->from('idiomas');
+        $this->db->join('lenguaje l','lenguaje_id = l.id_lenguaje','inner');
+        $this->db->where('usuario_id',$id);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+            //LISTA EL CONTENIDO PARA LOS NIVELES
+            function nivel()
+            {
+                return $this->db->get('niveles')->result();
+            }
+
+            //LISTA EL CONTENIDO PARA LOS LENGUAJES
+            function lenguaje()
+            {
+                return $this->db->get('lenguaje')->result();
+            }
+
+
+            //REGISTRA EL CONTENIDO PARA LOS RECONOCIMIENTOS
+            public function alta_idiomas($data)
+            {
+                return $this->db->insert('idiomas', $data);
+            }
+
+
+    //LISTA TODOS LOS GRADOS ACADEMICOS REGISTRADOS POR USUARIO
+    public function academica($id)
+    {
+        $this->db->select('*');
+        $this->db->from('academica');
+        $this->db->join('grado','grado_id = id_grado','inner');
+        $this->db->join('paises','paises_id = id_paises','inner');
+        $this->db->join('disciplinas','disciplina_id = id_disciplina','inner');
+        $this->db->where('usuario_id',$id);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+            //LISTA EL CONTENIDO PARA LOS GRADOS
+            function grado()
+            {
+                return $this->db->get('grado')->result();
+            }
+
+
+            //REGISTRA EL CONTENIDO PARA LOS RECONOCIMIENTOS
+            public function conocimiento()
+            {
+                $sql = $this->db->query('SELECT id_conocimiento, descr_conocimiento FROM campo_conocimiento');
+                foreach ($sql->result() as $reg)
+                {
+                    $data[$reg->id_conocimiento] = $reg->descr_conocimiento;
+                }
+                return $data;
+            }
+
+
+            function dis($campo_id)
+            {
+                return $this->db->select('id_disciplina, descr_disciplina')
+                                ->from('disciplinas')
+                                ->where(array('conocimiento_id' => $campo_id) )
+                                ->get()->result();
+            }
+
+
+            function sub($disciplina_id)
+            {
+                return $this->db->select('id_subdisciplinas, descr_subdisciplinas')
+                                ->from('subdisciplinas')
+                                ->where(array('disciplina_id' => $disciplina_id) )
+                                ->get()->result();
+            }
+
+
+            //LISTA EL CONTENIDO PARA LOS ESTATUS DEL GRADO
+            function est_grado()
+            {
+                return $this->db->get('estatus_grado')->result();
+            }
+
+            //LISTA EL CONTENIDO PARA LOS SECTORES
+            function sector()
+            {
+                return $this->db->get('sector')->result();
+            }
+
+            //REGISTRA EL CONTENIDO PARA LAS DEPENDENCIAS
+            public function dependencias()
+            {
+                $sql = $this->db->query('SELECT id_dependencias, descr_dependencia FROM dependencias');
+                foreach ($sql->result() as $reg)
+                {
+                    $data[$reg->id_dependencias] = $reg->descr_dependencia;
+                }
+                return $data;
+            }
+
+            function departamentos($dependencia_id)
+            {
+                return $this->db->select('id_departamentos, descr_departamentos')
+                                ->from('departamentos')
+                                ->where(array('dependencia_id' => $dependencia_id) )
+                                ->get()->result();
+            }
+
+            //REGISTRA EL CONTENIDO PARA LOS RECONOCIMIENTOS
+            public function alta_academica($data)
+            {
+                return $this->db->insert('academica', $data);
+            }
+
+
+
 
 }
 
