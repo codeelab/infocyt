@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 12-06-2018 a las 22:05:34
+-- Tiempo de generación: 17-07-2018 a las 23:02:00
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 5.6.33
 
@@ -64,30 +64,565 @@ INSERT INTO `area_conocimiento` (`id_area_conocimiento`, `nombre_area`, `clave_a
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `congresos`
+-- Estructura de tabla para la tabla `campo_conocimiento`
 --
 
-CREATE TABLE `congresos` (
-  `id_congresos` int(11) NOT NULL,
-  `usuario_id` int(11) DEFAULT NULL,
-  `titulo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `anio_publicacion` int(11) NOT NULL,
-  `descr_mezcla` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `fecha_inicio` date NOT NULL,
-  `fecha_final` date NOT NULL,
-  `nombre_organizador` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `paises_id` int(11) DEFAULT NULL,
-  `fecha_captura` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `campo_conocimiento` (
+  `id_conocimiento` int(11) NOT NULL,
+  `descr_conocimiento` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `congresos`
+-- Volcado de datos para la tabla `campo_conocimiento`
 --
 
-INSERT INTO `congresos` (`id_congresos`, `usuario_id`, `titulo`, `anio_publicacion`, `descr_mezcla`, `fecha_inicio`, `fecha_final`, `nombre_organizador`, `paises_id`, `fecha_captura`) VALUES
-(1, 2, 'LOS VALORES ESTETICOS DE LA FLORA DE MEXICO', 1993, 'PRIMER SIMPOSIO NACIONAL SOBRE PLANTAS NATIVAS DE MEXICO CONPOTENCIAL ORNAMENTAL', '2018-05-31', '2018-06-09', 'UCLA', 6, NULL),
-(2, 2, 'rfrfrfrfrfr', 1960, 'rfrfrfrrf', '2018-06-01', '2018-06-06', 'rfrfrfrfrf', 5, '2018-06-12'),
-(3, 2, 'etrhthdhrthrthrhrhr', 1961, 'thrrhrrhrhr', '2018-06-07', '2018-05-30', 'rthrhrthtrhtrt', 6, '2018-06-12');
+INSERT INTO `campo_conocimiento` (`id_conocimiento`, `descr_conocimiento`) VALUES
+(1, 'NO DEFINIDA'),
+(2, 'ANTROPOLOGIA'),
+(3, 'ARTES Y LETRAS'),
+(4, 'ASTRONOMIA Y ASTROFISICA'),
+(5, 'CIENCIAS AGRONOMICAS Y VETERINARIAS'),
+(6, 'CIENCIAS DE LA TECNOLOGIA'),
+(7, 'CIENCIAS DE LA TIERRA Y EL COSMOS'),
+(8, 'CIENCIAS DE LA VIDA'),
+(9, 'CIENCIAS ECONOMICAS'),
+(10, 'CIENCIAS JURIDICAS Y DERECHO'),
+(11, 'CIENCIAS POLITICAS'),
+(12, 'DEMOGRAFIA'),
+(13, 'ETICA'),
+(14, 'FILOSOFIA'),
+(15, 'FISICA'),
+(16, 'GEOGRAFIA'),
+(17, 'HISTORIA'),
+(18, 'LINGUISTICA'),
+(19, 'LOGICA'),
+(20, 'MATEMATICAS'),
+(21, 'MEDICINA Y PATOLOGIA HUMANA'),
+(22, 'PEDAGOGIA'),
+(23, 'PSICOLOGIA'),
+(24, 'QUIMICA'),
+(25, 'SOCIOLOGIA'),
+(26, 'NO ESPECIFICADO'),
+(27, 'CIENCIAS DE LA SALUD');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clase_economica`
+--
+
+CREATE TABLE `clase_economica` (
+  `id_clase` int(11) NOT NULL,
+  `rama_id` int(11) NOT NULL,
+  `descr_clase` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `clase_economica`
+--
+
+INSERT INTO `clase_economica` (`id_clase`, `rama_id`, `descr_clase`) VALUES
+(1, 1, 'NO DEFINIDA'),
+(2, 1, 'CULTIVO DE SOYA'),
+(3, 1, 'CULTIVO DE CARTAMO'),
+(4, 1, 'CULTIVO DE GIRASOL'),
+(5, 1, 'CULTIVO ANUAL DE OTRAS SEMILLAS OLEAGINOSAS'),
+(6, 1, 'CULTIVO DE FRIJOL GRANO'),
+(7, 1, 'CULTIVO DE GARBANZO GRANO'),
+(8, 1, 'CULTIVO DE OTRAS LEGUMBRES'),
+(9, 1, 'CULTIVO DE TRIGO'),
+(10, 1, 'CULTIVO DE MAIZ GRANO'),
+(11, 1, 'CULTIVO DE MAIZ FORRAJERO'),
+(12, 1, 'CULTIVO DE ARROZ'),
+(13, 1, 'CULTIVO DE SORGO GRANO'),
+(14, 1, 'CULTIVO DE AVENA GRANO'),
+(15, 1, 'CULTIVO DE CEBADA GRANO'),
+(16, 1, 'CULTIVO DE SORGO FORRAJERO'),
+(17, 1, 'CULTIVO DE AVENA FORRAJERA'),
+(18, 1, 'CULTIVO DE OTROS CEREALES'),
+(19, 2, 'CULTIVO DE JITOMATE O TOMATE ROJO'),
+(20, 2, 'CULTIVO DE CHILE'),
+(21, 2, 'CULTIVO DE CEBOLLA'),
+(22, 2, 'CULTIVO DE MELON O SANDIA'),
+(23, 2, 'CULTIVO DE TOMATE VERDE'),
+(24, 2, 'CULTIVO DE PAPA'),
+(25, 2, 'CULTIVO DE CALABACITA'),
+(26, 2, 'CULTIVO DE OTRAS HORTALIZAS Y SEMILLAS DE HORTALIZAS'),
+(27, 3, 'CULTIVO DE NARANJA'),
+(28, 3, 'CULTIVO DE LIMON'),
+(29, 3, 'CULTIVO DE OTROS CITRICOS'),
+(30, 3, 'CULTIVO DE CAFE'),
+(31, 3, 'CULTIVO DE PLATANO'),
+(32, 3, 'CULTIVO DE MANGO'),
+(33, 3, 'CULTIVO DE AGUACATE'),
+(34, 3, 'CULTIVO DE UVA'),
+(35, 3, 'CULTIVO DE MANZANA'),
+(36, 3, 'CULTIVO DE CACAO'),
+(37, 3, 'CULTIVO DE OTROS FRUTALES NO CITRICOS Y DE NUECES'),
+(38, 4, 'CULTIVO DE PRODUCTOS ALIMENTICIOS EN INVERNADEROS'),
+(39, 4, 'FLORICULTURA A CIELO ABIERTO'),
+(40, 4, 'FLORICULTURA EN INVERNADERO'),
+(41, 4, 'CULTIVO DE ARBOLES DE CICLO PRODUCTIVO DE 10 ANOS O MENOS'),
+(42, 4, 'OTROS CULTIVOS EN INVERNADEROS Y VIVEROS'),
+(43, 5, 'CULTIVO DE TABACO'),
+(44, 5, 'CULTIVO DE ALGODON'),
+(45, 5, 'CULTIVO DE CANA DE AZUCAR'),
+(46, 5, 'CULTIVO DE ALFALFA'),
+(47, 5, 'CULTIVO DE PASTOS Y ZACATES'),
+(48, 5, 'CULTIVO DE COCO'),
+(49, 5, 'CULTIVO DE CACAHUATE'),
+(50, 5, 'CULTIVO DE AGAVE ALCOHOLERO'),
+(51, 5, 'OTROS CULTIVOS'),
+(52, 6, 'EXPLOTACION DE BOVINOS PARA CARNE'),
+(53, 6, 'EXPLOTACION DE BOVINOS PARA LECHE'),
+(54, 6, 'EXPLOTACION DE BOVINOS SIN ESPECIALIZACION'),
+(55, 7, 'EXPLOTACION DE PORCINOS EN GRANJA'),
+(56, 7, 'EXPLOTACION DE PORCINOS EN TRASPATIO'),
+(57, 8, 'EXPLOTACION DE GALLINAS PONEDORAS DE HUEVO FERTIL'),
+(58, 8, 'EXPLOTACION DE GALLINAS PONEDORAS DE HUEVO PARA PLATO'),
+(59, 8, 'EXPLOTACION DE POLLOS PARA CARNE'),
+(60, 8, 'EXPLOTACION DE GUAJOLOTES O PAVOS'),
+(61, 8, 'PRODUCCION DE AVES DE CORRAL EN INCUBADORA'),
+(62, 8, 'EXPLOTACION DE OTRAS AVES PRODUCTORAS DE CARNE Y HUEVO'),
+(63, 9, 'EXPLOTACION DE OVINOS'),
+(64, 9, 'EXPLOTACION CONJUNTA DE OVINOS CON CAPRINOS'),
+(65, 9, 'EXPLOTACION DE CAPRINOS'),
+(66, 10, 'CAMARONICULTURA'),
+(67, 10, 'ACUICULTURA ANIMAL EXCEPTO CAMARONICULTURA'),
+(68, 11, 'APICULTURA'),
+(69, 11, 'EXPLOTACION DE EQUIDOS'),
+(70, 11, 'CUNICULTURA Y EXPLOTACION DE ANIMALES DE PIEL CON PELAJE FINO'),
+(71, 11, 'EXPLOTACION DE OTROS ANIMALES'),
+(72, 12, 'SILVICULTURA'),
+(73, 13, 'VIVEROS FORESTALES'),
+(74, 13, 'RECOLECCION DE PRODUCTOS FORESTALES'),
+(75, 14, 'TALA DE ARBOLES'),
+(76, 15, 'PESCA DE CAMARON'),
+(77, 15, 'PESCA DE TUNIDOS'),
+(78, 15, 'PESCA DE SARDINA Y ANCHOVETA'),
+(79, 15, 'PESCA DE OTRAS ESPECIES'),
+(80, 16, 'CAZA Y CAPTURA'),
+(81, 17, 'SERVICIOS DE FUMIGACION AGRICOLA'),
+(82, 17, 'DESPEPITE DE ALGODON'),
+(83, 17, 'BENEFICIO DE PRODUCTOS AGRICOLAS'),
+(84, 17, 'OTROS SERVICIOS RELACIONADOS CON LA AGRICULTURA'),
+(85, 18, 'SERVICIOS RELACIONADOS CON LA GANADERIA'),
+(86, 19, 'SERVICIOS RELACIONADOS CON EL APROVECHAMIENTO FORESTAL'),
+(87, 20, 'EXTRACCION DE PETROLEO Y GAS'),
+(88, 21, 'MINERIA DE CARBON MINERAL'),
+(89, 22, 'MINERIA DE HIERRO'),
+(90, 22, 'MINERIA DE ORO'),
+(91, 22, 'MINERIA DE PLATA'),
+(92, 22, 'MINERIA DE COBRE Y NIQUEL'),
+(93, 22, 'MINERIA DE PLOMO Y ZINC'),
+(94, 22, 'MINERIA DE MANGANESO'),
+(95, 22, 'MINERIA DE MERCURIO Y ANTIMONIO'),
+(96, 22, 'MINERIA DE URANIO Y MINERALES RADIACTIVOS'),
+(97, 22, 'MINERIA DE OTROS MINERALES METALICOS'),
+(98, 23, 'MINERIA DE PIEDRA DE CAL'),
+(99, 23, 'MINERIA DE MARMOL'),
+(100, 23, 'MINERIA DE OTRAS PIEDRAS DIMENSIONADAS');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `departamentos`
+--
+
+CREATE TABLE `departamentos` (
+  `id_departamentos` int(11) NOT NULL,
+  `descr_departamentos` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `dependencia_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `departamentos`
+--
+
+INSERT INTO `departamentos` (`id_departamentos`, `descr_departamentos`, `dependencia_id`) VALUES
+(1, 'DEPARTAMENTO DE FISICO-QUIMICA', 23),
+(2, 'DEPARTAMENTO DE QUIMICA ORGANICA', 23),
+(3, 'LABORATORIO DE SINTESIS ORGANICA Y FITOQUIMICA', 23),
+(4, 'DEPARTAMENTO DE MICROBIOLOGIA', 23),
+(5, 'INSTITUTO DE CIENCIAS', 23),
+(6, 'DEPARTAMENTO DE QUIMICA INORGANICA', 23),
+(7, 'DEPARTAMENTO DE INMUNOLOGIA', 1972),
+(8, 'DEPARTAMENTO DE MICROBIOLOGIA Y PARASITOLOGIA, AGENTES BIOLOGICOS', 1972),
+(9, 'DEPARTAMENTO DE INVESTIGACION DE CIENCIAS AGRICOLAS', 2146),
+(10, 'CENTRO DE INVESTIGACIONES EN CIENCIAS QUIMICAS', 2146),
+(11, 'DEPARTAMENTO DE INVESTIGACION EN ZEOLITA', 2146),
+(12, 'CENTRO DE INVESTIGACIONES EN CIENCIAS FISIOLOGICAS', 2146),
+(13, 'CENTRO DE INVESTIGACIONES EN CIENCIAS MICROBIOLOGICAS', 2146),
+(14, 'CENTRO DE INVESTIGACIONES EN DISPOSITIVOS SEMICONDUCTORES', 2146),
+(15, 'DEPARTAMENTO DE INVESTIGACIONES ARQUITECTONICAS Y URBANISTICAS', 2146),
+(16, 'DEPARTAMENTO DE MATEMATICAS', 2146),
+(17, 'DEPARTAMENTO DE MICROELECTRONICA', 2146),
+(18, 'DEPARTAMENTO DE FISICA', 2146),
+(19, 'CENTRO DE QUIMICA', 2146),
+(20, 'AREA DE CIENCIAS DEL LENGUAJE', 2305),
+(21, 'AREA DE CULTURA Y SOCIEDADES', 2305),
+(22, 'AREA DE EST. PARA LA CONSERVACION Y DIFUSION DEL PATRIMONIO', 2305),
+(23, 'AREA DE ESTUDIOS LATINOAMERICANOS', 2305),
+(24, 'AREA DE ESTUDIOS REGIONALES', 2305),
+(25, 'AREA DE HISTORIA', 2305),
+(26, 'AREA DE SOCIEDAD Y CULTURA', 2305),
+(27, 'AREA DE SOCIOLOGIA Y CIENCIA POLITICA', 2305),
+(28, 'AREA DE DINAMICA NO-LINEAL Y CAOS', 2453),
+(29, 'AREA DE ELECTRONICA CUANTICA', 2453),
+(30, 'AREA DE FISICA ATOMICA Y MOLECULAR', 2453),
+(31, 'AREA DE PARTICULAS ELEMENTALES', 2453),
+(32, 'AREA DE PROP ELECTRONICAS Y DE TRANSPORTE EN SEMICONDUCTORES', 2453),
+(33, 'AREA DE PROPIEDADES OPTICAS Y ELECTRONICA DE SUPERFICIES', 2453),
+(34, 'AREA DE SUPERCONDUCTIVIDAD', 2453),
+(35, 'AREA DE PROPIEDADES ESTRUCTURALES DE MATERIALES', 2453),
+(36, 'POSGRADO EN MATEMATICAS', 2834),
+(37, 'COLEGIO DE FISICA', 2834),
+(38, 'POSGRADO EN OPTOELECTRONICA', 2834),
+(39, 'COLEGIO DE COMPUTACION', 2834),
+(40, 'MAESTRIA EN MATEMATICAS', 2834),
+(41, 'AREA DE PARTICULAS ELEMENTALES', 2834),
+(42, 'CENTRO DE INVESTIGACIONES JURIDICO POLITICAS', 2944),
+(43, 'AREA DE PSICOLOGIA SOCIAL', 3047),
+(44, 'DIVISION DE POSGRADO', 364),
+(45, 'COLEGIO DE ANTROPOLOGIA SOCIAL', 364),
+(46, 'CENTRO DE CIENCIAS POLITICAS', 364),
+(47, 'COLEGIO DE HISTORIA', 364),
+(48, 'COLEGIO DE FILOSOFIA', 364),
+(49, 'CENTRO DE INVESTIGACION EN INGENIERIA QUIMICA', 3359),
+(50, 'DEPARTAMENTO DE MATEMATICAS', 3359),
+(51, 'DIVISION DE ESTUDIOS DE POSTGRADO', 108),
+(52, 'DEPARTAMENTO DE INVESTIGACION', 4411),
+(53, 'BIOTERIO CLAUDE BERNARD', 4444),
+(54, 'CENTRO DE ESTUDIOS UNIVERSITARIOS', 4444),
+(55, 'SECRETARIA DE INVESTIGACION Y ESTUDIOS DE POSGRADO', 4562),
+(56, 'DEPARTAMENTO DE ACUICULTURA', 898),
+(57, 'DEPARTAMENTO DE GEOFISICA APLICADA', 8),
+(58, 'DEPARTAMENTO DE GEOLOGIA', 8),
+(59, 'DEPARTAMENTO DE SISMOLOGIA', 8),
+(60, 'DEPARTAMENTO DE ELECTRONICA Y TELECOMUNICACIONES', 898),
+(61, 'DEPARTAMENTO DE OPTICA', 898),
+(62, 'DEPARATAMENTO DE CIENCIAS DE LA COMPUTACION', 898),
+(63, 'DEPARTAMENTO DE ACUICULTURA', 1261),
+(64, 'DEPARTAMENTO DE ECOLOGIA', 1261),
+(65, 'DEPARTAMENTO DE OCEANOGRAFIA FISICA', 1261),
+(66, 'DEPARTAMENTO DE BIOTECNOLOGIA', 2717),
+(67, 'DEPARTAMENTO DE MICROBIOLOGIA EXPERIMENTAL', 2717),
+(68, 'DEPARTAMENTO DE BIOLOGIA DE LA CONSERVACION', 2717),
+(69, 'DEPTO DE RECURSOS NATURALES', 1261),
+(70, 'LABORATORIO DE GENETICA MOLECULAR', 23),
+(71, 'DEPARTAMENTO DE BIOQUIMICA', 2146),
+(72, 'DEPARTAMENTO DE BIOTECNOLOGIA', 2146),
+(73, 'DEPARTAMENTO DE FISIOLOGIA Y BIOQUIMICA', 2146),
+(74, 'DEPARTAMENTO DE RECURSOS NATURALES', 2146),
+(75, 'DIVISION DE BIOLOGIA VEGETAL', 897),
+(76, 'DEPARTAMENTO DE POLIMEROS', 2717),
+(77, 'DEPARTAMENTO DE CIENCIA DE LOS ALIMENTOS', 8),
+(78, 'DEPARTAMENTO DE NUTRICION', 898),
+(79, 'DEPTO. DE TECNOLOGIA DE ALIMENTOS DE ORIGEN ANIMAL', 1261),
+(80, 'FISIOLOGIA Y TECNOLOGIA POSCOSECHA DE FRUTAS Y HORTALIZAS', 1546),
+(81, 'DEPTO. DE MANEJO AMBIENTAL', 23),
+(82, 'DEPARTAMENTO DE PATOLOGIA', 23),
+(83, 'DEPTO. DE TECNOLOGIA DE ALIMENTOS DE ORIGEN VEGETAL', 2305),
+(84, 'DEPARTAMENTO DE DESARROLLO HUMANO Y BIENESTAR SOCIAL', 2834),
+(85, 'DEPARTAMENTO DE ECONOMIA REGIONAL E INTEGRACION INTERNACIONAL', 2834),
+(86, 'DEPARTAMENTO DE ESTUDIOS SOCIALES  DEL SISTEMA ALIMENTARIO', 2834),
+(87, 'DEPTO. DE MATERIALES CERAMICOS', 8),
+(88, 'DEPTO. DE METALURGIA', 8),
+(89, 'DEPTO. DE POLIMEROS', 8),
+(90, 'DEPTO. DE CORROSION', 1261),
+(91, 'DEPTO. DE ECOLOGIA Y MEDIO AMBIENTE', 1261),
+(92, 'DEPARTAMENTO DE MICROSCOPIA ELECTRONICA', 2146),
+(93, 'DEPARTAMENTO DE CATALISIS', 2944),
+(94, 'DEPTO. DE BIOPOLIMEROS', 1546),
+(95, 'DEPTO. DE QUIMICA DE POLIMEROS', 1546),
+(96, 'DEPARTAMENTO DE INVESTIGACION Y DESARROLLO', 23),
+(97, 'DEPTO. DE PROCESADO DE PLASTICOS', 23),
+(98, 'DEPARTAMENTO DE POLIMEROS', 1972),
+(99, 'GERENCIA DE FISICOQUIMICA DE POLIOMEROS', 2146),
+(100, 'DEPARTAMENTO DE QUIMICA ORGANICA', 2305);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `dependencias`
+--
+
+CREATE TABLE `dependencias` (
+  `id_dependencias` int(11) NOT NULL,
+  `descr_dependencia` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `institucion_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `dependencias`
+--
+
+INSERT INTO `dependencias` (`id_dependencias`, `descr_dependencia`, `institucion_id`) VALUES
+(1, 'CENTRO DE INVESTIGACIONES MICROBIOLOGICAS', 7),
+(2, 'DIRECCION DE INVESTIGACION Y DESARROLLO', 9),
+(3, 'DIRECCION ACADEMICA', 11),
+(4, 'UNIDAD HERMOSILLO', 13),
+(5, 'CENTRO DE INGENIERIA Y DESARROLLO INDUSTRIAL', 15),
+(6, 'DIVISION DE CIENCIAS DE LA TIERRA', 16),
+(7, 'UNIDAD DE BIOLOGIA EXPERIMENTAL', 17),
+(8, 'DIRECCION DE CIENCIAS DE LOS ALIMENTOS', 18),
+(9, 'DIVISION DE CARACTERIZACION DE MATERIALES', 19),
+(10, 'GERENCIA DE INGENIERIA DE PROCESOS QUIMICOS', 20),
+(11, 'UNIDAD DISTRITO FEDERAL', 21),
+(12, 'DIVISION DE ECONOMIA', 22),
+(13, 'DIRECCION DE ESTUDIOS DEL CARIBE', 24),
+(14, 'AREA CIENCIAS DE LA COMPUTACION', 26),
+(15, 'AREA DE INVESTIGACION', 27),
+(16, 'SUBDIRECCION ACADEMICA', 29),
+(17, 'DEPARTAMENTO DE INGENIERIA ELECTRONICA', 30),
+(18, 'DIVISION DE BIOTECNOLOGIA', 31),
+(19, 'UNIDAD RETABLO (MATRIZ)', 32),
+(20, 'DIVISION DE BIOLOGIA EXPERIMENTAL', 33),
+(21, 'CAMPUS PUEBLA', 34),
+(22, 'AREA DE METROLOGIA ELECTRICA', 40),
+(23, 'DIRECCION GENERAL', 42),
+(24, 'DIRECCION GENERAL', 43),
+(25, 'UNIDAD DE FORMACION ACADEMICA POSGRADUAL', 44),
+(26, 'AREA DE INVESTIGACION', 52),
+(27, 'CENTRO DE ESTUDIOS DEMOGRAFICOS Y DE DESARROLLO URBANO', 53),
+(28, 'CENTRO DE ESTUDIOS SOCIOESPACIALES Y POLITICAS PUBLICAS', 54),
+(29, 'CENTRO DE ESTUDIOS ANTROPOLOGICOS', 55),
+(30, 'PROGRAMA MEXICO-ESTADOS UNIDOS', 57),
+(31, 'COORDINACION DE INVESTIGACION', 58),
+(32, 'UNIDAD REGIONAL NOGALES', 59),
+(33, 'UNIDAD SAN CRISTOBAL DE LAS CASAS', 60),
+(34, 'UNIDAD CIUDAD DEL CARMEN, CAMPECHE', 65),
+(35, 'CENTRO NACIONAL DE INVESTIGACION Y DESARROLLO Y TECNOLOGICO', 69),
+(36, 'ESCUELA NACIONAL DE ANTROPOLOGIA E HISTORIA UNIDAD CHIHUAHUA', 74),
+(37, 'FACULTAD DE PSICOLOGIA', 77),
+(38, 'COORDINACION DE INVESTIGACION', 80),
+(39, 'CENTRO DE INVESTIGACION SISMICA', 81),
+(40, 'CAMPO EXPERIMENTAL BAJIO', 82),
+(41, 'PROYECTO ECONOMIA Y SALUD', 83),
+(42, 'CID CENTRO DE INVESTIGACION Y DESARROLLO TECNOLOGICO, S.A. DE C.V.', 85),
+(43, 'UNIDAD DE INVESTIGACION', 88),
+(44, 'HOSPITAL GENERAL DE MEXICO', 90),
+(45, 'DIVISION DE ASISTENCIA MEDICA', 92),
+(46, 'CAMPO EXPERIMENTAL COSTA DE ENSENADA', 95),
+(47, 'CENTRO REGIONAL DEL BAJIO', 96),
+(48, 'DIVISION DE INVESTIGACION EN NEUROCIENCIAS', 97),
+(49, 'UNIDAD DURANGO', 98),
+(50, 'COORDINACION DE TECNOLOGIA HIDROLOGICA', 100),
+(51, 'COORDINACION DEL PROGRAMA DE BIOTECNOLOGIA DEL PETROLEO', 101),
+(52, 'COORDINACION DE EQUIPAMIENTO', 102),
+(53, 'DIRECCION DE ESTUDIOS HISTORICOS', 103),
+(54, 'COORDINACION DE OPTICA', 104),
+(55, 'DIVISION DE INVESTIGACION BASICA', 105),
+(56, 'DEPARTAMENTO DE BIOQUIMICA', 106),
+(57, 'DEPARTAMENTO DE BIOLOGIA MOLECULAR', 107),
+(58, 'DIRECCION DE INVESTIGACION', 108),
+(59, 'GERENCIA DE CIENCIAS AMBIENTALES Y GENETICA', 110),
+(60, 'SUBDIRECCION GENERAL DE INVESTIGACION', 111),
+(61, 'UNIDAD DE INVESTIGACION', 112),
+(62, 'SUBDIRECCION DE INVESTIGACION', 113),
+(63, 'DIRECCION GENERAL DE INVESTIGACION PESQUERA DEL ATLANTICO', 114),
+(64, 'INSTITUTO NACIONAL DE VIROLOGIA', 116),
+(65, 'CENTRO  INTERDISCIPLINARIO DE ESTUDIOS SOBRE  MEDIO AMBIENTE Y DESARROLLO', 117),
+(66, 'CAMPUS-CIUDAD DE MEXICO', 118),
+(67, 'DIVISION ACADEMICA DE ACTUARIA ESTADISTICA Y MATEMATICAS', 124),
+(68, 'DEPARTAMENTO DE CIENCIAS BASICAS', 125),
+(69, 'DEPARTAMENTO DE CIENCIAS BASICAS', 126),
+(70, 'DEPARTAMENTO DE INGENIERIA BIOQUIMICA', 129),
+(71, 'DEPARTAMENTO DE CIENCIAS ECONOMICO ADMINISTRATIVAS', 130),
+(72, 'DEPARTAMENTO DE CIENCIAS BASICAS', 131),
+(73, 'DEPTO. DE BIOLOGIA', 133),
+(74, 'DEPARTAMENTO DE INGENIERIA QUIMICA-BIOQUIMICA', 135),
+(75, 'DEPARTAMENTO DE CIENCIAS ADMINISTRATIVAS', 136),
+(76, 'DEPARTAMENTO DE CIENCIAS BASICAS', 137),
+(77, 'DIVISION DE ESTUDIOS DE POSGRADO E INVESTIGACION', 138),
+(78, 'DEPARTAMENTO DE CIENCIAS BASICAS', 139),
+(79, 'DEPARTAMENTO DE CIENCIAS BASICAS', 140),
+(80, 'DIVISION DE INGENIERIAS Y CIENCIAS BIOLOGICAS', 141),
+(81, 'AREA DE INGENIERIA BIOQUIMICA EN ALIMENTOS', 143),
+(82, 'ACADEMIA DE CIENCIAS ECONOMICAS Y ADMINISTRATIVAS', 145),
+(83, 'DEPARTAMENTO DE QUIMICA Y BIOQUIMICA', 146),
+(84, 'DEPARTAMENTO DE CIENCIAS BASICAS', 148),
+(85, 'COORDINACION DE INVESTIGACION', 153),
+(86, 'DIVISION DE SISTEMAS DE CONTROL', 155),
+(87, 'DIRECCION GENERAL EN CIENCIA Y TECNOLOGIA', 162),
+(88, 'DIRECCION GENERAL', 163),
+(89, 'LANIA, A.C.', 165),
+(90, 'SECRETARIA', 176),
+(91, 'SECRETARIA', 177),
+(92, 'SECRETARIA DEL ESTADO DE QUINTANA ROO', 178),
+(93, 'DIVISION DE INVESTIGACION BASICA', 179),
+(94, 'DIRECCION ACADEMICA', 186),
+(95, 'CENTRO DE ALTA DIRECCION EN INGENIERIA Y TECNOLOGIA', 189),
+(96, 'UNIDAD SALTILLO', 190),
+(97, 'BIBLIOTECA FRAY FRANCISCO DE BURGOA', 191),
+(98, 'CENTRO DE CIENCIAS BASICAS', 192),
+(99, 'AREA INTERDISCIPLINARIA DE CIENCIAS AGROPECUARIAS', 193),
+(100, 'AREA INTERDISCIPLINARIA DE CIENCIAS AGROPECUARIAS', 194);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `dirigido_sector`
+--
+
+CREATE TABLE `dirigido_sector` (
+  `id_dirigido_sector` int(11) NOT NULL,
+  `nombre_dirigido` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `dirigido_sector`
+--
+
+INSERT INTO `dirigido_sector` (`id_dirigido_sector`, `nombre_dirigido`) VALUES
+(1, 'No definido'),
+(2, 'Estudiantes'),
+(3, 'Empresarios'),
+(4, 'Funcionarios'),
+(5, 'Público en General'),
+(6, 'Sector Acádemico'),
+(7, 'Sector Privado'),
+(8, 'Sector Público'),
+(9, 'Sector Social');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `disciplinas`
+--
+
+CREATE TABLE `disciplinas` (
+  `id_disciplina` int(11) NOT NULL,
+  `descr_disciplina` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `conocimiento_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `disciplinas`
+--
+
+INSERT INTO `disciplinas` (`id_disciplina`, `descr_disciplina`, `conocimiento_id`) VALUES
+(74, 'GEODESIA', 7),
+(73, 'GEOQUIMICA', 7),
+(72, 'CLIMATOLOGIA', 7),
+(71, 'CIENCIAS ATMOSFERICAS', 7),
+(70, 'OTRAS ESPECIALIDADES EN MATERIA DE BIOLOGIA', 8),
+(69, 'EVOLUCION', 8),
+(68, 'VIROLOGIA', 8),
+(67, 'SIMBIOSIS', 8),
+(66, 'RADIOBIOLOGIA', 8),
+(65, 'BOTANICA', 8),
+(64, 'PALEONTOLOGIA', 8),
+(63, 'BIOLOGIA MOLECULAR', 8),
+(62, 'MICROBIOLOGIA', 8),
+(61, 'ENTOMOLOGIA GENERAL', 8),
+(60, 'INMUNOLOGIA', 8),
+(59, 'FISIOLOGIA HUMANA', 8),
+(58, 'BIOLOGIA HUMANA', 8),
+(57, 'GENETICA', 8),
+(56, 'ETOLOGIA', 8),
+(55, 'BIOLOGIA CELULAR', 8),
+(54, 'BIOFISICA', 8),
+(53, 'BIOMETRIA', 8),
+(52, 'BIOMATEMATICA', 8),
+(51, 'BIOQUIMICA', 8),
+(50, 'ANTROPOLOGIA FISICA', 8),
+(49, 'BIOLOGIA ANIMAL Y ZOOLOGIA', 8),
+(48, 'OTRAS ESPECIALIDADES EN MATERIA DE QUIMICA', 24),
+(47, 'QUIMICA FISICA', 24),
+(46, 'QUIMICA ORGANICA', 24),
+(45, 'QUIMICA NUCLEAR', 24),
+(44, 'QUIMICA DE LAS MACROMOLECULAS', 24),
+(43, 'QUIMICA INORGANICA', 24),
+(42, 'BIOQUIMICA', 24),
+(41, 'QUIMICA ANALITICA', 24),
+(40, 'OTRAS ESPECIALIDADES EN MATERIA DE FISICA', 15),
+(39, 'FISICA DEL ESPACIO', 15),
+(38, 'UNIDADES Y CONSTANTES FISICA', 15),
+(37, 'TERMODINAMICA', 15),
+(36, 'FISICA TEORICA', 15),
+(35, 'FISICA DEL ESTADO SOLIDO', 15),
+(34, 'FISICOQUIMICA', 15),
+(33, 'OPTICA', 15),
+(32, 'FISICA DE LAS PARTICULAS NUCLEARES', 15),
+(31, 'FISICA NUCLEAR', 15),
+(30, 'FISICA MOLECULAR', 15),
+(29, 'MECANICA', 15),
+(28, 'FISICA DE FLUIDOS', 15),
+(27, 'ELECTRONICA', 15),
+(26, 'ELECTROMAGNETISMO', 15),
+(25, 'ACUSTICA', 15),
+(24, 'OTRAS ESPECIALIDADES EN MATERIA DE ASTRONOMIA', 4),
+(23, 'SISTEMA SOLAR', 4),
+(22, 'RADIOASTRONOMIA', 4),
+(21, 'PLANETOLOGIA', 4),
+(20, 'ASTRONOMIA OPTICA', 4),
+(19, 'ESPACIOS Y MATERIA INTERPLANETARIOS', 4),
+(18, 'COSMOLOGIA Y COSMOGONIA', 4),
+(17, 'OTRAS ESPECIALIDADES EN MATERIA DE MATEMATICAS', 20),
+(16, 'TOPOLOGIA', 20),
+(15, 'ESTADISTICA', 20),
+(14, 'CALCULO DE PROBABILIDADES', 20),
+(13, 'INVESTIGACION OPERATIVA', 20),
+(12, 'ANALISIS NUMERICO', 20),
+(11, 'TEORIA DE LOS NUMEROS', 20),
+(10, 'GEOMETRIA', 20),
+(9, 'INFORMATICA MATEMATICA', 20),
+(8, 'ANALISIS Y ANALISIS FUNCIONAL', 20),
+(7, 'ALGEBRA', 20),
+(6, 'OTRAS ESPECIALIDADES RELATIVAS A LA LOGICA', 19),
+(5, 'METODOLOGIA', 19),
+(4, 'LOGICA INDUCTIVA', 19),
+(3, 'LOGICA GENERAL', 19),
+(2, 'LOGICA DEDUCTIVA', 19),
+(1, 'APLICACIONES DE LA LOGICA', 19),
+(75, 'GEOGRAFIA', 7),
+(76, 'GEOLOGIA', 7),
+(77, 'GEOFISICA', 7),
+(78, 'HIDROLOGIA', 7),
+(79, 'METEOROLOGIA', 7),
+(80, 'OCEANOGRAFIA', 7),
+(81, 'CIENCIAS DEL SUELO', 7),
+(82, 'CIENCIAS DEL COSMOS', 7),
+(83, 'OTRAS ESPECIALIDADES EN MATERIA DE CIENCIAS DE LA TIERRA DEL COSMOS Y DEL MEDIO AMBIENTE', 7),
+(84, 'QUIMICA AGRONOMICA', 5),
+(85, 'INGENIERIA RURAL', 5),
+(86, 'AGRONOMIA', 5),
+(87, 'CIENCIAS VETERINARIAS', 5),
+(88, 'PECES Y ANIMALES SALVAJES', 5),
+(89, 'SILVICULTURA', 5),
+(90, 'HORTICULTURA', 5),
+(91, 'FITOPATOLOGIA', 5),
+(92, 'HIGIENE VETERINARIA Y SALUD PUBLICA', 5),
+(93, 'OTRAS ESPECIALIDADES EN MATERIA DE CIENCIAS AGRONOMICAS Y VETERINARIAS', 5),
+(94, 'MEDICINA CLINICA', 21),
+(95, 'EPIDEMIOLOGIA', 21),
+(96, 'MEDICINA FORENSE', 21),
+(97, 'MEDICINA DEL TRABAJO', 21),
+(98, 'MEDICINA INTERNA', 21),
+(99, 'NUTRICION', 21),
+(100, 'PATOLOGIA', 21);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleadoras`
+--
+
+CREATE TABLE `empleadoras` (
+  `id_empleadoras` int(11) NOT NULL,
+  `nom_empleador` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `empleadoras`
+--
+
+INSERT INTO `empleadoras` (`id_empleadoras`, `nom_empleador`) VALUES
+(1, 'Actividad Profesional'),
+(2, 'Empresa'),
+(3, 'Institución'),
+(4, 'No definido');
 
 -- --------------------------------------------------------
 
@@ -163,6 +698,53 @@ INSERT INTO `estado_civil` (`id_civil`, `nombre_civil`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `estatus_articulo`
+--
+
+CREATE TABLE `estatus_articulo` (
+  `id_estatus_articulos` int(11) NOT NULL,
+  `nombre_estatus` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `estatus_articulo`
+--
+
+INSERT INTO `estatus_articulo` (`id_estatus_articulos`, `nombre_estatus`) VALUES
+(1, 'Aceptado con Arbitraje'),
+(2, 'Divulgación'),
+(3, 'Memorias de congresos'),
+(4, 'No definido'),
+(5, 'Publicado con Arbitraje'),
+(6, 'Publicado sin Arbitraje'),
+(7, 'Revistas Arbitradas'),
+(8, 'Revistas Indexadas');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estatus_grado`
+--
+
+CREATE TABLE `estatus_grado` (
+  `id_est_grado` int(11) NOT NULL,
+  `descr_est_grado` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `estatus_grado`
+--
+
+INSERT INTO `estatus_grado` (`id_est_grado`, `descr_est_grado`) VALUES
+(1, 'No definido'),
+(2, 'Obtención'),
+(3, 'Proceso'),
+(4, 'Terminado'),
+(5, 'Truncado');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `genero`
 --
 
@@ -178,6 +760,113 @@ CREATE TABLE `genero` (
 INSERT INTO `genero` (`id_genero`, `nombre_gen`) VALUES
 (1, 'Hombre'),
 (2, 'Mujer');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grado`
+--
+
+CREATE TABLE `grado` (
+  `id_grado` int(11) NOT NULL,
+  `descr_grado` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `grado`
+--
+
+INSERT INTO `grado` (`id_grado`, `descr_grado`) VALUES
+(1, 'DIPLOMADO'),
+(2, 'MAESTRIA'),
+(3, 'DOCTORADO'),
+(4, 'POSDOCTORADO'),
+(5, 'ESPECIALIDAD'),
+(6, 'LICENCIATURA'),
+(7, 'NO DEFINIDO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lenguaje`
+--
+
+CREATE TABLE `lenguaje` (
+  `id_lenguaje` int(11) NOT NULL,
+  `nombre_leng` varchar(255) NOT NULL,
+  `descr_corta` varchar(255) DEFAULT NULL,
+  `categoria` varchar(255) NOT NULL,
+  `requiere_renovacion` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `lenguaje`
+--
+
+INSERT INTO `lenguaje` (`id_lenguaje`, `nombre_leng`, `descr_corta`, `categoria`, `requiere_renovacion`) VALUES
+(1, 'Chino (Cantonese)', 'Chino', 'LNG', 0),
+(2, 'Afrikaans', 'Afrikaans', 'LNG', 0),
+(3, 'Amharic', 'Amharic', 'LNG', 0),
+(4, 'Arabic', 'Arabic', 'LNG', 0),
+(5, 'American Sign Language', 'Sign', 'LNG', 0),
+(6, 'Bahasa (Indonesian)', 'Bahasa', 'LNG', 0),
+(7, 'Bengali', 'Bengali', 'LNG', 0),
+(8, 'Burmese', 'Burmese', 'LNG', 0),
+(9, 'Chinese (Cantonese)', 'Chinese', 'LNG', 0),
+(10, 'Chinese (Other)', 'Chinese', 'LNG', 0),
+(11, 'Chinese (Mandarin)', 'Chinese', 'LNG', 0),
+(12, 'Chinese (Shanghai)', 'Chinese', 'LNG', 0),
+(13, 'Czech', 'Czech', 'LNG', 0),
+(14, 'Danish', 'Danish', 'LNG', 0),
+(15, 'Dutch', 'Dutch', 'LNG', 0),
+(16, 'English', 'English', 'LNG', 0),
+(17, 'Farsi (Persian)', 'Farsi', 'LNG', 0),
+(18, 'Flemish', 'Flemish', 'LNG', 0),
+(19, 'French', 'French', 'LNG', 0),
+(20, 'Finish', 'Finish', 'LNG', 0),
+(21, 'German', 'German', 'LNG', 0),
+(22, 'Greek', 'Greek', 'LNG', 0),
+(23, 'Hebrew', 'Hebrew', 'LNG', 0),
+(24, 'Hindi', 'Hindi', 'LNG', 0),
+(25, 'Hungarian', 'Hungarian', 'LNG', 0),
+(26, 'Indian (Kannada)', 'Indian', 'LNG', 0),
+(27, 'Indian (Hindi)', 'Indian', 'LNG', 0),
+(28, 'Indian (Konkani)', 'Indian', 'LNG', 0),
+(29, 'Italian', 'Italian', 'LNG', 0),
+(30, 'Japanese', 'Japanese', 'LNG', 0),
+(31, 'Kiswahili', 'Kiswahili', 'LNG', 0),
+(32, 'Korean', 'Korean', 'LNG', 0),
+(33, 'Latvian', 'Latvian', 'LNG', 0),
+(34, 'Lithuanian', 'Lithuanian', 'LNG', 0),
+(35, 'Laotian', 'Laotian', 'LNG', 0),
+(36, 'Latin', 'Latin', 'LNG', 0),
+(37, 'Malay', 'Malay', 'LNG', 0),
+(38, 'Maya', 'Maya', 'LNG', 0),
+(39, 'Nahuatl', 'Nahuatl', 'LNG', 0),
+(40, 'Norwegian', 'Norwegian', 'LNG', 0),
+(41, 'Polish', 'Polish', 'LNG', 0),
+(42, 'Portuguese', 'Portuguese', 'LNG', 0),
+(43, 'Rumanian', 'Rumanian', 'LNG', 0),
+(44, 'Russian', 'Russian', 'LNG', 0),
+(45, 'Swahili', 'Swahili', 'LNG', 0),
+(46, 'Spanish', 'Spanish', 'LNG', 0),
+(47, 'Serbo-Croatian', 'Srbo-Croat', 'LNG', 0),
+(48, 'Swedish', 'Swedish', 'LNG', 0),
+(49, 'Tagalog (Philippines)', 'Tagalog', 'LNG', 0),
+(50, 'Telugu', 'Telugu', 'LNG', 0),
+(51, 'Thai', 'Thai', 'LNG', 0),
+(52, 'Tamil (India)', 'Tamil', 'LNG', 0),
+(53, 'Tamil (Ceylon)', 'Tamil', 'LNG', 0),
+(54, 'Turkish', 'Turkish', 'LNG', 0),
+(55, 'Twi (Ghana)', 'Twi', 'LNG', 0),
+(56, 'Ukrainian', 'Ukrainian', 'LNG', 0),
+(57, 'Urdu (Pakistan)', 'Urdu', 'LNG', 0),
+(58, 'Vietnamese', 'Vietnamese', 'LNG', 0),
+(59, 'Welsh', 'Welsh', 'LNG', 0),
+(60, 'Zapoteco', 'Zapoteco', 'LNG', 0),
+(61, 'Bulgaro', 'Bulgaro', 'LNG', 0),
+(62, 'Armenio', 'Armenio', 'LNG', 0),
+(63, 'Punjabi', 'Punjabi', 'LNG', 0);
 
 -- --------------------------------------------------------
 
@@ -2853,6 +3542,27 @@ INSERT INTO `nacionalidad` (`id_nacionalidad`, `nombre_nac`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `niveles`
+--
+
+CREATE TABLE `niveles` (
+  `id_niveles` int(11) NOT NULL,
+  `nombre_nivel` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `niveles`
+--
+
+INSERT INTO `niveles` (`id_niveles`, `nombre_nivel`) VALUES
+(1, 'Alto'),
+(2, 'Bajo'),
+(3, 'Medio'),
+(4, 'No definido');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `nivel_academico`
 --
 
@@ -3130,6 +3840,786 @@ INSERT INTO `paises` (`id_paises`, `nombre_pa`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `rama_economica`
+--
+
+CREATE TABLE `rama_economica` (
+  `id_rama` int(11) NOT NULL,
+  `descr_rama` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `economico_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `rama_economica`
+--
+
+INSERT INTO `rama_economica` (`id_rama`, `descr_rama`, `economico_id`) VALUES
+(1, 'CULTIVO DE GRANOS Y SEMILLAS OLEAGINOSAS', 2),
+(2, 'CULTIVO DE HORTALIZAS', 2),
+(3, 'CULTIVO DE FRUTALES Y NUECES', 2),
+(4, 'CULTIVO EN INVERNADEROS Y VIVEROS Y FLORICULTURA', 2),
+(5, 'OTROS CULTIVOS', 2),
+(6, 'EXPLOTACION DE BOVINOS', 2),
+(7, 'EXPLOTACION DE PORCINOS', 2),
+(8, 'EXPLOTACION AVICOLA', 2),
+(9, 'EXPLOTACION DE OVINOS Y CAPRINOS', 2),
+(10, 'ACUICULTURA ANIMAL', 2),
+(11, 'EXPLOTACION DE OTROS ANIMALES', 2),
+(12, 'SILVICULTURA', 2),
+(13, 'VIVEROS FORESTALES Y RECOLECCION DE PRODUCTOS FORESTALES', 2),
+(14, 'TALA DE ARBOLES', 2),
+(15, 'PESCA', 2),
+(16, 'CAZA Y CAPTURA', 2),
+(17, 'SERVICIOS RELACIONADOS CON LA AGRICULTURA', 2),
+(18, 'SERVICIOS RELACIONADOS CON LA GANADERIA', 2),
+(19, 'SERVICIOS RELACIONADOS CON EL APROVECHAMIENTO FORESTAL', 2),
+(20, 'EXTRACCION DE PETROLEO Y GAS', 3),
+(21, 'MINERIA DE CARBON MINERAL', 3),
+(22, 'MINERIA DE MINERALES METALICOS', 3),
+(23, 'MINERIA DE MINERALES NO METALICOS', 3),
+(24, 'SERVICIOS RELACIONADOS CON LA MINERIA', 3),
+(25, 'GENERACION TRANSMISION Y SUMINISTRO DE ENERGIA ELECTRICA', 4),
+(26, 'CAPTACION TRATAMIENTO Y SUMINISTRO DE AGUA', 4),
+(27, 'SUMINISTRO DE GAS POR DUCTOS AL CONSUMIDOR FINAL', 4),
+(28, 'EDIFICACION RESIDENCIAL', 5),
+(29, 'EDIFICACION NO RESIDENCIAL', 5),
+(30, 'CONSTRUCCION DE OBRAS PARA EL ABASTECIMIENTO DE AGUA PETROLEO GAS ELECTRICIDAD Y TELECOMUNICACIONES', 5),
+(31, 'DIVISION DE TERRENOS Y CONSTRUCCION DE OBRAS DE URBANIZACION', 5),
+(32, 'CONSTRUCCION DE VIAS DE COMUNICACION', 5),
+(33, 'OTRAS CONSTRUCCIONES DE INGENIERIA CIVIL U OBRA PESADA', 5),
+(34, 'CIMENTACIONES MONTAJE DE ESTRUCTURAS PREFABRICADAS Y TRABAJO EN EXTERIORES', 5),
+(35, 'INSTALACIONES Y EQUIPAMIENTO EN CONSTRUCCIONES', 5),
+(36, 'TRABAJOS DE ACABADOS EN EDIFICACIONES', 5),
+(37, 'OTROS TRABAJOS ESPECIALIZADOS PARA LA CONSTRUCCION', 5),
+(38, 'ELABORACION DE ALIMENTOS PARA ANIMALES', 6),
+(39, 'MOLIENDA DE GRANOS Y DE SEMILLAS OLEAGINOSAS', 6),
+(40, 'ELABORACION DE AZUCAR CHOCOLATES  DULCES Y SIMILARES', 6),
+(41, 'CONSERVACION DE FRUTAS VERDURAS Y GUISOS', 6),
+(42, 'ELABORACION DE PRODUCTOS LACTEOS', 6),
+(43, 'MATANZA EMPACADO Y PROCESAMIENTO DE CARNE DE GANADO Y AVES', 6),
+(44, 'PREPARACION Y ENVASADO DE PESCADOS Y MARISCOS', 6),
+(45, 'ELABORACION DE PRODUCTOS DE PANADERIA Y TORTILLAS', 6),
+(46, 'OTRAS INDUSTRIAS ALIMENTARIAS', 6),
+(47, 'INDUSTRIA DE LAS BEBIDAS', 6),
+(48, 'INDUSTRIA DEL TABACO', 6),
+(49, 'PREPARACION E HILADO DE FIBRAS TEXTILES Y FABRICACION DE HILOS', 6),
+(50, 'FABRICACION DE TELAS', 6),
+(51, 'ACABADO Y RECUBRIMIENTO DE TEXTILES', 6),
+(52, 'CONFECCION DE ALFOMBRAS BLANCOS Y SIMILARES', 6),
+(53, 'CONFECCION DE OTROS PRODUCTOS TEXTILES EXCEPTO PRENDAS DE VESTIR', 6),
+(54, 'TEJIDO DE PRENDAS DE VESTIR DE PUNTO', 6),
+(55, 'CONFECCION DE PRENDAS DE VESTIR', 6),
+(56, 'CONFECCION DE ACCESORIOS DE VESTIR', 6),
+(57, 'CURTIDO Y ACABADO DE CUERO Y PIEL', 6),
+(58, 'FABRICACION DE CALZADO', 6),
+(59, 'FABRICACION DE OTROS PRODUCTOS DE CUERO PIEL Y MATERIALES SUCEDANEOS', 6),
+(60, 'ASERRADO Y CONSERVACION DE LA MADERA', 6),
+(61, 'FABRICACION DE LAMINADOS Y AGLUTINADOS DE MADERA', 6),
+(62, 'FABRICACION DE OTROS PRODUCTOS DE MADERA', 6),
+(63, 'FABRICACION DE CELULOSA PAPEL CARTON', 6),
+(64, 'FABRICACION DE PRODUCTOS DE PAPEL Y CARTON', 6),
+(65, 'IMPRESION E INDUSTRIAS CONEXAS', 6),
+(66, 'FABRICACION DE PRODUCTOS DERIVADOS DEL PETROLEO Y DEL CARBON', 6),
+(67, 'FABRICACION DE PRODUCTOS QUIMICOS BASICOS', 6),
+(68, 'FABRICACION DE HULES RESINAS Y FIBRAS QUIMICAS', 6),
+(69, 'FABRICACION DE FERTILIZANTES PESTICIDAS Y OTROS AGROQUIMICOS', 6),
+(70, 'FABRICACION DE PRODUCTOS FARMACEUTICOS', 6),
+(71, 'FABRICACION DE PINTURAS RECUBRIMIENTOS ADHESIVOS Y SELLADORES', 6),
+(72, 'FABRICACION DE JABONES LIMPIADORES Y PREPARACIONES DE TOCADOR', 6),
+(73, 'FABRICACION DE OTROS PRODUCTOS QUIMICOS', 6),
+(74, 'FABRICACION DE PRODUCTOS DE PLASTICO', 6),
+(75, 'FABRICACION DE PRODUCTOS DE HULE', 6),
+(76, 'FABRICACION DE PRODUCTOS A BASE DE ARCILLAS Y MINERALES REFRACTARIOS', 6),
+(77, 'FABRICACION DE VIDRIO Y PRODUCTOS DE VIDRIO', 6),
+(78, 'FABRICACION DE CEMENTO Y PRODUCTOS DE CONCRETO', 6),
+(79, 'FABRICACION DE CAL YESO Y PRODUCTOS DE YESO', 6),
+(80, 'FABRICACION DE OTROS PRODUCTOS A BASE DE MINERALES NO METALICOS', 6),
+(81, 'INDUSTRIA BASICA DEL HIERRO Y DEL ACERO', 6),
+(82, 'FABRICACION DE PRODUCTOS DE HIERRO Y ACERO DE MATERIAL COMPRADO', 6),
+(83, 'INDUSTRIA DEL ALUMINIO', 6),
+(84, 'INDUSTRIAS DE METALES NO FERROSOS EXCEPTO ALUMINIO', 6),
+(85, 'MOLDEO POR FUNDICION DE PIEZAS METALICAS', 6),
+(86, 'FABRICACION DE PRODUCTOS METALICOS FORJADOS Y TROQUELADOS', 6),
+(87, 'FABRICACION DE HERRAMIENTAS DE MANO SIN MOTOR Y UTENSILIOS DE COCINA METALICOS', 6),
+(88, 'FABRICACION DE ESTRUCTURAS METALICAS Y PRODUCTOS DE HERRERIA', 6),
+(89, 'FABRICACION DE CALDERAS TANQUES Y ENVACES METALICOS', 6),
+(90, 'FABRICACION DE HERRAJES Y CERRADURAS', 6),
+(91, 'FABRICACION DE ALAMBRE PRODUCTOS DE ALAMBRE Y RESORTES', 6),
+(92, 'MAQUINADO DE PIEZAS METALICAS Y FABRICACION DE TORNILLOS', 6),
+(93, 'RECUBRIMIENTOS Y TERMINADOS METALICOS', 6),
+(94, 'FABRICACION DE OTROS PRODUCTOS METALICOS', 6),
+(95, 'FABRICACION DE MAQUINARIA Y EQUIPO PARA LAS ACTIVIDADES AGROPECUARIAS PARA LA CONSTRUCCION Y PARA LA', 6),
+(96, 'FABRICACION DE MAQUINARIA Y EQUIPO PARA LAS INDUSTRIAS MANUFACTURERAS EXCEPTO LA METALMECANICA', 6),
+(97, 'FABRICACION DE MAQUINARIA Y EQUIPO PARA EL COMERCIO Y LOS SERVICIOS', 6),
+(98, 'SERVICIOS RELACIONADOS CON EL TRANSPORTE POR CARRETERA', 9),
+(99, 'FABRICACION DE SISTEMAS DE AIRE ACONDICIONADO CALEFACCION Y DE REFRIGERACION INDUSTRIAL Y COMERCIAL', 6),
+(100, 'FABRICACION DE MAQUINARIA Y EQUIPO PARA LA INDUSTRIA METALMECANICA', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_academica`
+--
+
+CREATE TABLE `reg_academica` (
+  `id_academica` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
+  `fecha_terminacion` date DEFAULT NULL,
+  `grado_id` int(11) DEFAULT NULL,
+  `descr_grado` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `completado` char(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `paises_id` int(11) DEFAULT NULL,
+  `estados_id` int(11) DEFAULT NULL,
+  `campo_id` int(11) DEFAULT NULL,
+  `disciplina_id` int(11) DEFAULT NULL,
+  `subdisciplina_id` int(11) DEFAULT NULL,
+  `estatus_id` int(11) DEFAULT NULL,
+  `num_cedula` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `sector_id` int(11) DEFAULT NULL,
+  `institucion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `dependencia_id` int(11) NOT NULL,
+  `departamento_id` int(11) NOT NULL,
+  `descripcion_tesis` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_academica`
+--
+
+INSERT INTO `reg_academica` (`id_academica`, `usuario_id`, `fecha_terminacion`, `grado_id`, `descr_grado`, `completado`, `paises_id`, `estados_id`, `campo_id`, `disciplina_id`, `subdisciplina_id`, `estatus_id`, `num_cedula`, `sector_id`, `institucion`, `dependencia_id`, `departamento_id`, `descripcion_tesis`, `fecha_captura`) VALUES
+(1, 1, '2018-06-07', 4, 'rfrkjfbrmfbjrbfjhrbfjhbrjhfbrjfbjhrbf', 'Si', 4, 3, 20, 7, 26, 4, 'rgrgjrbgjhi4yr7y847y', 3, 'gtighjjtkhgtjkgjtkgjkltjglkt', 23, 4, 'tkjgntkjngkjtngkjntkgjntkjngkjgnkt', '2018-06-16');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_adscripciones`
+--
+
+CREATE TABLE `reg_adscripciones` (
+  `id_adscripcion` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `entidad_empleadora_id` int(11) NOT NULL,
+  `nombre_entidad` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre_puesto` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tel_pais` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tel_laboral` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `domicilio_laboral` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `paises_id` int(11) NOT NULL,
+  `estado_id` int(11) NOT NULL,
+  `municipio_id` int(11) NOT NULL,
+  `codigo_postal` bigint(20) DEFAULT NULL,
+  `fecha_final` date DEFAULT NULL,
+  `sector_estancia_id` int(11) NOT NULL,
+  `nombre_institucion` varchar(266) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `dependencia_id` int(11) NOT NULL,
+  `departamento_id` int(11) NOT NULL,
+  `fecha_captura` date DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_adscripciones`
+--
+
+INSERT INTO `reg_adscripciones` (`id_adscripcion`, `usuario_id`, `fecha_inicio`, `entidad_empleadora_id`, `nombre_entidad`, `nombre_puesto`, `tel_pais`, `tel_laboral`, `domicilio_laboral`, `paises_id`, `estado_id`, `municipio_id`, `codigo_postal`, `fecha_final`, `sector_estancia_id`, `nombre_institucion`, `dependencia_id`, `departamento_id`, `fecha_captura`) VALUES
+(1, 1, '2018-06-01', 1, 'jkhedbfhkejhfkjehfkjehfkjehkjhekj', 'kjhkjhkjhkjhkjhkjhkjhkj', '67657575', '567657657', 'wjhdvjgdjhwvjhwgdjwdgjwhg', 146, 16, 835, 58000, '2018-06-29', 6, 'kjgkjhbkjjlsdjlsjlksjlksjlkjslkdjlskjslkjlk', 3, 0, '2018-06-18');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_articulos`
+--
+
+CREATE TABLE `reg_articulos` (
+  `id_articulos` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_pub` date DEFAULT NULL,
+  `num_volumen` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `titulo_articulo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `tipo_autor_id` int(11) NOT NULL,
+  `autor` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `total_autor` int(11) DEFAULT NULL,
+  `posicion_autor` int(11) DEFAULT NULL,
+  `coautor` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estatus_articulo_id` int(11) NOT NULL,
+  `paises_id` int(11) NOT NULL,
+  `rev_publicacion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `campos_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL,
+  `subdisciplina_id` int(11) NOT NULL,
+  `descr_larga` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_articulos`
+--
+
+INSERT INTO `reg_articulos` (`id_articulos`, `usuario_id`, `fecha_pub`, `num_volumen`, `titulo_articulo`, `tipo_autor_id`, `autor`, `total_autor`, `posicion_autor`, `coautor`, `estatus_articulo_id`, `paises_id`, `rev_publicacion`, `campos_id`, `disciplina_id`, `subdisciplina_id`, `descr_larga`, `fecha_captura`) VALUES
+(1, 1, '2018-07-11', '4', 'kjdbkjdhkjdhk', 2, 'efefefefefef', 4, NULL, 'dfjnjkfkjfhkjfhkfhkjrhkrhkfjhrkfjhrf', 2, 2, 'rkflrlkfjlkrjflkjflkrjlfkjrlkfjlrkfjlr', 19, 4, 17, 'lkrjfjrflkjroifjoirjhforjhofihjrif', '2018-07-10');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_capitulo`
+--
+
+CREATE TABLE `reg_capitulo` (
+  `id_capitulos` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_pub` date DEFAULT NULL,
+  `titulo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descr_mezclada` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `tipo_autor_id` int(11) NOT NULL,
+  `autor` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `total_autor` int(11) NOT NULL,
+  `paises_id` int(11) NOT NULL,
+  `num_pag` int(11) DEFAULT NULL,
+  `num_volumen` int(11) NOT NULL,
+  `editores` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `editorial` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `campos_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL,
+  `subdisciplina_id` int(11) NOT NULL,
+  `descr_larga` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `pal_clave01` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pal_clave02` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_capitulo`
+--
+
+INSERT INTO `reg_capitulo` (`id_capitulos`, `usuario_id`, `fecha_pub`, `titulo`, `descr_mezclada`, `tipo_autor_id`, `autor`, `total_autor`, `paises_id`, `num_pag`, `num_volumen`, `editores`, `editorial`, `campos_id`, `disciplina_id`, `subdisciplina_id`, `descr_larga`, `pal_clave01`, `pal_clave02`, `fecha_captura`) VALUES
+(1, 1, '2018-07-31', 'grgrgrgrgrrgrgr', 'grgrgrgrgrg', 2, 'rgrgrgrgrgrgrgrg', 4, 1, 1090, 4, 'fvggbgbg,gbgbgbgbgb,gbgbgbgb,gbgbgbgb,gbgbgbg', 'gbgbgbgbgbgbgbgbgbgbggbg', 20, 7, 26, 'gbggbgbgbgbgbmlkgbnkgnbkgnbknkjgnbkgnbknkjgnbgkjnbkjgnbkjgnjbnkgjnbjbngkjbnkjgnbjkgnbkjgnbkjngjkbgnbjkgnbjgnkjgjbnkjgnbkgnbkjngkjbnjgkbnkjgnbkjgnbngkjbnkjgnkjgnbkjgnkjbngkjbnjkgnbkjgnbkjngkbnkgjbnkjgnbkjngkjbnkjgnbkjgnbkjgnbkjngkjbngkjbnkjgnbgkbjngkb', 'tbgbtbtbbttb,tbbtbtbtbtbtb,tbtbtbtbtb,tbtbtbbtb,tbtbtbbt', 'tbgbtbtbbttb,tbbtbtbtbtbtb,tbtbtbtbtb,tbtbtbbtb,tbtbtbbt', '2018-07-05 00:00:00'),
+(2, 1, '2018-07-10', 'xfdfdfdfdfdfdfdzfdzfdz', 'cvxcvxvcxv', 2, 'jhvghvhgvhgvhg', 4, 4, 890, 4, 'bcghcgcg', 'jhgfhgvhgfhg', 20, 10, 92, 'vcgcgfdfgcfgc', 'nvcg', 'bvhgvh', '2018-07-05 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_congresos`
+--
+
+CREATE TABLE `reg_congresos` (
+  `id_congresos` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
+  `titulo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `anio_publicacion` int(11) NOT NULL,
+  `descr_mezcla` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_final` date NOT NULL,
+  `nombre_organizador` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `paises_id` int(11) DEFAULT NULL,
+  `fecha_captura` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_congresos`
+--
+
+INSERT INTO `reg_congresos` (`id_congresos`, `usuario_id`, `titulo`, `anio_publicacion`, `descr_mezcla`, `fecha_inicio`, `fecha_final`, `nombre_organizador`, `paises_id`, `fecha_captura`) VALUES
+(1, 2, 'LOS VALORES ESTETICOS DE LA FLORA DE MEXICO', 1993, 'PRIMER SIMPOSIO NACIONAL SOBRE PLANTAS NATIVAS DE MEXICO CONPOTENCIAL ORNAMENTAL', '2018-05-31', '2018-06-09', 'UCLA', 6, NULL),
+(2, 2, 'rfrfrfrfrfr', 1960, 'rfrfrfrrf', '2018-06-01', '2018-06-06', 'rfrfrfrfrf', 5, '2018-06-12'),
+(3, 2, 'etrhthdhrthrthrhrhr', 1961, 'thrrhrrhrhr', '2018-06-07', '2018-05-30', 'rthrhrthtrhtrt', 6, '2018-06-12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_desarrollos_tecnologicos`
+--
+
+CREATE TABLE `reg_desarrollos_tecnologicos` (
+  `id_desarrollos` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `titulo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ano_publicacion` date DEFAULT NULL,
+  `tipo_autor_id` int(11) DEFAULT NULL,
+  `nombre_autor` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `total_autor` int(11) DEFAULT NULL,
+  `coautores` mediumtext CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `descr_general` mediumtext CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `sector_id` int(11) NOT NULL,
+  `nom_institucion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pal_clave` mediumtext CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `dependencia_id` int(11) NOT NULL,
+  `departamento_id` int(11) NOT NULL,
+  `paises_id` int(11) NOT NULL,
+  `descr_larga` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` date NOT NULL,
+  `campos_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL,
+  `subdisciplina_id` int(11) NOT NULL,
+  `economico_id` int(11) NOT NULL,
+  `rama_id` int(11) NOT NULL,
+  `clase_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_desarrollos_tecnologicos`
+--
+
+INSERT INTO `reg_desarrollos_tecnologicos` (`id_desarrollos`, `usuario_id`, `titulo`, `ano_publicacion`, `tipo_autor_id`, `nombre_autor`, `total_autor`, `coautores`, `descr_general`, `sector_id`, `nom_institucion`, `pal_clave`, `dependencia_id`, `departamento_id`, `paises_id`, `descr_larga`, `fecha_captura`, `campos_id`, `disciplina_id`, `subdisciplina_id`, `economico_id`, `rama_id`, `clase_id`) VALUES
+(1, 1, 'tjkgntkjgnkjtngjtg', '2018-06-06', 2, 'tgtgtgtgtgtg', 5, 'tgtgt', 'gtgtgt', 2, 'tgtgttg', 'tgtg', 2, 0, 2, 'tgtg', '2018-06-19', 20, 8, 50, 2, 16, 80);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_difusion`
+--
+
+CREATE TABLE `reg_difusion` (
+  `id_difusion` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `titulo_difusion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `participacion_id` int(11) NOT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `dependencia` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `facilitadora` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `colaboradores` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `dirigido_id` int(11) NOT NULL,
+  `beneficiario` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `extranjero` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
+  `duracion_act` bigint(10) NOT NULL,
+  `pal_clave01` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pal_clave02` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pal_clave03` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descripcion_larga` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `material` mediumtext CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_difusion`
+--
+
+INSERT INTO `reg_difusion` (`id_difusion`, `usuario_id`, `titulo_difusion`, `participacion_id`, `fecha_inicio`, `dependencia`, `facilitadora`, `colaboradores`, `dirigido_id`, `beneficiario`, `extranjero`, `duracion_act`, `pal_clave01`, `pal_clave02`, `pal_clave03`, `descripcion_larga`, `material`, `fecha_captura`) VALUES
+(1, 1, 'djhdjhsjhjshdjhsdjd', 4, '2018-06-06', 'dkksjdkjskdjksdjksjdksd', 'djldjsjdsdlsdjsdj', 'sldjsljsldjsjdlsdl,ljdljljdsdjd,jl,dlsdjddjsdj,ljsdjsldjlsdjlsdjsldjld,lsjdlsdsdjdlsdd', 5, '', 'Si', 6, 'fgffgfgfgf', 'gfgfgfgf', 'fgfgf', 'fgflkgjfgjlkfjgkljfglkjflkjflkgjfkljkljklgj', 'khkjhkjhkj,hhhkhkhhh,hkjhkhkjhkjh,jh,kjhkjhjh,hhhkhkjh', '2018-06-25');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_docencia`
+--
+
+CREATE TABLE `reg_docencia` (
+  `id_docencia` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `entidad_empleadora_id` int(11) NOT NULL,
+  `sectores_id` int(11) NOT NULL,
+  `institucion_resp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dependencia_id` int(11) NOT NULL,
+  `departamento_id` int(11) NOT NULL,
+  `descr_larga` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_final` date DEFAULT NULL,
+  `grado_id` int(11) DEFAULT NULL,
+  `paises_id` int(11) DEFAULT NULL,
+  `programa_aca` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `asignatura` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `campos_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL,
+  `subdisciplina_id` int(11) NOT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_docencia`
+--
+
+INSERT INTO `reg_docencia` (`id_docencia`, `usuario_id`, `fecha_inicio`, `entidad_empleadora_id`, `sectores_id`, `institucion_resp`, `dependencia_id`, `departamento_id`, `descr_larga`, `fecha_final`, `grado_id`, `paises_id`, `programa_aca`, `asignatura`, `campos_id`, `disciplina_id`, `subdisciplina_id`, `fecha_captura`) VALUES
+(1, 1, '2018-07-11', 3, 6, 'UNIVERSIDAD CONTEMPORANEA DE LAS AMERICAS', 14, 0, 'UNIVERSIDAD CONTEMPORANEA DE LAS AMERICAS', '2018-07-11', 6, 146, 'UNIVERSIDAD CONTEMPORANEA DE LAS AMERICAS', 'UNIVERSIDAD CONTEMPORANEA DE LAS AMERICAS', 20, 8, 50, '2018-07-04'),
+(2, 1, '2018-07-18', 3, 3, 'EKDJKIEDJKEJDKEJDKJEIKDE', 34, 0, '', '2018-07-17', 6, 7, '', '', 8, 57, 0, '2018-07-04');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_experiencia`
+--
+
+CREATE TABLE `reg_experiencia` (
+  `id_experiencia` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `entidad_id` int(11) NOT NULL,
+  `nombre_entidad` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nom_puesto` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `empleador` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `paises_id` int(11) NOT NULL,
+  `fecha_final` date DEFAULT NULL,
+  `descr_experiencia` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `campos_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL,
+  `subdisciplina_id` int(11) NOT NULL,
+  `institucion_resp` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `dependencia_id` int(11) NOT NULL,
+  `departamento_id` int(11) NOT NULL,
+  `economico_id` int(11) NOT NULL,
+  `rama_id` int(11) NOT NULL,
+  `clase_id` int(11) NOT NULL,
+  `pal_clave01` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pal_clave02` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pal_clave03` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `sectores_id` int(11) NOT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_experiencia`
+--
+
+INSERT INTO `reg_experiencia` (`id_experiencia`, `usuario_id`, `fecha_inicio`, `entidad_id`, `nombre_entidad`, `nom_puesto`, `empleador`, `paises_id`, `fecha_final`, `descr_experiencia`, `campos_id`, `disciplina_id`, `subdisciplina_id`, `institucion_resp`, `dependencia_id`, `departamento_id`, `economico_id`, `rama_id`, `clase_id`, `pal_clave01`, `pal_clave02`, `pal_clave03`, `sectores_id`, `fecha_captura`) VALUES
+(1, 1, '2018-07-09', 3, 'UCKA', 'SISTEMAS', 'RODRIGO BUSTOS', 146, '2018-07-31', 'DCNKJDNCKJDNCKDNCKNDKJCNDKJCNKJDNCKJDNCKJDNCKJNDKCJNDJKCNJKDNCJKNDJKCNDKJCNJKDNCKJNDKJNCKJDNCJKDNCKJNKJCNKJDN', 20, 10, 92, 'UCLA', 97, 0, 5, 30, 0, 'DCDCDCDD', 'CDCDCDCDCDC', 'DCDCDCDCDCDC', 2, '2018-07-03');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_financiamiento`
+--
+
+CREATE TABLE `reg_financiamiento` (
+  `id_financiamiento` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `tipo_apoyo_id` int(11) NOT NULL,
+  `tipo_programa_id` int(11) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_final` date NOT NULL,
+  `palabra_clave_1` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `palabra_clave_2` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `palabra_clave_3` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_financiamiento`
+--
+
+INSERT INTO `reg_financiamiento` (`id_financiamiento`, `usuario_id`, `tipo_apoyo_id`, `tipo_programa_id`, `fecha_inicio`, `fecha_final`, `palabra_clave_1`, `palabra_clave_2`, `palabra_clave_3`, `fecha_captura`) VALUES
+(1, 1, 4, 3, '2018-07-20', '2018-07-16', 'ddddd', 'dddddd', 'dddddd', '2018-07-12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_grupos`
+--
+
+CREATE TABLE `reg_grupos` (
+  `id_grupos` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `nombre_grupo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `es_lider` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `sectores_id` int(11) NOT NULL,
+  `institucion_resp` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `dependencia_id` int(11) NOT NULL,
+  `departamento_id` int(11) NOT NULL,
+  `nombre_lider` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descr_grupo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `logros` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `actividades` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `colaboracion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `comentarios` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_grupos`
+--
+
+INSERT INTO `reg_grupos` (`id_grupos`, `usuario_id`, `nombre_grupo`, `es_lider`, `sectores_id`, `institucion_resp`, `dependencia_id`, `departamento_id`, `nombre_lider`, `descr_grupo`, `logros`, `actividades`, `colaboracion`, `comentarios`, `fecha_captura`) VALUES
+(1, 1, 'deddedededed', 'SI', 2, 'ededededededeeded', 8, 59, 'edededededed', 'ededededed', 'edededd', 'edededed', 'ededede', 'edededed', '2018-07-12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_idiomas`
+--
+
+CREATE TABLE `reg_idiomas` (
+  `id_idiomas` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
+  `lenguaje_id` int(11) DEFAULT NULL,
+  `idioma_nativo` char(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `traductor` char(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `profesor` char(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nivel_habla_id` int(11) DEFAULT NULL,
+  `nivel_lectura_id` int(11) NOT NULL,
+  `nivel_escritura_id` int(11) NOT NULL,
+  `fecha_acreditacion` date DEFAULT NULL,
+  `titulo_obtenido` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `puntos_idioma` int(11) DEFAULT NULL,
+  `fecha_captura` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_idiomas`
+--
+
+INSERT INTO `reg_idiomas` (`id_idiomas`, `usuario_id`, `lenguaje_id`, `idioma_nativo`, `traductor`, `profesor`, `nivel_habla_id`, `nivel_lectura_id`, `nivel_escritura_id`, `fecha_acreditacion`, `titulo_obtenido`, `puntos_idioma`, `fecha_captura`) VALUES
+(6, 1, 4, 'Si', 'Si', 'Si', 1, 2, 2, '2018-06-08', 'hvjhfjhfjfj', 89, '2018-06-13'),
+(7, 1, 7, '', 'Si', '', 4, 2, 2, '2018-06-15', 'kgkl', 98, '2018-06-13'),
+(8, 1, 4, 'Si', 'Si', 'Si', 2, 3, 4, '2018-06-29', 'gyhgggdsg', 56, '2018-06-13'),
+(9, 1, 0, '', '', '', 0, 0, 0, '0000-00-00', '', 0, '2018-06-16');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_investigacion`
+--
+
+CREATE TABLE `reg_investigacion` (
+  `id_investigacion` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date NOT NULL,
+  `entidad_empleadora_id` int(11) DEFAULT NULL,
+  `nombre_ent` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descrp_entidad` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `sector_estancia_id` int(11) DEFAULT NULL,
+  `institucion_empleadora` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+  `dependencia_id` int(11) DEFAULT NULL,
+  `departamento_id` int(11) DEFAULT NULL,
+  `descrp_estancia` mediumtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_investigacion`
+--
+
+INSERT INTO `reg_investigacion` (`id_investigacion`, `usuario_id`, `fecha_inicio`, `fecha_fin`, `entidad_empleadora_id`, `nombre_ent`, `descrp_entidad`, `sector_estancia_id`, `institucion_empleadora`, `dependencia_id`, `departamento_id`, `descrp_estancia`, `fecha_captura`) VALUES
+(1, 1, '2018-06-01', '2018-06-30', 3, 'UCLA', 'EDJKEKJDHJEHDKJEHDKJHEKJDHEKJHDKJEHDKJEJKDHKJEHDKJEHDKJEHKDJHEKJDHKJEDHKJEHDKJHEDKHEKJHDKJEHDKJEHDKJHEKJDHKJEHDKJEHDKJHEJKDHKJEHDKJEHDKJHEKJDHEKJDHKJE', 6, '', 2, 0, 'EDJKEKJDHJEHDKJEHDKJHEKJDHEKJHDKJEHDKJEJKDHKJEHDKJEHDKJEHKDJHEKJDHKJEDHKJEHDKJHEDKHEKJHDKJEHDKJEHDKJHEKJDHKJEHDKJEHDKJHEJKDHKJEHDKJEHDKJHEKJDHEKJDHKJEEDJKEKJDHJEHDKJEHDKJHEKJDHEKJHDKJEHDKJEJKDHKJEHDKJEHDKJEHKDJHEKJDHKJEDHKJEHDKJHEDKHEKJHDKJEHDKJEHDKJ', '2018-06-18'),
+(2, 1, '2018-06-01', '2018-06-29', 1, '', '', 6, '', 2, 0, '', '2018-06-18');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_libros`
+--
+
+CREATE TABLE `reg_libros` (
+  `id_libros` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `isbn` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `titulo_libro` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_pub` date NOT NULL,
+  `tipo_libro_id` int(11) NOT NULL,
+  `tipo_autor_id` int(5) NOT NULL,
+  `autor` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `total_autor` int(11) NOT NULL,
+  `paises_id` int(11) NOT NULL,
+  `num_volumen` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `num_pag` int(11) NOT NULL,
+  `editores` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `editorial` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `campos_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL,
+  `subdisciplina_id` int(11) NOT NULL,
+  `lenguaje_id` int(11) NOT NULL,
+  `descr_larga` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_libros`
+--
+
+INSERT INTO `reg_libros` (`id_libros`, `usuario_id`, `isbn`, `titulo_libro`, `fecha_pub`, `tipo_libro_id`, `tipo_autor_id`, `autor`, `total_autor`, `paises_id`, `num_volumen`, `num_pag`, `editores`, `editorial`, `campos_id`, `disciplina_id`, `subdisciplina_id`, `lenguaje_id`, `descr_larga`, `fecha_captura`) VALUES
+(2, 1, 'vfvfv998989', 'fvjvnkfvkjfkjvfkjvhkjfv', '2018-07-17', 3, 3, 'kvflkvklfvlkfvlkflvjfkmfkv', 5, 2, '6', 6, 'fv,mfnvnvjkfnkvjnfkjvnfkvnkfjvnkfnvkfnvjfnvkfnkv', 'fvlkvjhkfjvkjvklfjvlkjflkvjfklvjflkvjflkjlkvjlkfjlkv', 20, 9, 77, 3, 'fjkfjvkfjkvjfvkjfkvhjfkjvhkjfhvkjfhkjfhkjhfvkjhfkvjhf', '2018-07-10'),
+(3, 1, '', '', '0000-00-00', 0, 2, 'kfjkjfkrjfkrjfkrjfkjrkfjrkfrkfjkrjfkrjfkr', 0, 0, '', 4, '', '', 0, 0, 0, 0, '', '2018-07-12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_patente`
+--
+
+CREATE TABLE `reg_patente` (
+  `id_patente` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `num_registro` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipo_patente_id` int(11) NOT NULL,
+  `nombre_patente` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descr_patente` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipo_autor_id` int(11) NOT NULL,
+  `total_autor` int(11) NOT NULL,
+  `coautor` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descr_beneficiarios` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `paises_id` int(11) NOT NULL,
+  `anio_publicacion` year(4) NOT NULL,
+  `economico_id` int(11) NOT NULL,
+  `rama_id` int(11) NOT NULL,
+  `clase_id` int(11) NOT NULL,
+  `descripcion_detallada` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_patente`
+--
+
+INSERT INTO `reg_patente` (`id_patente`, `usuario_id`, `num_registro`, `tipo_patente_id`, `nombre_patente`, `descr_patente`, `tipo_autor_id`, `total_autor`, `coautor`, `descr_beneficiarios`, `paises_id`, `anio_publicacion`, `economico_id`, `rama_id`, `clase_id`, `descripcion_detallada`, `fecha_captura`) VALUES
+(1, 1, '4f4f4frffrf', 0, 'rfrffr', 'frfrfrrf', 3, 44, 'frfrfrf', 'rfrfrfr', 2, 2010, 3, 21, 88, 'rfrfrfrfrfr', '2018-07-13'),
+(2, 1, 'efrfrf5t5tt5', 3, 'ggtgtgt', 'tgtgtg', 2, 6, 'gtggtg', 'gtgtgtgt', 2, 2010, 5, 35, 0, 'frfrfrfrf', '2018-07-13');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_proyectos`
+--
+
+CREATE TABLE `reg_proyectos` (
+  `id_proyectos` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_final` date NOT NULL,
+  `tipo_proyecto_id` int(11) NOT NULL,
+  `entidad_empleadora_id` int(11) NOT NULL,
+  `nombre_proyecto` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `institucion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sector_id` int(11) NOT NULL,
+  `dependencia_id` int(11) NOT NULL,
+  `departamento_id` int(11) NOT NULL,
+  `finalidad` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `campos_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL,
+  `subdisciplina_id` int(11) NOT NULL,
+  `economico_id` int(11) NOT NULL,
+  `rama_id` int(11) NOT NULL,
+  `clase_id` int(11) NOT NULL,
+  `descripcion_larga` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_proyectos`
+--
+
+INSERT INTO `reg_proyectos` (`id_proyectos`, `usuario_id`, `fecha_inicio`, `fecha_final`, `tipo_proyecto_id`, `entidad_empleadora_id`, `nombre_proyecto`, `institucion`, `sector_id`, `dependencia_id`, `departamento_id`, `finalidad`, `campos_id`, `disciplina_id`, `subdisciplina_id`, `economico_id`, `rama_id`, `clase_id`, `descripcion_larga`, `fecha_captura`) VALUES
+(1, 1, '2018-07-09', '2018-07-25', 3, 1, 'efeflekflkefjlkefef', 'kejflkjelkfjelkjflkejflke', 3, 27, 0, 'efefefefefefef', 20, 7, 32, 5, 30, 0, 'efelkjflkejfkljefljelkfe', '2018-07-17');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_reconocimientos`
+--
+
+CREATE TABLE `reg_reconocimientos` (
+  `id_reconocimientos` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `anio_reconocimiento` date NOT NULL,
+  `inst_otorga` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `paises_id` int(11) DEFAULT NULL,
+  `dependencia` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_reconocimientos`
+--
+
+INSERT INTO `reg_reconocimientos` (`id_reconocimientos`, `usuario_id`, `descripcion`, `anio_reconocimiento`, `inst_otorga`, `paises_id`, `dependencia`, `fecha_captura`) VALUES
+(1, 1, 'fvfvfvfvfv', '0000-00-00', 'vfvfvfvf', 6, 'vfvfvfvfv', '2018-06-13');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_reporte_tecnico`
+--
+
+CREATE TABLE `reg_reporte_tecnico` (
+  `id_reporte` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `titulo_reporte` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre_entidad` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descr_general` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `num_pag` int(11) NOT NULL,
+  `fecha_reporte` date NOT NULL,
+  `autor` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `total_autores` int(11) NOT NULL,
+  `tipo_autor_id` int(11) NOT NULL,
+  `descipcion_larga` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_reporte_tecnico`
+--
+
+INSERT INTO `reg_reporte_tecnico` (`id_reporte`, `usuario_id`, `titulo_reporte`, `nombre_entidad`, `descr_general`, `num_pag`, `fecha_reporte`, `autor`, `total_autores`, `tipo_autor_id`, `descipcion_larga`, `fecha_captura`) VALUES
+(1, 1, 'jkdfhkjdfhkdhfkjdhfkdh', 'djfhkjdfhkjdhfkjdhfkjhdfkjhd', 'dfkdjfhkjdhfkjdhfkjdhfkj', 5, '2018-07-09', 'fgfgjkfgvhhkjhgkjhfkjhfkjvh', 5, 2, 'lkfvnlkjvjkfvjlkfjvkf', '2018-07-12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_resenas`
+--
+
+CREATE TABLE `reg_resenas` (
+  `id_resena` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `titulo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_pub` date NOT NULL,
+  `tipo_autor_id` int(11) NOT NULL,
+  `autor` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `total_autores` int(11) NOT NULL,
+  `paises_id` int(11) NOT NULL,
+  `tipo_publicacion_id` int(11) NOT NULL,
+  `comentarios` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pag_inicio` int(11) NOT NULL,
+  `pag_final` int(11) NOT NULL,
+  `campos_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL,
+  `subdisciplina_id` int(11) NOT NULL,
+  `descripcion_larga` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_resenas`
+--
+
+INSERT INTO `reg_resenas` (`id_resena`, `usuario_id`, `titulo`, `fecha_pub`, `tipo_autor_id`, `autor`, `total_autores`, `paises_id`, `tipo_publicacion_id`, `comentarios`, `pag_inicio`, `pag_final`, `campos_id`, `disciplina_id`, `subdisciplina_id`, `descripcion_larga`, `fecha_captura`) VALUES
+(1, 1, 'fnjkrkrhkfhrkfhrkjfhkrjhfkjrhf', '2018-07-10', 2, 'rjkhfkjrhfkjrhfkhrkfjhrkfhkrjhf', 4, 4, 4, 'gkjghkrjhgkjrghkrjghkjrghkjrhgkjgr', 0, 4, 20, 8, 50, 'hkgjhrkghkrhgkrhgkhrkghkrgh', '2018-07-12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_tesis`
+--
+
+CREATE TABLE `reg_tesis` (
+  `id_tesis` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_final` date NOT NULL,
+  `autor` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `grado_id` int(11) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `paises_id` int(11) NOT NULL,
+  `entidad_empleadora_id` int(11) NOT NULL,
+  `sectores_id` int(11) NOT NULL,
+  `institucion_resp` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `dependencia_id` int(11) NOT NULL,
+  `departamento_id` int(11) NOT NULL,
+  `campos_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL,
+  `subdisciplina_id` int(11) NOT NULL,
+  `conclusion` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `titulo_tesis` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_tesis`
+--
+
+INSERT INTO `reg_tesis` (`id_tesis`, `usuario_id`, `fecha_final`, `autor`, `grado_id`, `fecha_inicio`, `paises_id`, `entidad_empleadora_id`, `sectores_id`, `institucion_resp`, `dependencia_id`, `departamento_id`, `campos_id`, `disciplina_id`, `subdisciplina_id`, `conclusion`, `titulo_tesis`, `fecha_captura`) VALUES
+(1, 1, '2018-07-19', 'JOEL ALVAREZ', 4, '2018-07-18', 3, 3, 3, 'KEJDKJDKEJDKJEDKJEKDJEKDJE', 0, 96, 20, 7, 26, 'SI', 'kejfkjfkejfkjefkjekfjekfjkejfkejfkejfkejfkejkjekf', '2018-07-04');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `rol`
 --
 
@@ -3146,6 +4636,73 @@ INSERT INTO `rol` (`id_rol`, `nombre_rol`) VALUES
 (1, 'Super Admin'),
 (2, 'Jefe de Departamento'),
 (3, 'Investigador');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sector`
+--
+
+CREATE TABLE `sector` (
+  `id_sector` int(11) NOT NULL,
+  `descr_sector` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sector`
+--
+
+INSERT INTO `sector` (`id_sector`, `descr_sector`, `descripcion`) VALUES
+(1, 'NO ESPECIFICADO', 'NO ESPECIFICADO'),
+(2, 'GOBIERNO FEDERAL CENTRALIZADO', 'INSTITUCIONES DEL SECTOR GOBIERNO FEDERAL CENTRALIZADO'),
+(3, 'ENTIDADES PARAESTATALES', 'INSTITUCIONES DEL SECTOR ENTIDADES PARAESTATALES'),
+(4, 'GOB. DE LAS ENT. FEDERATIVAS', 'INSTITUCIONES DEL SECTOR GOBIERNO DE LAS ENTIDADES FEDERATIVAS'),
+(5, 'INST. DE EDU. SUP. PUBLICAS', 'INSTITUCIONES DEL SECTOR DE EDUCACION SUPERIOR PUBLICAS'),
+(6, 'INST. DE EDU. SUP. PRIVADAS', 'INSTITUCIONES DEL SECTOR DE EDUCACION SUPERIOR PRIVADAS'),
+(7, 'EMPRESAS PRODUCTIVAS', 'INSTITUCIONES DEL SECTOR PRIVADO DE EMPRESAS PRODUCTIVAS (ADIAT)'),
+(8, 'ENTIDADES NO LUCRATIVAS', 'INSTITUCIONES DEL SECTOR DE ENTIDADES NO LUCRATIVAS'),
+(9, 'ENTIDADES EXTERNAS', 'INSTITUCIONES DEL SECTOR DE ENTIDADES EXTERNAS'),
+(10, 'CONSULTORAS ', 'CONSULTORAS');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sector_economico`
+--
+
+CREATE TABLE `sector_economico` (
+  `id_economico` int(11) NOT NULL,
+  `descr_economico` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sector_economico`
+--
+
+INSERT INTO `sector_economico` (`id_economico`, `descr_economico`) VALUES
+(1, 'NO DEFINIDA'),
+(2, 'AGRICULTURA GANADERIA APROVECHAMIENTO FORESTAL PESCA Y CAZA'),
+(3, 'MINERIA'),
+(4, 'ELECTRICIDAD AGUA Y SUMINISTRO DE GAS POR DUCTOS AL CONSUMIDOR FINAL'),
+(5, 'CONSTRUCCION'),
+(6, 'INDUSTRIAS MANUFACTURERAS'),
+(7, 'COMERCIO AL POR MAYOR'),
+(8, 'COMERCIO AL POR MENOR'),
+(9, 'TRANSPORTES CORREOS Y ALMACENAMIENTO'),
+(10, 'INFORMACION EN MEDIOS MASIVOS'),
+(11, 'SERVICIOS FINANCIEROS Y DE SEGUROS'),
+(12, 'SERVICIOS INMOBILIARIOS Y DE ALQUILER DE BIENES MUEBLES E INTANGIBLES'),
+(13, 'SERVICIOS PROFESIONALES CIENTIFICOS Y TECNICOS'),
+(14, 'DIRECCION DE CORPORATIVOS Y EMPRESAS'),
+(15, 'SERVICIOS DE APOYO A LOS NEGOCIOS Y MANEJO DE DESECHOS Y SERVICIOS DE REMEDIACION'),
+(16, 'SERVICIOS EDUCATIVOS'),
+(17, 'SERVICIOS DE SALUD Y DE ASISTENCIA SOCIAL'),
+(18, 'SERVICIOS DE ESPARCIMIENTO CULTURALES Y DEPORTIVOS Y OTROS SERVICIOS RECREATIVOS'),
+(19, 'SERVICIOS DE ALOJAMIENTO TEMPORAL Y DE PREPARACION DE ALIMENTOS Y BEBIDAS'),
+(20, 'OTROS SERVICIOS EXCEPTO ACTIVIDADES DEL GOBIERNO'),
+(21, 'ACTIVIDADES DEL GOBIERNO Y DE ORGANISMOS INTERNACIONALES Y EXTRATERRITORIALES'),
+(22, 'NO DEFINIDA');
 
 -- --------------------------------------------------------
 
@@ -3170,6 +4727,307 @@ INSERT INTO `status_sni` (`id_sni`, `nombre_sni`, `opcion_sni`) VALUES
 (4, 'SNI 2', 1),
 (5, 'SNI 3', 1),
 (6, 'SNI Emérito', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `subdisciplinas`
+--
+
+CREATE TABLE `subdisciplinas` (
+  `id_subdisciplinas` int(11) NOT NULL,
+  `descr_subdisciplinas` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `disciplina_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `subdisciplinas`
+--
+
+INSERT INTO `subdisciplinas` (`id_subdisciplinas`, `descr_subdisciplinas`, `disciplina_id`) VALUES
+(1, 'ANALOGIA', 2),
+(2, 'ALGEBRA DE BOOLE', 2),
+(3, 'LOGICA FORMAL', 2),
+(4, 'LENGUAJES FORMALIZADOS', 2),
+(5, 'SISTEMAS FORMALES', 2),
+(6, 'FUNDAMENTOS DE MATEMATICAS', 2),
+(7, 'GENERALIZACION', 2),
+(8, 'LOGICA MATEMATICA', 2),
+(9, 'LOGICA MODAL', 2),
+(10, 'TEORIA DE MODELOS', 2),
+(11, 'TEORIA DE PRUEBAS', 2),
+(12, 'CALCULO PROPOSICIONAL', 2),
+(13, 'FUNCIONES RECURSIVAS', 2),
+(14, 'LOGICA SIMBOLICA', 2),
+(15, 'TEORIA DE LENGUAJES FORMALES', 2),
+(16, 'OTRAS', 2),
+(17, 'INDUCCION', 4),
+(18, 'INTUICIONISMO', 4),
+(19, 'PROBABILIDAD', 4),
+(20, 'OTROS', 4),
+(21, 'METODO CIENTIFICO', 5),
+(22, 'OTRAS', 5),
+(23, 'GEOMETRIA ALGEBRAICA', 7),
+(24, 'TEORIA AXIOMATICA DE CONJUNTOS', 7),
+(25, 'TEORIA DE CATEGORIAS', 7),
+(26, 'ALGEBRA DIFERENCIAL', 7),
+(27, 'CAMPOS ANILLOS ALGEBRAS', 7),
+(28, 'GRUPOS GENERALIDADES', 7),
+(29, 'ALGEBRA HOMOLOGICA', 7),
+(30, 'RETICULOS', 7),
+(31, 'ALGEBRA DE LIE', 7),
+(32, 'ALGEBRA LINEAL', 7),
+(33, 'TEORIA DE MATRICES', 7),
+(34, 'ALGEBRAS NO ASOCIATIVAS', 7),
+(35, 'POLINOMIOS', 7),
+(36, 'TEORIA DE LA REPRESENTACION', 7),
+(37, 'OTRAS', 7),
+(38, 'ALGEBRA DE OPERADOR', 8),
+(39, 'TEORIA DE LA APROXIMACION', 8),
+(40, 'ALGEBRAS Y ESPACIOS BANACH', 8),
+(41, 'CALCULO DE VARIACION', 8),
+(42, 'ANALISIS COMBINATOR', 8),
+(43, 'CONVEXIDAD DESIGUALDADES', 8),
+(44, 'ECUACIONES EN DIFERENCIAS', 8),
+(45, 'ECUACIONES FUNCIONA', 8),
+(46, 'FUNCIONES DE UNA VARIABLE COMPLEJA', 8),
+(47, 'FUNCIONES DE VARIABLES REALES', 8),
+(48, 'FUNCIONES DE VARIAS VARIABLES COMPLEJAS', 8),
+(49, 'ANALISIS GLOBAL', 8),
+(50, 'ANALISIS ARMONICO', 8),
+(51, 'ESPACIOS DE HILBERT', 8),
+(52, 'ECUACIONES INTEGRALES', 8),
+(53, 'TRANSFORMACIONES INTEGRALES', 8),
+(54, 'MEDIDA INTEGRACION AREA', 8),
+(55, 'CALCULO OPERACIONAL', 8),
+(56, 'ECUACIONES DIFERENCIALES ORDINARIAS', 8),
+(57, 'ECUACIONES DIFERENCIALES PARCIALES', 8),
+(58, 'TEORIA DE POTENCIAL', 8),
+(59, 'SERIES SUMABILIDAD', 8),
+(60, 'FUNCIONES ESPECIALES', 8),
+(61, 'FUNCIONES SUBARMONICAS', 8),
+(62, 'ESPACIOS LINEALES TOPOLOGICOS', 8),
+(63, 'SERIES E INTEGRALES TRIGONOMETRICAS', 8),
+(64, 'OTRAS', 8),
+(65, 'CONTABILIDAD', 9),
+(66, 'LENGUAJES ALGORITMICOS', 9),
+(67, 'COMPUTACION ANALOGICA', 9),
+(68, 'INTELIGENCIA ARTIFICIAL', 9),
+(69, 'SISTEMAS DE PRODUCCION AUTOMATICA', 9),
+(70, 'SISTEMAS AUTOMATICOS DE CONTROL DE CALIDAD', 9),
+(71, 'MODELIZACION CAUSAL', 9),
+(72, 'CODIGOS Y SISTEMAS DE CODIFICACION', 9),
+(73, 'DISE?O CON AYUDA DE COMPUTADOR', 9),
+(74, 'ENSE?ANZA CON AYUDA DE COMPUTADOR', 9),
+(75, 'SOPORTE LOGICO DE COMPUTADORES', 9),
+(76, 'BANCOS DE DATOS', 9),
+(77, 'COMPUTACION DIGITAL', 9),
+(78, 'SISTEMAS DE CONTROL AMBIENTAL', 9),
+(79, 'HEURISTICA', 9),
+(80, 'COMPUTACION HIBRIDA', 9),
+(81, 'INFORMATICA', 9),
+(82, 'SISTEMAS DE INFORMACION; DISE?O Y COMPONENTES', 9),
+(83, 'CONTROL DE INVENTARIO', 9),
+(84, 'SISTEMAS DE CONTROL MEDICO', 9),
+(85, 'SISTEMAS DE NAVEGACION DE TELEMETRIA Y ESPACIAL', 9),
+(86, 'SISTEMAS DE CONTROL DE PRODUCCION', 9),
+(87, 'LENGUAJES DE PROGRAMACION', 9),
+(88, 'TEORIA DE LA PROGRAMACION', 9),
+(89, 'DISE?O DE SISTEMAS DE SENSORES', 9),
+(90, 'SIMULACION', 9),
+(91, 'OTROS', 9),
+(92, 'GEOMETRIA AFIN', 10),
+(93, 'VARIEDADES COMPLEJAS', 10),
+(94, 'DOMINIOS CONVEXOS', 10),
+(95, 'GEOMETRIA DIFERENCIAL', 10),
+(96, 'PROBLEMAS DE EXTREMO', 10),
+(97, 'GEOMETRIA EUCLIDIANA', 10),
+(98, 'GEOMETRIAS INFINITAS', 10),
+(99, 'FUNDAMENTOS', 10),
+(100, 'GEOMETRIAS NO EUCLIDIANAS', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_apoyo`
+--
+
+CREATE TABLE `tipo_apoyo` (
+  `id_tipo_apoyo` int(11) NOT NULL,
+  `nombre_apoyo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_apoyo`
+--
+
+INSERT INTO `tipo_apoyo` (`id_tipo_apoyo`, `nombre_apoyo`) VALUES
+(1, 'No definido'),
+(2, 'Desarrollo Tecnológico'),
+(3, 'Formación Acádemica'),
+(4, 'Proyecto Científico');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_autor`
+--
+
+CREATE TABLE `tipo_autor` (
+  `id_tipo` int(11) NOT NULL,
+  `nombre_tipo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_autor`
+--
+
+INSERT INTO `tipo_autor` (`id_tipo`, `nombre_tipo`) VALUES
+(1, 'No definido'),
+(2, 'Autor Principal'),
+(3, 'Coautor');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_libro`
+--
+
+CREATE TABLE `tipo_libro` (
+  `id_tipo_libro` int(11) NOT NULL,
+  `nombre_libro` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_libro`
+--
+
+INSERT INTO `tipo_libro` (`id_tipo_libro`, `nombre_libro`) VALUES
+(1, 'No definido'),
+(2, 'Compilación'),
+(3, 'Editado'),
+(4, 'Publicado'),
+(5, 'Traducido');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_participacion`
+--
+
+CREATE TABLE `tipo_participacion` (
+  `id_tipo_participacion` int(11) NOT NULL,
+  `nombre_participacion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_participacion`
+--
+
+INSERT INTO `tipo_participacion` (`id_tipo_participacion`, `nombre_participacion`) VALUES
+(1, 'No definido'),
+(2, 'Conferencias'),
+(3, 'Demostraciones'),
+(4, 'Ferias Científicas y Tecnológicas'),
+(5, 'Ferias Empresariales'),
+(6, 'Radio'),
+(7, 'Revistas de Divulgación'),
+(8, 'Simposium'),
+(9, 'Talleres'),
+(10, 'Teatro'),
+(11, 'Televisón'),
+(12, 'Vídeos');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_patente`
+--
+
+CREATE TABLE `tipo_patente` (
+  `id_tipo_patente` int(11) NOT NULL,
+  `nombre_tipo` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_patente`
+--
+
+INSERT INTO `tipo_patente` (`id_tipo_patente`, `nombre_tipo`) VALUES
+(1, 'Mejora'),
+(2, 'Adaptacion Tecnologica'),
+(3, 'Innovacion'),
+(4, 'No definido');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_programa`
+--
+
+CREATE TABLE `tipo_programa` (
+  `id_tipo_programa` int(11) NOT NULL,
+  `nombre_programa` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_programa`
+--
+
+INSERT INTO `tipo_programa` (`id_tipo_programa`, `nombre_programa`) VALUES
+(1, 'Fondo Sectorial'),
+(2, 'Beca'),
+(3, 'Estimulo Fiscal'),
+(4, 'Catedras'),
+(5, 'Estimulo SNI'),
+(6, 'Avance'),
+(7, 'Catedras Patrimoniales'),
+(8, 'Repatriacion/Consolidacion'),
+(9, 'Fondo Ciencia Basica'),
+(10, 'Fondo Mixto'),
+(11, 'No definido');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_proyecto`
+--
+
+CREATE TABLE `tipo_proyecto` (
+  `id_tipo_proyecto` int(11) NOT NULL,
+  `nombre_tipo_proyecto` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_proyecto`
+--
+
+INSERT INTO `tipo_proyecto` (`id_tipo_proyecto`, `nombre_tipo_proyecto`) VALUES
+(1, 'No definido'),
+(2, 'Consultoría'),
+(3, 'Investigación'),
+(4, 'Planes de Negocio');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_publicacion`
+--
+
+CREATE TABLE `tipo_publicacion` (
+  `id_tipo_publicacion` int(11) NOT NULL,
+  `nombre_publicacion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_publicacion`
+--
+
+INSERT INTO `tipo_publicacion` (`id_tipo_publicacion`, `nombre_publicacion`) VALUES
+(1, 'No definido'),
+(2, 'Sin definir'),
+(3, 'Critica'),
+(4, 'Informativa');
 
 -- --------------------------------------------------------
 
@@ -3217,14 +5075,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `a_paterno`, `a_materno`, `rfc`, `curp`, `fecha_nac`, `edad`, `estado_civil`, `nacionalidad`, `correo_laboral`, `correo_personal`, `tel_lab`, `tel_part`, `tel_cel`, `direccion`, `numero_dom`, `colonia`, `cp`, `pais_id`, `estado_id`, `municipio_id`, `localidad`, `estado_sni`, `num_rim`, `sexo_id`, `rol_id`, `mailing`, `username`, `password`, `update_recovery`, `status_id`) VALUES
-(1, 'Abraham Joel', 'Álvarez', 'García', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-06-16', '32', 1, 282, 'informatica.cecti@gmail.com', 'softcodec@gmail.com', '3140482', '3156139', '2147483647', 'curtidores de teremendo', '250', 'Eréndira', '58240', 146, 16, 835, 'Morelia', 5, 'AAGA86HLMAT0', 'H', 3, 'NO', 'joel', 'be9b16e50121a086f9e35698d839dd9c3cd7e27b', 0, 1),
-(2, 'Omar', 'Jaimes', 'Brito', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '0000-00-00', '32', 3, 282, 'informatica.cecti@gmail.com', 'informatica.cecti@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '250', 'Erendira', '58188', NULL, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'joel1986', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
-(3, 'Said', 'Guerra', 'Ibarra', 'GUIS730818LG7', 'GUIS730818HMNRBD04', '0000-00-00', '44', 4, 282, 'saidguerrai2017@gmail.com', 'saidguerrai2017@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '289', 'Guadalupe', '58188', NULL, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'said1973', '9b140708e3bca313acbb87ac2bfb1d8281949de7', NULL, 1),
-(4, 'Joel', 'Alvarez', 'Garcia', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '0000-00-00', '32', 3, 282, 'informatica@gmail.com', 'informatica@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '234', 'Erendira', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'joel23', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
-(5, 'Joel', 'Alvarez', 'Garcia', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '1986-03-16', '32', 4, 282, 'informatica.cecti@gmail.com', 'informatica.cecti@gmail.com', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '280', 'Erendira', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'joel34', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
-(6, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-10', '32', 3, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita ', '234', 'eRENDIRA', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'JOEL45', 'fbb9d393d5c2d48231df7ed0baf3dc7ba81b136c', NULL, 1),
-(7, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-03', '32', 2, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '345', 'eRENDIRA', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'JOEL78', 'c0a5d62de05690c20a1f53003aefe16c462679bc', NULL, 1),
-(8, 'Secretaria de Innovación', 'Morelia', 'Ciencia y Desarrollo Tecnológico', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-05-08', '32', 2, 282, 'INFORMATICA.CECTI@GMAIL.COM', 'INFORMATICA.CECTI@GMAIL.COM', '014433149907', '014433149907', '4433149907', 'Manantial Mintzita', '34', 'ERDSFDFF', '58188', 146, 16, 835, 'Morelia', 5, '', 'H', 3, 'SI', 'JOELW34', '0681595ffb9efad26d75dc410e01e05c38f5641b', NULL, 1);
+(1, 'Abraham Joel', 'Álvarez', 'García', 'AAGA860316KD2', 'AAGA860316HMNLRB09', '2018-06-16', '32', 1, 282, 'informatica.cecti@gmail.com', 'softcodec@gmail.com', '3140482', '3156139', '2147483647', 'curtidores de teremendo', '250', 'Eréndira', '58240', 146, 16, 835, 'Morelia', 5, 'AAGA86HLMAT0', 'H', 3, 'NO', 'joel', 'be9b16e50121a086f9e35698d839dd9c3cd7e27b', 0, 1);
 
 --
 -- Índices para tablas volcadas
@@ -3237,10 +5088,46 @@ ALTER TABLE `area_conocimiento`
   ADD PRIMARY KEY (`id_area_conocimiento`);
 
 --
--- Indices de la tabla `congresos`
+-- Indices de la tabla `campo_conocimiento`
 --
-ALTER TABLE `congresos`
-  ADD PRIMARY KEY (`id_congresos`);
+ALTER TABLE `campo_conocimiento`
+  ADD PRIMARY KEY (`id_conocimiento`);
+
+--
+-- Indices de la tabla `clase_economica`
+--
+ALTER TABLE `clase_economica`
+  ADD PRIMARY KEY (`id_clase`);
+
+--
+-- Indices de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  ADD PRIMARY KEY (`id_departamentos`);
+
+--
+-- Indices de la tabla `dependencias`
+--
+ALTER TABLE `dependencias`
+  ADD PRIMARY KEY (`id_dependencias`);
+
+--
+-- Indices de la tabla `dirigido_sector`
+--
+ALTER TABLE `dirigido_sector`
+  ADD PRIMARY KEY (`id_dirigido_sector`);
+
+--
+-- Indices de la tabla `disciplinas`
+--
+ALTER TABLE `disciplinas`
+  ADD PRIMARY KEY (`id_disciplina`);
+
+--
+-- Indices de la tabla `empleadoras`
+--
+ALTER TABLE `empleadoras`
+  ADD PRIMARY KEY (`id_empleadoras`);
 
 --
 -- Indices de la tabla `estado`
@@ -3255,10 +5142,34 @@ ALTER TABLE `estado_civil`
   ADD PRIMARY KEY (`id_civil`);
 
 --
+-- Indices de la tabla `estatus_articulo`
+--
+ALTER TABLE `estatus_articulo`
+  ADD PRIMARY KEY (`id_estatus_articulos`);
+
+--
+-- Indices de la tabla `estatus_grado`
+--
+ALTER TABLE `estatus_grado`
+  ADD PRIMARY KEY (`id_est_grado`);
+
+--
 -- Indices de la tabla `genero`
 --
 ALTER TABLE `genero`
   ADD PRIMARY KEY (`id_genero`);
+
+--
+-- Indices de la tabla `grado`
+--
+ALTER TABLE `grado`
+  ADD PRIMARY KEY (`id_grado`);
+
+--
+-- Indices de la tabla `lenguaje`
+--
+ALTER TABLE `lenguaje`
+  ADD PRIMARY KEY (`id_lenguaje`);
 
 --
 -- Indices de la tabla `municipio`
@@ -3273,6 +5184,12 @@ ALTER TABLE `nacionalidad`
   ADD PRIMARY KEY (`id_nacionalidad`);
 
 --
+-- Indices de la tabla `niveles`
+--
+ALTER TABLE `niveles`
+  ADD PRIMARY KEY (`id_niveles`);
+
+--
 -- Indices de la tabla `nivel_academico`
 --
 ALTER TABLE `nivel_academico`
@@ -3285,16 +5202,208 @@ ALTER TABLE `paises`
   ADD PRIMARY KEY (`id_paises`);
 
 --
+-- Indices de la tabla `rama_economica`
+--
+ALTER TABLE `rama_economica`
+  ADD PRIMARY KEY (`id_rama`);
+
+--
+-- Indices de la tabla `reg_academica`
+--
+ALTER TABLE `reg_academica`
+  ADD PRIMARY KEY (`id_academica`);
+
+--
+-- Indices de la tabla `reg_adscripciones`
+--
+ALTER TABLE `reg_adscripciones`
+  ADD PRIMARY KEY (`id_adscripcion`);
+
+--
+-- Indices de la tabla `reg_articulos`
+--
+ALTER TABLE `reg_articulos`
+  ADD PRIMARY KEY (`id_articulos`);
+
+--
+-- Indices de la tabla `reg_capitulo`
+--
+ALTER TABLE `reg_capitulo`
+  ADD PRIMARY KEY (`id_capitulos`);
+
+--
+-- Indices de la tabla `reg_congresos`
+--
+ALTER TABLE `reg_congresos`
+  ADD PRIMARY KEY (`id_congresos`);
+
+--
+-- Indices de la tabla `reg_desarrollos_tecnologicos`
+--
+ALTER TABLE `reg_desarrollos_tecnologicos`
+  ADD PRIMARY KEY (`id_desarrollos`);
+
+--
+-- Indices de la tabla `reg_difusion`
+--
+ALTER TABLE `reg_difusion`
+  ADD PRIMARY KEY (`id_difusion`);
+
+--
+-- Indices de la tabla `reg_docencia`
+--
+ALTER TABLE `reg_docencia`
+  ADD PRIMARY KEY (`id_docencia`);
+
+--
+-- Indices de la tabla `reg_experiencia`
+--
+ALTER TABLE `reg_experiencia`
+  ADD PRIMARY KEY (`id_experiencia`);
+
+--
+-- Indices de la tabla `reg_financiamiento`
+--
+ALTER TABLE `reg_financiamiento`
+  ADD PRIMARY KEY (`id_financiamiento`);
+
+--
+-- Indices de la tabla `reg_grupos`
+--
+ALTER TABLE `reg_grupos`
+  ADD PRIMARY KEY (`id_grupos`);
+
+--
+-- Indices de la tabla `reg_idiomas`
+--
+ALTER TABLE `reg_idiomas`
+  ADD PRIMARY KEY (`id_idiomas`);
+
+--
+-- Indices de la tabla `reg_investigacion`
+--
+ALTER TABLE `reg_investigacion`
+  ADD PRIMARY KEY (`id_investigacion`);
+
+--
+-- Indices de la tabla `reg_libros`
+--
+ALTER TABLE `reg_libros`
+  ADD PRIMARY KEY (`id_libros`);
+
+--
+-- Indices de la tabla `reg_patente`
+--
+ALTER TABLE `reg_patente`
+  ADD PRIMARY KEY (`id_patente`);
+
+--
+-- Indices de la tabla `reg_proyectos`
+--
+ALTER TABLE `reg_proyectos`
+  ADD PRIMARY KEY (`id_proyectos`);
+
+--
+-- Indices de la tabla `reg_reconocimientos`
+--
+ALTER TABLE `reg_reconocimientos`
+  ADD PRIMARY KEY (`id_reconocimientos`);
+
+--
+-- Indices de la tabla `reg_reporte_tecnico`
+--
+ALTER TABLE `reg_reporte_tecnico`
+  ADD PRIMARY KEY (`id_reporte`);
+
+--
+-- Indices de la tabla `reg_resenas`
+--
+ALTER TABLE `reg_resenas`
+  ADD PRIMARY KEY (`id_resena`);
+
+--
+-- Indices de la tabla `reg_tesis`
+--
+ALTER TABLE `reg_tesis`
+  ADD PRIMARY KEY (`id_tesis`);
+
+--
 -- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`id_rol`);
 
 --
+-- Indices de la tabla `sector`
+--
+ALTER TABLE `sector`
+  ADD PRIMARY KEY (`id_sector`);
+
+--
+-- Indices de la tabla `sector_economico`
+--
+ALTER TABLE `sector_economico`
+  ADD PRIMARY KEY (`id_economico`);
+
+--
 -- Indices de la tabla `status_sni`
 --
 ALTER TABLE `status_sni`
   ADD PRIMARY KEY (`id_sni`);
+
+--
+-- Indices de la tabla `subdisciplinas`
+--
+ALTER TABLE `subdisciplinas`
+  ADD PRIMARY KEY (`id_subdisciplinas`);
+
+--
+-- Indices de la tabla `tipo_apoyo`
+--
+ALTER TABLE `tipo_apoyo`
+  ADD PRIMARY KEY (`id_tipo_apoyo`);
+
+--
+-- Indices de la tabla `tipo_autor`
+--
+ALTER TABLE `tipo_autor`
+  ADD PRIMARY KEY (`id_tipo`);
+
+--
+-- Indices de la tabla `tipo_libro`
+--
+ALTER TABLE `tipo_libro`
+  ADD PRIMARY KEY (`id_tipo_libro`);
+
+--
+-- Indices de la tabla `tipo_participacion`
+--
+ALTER TABLE `tipo_participacion`
+  ADD PRIMARY KEY (`id_tipo_participacion`);
+
+--
+-- Indices de la tabla `tipo_patente`
+--
+ALTER TABLE `tipo_patente`
+  ADD PRIMARY KEY (`id_tipo_patente`);
+
+--
+-- Indices de la tabla `tipo_programa`
+--
+ALTER TABLE `tipo_programa`
+  ADD PRIMARY KEY (`id_tipo_programa`);
+
+--
+-- Indices de la tabla `tipo_proyecto`
+--
+ALTER TABLE `tipo_proyecto`
+  ADD PRIMARY KEY (`id_tipo_proyecto`);
+
+--
+-- Indices de la tabla `tipo_publicacion`
+--
+ALTER TABLE `tipo_publicacion`
+  ADD PRIMARY KEY (`id_tipo_publicacion`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -3313,10 +5422,46 @@ ALTER TABLE `area_conocimiento`
   MODIFY `id_area_conocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT de la tabla `congresos`
+-- AUTO_INCREMENT de la tabla `campo_conocimiento`
 --
-ALTER TABLE `congresos`
-  MODIFY `id_congresos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `campo_conocimiento`
+  MODIFY `id_conocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `clase_economica`
+--
+ALTER TABLE `clase_economica`
+  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  MODIFY `id_departamentos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT de la tabla `dependencias`
+--
+ALTER TABLE `dependencias`
+  MODIFY `id_dependencias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT de la tabla `dirigido_sector`
+--
+ALTER TABLE `dirigido_sector`
+  MODIFY `id_dirigido_sector` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `disciplinas`
+--
+ALTER TABLE `disciplinas`
+  MODIFY `id_disciplina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT de la tabla `empleadoras`
+--
+ALTER TABLE `empleadoras`
+  MODIFY `id_empleadoras` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -3331,10 +5476,34 @@ ALTER TABLE `estado_civil`
   MODIFY `id_civil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `estatus_articulo`
+--
+ALTER TABLE `estatus_articulo`
+  MODIFY `id_estatus_articulos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `estatus_grado`
+--
+ALTER TABLE `estatus_grado`
+  MODIFY `id_est_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
   MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `grado`
+--
+ALTER TABLE `grado`
+  MODIFY `id_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `lenguaje`
+--
+ALTER TABLE `lenguaje`
+  MODIFY `id_lenguaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `municipio`
@@ -3349,6 +5518,12 @@ ALTER TABLE `nacionalidad`
   MODIFY `id_nacionalidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=362;
 
 --
+-- AUTO_INCREMENT de la tabla `niveles`
+--
+ALTER TABLE `niveles`
+  MODIFY `id_niveles` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `nivel_academico`
 --
 ALTER TABLE `nivel_academico`
@@ -3361,10 +5536,148 @@ ALTER TABLE `paises`
   MODIFY `id_paises` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
+-- AUTO_INCREMENT de la tabla `rama_economica`
+--
+ALTER TABLE `rama_economica`
+  MODIFY `id_rama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_academica`
+--
+ALTER TABLE `reg_academica`
+  MODIFY `id_academica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_adscripciones`
+--
+ALTER TABLE `reg_adscripciones`
+  MODIFY `id_adscripcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_articulos`
+--
+ALTER TABLE `reg_articulos`
+  MODIFY `id_articulos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_capitulo`
+--
+ALTER TABLE `reg_capitulo`
+  MODIFY `id_capitulos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_congresos`
+--
+ALTER TABLE `reg_congresos`
+  MODIFY `id_congresos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_desarrollos_tecnologicos`
+--
+ALTER TABLE `reg_desarrollos_tecnologicos`
+  MODIFY `id_desarrollos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_difusion`
+--
+ALTER TABLE `reg_difusion`
+  MODIFY `id_difusion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_docencia`
+--
+ALTER TABLE `reg_docencia`
+  MODIFY `id_docencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_experiencia`
+--
+ALTER TABLE `reg_experiencia`
+  MODIFY `id_experiencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_financiamiento`
+--
+ALTER TABLE `reg_financiamiento`
+  MODIFY `id_financiamiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_grupos`
+--
+ALTER TABLE `reg_grupos`
+  MODIFY `id_grupos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_idiomas`
+--
+ALTER TABLE `reg_idiomas`
+  MODIFY `id_idiomas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_investigacion`
+--
+ALTER TABLE `reg_investigacion`
+  MODIFY `id_investigacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_libros`
+--
+ALTER TABLE `reg_libros`
+  MODIFY `id_libros` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_patente`
+--
+ALTER TABLE `reg_patente`
+  MODIFY `id_patente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_proyectos`
+--
+ALTER TABLE `reg_proyectos`
+  MODIFY `id_proyectos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_reconocimientos`
+--
+ALTER TABLE `reg_reconocimientos`
+  MODIFY `id_reconocimientos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_reporte_tecnico`
+--
+ALTER TABLE `reg_reporte_tecnico`
+  MODIFY `id_reporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_resenas`
+--
+ALTER TABLE `reg_resenas`
+  MODIFY `id_resena` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `reg_tesis`
+--
+ALTER TABLE `reg_tesis`
+  MODIFY `id_tesis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `id_rol` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `sector`
+--
+ALTER TABLE `sector`
+  MODIFY `id_sector` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `sector_economico`
+--
+ALTER TABLE `sector_economico`
+  MODIFY `id_economico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `status_sni`
@@ -3373,10 +5686,64 @@ ALTER TABLE `status_sni`
   MODIFY `id_sni` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `subdisciplinas`
+--
+ALTER TABLE `subdisciplinas`
+  MODIFY `id_subdisciplinas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_apoyo`
+--
+ALTER TABLE `tipo_apoyo`
+  MODIFY `id_tipo_apoyo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_autor`
+--
+ALTER TABLE `tipo_autor`
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_libro`
+--
+ALTER TABLE `tipo_libro`
+  MODIFY `id_tipo_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_participacion`
+--
+ALTER TABLE `tipo_participacion`
+  MODIFY `id_tipo_participacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_patente`
+--
+ALTER TABLE `tipo_patente`
+  MODIFY `id_tipo_patente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_programa`
+--
+ALTER TABLE `tipo_programa`
+  MODIFY `id_tipo_programa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_proyecto`
+--
+ALTER TABLE `tipo_proyecto`
+  MODIFY `id_tipo_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_publicacion`
+--
+ALTER TABLE `tipo_publicacion`
+  MODIFY `id_tipo_publicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_usuario` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -2,25 +2,45 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-//CONTROLADR PRINCIPAL DE LIDER DEL PROYECTO
-//$route['lider/editar_usuarios'] = 'lider/editar_usuarios';
-//$route['lider/edit'] = 'lider/edit';
-//$route['lider/update_tallerista'] = 'lider/update_tallerista';
+//PESTAÑA INVESTIGACIÓN
+$route['personacyt/alta_proyectos'] = 'personacyt/alta_proyectos';
+$route['personacyt/proyectos'] = 'personacyt/proyectos';
+$route['personacyt/alta_patentes'] = 'personacyt/alta_patentes';
+$route['personacyt/patentes'] = 'personacyt/patentes';
+$route['personacyt/alta_grupos'] = 'personacyt/alta_grupos';
+$route['personacyt/grupos'] = 'personacyt/grupos';
+$route['personacyt/alta_financiamiento'] = 'personacyt/alta_financiamiento';
+$route['personacyt/financiamiento'] = 'personacyt/financiamiento';
 
-//$route['lider/editar_eventos'] = 'lider/editar_eventos';
-//$route['lider/edita'] = 'lider/edita';
-//$route['lider/update_evento'] = 'lider/update_evento';
+//PESTAÑA PUBLICACIONES
+$route['personacyt/alta_resenas'] = 'personacyt/alta_resenas';
+$route['personacyt/resena'] = 'personacyt/resena';
+$route['personacyt/alta_reportes'] = 'personacyt/alta_reportes';
+$route['personacyt/reporte'] = 'personacyt/reporte';
+$route['personacyt/alta_libros'] = 'personacyt/alta_libros';
+$route['personacyt/libro'] = 'personacyt/libro';
+$route['personacyt/alta_articulos'] = 'personacyt/alta_articulos';
+$route['personacyt/articulos'] = 'personacyt/articulos';
+$route['personacyt/alta_capitulo'] = 'personacyt/alta_capitulo';
+$route['personacyt/capitulo'] = 'personacyt/capitulo';
 
-//$route['lider/registro_talleristas'] = 'lider/registro_talleristas';
-//$route['lider/r_tallerista'] = 'lider/r_tallerista';
-
-//$route['lider/registro_eventos'] = 'lider/registro_eventos';
-//$route['lider/r_evento'] = 'lider/r_evento';
-
-//$route['lider/estadisticas'] = 'lider/estadisticas';
-//$route['lider/municipios'] = 'lider/municipios';
+//PESTAÑA ACTIVIDAD PROFESIONAL
+$route['personacyt/alta_tesis'] = 'personacyt/alta_tesis';
+$route['personacyt/tesis'] = 'personacyt/tesis';
+$route['personacyt/alta_docencia'] = 'personacyt/alta_docencia';
+$route['personacyt/docencia'] = 'personacyt/docencia';
+$route['personacyt/alta_experiencia'] = 'personacyt/alta_experiencia';
+$route['personacyt/experiencia'] = 'personacyt/experiencia';
+$route['personacyt/alta_difusion'] = 'personacyt/alta_difusion';
+$route['personacyt/difusion'] = 'personacyt/difusion';
+$route['personacyt/alta_desarrollos'] = 'personacyt/alta_desarrollos';
+$route['personacyt/desarrollos'] = 'personacyt/desarrollos';
+$route['personacyt/alta_adscripcion'] = 'personacyt/alta_adscripcion';
+$route['personacyt/adscripcion'] = 'personacyt/adscripcion';
 
 //PESTAÑA PREPARACIÓN ACADÉMICA
+$route['personacyt/alta_investigacion'] = 'personacyt/alta_investigacion';
+$route['personacyt/investigacion'] = 'personacyt/investigacion';
 $route['personacyt/alta_academica'] = 'personacyt/alta_academica';
 $route['personacyt/academica'] = 'personacyt/academica';
 $route['personacyt/alta_idiomas'] = 'personacyt/alta_idiomas';
@@ -35,7 +55,10 @@ $route['personacyt/update_personacyt'] = 'personacyt/update_personacyt';
 $route['personacyt/generales'] = 'personacyt/generales';
 $route['personacyt/opciones'] = 'personacyt/opciones';
 
+
+
 $route['personacyt/(:any)'] = 'personacyt/view/$1';
+$route['constancia/(:any)'] = 'personacyt/constancia/$1';
 $route['personacyt'] = 'personacyt/index';
 
 

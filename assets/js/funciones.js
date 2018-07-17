@@ -1,5 +1,5 @@
-$(function() {
-    $("select[id=campo_id]").change(function() {
+$(function(){
+    $("select[id=campo_id]").change(function(){
         estado = $(this).val();
         if (estado === '') return false;
         resetaCombo('municipio_id');
@@ -18,7 +18,7 @@ $(function() {
 });
 
 $(function() {
-    $("select[id=estado_id]").change(function() {
+    $("select[id=campo_id]").change(function() {
         estado = $(this).val();
         if (estado === '') return false;
         resetaCombo('municipio_id');
@@ -79,9 +79,9 @@ $(document).ready(function() {
         i.show().removeClass(), e != n && i.text(t).addClass("text-danger"), 0 != e.length && "" != e || i.text(r).addClass("text-warning"), 0 != e.length && e == n && i.text(o).removeClass("text-danger").addClass("text-success")
         p.show().removeClass(), h != l && p.text(t).addClass("text-danger"), 0 != h.length && "" != e || p.text(r).addClass("text-warning"), 0 != h.length && h == l && p.text(o).removeClass("text-danger").addClass("text-success")
     }
-    var a = $("[name=correo_personal]"),
+    var a = $("[name=correos_personal]"),
         s = $("[name=correo_personal2]"),
-        v = $("[name=correo_laboral]"),
+        v = $("[name=correos_laboral]"),
         m = $("[name=correo_laboral2]"),
         o = "Los correos si coinciden",
         t = "No coinciden ambos correos",
@@ -212,7 +212,7 @@ $(document).ready(function(){
             validating: 'fas fa-redo'
         },
         fields:{
-            nombre:{
+            nombres:{
                 validators:{
                     notEmpty:{
                         message:"Es requerido el Nombre. "
@@ -223,7 +223,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            a_paterno:{
+            a_paternos:{
                 validators:{
                     notEmpty:{
                         message:"Es requerido el Apellido Paterno. "
@@ -234,7 +234,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            a_materno:{
+            a_maternos:{
                 validators:{
                     notEmpty:{
                         message:"Es requerido el Apellido Materno. "
@@ -252,7 +252,7 @@ $(document).ready(function(){
                     },
                     regexp: {
                       regexp: /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/,
-                      message: 'No es un RFC correcto'
+                      message: 'No es un RFC correcto o esta en minúsculas'
                     }
                 }
             },
@@ -267,28 +267,28 @@ $(document).ready(function(){
                     }
                 }
             },
-            fecha_nac: {
+            fechas_nac: {
                 validators: {
                     notEmpty: {
                         message: 'Ingrese Fecha de Nacimiento'
                     }
                 }
             },
-            pais_id:{
+            paises_id:{
                 validators:{
                     notEmpty:{
                         message:"Es requerido su País de Nacimineto."
                     }
                 }
             },
-            nacionalidad:{
+            nacionalidade:{
                 validators:{
                     notEmpty:{
                         message:"Es requerida su Nacionalidad."
                     }
                 }
             },
-            estado_id:{
+            campo_id:{
                 validators:{
                     notEmpty:{
                         message:"Es requerido su Estado."
@@ -302,7 +302,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            localidad:{
+            localidade:{
                 validators:{
                     notEmpty:{
                         message:"Es requerida la Localidad. "
@@ -313,7 +313,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            edad: {
+            edade: {
                 validators: {
                     notEmpty: {
                         message: 'Ingrese su Edad.'
@@ -331,14 +331,14 @@ $(document).ready(function(){
                 }
               }
             },
-            estado_civil: {
+            estados_civil: {
               validators: {
                 notEmpty: {
                   message: 'Es requerido su Genéro.'
                 }
               }
             },
-            correo_personal:{
+            correos_personal:{
                 validators:{
                     notEmpty:{
                         message:"Es requerido su Correo Personal. "
@@ -352,7 +352,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            correo_laboral:{
+            correos_laboral:{
                 validators:{
                     notEmpty:{
                         message:"Es requerido su Correo Laboral. "
@@ -394,7 +394,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            tel_part: {
+            tel_parti: {
                 validators: {
                     notEmpty: {
                         message: 'Ingrese su Número de Teléfono Particular.'
@@ -405,7 +405,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            tel_lab: {
+            tel_labo: {
                 validators: {
                     notEmpty: {
                        message: 'Ingrese su Número de Teléfono Laboral.'
@@ -416,7 +416,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            tel_cel: {
+            tel_celu: {
                 validators: {
                     notEmpty: {
                         message: 'Ingrese su Número de Celular.'
@@ -427,7 +427,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            direccion:{
+            direcciones:{
                 validators:{
                     notEmpty:{
                         message:"Es requerido su Domicilio. "
@@ -438,7 +438,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            numero_dom: {
+            numero_domi: {
                 validators: {
                     notEmpty: {
                         message: 'Ingrese su Número de domicilio.'
@@ -449,7 +449,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            colonia:{
+            colonias:{
                 validators:{
                     notEmpty:{
                         message:"Es requerida su Colonia. "
@@ -460,7 +460,7 @@ $(document).ready(function(){
                     }
                 }
             },
-            cp: {
+            cps: {
                 validators: {
                     notEmpty: {
                         message: 'Ingrese su Código Postal.'
@@ -1119,4 +1119,88 @@ function resetaCombo(el) {
     });
     $(op).append('Elija un Departamento');
     $("select[id='" + el + "']").append(op);
+}
+
+$(function() {
+    $("select[id=campos_id]").change(function() {
+        sub = $(this).val();
+        if (sub === '') return false;
+        resetaCombo('disciplina_id');
+        $.getJSON('disciplina/' + sub, function(data) {
+            var option = new Array();
+            $.each(data, function(i, obj) {
+                option[i] = document.createElement('option');
+                $(option[i]).attr({
+                    value: obj.id_disciplina
+                });
+                $(option[i]).append(obj.nombre);
+                $("select[id='disciplina_id']").append(option[i]);
+            });
+        });
+    });
+});
+
+$(document).ready(function() {   
+    setTimeout(function() {
+        $(".c-cookies-bar").fadeOut(1500);
+    },6000);
+});
+
+$(function(){
+    $("select[id=economico_id]").change(function(){
+        rama = $(this).val();
+        if (rama === '') return false;
+        resetaRama('rama_id');
+        $.getJSON('rama/' + rama, function(data) {
+            var option = new Array();
+            $.each(data, function(i, obj) {
+                option[i] = document.createElement('option');
+                $(option[i]).attr({
+                    value: obj.id_rama
+                });
+                $(option[i]).append(obj.nombre);
+                $("select[id='rama_id']").append(option[i]);
+            });
+        });
+    });
+});
+
+function resetaRama(el) {
+    $("select[id='" + el + "']").empty();
+    var option = document.createElement('option');
+    $(option).attr({
+        value: ''
+    });
+    $(option).append('Elija Rama');
+    $("select[id='" + el + "']").append(option);
+}
+
+$(function() {
+    $("select[id=rama_id]").change(function() {
+        rama = $(this).val();
+        if (rama === '') return false;
+        resetaRama('clase_id');
+        $.getJSON('clases/' + rama, function(data) {
+            var option = new Array();
+            $.each(data, function(i, obj) {
+                option[i] = document.createElement('option');
+                $(option[i]).attr({
+                    value: obj.id_clase
+                });
+                $(option[i]).append(obj.nombre);
+                $("select[id='clase_id']").append(option[i]);
+            });
+        });
+    });
+});
+
+
+function resetaRama(el) {
+    $("select[id='" + el + "']").empty();
+    var option = document.createElement('option');
+    $(option).attr({
+        value: ''
+    });
+    $(option).append('Elija Clase');
+    $("select[id='" + el + "']").append(option);
 }

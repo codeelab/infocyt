@@ -10,6 +10,7 @@
       $nombre_completo  = $nombre .' '.$a_paterno .' '.$a_materno;
 
 
+
 $rim_u = 1;
     $fecha1="2018";
     $fecha="12-08-2017";
@@ -306,7 +307,7 @@ $rim_u = 1;
         <div class="row" >
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/adscripcion">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-briefcase fa-fw fa-3x"></i>
                                 </div>
@@ -316,13 +317,13 @@ $rim_u = 1;
                                     Adscripción Actual
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/adscripcion" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/desarrollos">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-rocket fa-fw fa-3x"></i>
                                 </div>
@@ -332,14 +333,14 @@ $rim_u = 1;
                                     Desarrollos Tecnológicos
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/desarrollos" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/difusion">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-copy fa-fw fa-3x"></i>
                                 </div>
@@ -349,7 +350,7 @@ $rim_u = 1;
                                    Difusión y Divulgación
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/difusion" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
@@ -360,7 +361,7 @@ $rim_u = 1;
         <div class="row" >
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/experiencia">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-graduation-cap fa-fw fa-3x"></i>
                                 </div>
@@ -370,13 +371,13 @@ $rim_u = 1;
                                     Experiencia Profesional
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/experiencia" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/docencia">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-university fa-fw fa-3x"></i>
                                 </div>
@@ -386,13 +387,13 @@ $rim_u = 1;
                                     Docencia
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/docencia" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/tesis">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-file-alt fa-fw fa-3x"></i>
                                 </div>
@@ -402,7 +403,7 @@ $rim_u = 1;
                                     Tesís
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/tesis" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
@@ -426,7 +427,7 @@ $rim_u = 1;
         <div class="row" >
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/capitulo">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-book fa-fw fa-3x"></i>
                                 </div>
@@ -436,13 +437,13 @@ $rim_u = 1;
                                     Captitulo de Libro
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/capitulo" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/articulos">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-bookmark fa-fw fa-3x"></i>
                                 </div>
@@ -452,14 +453,14 @@ $rim_u = 1;
                                    Publicación de Articulos
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/articulos" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/libro">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-book fa-fw fa-3x"></i>
                                 </div>
@@ -469,7 +470,7 @@ $rim_u = 1;
                                    Publicación de Libro
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/libro" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
@@ -480,7 +481,7 @@ $rim_u = 1;
         <div class="row" >
                     <div class="col-lg-6 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/reporte">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-clipboard fa-fw fa-3x"></i>
                                 </div>
@@ -490,13 +491,13 @@ $rim_u = 1;
                                     Reporte Técnico
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/reporte" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/resena">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-file fa-fw fa-3x"></i>
                                 </div>
@@ -506,7 +507,7 @@ $rim_u = 1;
                                     Reseña
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/resena" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
@@ -529,7 +530,7 @@ $rim_u = 1;
         <div class="row" >
                     <div class="col-lg-6 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/financiamiento">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-money-bill-alt fa-fw fa-3x"></i>
                                 </div>
@@ -539,13 +540,13 @@ $rim_u = 1;
                                     Financiamiento
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/financiamiento" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/grupos">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-users fa-fw fa-3x"></i>
                                 </div>
@@ -555,7 +556,7 @@ $rim_u = 1;
                                    Grupos
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/grupos" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
@@ -567,7 +568,7 @@ $rim_u = 1;
 
                     <div class="col-lg-6 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/patentes">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-certificate fa-fw fa-3x"></i>
                                 </div>
@@ -577,13 +578,13 @@ $rim_u = 1;
                                    Patentes
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/patentes" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6">
                         <div class="circle-tile">
-                            <a href="#">
+                            <a href="<?=base_url();?>personacyt/proyectos">
                                 <div class="circle-tile-heading blue"">
                                    <i class="fas fa-list fa-fw fa-3x"></i>
                                 </div>
@@ -593,7 +594,7 @@ $rim_u = 1;
                                    Proyectos
                                 </div>
                                 <br>
-                                <a href="#" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
+                                <a href="<?=base_url();?>personacyt/proyectos" class="c-btn-white c-btn-border-1x circle-tile-footer"><i class="far fa-share-square "></i>Acceder</a>
                             </div>
                         </div>
                     </div>
@@ -624,6 +625,11 @@ $rim_u = 1;
                                 </li>
                                 <li>
                                     <a href="#tab_18_5" data-toggle="tab">Investigación </a>
+                                </li>
+                                <li>
+
+                                    <a href="<?= base_url("constancia/").$user; ?>" 
+                                    target="_blank">Constancia</a>
                                 </li>
                             </ul>
                         </div>  

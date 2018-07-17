@@ -311,7 +311,7 @@ $rim_u = 1;
                         <div class="col-md-4">
                             <label class="form-text" for="otorgante">CAMPO:</label>
                                 <?php
-                                    echo form_dropdown('campo_id', $conocimiento, ' ', 'class="form-control c-theme c-square input-lg" id="campo_id"');
+                                    echo form_dropdown('campos_id', $conocimiento, ' ', 'class="form-control c-theme c-square input-lg" id="campos_id"');
                                 ?>
                         </div>     
                         <div class="col-md-4">
