@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 17-07-2018 a las 23:02:00
--- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 5.6.33
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 18-07-2018 a las 07:35:22
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 5.6.36
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -4586,6 +4586,29 @@ INSERT INTO `reg_resenas` (`id_resena`, `usuario_id`, `titulo`, `fecha_pub`, `ti
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `reg_rim`
+--
+
+CREATE TABLE `reg_rim` (
+  `id_rim` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `num_rim` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `status_rim` tinyint(1) NOT NULL,
+  `fecha_aprobacion` date NOT NULL,
+  `fecha_vigencia` date NOT NULL,
+  `fecha_captura` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `reg_rim`
+--
+
+INSERT INTO `reg_rim` (`id_rim`, `usuario_id`, `num_rim`, `status_rim`, `fecha_aprobacion`, `fecha_vigencia`, `fecha_captura`) VALUES
+(1, 1, 'AAGA86HLMAT0', 4, '0000-00-00', '0000-00-00', '2018-07-17');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `reg_tesis`
 --
 
@@ -5322,6 +5345,12 @@ ALTER TABLE `reg_resenas`
   ADD PRIMARY KEY (`id_resena`);
 
 --
+-- Indices de la tabla `reg_rim`
+--
+ALTER TABLE `reg_rim`
+  ADD PRIMARY KEY (`id_rim`);
+
+--
 -- Indices de la tabla `reg_tesis`
 --
 ALTER TABLE `reg_tesis`
@@ -5656,6 +5685,12 @@ ALTER TABLE `reg_resenas`
   MODIFY `id_resena` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `reg_rim`
+--
+ALTER TABLE `reg_rim`
+  MODIFY `id_rim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `reg_tesis`
 --
 ALTER TABLE `reg_tesis`
@@ -5695,7 +5730,7 @@ ALTER TABLE `subdisciplinas`
 -- AUTO_INCREMENT de la tabla `tipo_apoyo`
 --
 ALTER TABLE `tipo_apoyo`
-  MODIFY `id_tipo_apoyo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_tipo_apoyo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_autor`

@@ -28,6 +28,24 @@ class Personacyt_model extends CI_Model {
 
     }
 
+    public function rim($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_rim');
+        $this->db->where('usuario_id',$id);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+
+
+    }
  //--------------------------------------------------------------------------
  // 
  // CONTENIDO PARA VENTANA GENERALES

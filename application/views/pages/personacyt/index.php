@@ -1,70 +1,4 @@
- <?php
-      $user             = $this->session->userdata('id_usuario');
-      $nombre           = $this->session->userdata('nombre');
-      $a_paterno        = $this->session->userdata('a_paterno');
-      $a_materno        = $this->session->userdata('a_materno');
-      $email            = $this->session->userdata('correo_personal');
-      $rol              = $this->session->userdata('rol_id');
-      $sexo             = $this->session->userdata('sexo_id');
-      $rim              = $this->session->userdata('num_rim');
-      $nombre_completo  = $nombre .' '.$a_paterno .' '.$a_materno;
-
-
-
-$rim_u = 1;
-    $fecha1="2018";
-    $fecha="12-08-2017";
-    $diff = strtotime($fecha) - strtotime(date('d-m-Y'));
-    $dias = $diff/(60*60*24);
-    $ano = $fecha - date('Y');
-
-    $a = intval($ano);
-    $d = intval($dias); 
-
-    if ($a >= 0) 
-    {
-        if ($a == 1 AND $rim_u == 1) {
-            $verificacion = " En: <b>". $a ." Año</b>"; 
-            $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-        } else {
-            $verificacion = " En: <b>". $a ." Años</b>"; 
-            $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-        }
-
-        
-    }
-    if ($a <= 0) {
-        if ($d == 1 AND $rim_u == 1) {
-            $verificacion = " En: <b>". $d ." Día</b>";
-            $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-        } else {
-            $verificacion = " En: <b>". $d ." Dias</b>";
-            $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-        }
-    }
-
-    if ($d == 0) {
-        $verificacion = "<b class='text-orange'>Hoy último día</b>";
-        $u_rim = '<i class="fas fa-times"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-    } else if($d <= 0 AND $rim_u == 1) {
-        $verificacion = "<i class='fas fa-times'></i> <span class='text-red'> Vencido</span>";
-        $u_rim = '<i class="fas fa-times"></i><span class="text-red"> Vencido: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-    }
-
-      
-
-      if ( $a >= 0 AND $a <= 0 AND $d == 0) {
-          
-      }else if ($rim_u == 2) {
-          $u_rim = '<i class="fas fa-times"></i> <b class="text-orange"> Pendiente: </b> RIM_'.$rim;
-      }
-
-    if(!$user)
-    {
-      redirect('login','refresh');
-      exit();
-    }
-?>
+ <?php include('head.php');?>
 <!-- BEGIN: PAGE CONTAINER -->
 <div class="c-layout-page">
 
@@ -83,8 +17,8 @@ $rim_u = 1;
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 col-md-6 col-xs-12 col-sm-12">
-            <?php if($d == 0 OR $d <= 0){ ?>
-                    <!-- BEGIN: CONTENT/MISC/COOKIES-5 -->
+            <?php //if($d == 0 OR $d <= 0){ ?>
+                    <!-- BEGIN: CONTENT/MISC/COOKIES-5 
                     <div class="c-cookies-bar c-cookies-bar-2 c-cookies-bar-top-left c-bg-red c-rounded wow animate fadeInLeft" data-wow-delay=".5s">
                         <div class="c-cookies-bar-container">
                             <div class="row">
@@ -101,9 +35,9 @@ $rim_u = 1;
                                 </div>
                             </div>
                         </div>
-                    </div><!-- END: CONTENT/MISC/COOKIES-5 -->
+                    </div> END: CONTENT/MISC/COOKIES-5 -->
 
-            <?php } ?>
+            <?php // } ?>
 
             </div>
         </div>

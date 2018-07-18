@@ -19,10 +19,11 @@ class Personacyt extends CI_Controller {
         {
             redirect('personacyt');
         }
-
+        $id = $this->session->userdata('id_usuario');        
+        $data['rimm']    = $this->Personacyt_model->rim($id);
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
-        $this->load->view('pages/personacyt/index');
+        $this->load->view('pages/personacyt/index',$data);
         $this->load->view('theme/footer');
     }
 
