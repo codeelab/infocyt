@@ -67,7 +67,7 @@
                                     <div class="c-name c-font-uppercase c-font-bold c-center"><?=$nombre_completo?></div>
                                 </div>
                                     <p class="c-center"> <?=$u_rim?> </p>
-                                    <p class="c-center"> <span style="font-size: 13px;">Próxima Renovación: </span> <br> 
+                                    <p class="c-center"> <span style="font-size: 14px;">Próxima Renovación: </span> <br> 
                                         <?=$verificacion;?>
                                     </p>
                                 </div>
