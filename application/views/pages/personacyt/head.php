@@ -26,6 +26,12 @@
       }
     }
 
+///////////////////////////////////////////////////////////////////////////
+//
+// OPCIONES PARA FECHAS
+//
+///////////////////////////////////////////////////////////////////////////
+
       $fecha = $vigencia;
       $diff = strtotime($fecha) - strtotime(date('d-m-Y'));
       $dias = $diff/(60*60*24);
@@ -36,8 +42,10 @@
       setlocale(LC_ALL,"es_ES");
       $vigencia = strftime("%d %B %Y", strtotime(str_replace('-','/', $vigencia)));
 
-
-
+      $periodo = strtotime('+3 year', strtotime($fecha));
+      $periodo = date('Y', $periodo);
+      $periodos = strtotime('0 year', strtotime($fecha));
+      $periodos = date('Y', $periodos);
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -93,13 +101,15 @@
             if ($a == 1 && $estado_rim == 2) 
             {
                 $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-                $verificacion = " En: <b>". $a ." Año</b>"; 
+                $verificacion = " En: <b>". $a ." Año</b>";
+                $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>'; 
 
             } 
             else 
             {
                 $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-                $verificacion = " En: <b>". $a ." Años</b>"; 
+                $verificacion = " En: <b>". $a ." Años</b>";
+                $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>';  
             } 
         }
 
@@ -109,12 +119,14 @@
             {
                 $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
                 $verificacion = " En: <b>". $d ." Día</b>";
+                $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>';
 
             }
             else 
             {
                 $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
                 $verificacion = " En: <b>". $d ." Dias</b>";
+                $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>'; 
             }
         }
 
@@ -122,11 +134,13 @@
         {
             $u_rim = '<i class="fas fa-times"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
             $verificacion = "<b class='text-orange'>Hoy último día</b>";
+            $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>'; 
         } 
         else if ($d <= 0) 
         {
             $u_rim = '<i class="fas fa-times"></i><span class="text-red"> Vencida: </span> REIM_'.$rim.' ';
             $verificacion = '<i class="far fa-calendar"></i> Vencio el: <br><span class="text-red">'.$vigencia.'</span>';
+            $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>'; 
         }   
     }
     
@@ -174,73 +188,6 @@
 
 
 
-$fi                = $fecha;
-$hoy               = date('d-m-Y');
-$fecha_ingreso     = date("d-m-Y", strtotime($fi));
-$anio_actual       = date("Y");
-$fecha_aviso = date("d-m-" . $anio_actual . "", strtotime($fi));
-
-$periodo2015 = strtotime('-1 year', strtotime($fecha_aviso));
-$periodo2015 = date('d-m-Y', $periodo2015);
-
-$periodo2017 = strtotime('+1 year', strtotime($fecha_aviso));
-$periodo2017 = date('d-m-Y', $periodo2017);
-
-
-
-echo " Comparar si " . $fi . "  cumple el rango de :" . $fi . " al periodo " . $fecha_aviso . " </br> ";
-
-
-$fecha1 = new DateTime($hoy);
-$fecha1 = $fecha1->format("d-m-Y");
-
-$f2015 = new DateTime($periodo2015);
-$f2015 = $f2015->format("d-m-Y"); //=> 2015
-
-$f2016 = new DateTime($fecha_aviso);
-$f2016 = $f2016->format("d-m-Y"); //=> 2016
-
-$f2017 = new DateTime($periodo2017);
-$f2017 = $f2017->format("d-m-Y"); //=2017
-
-
-function comprobarPeriodo20152016($fecha1, $f2015, $f2016)
-{
-
-    return $fecha1 >= $f2015 && $fecha1 <= $f2016;
-}
-
-
-if (comprobarPeriodo20152016($fecha1, $f2015, $f2016)) {
-
-    echo " " . $fecha1 . " Esta dentro del periodo " . $f2015 . "-" . $f2016 . "</br>";
-
-} else {
-
-    echo " " . $fecha1 . " Esta fuera del periodo " . $f2015 . "-" . $f2016 . "</br>"; // <= Resultado
-}
-
-echo "</br>";
-
-echo " Comparar si " . $hoy . "  cumple el rango de :" . $fecha_aviso . " al periodo " . $periodo2017 . " </br> ";
-
-function comprobarPeriodo20162017($fecha1, $f2016, $f2017)
-{
-
-    return $fecha1 >= $f2016 && $fecha1 <= $f2017;
-}
-
-
-if (comprobarPeriodo20162017($fecha1, $f2016, $f2017)) {
-
-    echo " " . $fecha1 . " Esta dentro del periodo " . $f2016 . "-" . $f2017 . "</br>";
-
-} else {
-
-    echo " " . $fecha1 . " Esta fuera del periodo " . $f2016 . "-" . $f2017 . "</br>"; // <= Resultado
-}
-
-echo "</br>";
 
 
  ?>
