@@ -7,7 +7,7 @@ class Personacyt extends CI_Controller {
     {
         parent::__construct();
         $this->load->model(array('Personacyt_model','Pages_model'));
-        $this->load->library(array('session','form_validation','user_agent','encrypt'));
+        $this->load->library(array('session','form_validation','user_agent'));
         $this->load->helper(array('url','form','security'));
         $this->load->database('default');
     }

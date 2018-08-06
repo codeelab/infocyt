@@ -66,9 +66,9 @@
                                 <div class="c-head">
                                     <div class="c-name c-font-uppercase c-font-bold c-center"><?=$nombre_completo?></div>
                                 </div>
-                                    <p class="c-center"> <?=$u_rim?> </p>
-                                    <p class="c-center"> <span style="font-size: 14x;"><span style="font-size: 14px;">Duración: </span><br><?=$dura;?><br>
-                                    Próxima Renovación: </span><br> 
+                                    <p class="c-center"> <?=$u_rim;?> </p>
+                                    <p class="c-center"> <span style="font-size: 14x;"><span style="font-size: 14px;">Vigencia: </span><br><?=$dura;?><br>
+                                    Renovación: </span><br> 
                                         <?=$verificacion;?>
                                     </p>
                                 </div>

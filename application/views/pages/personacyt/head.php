@@ -42,12 +42,6 @@
       setlocale(LC_ALL,"es_ES");
       $vigencia = strftime("%d %B %Y", strtotime(str_replace('-','/', $vigencia)));
 
-      $periodo = strtotime('+3 year', strtotime($fecha));
-      $periodo = date('Y', $periodo);
-      $periodos = strtotime('0 year', strtotime($fecha));
-      $periodos = date('Y', $periodos);
-
-
 ///////////////////////////////////////////////////////////////////////////
 //
 // OPCIONES DE AVISO REIM A USUARIO
@@ -55,138 +49,126 @@
 ///////////////////////////////////////////////////////////////////////////
 
 
-     //--------------------------------------------------------------------------
-     // MUESTRA LOS AVISOS SI LA OPCIÓN ES PENDIENTE = 1
-     //--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
+// MUESTRA LOS AVISOS DE VIGENCIA SEGUN EL ESTADO REIM
+//--------------------------------------------------------------------------
 
-    if ($aprobacion == '0000-00-00'  && $fecha == '0000-00-00'  && $estado_rim == 1) 
-    {
-      $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> Pendiente: REIM_'.$rim.'</span>';
-      $verificacion = '<i class="far fa-clock"></i> [Pendiente]';
-    }
-    else if ($aprobacion != '0000-00-00'  && $fecha == '0000-00-00'  && $estado_rim == 1) 
-    {
-      $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-      $verificacion = '<i class="far fa-clock"></i> [Pendiente]';
-    }
-    else if ($aprobacion == '0000-00-00'  && $fecha != '0000-00-00'  && $estado_rim == 1) 
-    {
-      $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> Pendiente: REIM_'.$rim.'</span>';
-      $verificacion = '<i class="far fa-clock"></i> [Pendiente]';
-    }
 
-     //--------------------------------------------------------------------------
-     // MUESTRA LOS AVISOS SI LA OPCIÓN ES APROBADO = 2
-     //-------------------------------------------------------------------------
+// MUESTRA LOS AVISOS SI LA OPCIÓN ES PENDIENTE = 1
 
-    if ($aprobacion == '0000-00-00'  && $fecha == '0000-00-00'  && $estado_rim == 2) 
+    if ($estado_rim == 1)
     {
-      $u_rim = '<i class="far fa-clock"></i><b class="text-orange"> [No Confirmado]</b>: REIM_'.$rim.'';
-      $verificacion = '<i class="far fa-calendar"></i> [No Confirmado]';  
+    
+      if ($aprobacion === '0000-00-00' && $fecha === '0000-00-00') 
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> Pendiente: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-clock"></i> [Pendiente]';
+        $dura = '<i class="far fa-clock"></i> [Pendiente]';
+      }
+      else if ($aprobacion != '0000-00-00' && $fecha === '0000-00-00') 
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> Pendiente: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $dura = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+      }
+      else if ($aprobacion == '0000-00-00' && $fecha != '0000-00-00') 
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> Pendiente: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $dura = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+      }
+
+// MUESTRA LOS AVISOS SI LA OPCIÓN ES APROBADO = 2
+  
     }
-    else if ($aprobacion != '0000-00-00'  && $fecha == '0000-00-00'  && $estado_rim == 2) 
+    elseif ($estado_rim == 2) 
     {
-      $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-      $verificacion = '<i class="far fa-calendar"></i> [No Confirmado]';  
-    }
-    else if ($aprobacion == '0000-00-00'  && $fecha != '0000-00-00'  && $estado_rim == 2) 
-    {
-      $u_rim = '<i class="far fa-clock"></i><b class="text-default"> [No Confirmado]</b>: REIM_'.$rim.'';
-      $verificacion = '<i class="far fa-calendar"></i> Vencio el: <br><span class="text-red">'.$vigencia.'</span>';  
-    }
-    else
-    {
-        if ($a > 0) 
+      
+        if ($aprobacion == '0000-00-00' && $fecha == '0000-00-00') 
         {
-            if ($a == 1 && $estado_rim == 2) 
-            {
-                $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-                $verificacion = " En: <b>". $a ." Año</b>";
-                $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>'; 
-
-            } 
-            else 
-            {
-                $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-                $verificacion = " En: <b>". $a ." Años</b>";
-                $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>';  
-            } 
+          $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> No confirmado:</span> REIM_'.$rim;
+          $verificacion = '<i class="far fa-calendar-alt"></i> [No Confirmado]';
+          $dura = '<i class="far fa-calendar-alt"></i> [No Confirmado]';    
         }
-
-        if ($a <= 0) 
+        else if ($aprobacion != '0000-00-00' && $fecha == '0000-00-00') 
         {
-            if ($d == 1 && $estado_rim == 2) 
-            {
-                $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-                $verificacion = " En: <b>". $d ." Día</b>";
-                $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>';
-
-            }
-            else 
-            {
-                $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-                $verificacion = " En: <b>". $d ." Dias</b>";
-                $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>'; 
-            }
+          $u_rim = '<i class="fas fa-check"></i><span class="text-green">Aprobado: <a href="#" target="_blank">REIM_'.$rim.'</a>';
+          $dura = '<i class="far fa-calendar-alt"></i>  ' . date("Y", strtotime($aprobacion)) . ' - <i class="far fa-question-circle"></i>'; 
+          $verificacion = '<i class="far fa-calendar-alt"></i> [No Confirmado]';
+           
         }
+        else if ($aprobacion == '0000-00-00' && $fecha != '0000-00-00') 
+        {
+          $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> No confirmado:</span> REIM_'.$rim;
+          $dura = '<i class="far fa-calendar-alt"></i>  <i class="far fa-question-circle"></i> - ' . date("Y", strtotime($fecha));
+          $verificacion = '<i class="far fa-clock"></i> [No Confirmado]';  
+        }else
+        {
 
-        if ($d == 0) 
-        {
-            $u_rim = '<i class="fas fa-times"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-            $verificacion = "<b class='text-orange'>Hoy último día</b>";
-            $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>'; 
-        } 
-        else if ($d <= 0) 
-        {
-            $u_rim = '<i class="fas fa-times"></i><span class="text-red"> Vencida: </span> REIM_'.$rim.' ';
-            $verificacion = '<i class="far fa-calendar"></i> Vencio el: <br><span class="text-red">'.$vigencia.'</span>';
-            $dura = '<b>' . $periodos . '</b> a <b>' . $periodo . '</b>'; 
-        }   
-    }
+            if ($a > 0) 
+            {
+                if ($a != 1) 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green">Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = " En: <b>". $a ." Años</b>";
+                }
+                else
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green">Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = 'En: <b>'. $a . ' Año</b>';
+                }
+          }
+
+            if ($a <= 0) 
+            {
+                if ($d > 1) 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = " En: <b>". $d ." Dias</b>"; 
+                }
+                else 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = " En: <b>". $d ." Día</b>";
+                }
+
+
+                if ($d == 0) 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>'; 
+                    $verificacion = "<span class='text-orange'>Hoy último día</span>";
+                }
+                else if ($d < 0) 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-red"> Vencida: </span> REIM_'.$rim;
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = '<i class="far fa-calendar"></i> Vencio el: <br><span class="text-red">'.$vigencia.'</span>';
+                     
+                }
+
+            }//FIN DEL if ($a <= 0)        
+
+        }//FIN DEL ELSE EN EL IF 2
+    }// FIN DEL elseif ($estado_rim == 2) 
+    elseif ($estado_rim == 3) 
+    {
+      
+
+    }// FIN DEL elseif ($estado_rim == 3) 
+    elseif ($estado_rim == 4)
+    {
     
 
-     //--------------------------------------------------------------------------
-     // MUESTRA LOS AVISOS SI LA OPCIÓN ES VENCIDO = 3
-     //-------------------------------------------------------------------------
-
-    if ($aprobacion == '0000-00-00'  && $fecha == '0000-00-00'  && $estado_rim == 3) 
+    }// FIN DEL elseif ($estado_rim == 4)
+    else
     {
-      $u_rim = '<i class="far fa-clock"></i><span class="text-danger"> Vencido: REIM_'.$rim.'</span>';
-      $verificacion = '<i class="far fa-calendar"></i> [No Confirmado]';
-    }
-    else if ($aprobacion != '0000-00-00'  && $fecha == '0000-00-00'  && $estado_rim == 3) 
-    {
-      $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-      $verificacion = '<i class="far fa-calendar"></i> [No Confirmado]';
-    }
-    else if ($aprobacion == '0000-00-00'  && $fecha != '0000-00-00'  && $estado_rim == 3) 
-    {
-      $u_rim = '<i class="far fa-clock"></i><span class="text-danger"> Vencido: REIM_'.$rim.'</span>';
-      $verificacion = '<i class="far fa-calendar"></i> Vence el: <br><span class="text-red">'.$vigencia.'</span>';
-    }
 
-     //--------------------------------------------------------------------------
-     // MUESTRA LOS AVISOS SI LA OPCIÓN ES CANCELADO = 4
-     //-------------------------------------------------------------------------
-
-    if ($aprobacion == '0000-00-00'  && $fecha == '0000-00-00'  && $estado_rim == 4) 
-    {
-      $u_rim = '<i class="far fa-clock"></i><span class="text-default"> Cancelado: REIM_'.$rim.'</span>';
-      $verificacion = '<i class="far fa-calendar"></i> [Cancelado]';
-    }
-    else if ($aprobacion != '0000-00-00'  && $fecha == '0000-00-00'  && $estado_rim == 4) 
-    {
-      $u_rim = '<i class="fas fa-check"></i><b class="text-default">Cancelado: </b> <a href="#" target="_blank">REIM_'.$rim.'</a>';
-      $verificacion = '<i class="far fa-calendar"></i> [Cancelado]';
-    }
-    else if ($aprobacion == '0000-00-00'  && $fecha != '0000-00-00'  && $estado_rim == 4) 
-    {
-      $u_rim = '<i class="far fa-clock"></i><span class="text-default"> Cancelado: REIM_'.$rim.'</span>';
-      $verificacion = '<i class="far fa-calendar"></i> [Cancelado]';
-    }
-
-
-
+    }// FIN DEL ELSE
 
 
 
