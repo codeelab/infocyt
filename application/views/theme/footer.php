@@ -87,12 +87,14 @@
         <script src="<?=base_url();?>assets/js/isotope-gallery.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/revolution.extension.parallax.min.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/funciones.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/custom.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/zxcvbn.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/html5shiv.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/jquery-ui.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/jquery-validate.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/particles.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/js/particulas.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/js/datetimepicker.js" type="text/javascript"></script>
      <!-- END: PAGE SCRIPTS -->
 
      <!-- Datatables -->

@@ -4,9 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Registro_model extends CI_Model {
 
 
-    function registro_investigador($datas)
+    function registro_investigador($datas, $reim)
     {
-        return $this->db->insert('usuarios',$datas);
+
+        $this->db->insert('usuarios',$datas);
+
+        $ids = $this->db->insert_id();
+        $fecha = date('Y-m-d');
+        return $this->db->query("INSERT INTO reg_rim (usuario_id, num_rim, status_rim, fecha_captura) VALUES ('$ids', '$reim', '1', '$fecha') ");
+        
+
     }
 
 

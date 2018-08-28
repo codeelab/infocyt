@@ -50,7 +50,7 @@
             </div>
             <!-- END: CONTENT/FEATURES/FEATURES-1 -->
 
-            <!-- BEGIN: CONTENT/TABS/TAB-1 -->
+            <!-- BEGIN: CONTENT/TABS/TAB-1 
             <div class="c-content-box c-size-md c-no-bottom-padding c-overflow-hide">
                 <div class="c-container">
                     <div class="row">
@@ -163,7 +163,7 @@
                     </div>
                 </div>
             </div>
-            <!-- END: CONTENT/TABS/TAB-1 -->
+            END: CONTENT/TABS/TAB-1 -->
             <!-- END: PAGE CONTENT -->
         </div>
         <!-- END: PAGE CONTAINER -->

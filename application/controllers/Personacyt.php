@@ -7,10 +7,11 @@ class Personacyt extends CI_Controller {
     {
         parent::__construct();
         $this->load->model(array('Personacyt_model','Pages_model'));
-        $this->load->library(array('session','form_validation','user_agent'));
+        $this->load->library(array('session','form_validation','user_agent', 'Pdf'));
         $this->load->helper(array('url','form','security'));
         $this->load->database('default');
     }
+
 
     public function index()
     {
@@ -19,6 +20,7 @@ class Personacyt extends CI_Controller {
         {
             redirect('personacyt');
         }
+
         $id = $this->session->userdata('id_usuario');        
         $data['rimm']    = $this->Personacyt_model->rim($id);
         $this->load->view('theme/header');
@@ -28,8 +30,533 @@ class Personacyt extends CI_Controller {
     }
 
 
+///////////////////////////////////////////////////////////////////////////
+//
+// PESTAÑA DE PDF GENERALES
+//
+///////////////////////////////////////////////////////////////////////////
+
+    public function postulacion()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/postulacion_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id = $this->session->userdata('id_usuario'); 
+        $data['pdf'] = $this->Personacyt_model->datos_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+             redirect('personacyt');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/postulacion_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function solicitud()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/solicitud_pdf.php')) 
+        {
+             redirect('personacyt');
+        }
+
+        $id = $this->session->userdata('id_usuario');
+        $data['pdf'] = $this->Personacyt_model->datos_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/solicitud');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/solicitud_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
 
 
+// PREPARACIÓN ACADÉMICA //
+
+    public function congreso_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/congreso_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->congreso_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/congreso');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/congreso_pdf',$data);
+            $this->load->view('theme/footer'); 
+        }
+    }
+
+    public function reconocimiento_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/reconocimientos_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->reconocimiento_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/reconocimiento');
+
+        }else{
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/reconocimientos_pdf',$data);
+            $this->load->view('theme/footer');
+        } 
+          
+    }
+
+    public function idioma_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/idioma_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->idioma_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/idiomas');
+
+        }else{
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/idioma_pdf',$data);
+            $this->load->view('theme/footer');
+        } 
+          
+    }
+
+    public function academica_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/academica_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->academica_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/academica');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/academica_pdf',$data);
+            $this->load->view('theme/footer');
+
+        }
+
+          
+    }
+
+    public function investigacion_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/investigacion_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->investigacion_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/investigacion');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/investigacion_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+
+          
+    }
+
+
+// ACTIVIDAD PROFESIONAL //
+
+    public function adscripcion_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/adscripcion_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->adscripcion_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/adscripcion');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/adscripcion_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function desarrollos_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/desarrollos_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->desarrollos_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/desarrollos');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/desarrollos_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function difusion_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/difusion_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->difusion_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/difusion');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/difusion_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function experiencia_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/experiencia_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->experiencia_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/experiencia');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/experiencia_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }    
+
+    public function docencia_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/docencia_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->docencia_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/docencia');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/docencia_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function tesis_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/tesis_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->tesis_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/tesis');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/tesis_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+// PUBLICACIONES //
+
+    public function capitulo_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/capitulo_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->capitulo_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/capitulo');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/capitulo_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function articulos_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/articulos_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->articulos_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/articulos');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/articulos_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function libro_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/libro_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->libro_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/libro');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/libro_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function reporte_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/reporte_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->reporte_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/reporte');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/reporte_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+
+    public function resena_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/resena_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->resena_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/resena');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/resena_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+// PUBLICACIONES //
+
+    public function financiamiento_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/financiamiento_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->financiamiento_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/financiamiento');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/financiamiento_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function grupos_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/grupos_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->grupos_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/grupos');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/grupos_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function patentes_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/patentes_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->patentes_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/patentes');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/patentes_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
+
+    public function proyectos_pdf()
+    {
+        if (!file_exists(APPPATH.'views/pages/personacyt/pdf/proyectos_pdf.php')) 
+        {
+            redirect('personacyt');
+        }
+
+        $id          = $this->uri->segment(2);  
+        $data['pdf'] = $this->Personacyt_model->proyectos_pdf($id);
+
+        if ($data['pdf'] == FALSE) {
+            
+            redirect('personacyt/proyectos');
+
+        }else{
+
+            $this->load->view('theme/header');
+            $this->load->view('theme/nav');
+            $this->load->view('pages/personacyt/pdf/proyectos_pdf',$data);
+            $this->load->view('theme/footer');
+        }
+    }
 ///////////////////////////////////////////////////////////////////////////
 //
 // PESTAÑA DE OPCIONES GENERALES
@@ -41,9 +568,11 @@ class Personacyt extends CI_Controller {
         {
             redirect('personacyt');
         }
+        $id = $this->session->userdata('id_usuario');        
+        $data['rimm']    = $this->Personacyt_model->rim($id);
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
-        $this->load->view('pages/personacyt/generales/opciones');
+        $this->load->view('pages/personacyt/generales/opciones',$data);
         $this->load->view('theme/footer');
     }
 
@@ -55,7 +584,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id                 = $this->session->userdata('id_usuario');
-        
+        $data['rimm']       = $this->Personacyt_model->rim($id);     
         $data['usuario']    = $this->Personacyt_model->Usuario($id);
         $data['estados']    = $this->Pages_model->getEstados();
         $data['nac']        = $this->Pages_model->nacionalidad();
@@ -160,6 +689,7 @@ class Personacyt extends CI_Controller {
         $id = $this->session->userdata('id_usuario');
         $data['pais']        = $this->Pages_model->paises();
         $data['congresos']   = $this->Personacyt_model->congresos($id);
+        $data['rimm']        = $this->Personacyt_model->rim($id);   
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('pages/personacyt/academica/congresos',$data);
@@ -170,10 +700,10 @@ class Personacyt extends CI_Controller {
             {
                 if($this->input->method() === 'post')
                 {
-                    $titulo         = $this->security->xss_clean($this->input->post('titulo'));
+                    $titulo         = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo'),'utf-8'));
                     $publicacion    = $this->security->xss_clean($this->input->post('anio_publicacion'));
-                    $descripcion    = $this->security->xss_clean($this->input->post('descr_mezcla'));
-                    $organizador    = $this->security->xss_clean($this->input->post('nombre_organizador'));
+                    $descripcion    = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_mezcla'),'utf-8'));
+                    $organizador    = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_organizador'),'utf-8'));
                     $fecha_ini      = $this->security->xss_clean($this->input->post('fecha_inicio'));
                     $fecha_fin      = $this->security->xss_clean($this->input->post('fecha_final'));
                     $pais           = $this->security->xss_clean($this->input->post('paises_id'));
@@ -211,6 +741,7 @@ class Personacyt extends CI_Controller {
         $id = $this->session->userdata('id_usuario');
         $data['pais']              = $this->Pages_model->paises();
         $data['reconocimientos']   = $this->Personacyt_model->reconocimientos($id);
+        $data['rimm']       = $this->Personacyt_model->rim($id); 
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('pages/personacyt/academica/reconocimientos',$data);
@@ -221,10 +752,10 @@ class Personacyt extends CI_Controller {
             {
                 if($this->input->method() === 'post')
                 {
-                    $descripcion    = $this->security->xss_clean($this->input->post('descripcion'));
+                    $descripcion    = $this->security->xss_clean(mb_strtoupper($this->input->post('descripcion'),'UTF-8'));
                     $publicacion    = $this->security->xss_clean($this->input->post('anio_reconocimiento'));
-                    $organizador    = $this->security->xss_clean($this->input->post('inst_otorga'));
-                    $dependencia    = $this->security->xss_clean($this->input->post('dependencia'));
+                    $organizador    = $this->security->xss_clean(mb_strtoupper($this->input->post('inst_otorga'),'UTF-8'));
+                    $dependencia    = $this->security->xss_clean(mb_strtoupper($this->input->post('dependencia'),'UTF-8'));
                     $pais           = $this->security->xss_clean($this->input->post('paises_id'));
                     $usuario        = $this->security->xss_clean($this->input->post('usuario_id'));
 
@@ -237,13 +768,13 @@ class Personacyt extends CI_Controller {
                         'usuario_id'            => $usuario,
                         'fecha_captura'         => date('Y-m-d')
                     );
-                    $this->session->set_flashdata('success', 'Se ha registrado correctamente el congreso.');
+                    $this->session->set_flashdata('success', 'Se ha registrado correctamente el Reconocimiento.');
                     $this->Personacyt_model->alta_reconocimientos($data);
                     redirect('personacyt/reconocimientos');
                 }
                 else
                 {
-                    $this->session->set_flashdata('error', 'No se ha podido registrar el congreso.');
+                    $this->session->set_flashdata('error', 'No se ha podido registrar el Reconocimiento.');
                     redirect('personacyt/reconocimientos');
                 }
             }
@@ -258,6 +789,7 @@ class Personacyt extends CI_Controller {
         $data['lenguaje']   = $this->Personacyt_model->lenguaje();
         $data['nivel']      = $this->Personacyt_model->nivel();
         $data['idiomas']    = $this->Personacyt_model->idiomas($id);
+        $data['rimm']       = $this->Personacyt_model->rim($id);
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
         $this->load->view('pages/personacyt/academica/idiomas',$data);
@@ -270,13 +802,13 @@ class Personacyt extends CI_Controller {
                 {
                     $lenguaje           = $this->security->xss_clean($this->input->post('lenguaje_id'));
                     $idioma_nativo      = $this->security->xss_clean($this->input->post('idioma_nativo'));
-                    $traductor          = $this->security->xss_clean($this->input->post('traductor'));
-                    $profesor           = $this->security->xss_clean($this->input->post('profesor'));
+                    $traductor          = $this->security->xss_clean(mb_strtoupper($this->input->post('traductor'),'UTF-8'));
+                    $profesor           = $this->security->xss_clean(mb_strtoupper($this->input->post('profesor'),'UTF-8'));
                     $nivel_habla_id     = $this->security->xss_clean($this->input->post('nivel_habla_id'));
                     $nivel_lectura_id   = $this->security->xss_clean($this->input->post('nivel_lectura_id'));
                     $nivel_escritura_id = $this->security->xss_clean($this->input->post('nivel_escritura_id'));
                     $fecha_acreditacion = $this->security->xss_clean($this->input->post('fecha_acreditacion'));
-                    $titulo_obtenido    = $this->security->xss_clean($this->input->post('titulo_obtenido'));
+                    $titulo_obtenido    = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo_obtenido'),'UTF-8'));
                     $puntos_idioma      = $this->security->xss_clean($this->input->post('puntos_idioma'));
                     $usuario            = $this->security->xss_clean($this->input->post('usuario_id'));
 
@@ -308,11 +840,13 @@ class Personacyt extends CI_Controller {
 
     public function academica()
     {
+
         if (!file_exists(APPPATH.'views/pages/personacyt/academica/academica.php')) 
         {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['grados']         = $this->Personacyt_model->academica($id);
         $data['grado']          = $this->Personacyt_model->grado();
         $data['pais']           = $this->Pages_model->paises();
@@ -355,21 +889,6 @@ class Personacyt extends CI_Controller {
             return;
         }
 
-        function departamentos($dependencia_id)
-        {
-            $dep = $this->Personacyt_model->departamentos($dependencia_id);
-            if( empty ( $dep ) )
-                return '{ "nombre": "No hay Departamento disponibles" }';
-            $data = array();
-            foreach ($dep as $s) {
-                $data[] = '{"id_departamentos":' . $s->id_departamentos . ',"nombre":"' . $s->descr_departamentos . '"}';
-            }
-            echo '[ ' . implode(",",$data) . ']';
-            return;
-        }
-
-
-
 
             public function alta_academica()
             {
@@ -378,37 +897,37 @@ class Personacyt extends CI_Controller {
                     $fecha_terminacion  = $this->security->xss_clean($this->input->post('fecha_terminacion'));
                     $grado_id           = $this->security->xss_clean($this->input->post('grado_id'));
                     $completado         = $this->security->xss_clean($this->input->post('completado'));
-                    $descr_grado        = $this->security->xss_clean($this->input->post('descr_grado'));
+                    $descr_grado        = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_grado'),'UTF-8'));
                     $paises_id          = $this->security->xss_clean($this->input->post('paises_id'));
                     $estados_id         = $this->security->xss_clean($this->input->post('estados_id'));
                     $campos_id          = $this->security->xss_clean($this->input->post('campos_id'));
                     $disciplina_id      = $this->security->xss_clean($this->input->post('disciplina_id'));
                     $subdisciplina_id   = $this->security->xss_clean($this->input->post('subdisciplina_id'));
                     $estatus_id         = $this->security->xss_clean($this->input->post('estatus_id'));
-                    $num_cedula         = $this->security->xss_clean($this->input->post('num_cedula'));
+                    $num_cedula         = $this->security->xss_clean(mb_strtoupper($this->input->post('num_cedula'),'UTF-8'));
                     $sector_id          = $this->security->xss_clean($this->input->post('sector_id'));
-                    $institucion        = $this->security->xss_clean($this->input->post('institucion'));
-                    $dependencia_id     = $this->security->xss_clean($this->input->post('dependencia_id'));
-                    $departamento_id    = $this->security->xss_clean($this->input->post('departamento_id'));
-                    $descripcion_tesis  = $this->security->xss_clean($this->input->post('descripcion_tesis'));
+                    $institucion        = $this->security->xss_clean(mb_strtoupper($this->input->post('institucion'),'UTF-8'));
+                    $dependencia     = $this->security->xss_clean(mb_strtoupper($this->input->post('dependencia'),'UTF-8'));
+                    $departamento    = $this->security->xss_clean(mb_strtoupper($this->input->post('departamento'),'UTF-8'));
+                    $descripcion_tesis  = $this->security->xss_clean(mb_strtoupper($this->input->post('descripcion_tesis'),'UTF-8'));
                     $usuario            = $this->security->xss_clean($this->input->post('usuario_id'));
 
                     $data = array(
                         'fecha_terminacion'         => $fecha_terminacion,
                         'grado_id'                  => $grado_id,
                         'completado'                => $completado,
-                        'descr_grado'               => $descr_grado,
+                        'descrip_grado'             => $descr_grado,
                         'paises_id'                 => $paises_id,
                         'estados_id'                => $estados_id,
-                        'campos_id'                 => $campos_id,
+                        'campo_id'                  => $campos_id,
                         'disciplina_id'             => $disciplina_id,
                         'subdisciplina_id'          => $subdisciplina_id,
                         'estatus_id'                => $estatus_id,
                         'num_cedula'                => $num_cedula,
                         'sector_id'                 => $sector_id,
                         'institucion'               => $institucion,
-                        'dependencia_id'            => $dependencia_id,
-                        'departamento_id'           => $departamento_id,
+                        'dependencia'               => $dependencia,
+                        'departamento'              => $departamento,
                         'descripcion_tesis'         => $descripcion_tesis,
                         'usuario_id'                => $usuario,
                         'fecha_captura'             => date('Y-m-d')
@@ -433,6 +952,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']       = $this->Personacyt_model->rim($id);
         $data['investigaciones']  = $this->Personacyt_model->investigacion($id);
         $data['empleadora']       = $this->Personacyt_model->empleadoras();
         $data['sector']           = $this->Personacyt_model->sector();
@@ -449,15 +969,15 @@ class Personacyt extends CI_Controller {
                 if($this->input->method() === 'post')
                 {
                     $fecha_inicio           = $this->security->xss_clean($this->input->post('fecha_inicio'));
-                    $fecha_fin              = $this->security->xss_clean($this->input->post('fecha_fin'));
+                    $fecha_fin              = $this->security->xss_clean($this->input->post('fecha_final'));
                     $entidad_empleadora_id  = $this->security->xss_clean($this->input->post('entidad_empleadora_id'));
-                    $nombre_ent             = $this->security->xss_clean($this->input->post('nombre_ent'));
-                    $descrp_entidad         = $this->security->xss_clean($this->input->post('descrp_entidad'));
+                    $nombre_ent             = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_ent'),'UTF-8'));
+                    $descrp_entidad         = $this->security->xss_clean(mb_strtoupper($this->input->post('descrp_entidad'),'UTF-8'));
                     $sector_estancia_id     = $this->security->xss_clean($this->input->post('sector_estancia_id'));
-                    $institucion_empleadora = $this->security->xss_clean($this->input->post('institucion_empleadora'));
+                    $institucion_empleadora = $this->security->xss_clean(mb_strtoupper($this->input->post('institucion_empleadora'),'UTF-8'));
                     $dependencia_id         = $this->security->xss_clean($this->input->post('dependencia_id'));
                     $departamento_id        = $this->security->xss_clean($this->input->post('departamento_id'));
-                    $descrp_estancia        = $this->security->xss_clean($this->input->post('descrp_estancia'));
+                    $descrp_estancia        = $this->security->xss_clean(mb_strtoupper($this->input->post('descrp_estancia'),'UTF-8'));
                     $usuario                = $this->security->xss_clean($this->input->post('usuario_id'));
 
                     $data = array(
@@ -474,13 +994,13 @@ class Personacyt extends CI_Controller {
                         'usuario_id'                => $usuario,
                         'fecha_captura'             => date('Y-m-d')
                     );
-                    $this->session->set_flashdata('success', 'Se ha registrado correctamente la Estancia Acádemica.');
+                    $this->session->set_flashdata('success', 'Se ha registrado correctamente la Estancia de Investigación.');
                     $this->Personacyt_model->alta_investigacion($data);
                     redirect('personacyt/investigacion');
                 }
                 else
                 {
-                    $this->session->set_flashdata('error', 'No se ha podido registrar la Estancia Acádemica.');
+                    $this->session->set_flashdata('error', 'No se ha podido registrar la Estancia de Investigación.');
                     redirect('personacyt/investigacion');
                 }
             }
@@ -499,10 +1019,12 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']             = $this->Personacyt_model->rim($id);
         $data['ad']               = $this->Personacyt_model->adscripcion($id);
         $data['empleadora']       = $this->Personacyt_model->empleadoras();
         $data['sector']           = $this->Personacyt_model->sector();
         $data['dependencia']      = $this->Personacyt_model->dependencias();
+        $data['departamento']     = $this->Personacyt_model->departamentos();
         $data['pais']             = $this->Pages_model->paises();
         $data['estados']          = $this->Pages_model->getEstados();
 
@@ -513,6 +1035,7 @@ class Personacyt extends CI_Controller {
     }
 
 
+
             public function alta_adscripcion()
             {
                 if($this->input->method() === 'post')
@@ -520,17 +1043,17 @@ class Personacyt extends CI_Controller {
                     $fecha_inicio           = $this->security->xss_clean($this->input->post('fecha_inicio'));
                     $fecha_final            = $this->security->xss_clean($this->input->post('fecha_final'));
                     $entidad_empleadora_id  = $this->security->xss_clean($this->input->post('entidad_empleadora_id'));
-                    $nombre_entidad         = $this->security->xss_clean($this->input->post('nombre_entidad'));
-                    $nombre_puesto          = $this->security->xss_clean($this->input->post('nombre_puesto'));
+                    $nombre_entidad         = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_entidad'),'UTF-8'));
+                    $nombre_puesto          = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_puesto'),'UTF-8'));
                     $tel_pais               = $this->security->xss_clean($this->input->post('tel_pais'));
                     $tel_laboral            = $this->security->xss_clean($this->input->post('tel_laboral'));
-                    $domicilio_laboral      = $this->security->xss_clean($this->input->post('domicilio_laboral'));
+                    $domicilio_laboral      = $this->security->xss_clean(mb_strtoupper($this->input->post('domicilio_laboral'),'UTF-8'));
                     $paises_id              = $this->security->xss_clean($this->input->post('paises_id'));
                     $estado_id              = $this->security->xss_clean($this->input->post('estado_id'));
                     $municipio_id           = $this->security->xss_clean($this->input->post('municipio_id'));
                     $codigo_postal          = $this->security->xss_clean($this->input->post('codigo_postal'));
                     $sector_estancia_id     = $this->security->xss_clean($this->input->post('sector_estancia_id'));
-                    $nombre_institucion     = $this->security->xss_clean($this->input->post('nombre_institucion'));
+                    $nombre_institucion     = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_institucion'),'UTF-8'));
                     $dependencia_id         = $this->security->xss_clean($this->input->post('dependencia_id'));
                     $departamento_id        = $this->security->xss_clean($this->input->post('departamento_id'));
                     $usuario                = $this->security->xss_clean($this->input->post('usuario_id'));
@@ -545,8 +1068,8 @@ class Personacyt extends CI_Controller {
                         'tel_laboral'               => $tel_laboral,
                         'domicilio_laboral'         => $domicilio_laboral,
                         'paises_id'                 => $paises_id,
-                        'estado_id'                 => $estado_id,
-                        'municipio_id'              => $municipio_id,
+                        'estados_id'                 => $estado_id,
+                        'municipios_id'              => $municipio_id,
                         'codigo_postal'             => $codigo_postal,
                         'sector_estancia_id '       => $sector_estancia_id,
                         'nombre_institucion '       => $nombre_institucion,
@@ -555,13 +1078,13 @@ class Personacyt extends CI_Controller {
                         'usuario_id'                => $usuario,
                         'fecha_captura'             => date('Y-m-d')
                     );
-                    $this->session->set_flashdata('success', 'Se ha registrado correctamente la Estancia Acádemica.');
+                    $this->session->set_flashdata('success', 'Se ha registrado correctamente la Adscripción.');
                     $this->Personacyt_model->alta_adscripcion($data);
                     redirect('personacyt/adscripcion');
                 }
                 else
                 {
-                    $this->session->set_flashdata('error', 'No se ha podido registrar la Estancia Acádemica.');
+                    $this->session->set_flashdata('error', 'No se ha podido registrar la Adscripción.');
                     redirect('personacyt/adscripcion');
                 }
             }
@@ -574,12 +1097,14 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']    = $this->Personacyt_model->rim($id);
         $data['pais']             = $this->Pages_model->paises();
         $data['estados']          = $this->Pages_model->getEstados();
         $data['tec']              = $this->Personacyt_model->desarrollos($id);
         $data['empleadora']       = $this->Personacyt_model->empleadoras();
         $data['sector']           = $this->Personacyt_model->sector();
         $data['dependencia']      = $this->Personacyt_model->dependencias();
+        $data['departamento']     = $this->Personacyt_model->departamentos();
         $data['conocimiento']     = $this->Personacyt_model->conocimiento();
         $data['economico']        = $this->Personacyt_model->economico();
         $data['autor']            = $this->Personacyt_model->autor();
@@ -622,20 +1147,20 @@ class Personacyt extends CI_Controller {
             {
                 if($this->input->method() === 'post')
                 {
-                    $ano_publicacion        = $this->security->xss_clean($this->input->post('ano_publicacion'));
+                    $ano_publicacion        = $this->security->xss_clean($this->input->post('anio_publicacion'));
                     $tipo_autor_id          = $this->security->xss_clean($this->input->post('tipo_autor_id'));
                     $total_autor            = $this->security->xss_clean($this->input->post('total_autor'));
-                    $titulo                 = $this->security->xss_clean($this->input->post('titulo'));
-                    $nombre_autor           = $this->security->xss_clean($this->input->post('nombre_autor'));
-                    $coautores              = $this->security->xss_clean($this->input->post('coautores'));
-                    $descr_general          = $this->security->xss_clean($this->input->post('descr_general'));
+                    $titulo                 = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo'),'UTF-8'));
+                    $nombre_autor           = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_autor'),'UTF-8'));
+                    $coautores              = $this->security->xss_clean(mb_strtoupper($this->input->post('coautores'),'UTF-8'));
+                    $descr_general          = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_general'),'UTF-8'));
                     $sector_id              = $this->security->xss_clean($this->input->post('sector_id'));
                     $dependencia_id         = $this->security->xss_clean($this->input->post('dependencia_id'));
                     $departamento_id        = $this->security->xss_clean($this->input->post('departamento_id'));
                     $paises_id              = $this->security->xss_clean($this->input->post('paises_id'));
-                    $nom_institucion        = $this->security->xss_clean($this->input->post('nom_institucion'));
-                    $pal_clave              = $this->security->xss_clean($this->input->post('pal_clave'));
-                    $descr_larga            = $this->security->xss_clean($this->input->post('descr_larga'));
+                    $nom_institucion        = $this->security->xss_clean(mb_strtoupper($this->input->post('nom_institucion'),'UTF-8'));
+                    $pal_clave              = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave'),'UTF-8'));
+                    $descr_larga            = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_larga'),'UTF-8'));
                     $campos_id              = $this->security->xss_clean($this->input->post('campos_id'));
                     $disciplina_id          = $this->security->xss_clean($this->input->post('disciplina_id'));
                     $subdisciplina_id       = $this->security->xss_clean($this->input->post('subdisciplina_id'));
@@ -686,6 +1211,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['difusion']       = $this->Personacyt_model->difusion($id);
         $data['dirigido']       = $this->Personacyt_model->sector_dir();
         $data['participacion']  = $this->Personacyt_model->tipo_part();
@@ -699,21 +1225,21 @@ class Personacyt extends CI_Controller {
             {
                 if($this->input->method() === 'post')
                 {
-                    $titulo_difusion    = $this->security->xss_clean($this->input->post('titulo_difusion'));
+                    $titulo_difusion    = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo_difusion'),'UTF-8'));
                     $fecha_inicio       = $this->security->xss_clean($this->input->post('fecha_inicio'));
                     $dirigido_id        = $this->security->xss_clean($this->input->post('dirigido_id'));
                     $participacion_id   = $this->security->xss_clean($this->input->post('participacion_id'));
-                    $dependencia        = $this->security->xss_clean($this->input->post('dependencia'));
-                    $facilitadora       = $this->security->xss_clean($this->input->post('facilitadora'));
-                    $colaboradores      = $this->security->xss_clean($this->input->post('colaboradores'));
-                    $beneficiario       = $this->security->xss_clean($this->input->post('beneficiario'));
+                    $dependencia        = $this->security->xss_clean(mb_strtoupper($this->input->post('dependencia'),'UTF-8'));
+                    $facilitadora       = $this->security->xss_clean(mb_strtoupper($this->input->post('facilitadora'),'UTF-8'));
+                    $colaboradores      = $this->security->xss_clean(mb_strtoupper($this->input->post('colaboradores'),'UTF-8'));
+                    $beneficiario       = $this->security->xss_clean(mb_strtoupper($this->input->post('beneficiario'),'UTF-8'));
                     $duracion_act       = $this->security->xss_clean($this->input->post('duracion_act'));
                     $extranjero         = $this->security->xss_clean($this->input->post('extranjero'));
-                    $pal_clave01        = $this->security->xss_clean($this->input->post('pal_clave01'));
-                    $pal_clave02        = $this->security->xss_clean($this->input->post('pal_clave02'));
-                    $pal_clave03        = $this->security->xss_clean($this->input->post('pal_clave03'));
-                    $descripcion_larga  = $this->security->xss_clean($this->input->post('descripcion_larga'));
-                    $material           = $this->security->xss_clean($this->input->post('material'));
+                    $pal_clave01        = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave01'),'UTF-8'));
+                    $pal_clave02        = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave02'),'UTF-8'));
+                    $pal_clave03        = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave03'),'UTF-8'));
+                    $descripcion_larga  = $this->security->xss_clean(mb_strtoupper($this->input->post('descripcion_larga'),'UTF-8'));
+                    $material           = $this->security->xss_clean(mb_strtoupper($this->input->post('material'),'UTF-8'));;
                     $usuario            = $this->security->xss_clean($this->input->post('usuario_id'));
 
                     $data = array(
@@ -753,12 +1279,14 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['experiencia']    = $this->Personacyt_model->experiencia($id);
         $data['pais']           = $this->Pages_model->paises();
         $data['dirigido']       = $this->Personacyt_model->sector_dir();
         $data['conocimiento']   = $this->Personacyt_model->conocimiento();
         $data['sector']         = $this->Personacyt_model->sector();
         $data['dependencia']    = $this->Personacyt_model->dependencias();
+        $data['departamento']   = $this->Personacyt_model->departamentos();
         $data['economico']      = $this->Personacyt_model->economico();
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
@@ -774,23 +1302,23 @@ class Personacyt extends CI_Controller {
                     $fecha_final        = $this->security->xss_clean($this->input->post('fecha_final'));
                     $paises_id          = $this->security->xss_clean($this->input->post('paises_id'));
                     $entidad_id         = $this->security->xss_clean($this->input->post('entidad_id'));
-                    $nombre_entidad     = $this->security->xss_clean($this->input->post('nombre_entidad'));
-                    $nom_puesto         = $this->security->xss_clean($this->input->post('nom_puesto'));
-                    $empleador          = $this->security->xss_clean($this->input->post('empleador'));
+                    $nombre_entidad     = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_entidad'),'UTF-8'));
+                    $nom_puesto         = $this->security->xss_clean(mb_strtoupper($this->input->post('nom_puesto'),'UTF-8'));
+                    $empleador          = $this->security->xss_clean(mb_strtoupper($this->input->post('empleador'),'UTF-8'));
                     $campos_id          = $this->security->xss_clean($this->input->post('campos_id'));
                     $disciplina_id      = $this->security->xss_clean($this->input->post('disciplina_id'));
                     $subdisciplina_id   = $this->security->xss_clean($this->input->post('subdisciplina_id'));
                     $sectores_id        = $this->security->xss_clean($this->input->post('sectores_id'));
-                    $institucion_resp   = $this->security->xss_clean($this->input->post('institucion_resp'));
+                    $institucion_resp   = $this->security->xss_clean(mb_strtoupper($this->input->post('institucion_resp'),'UTF-8'));;
                     $dependencia_id     = $this->security->xss_clean($this->input->post('dependencia_id'));
                     $departamento_id    = $this->security->xss_clean($this->input->post('departamento_id'));
                     $economico_id       = $this->security->xss_clean($this->input->post('economico_id'));
                     $rama_id            = $this->security->xss_clean($this->input->post('rama_id'));
                     $clase_id           = $this->security->xss_clean($this->input->post('clase_id'));
-                    $descr_experiencia  = $this->security->xss_clean($this->input->post('descr_experiencia'));
-                    $pal_clave01        = $this->security->xss_clean($this->input->post('pal_clave01'));
-                    $pal_clave02        = $this->security->xss_clean($this->input->post('pal_clave02'));
-                    $pal_clave03        = $this->security->xss_clean($this->input->post('pal_clave03'));
+                    $descr_experiencia  = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_experiencia'),'UTF-8'));
+                    $pal_clave01        = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave01'),'UTF-8'));
+                    $pal_clave02        = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave02'),'UTF-8'));
+                    $pal_clave03        = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave03'),'UTF-8'));
                     $usuario            = $this->security->xss_clean($this->input->post('usuario_id'));
 
                     $data = array(
@@ -819,7 +1347,7 @@ class Personacyt extends CI_Controller {
                         'usuario_id'               => $usuario,
                         'fecha_captura'            => date('Y-m-d')
                     );
-                    $this->session->set_flashdata('success', 'Se ha registrado correctamente la Docencia');
+                    $this->session->set_flashdata('success', 'Se ha registrado correctamente la Experiencia Profesional');
                     $this->Personacyt_model->alta_experiencia($data);
                     redirect('personacyt/experiencia');
                 }
@@ -838,6 +1366,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['docencia']       = $this->Personacyt_model->docencia($id);
         $data['pais']           = $this->Pages_model->paises();
         $data['dirigido']       = $this->Personacyt_model->sector_dir();
@@ -845,6 +1374,7 @@ class Personacyt extends CI_Controller {
         $data['conocimiento']   = $this->Personacyt_model->conocimiento();
         $data['sector']         = $this->Personacyt_model->sector();
         $data['dependencia']    = $this->Personacyt_model->dependencias();
+        $data['departamento']   = $this->Personacyt_model->departamentos();
         $data['grado']          = $this->Personacyt_model->grado();
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
@@ -865,11 +1395,11 @@ class Personacyt extends CI_Controller {
                     $institucion_resp       = $this->security->xss_clean($this->input->post('institucion_resp'));
                     $dependencia_id         = $this->security->xss_clean($this->input->post('dependencia_id'));
                     $departamento_id        = $this->security->xss_clean($this->input->post('departamento_id'));
-                    $descr_larga            = $this->security->xss_clean($this->input->post('descr_larga'));
+                    $descr_larga            = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_larga'),'UTF-8'));
                     $grado_id               = $this->security->xss_clean($this->input->post('grado_id'));
                     $paises_id              = $this->security->xss_clean($this->input->post('paises_id'));
-                    $programa_aca           = $this->security->xss_clean($this->input->post('programa_aca'));
-                    $asignatura             = $this->security->xss_clean($this->input->post('asignatura'));
+                    $programa_aca           = $this->security->xss_clean(mb_strtoupper($this->input->post('programa_aca'),'UTF-8'));
+                    $asignatura             = $this->security->xss_clean(mb_strtoupper($this->input->post('asignatura'),'UTF-8'));
                     $campos_id              = $this->security->xss_clean($this->input->post('campos_id'));
                     $disciplina_id          = $this->security->xss_clean($this->input->post('disciplina_id'));
                     $subdisciplina_id       = $this->security->xss_clean($this->input->post('subdisciplina_id'));
@@ -913,6 +1443,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['tesis']          = $this->Personacyt_model->tesis($id);
         $data['pais']           = $this->Pages_model->paises();
         $data['dirigido']       = $this->Personacyt_model->sector_dir();
@@ -920,6 +1451,7 @@ class Personacyt extends CI_Controller {
         $data['conocimiento']   = $this->Personacyt_model->conocimiento();
         $data['sector']         = $this->Personacyt_model->sector();
         $data['dependencia']    = $this->Personacyt_model->dependencias();
+        $data['departamento']   = $this->Personacyt_model->departamentos();
         $data['grado']          = $this->Personacyt_model->grado();
         $this->load->view('theme/header');
         $this->load->view('theme/nav');
@@ -935,14 +1467,14 @@ class Personacyt extends CI_Controller {
                 {
                     $fecha_inicio           = $this->security->xss_clean($this->input->post('fecha_inicio'));
                     $fecha_final            = $this->security->xss_clean($this->input->post('fecha_final'));
-                    $conclusion             = $this->security->xss_clean($this->input->post('conclusion'));
-                    $titulo_tesis           = $this->security->xss_clean($this->input->post('titulo_tesis'));
-                    $autor                  = $this->security->xss_clean($this->input->post('autor'));
+                    $conclusion             = $this->security->xss_clean(mb_strtoupper($this->input->post('conclusion'),'UTF-8'));
+                    $titulo_tesis           = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo_tesis'),'UTF-8'));
+                    $autor                  = $this->security->xss_clean(mb_strtoupper($this->input->post('autor'),'UTF-8'));
                     $grado_id               = $this->security->xss_clean($this->input->post('grado_id'));
                     $paises_id              = $this->security->xss_clean($this->input->post('paises_id'));
                     $entidad_empleadora_id  = $this->security->xss_clean($this->input->post('entidad_empleadora_id'));
                     $sectores_id            = $this->security->xss_clean($this->input->post('sectores_id'));
-                    $institucion_resp       = $this->security->xss_clean($this->input->post('institucion_resp'));
+                    $institucion_resp       = $this->security->xss_clean(mb_strtoupper($this->input->post('institucion_resp'),'UTF-8'));
                     $departamento_id        = $this->security->xss_clean($this->input->post('departamento_id'));
                     $campos_id              = $this->security->xss_clean($this->input->post('campos_id'));
                     $disciplina_id          = $this->security->xss_clean($this->input->post('disciplina_id'));
@@ -994,6 +1526,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['capitulos']      = $this->Personacyt_model->capitulos($id);
         $data['autor']          = $this->Personacyt_model->autor();
         $data['pais']           = $this->Pages_model->paises();
@@ -1009,22 +1542,22 @@ class Personacyt extends CI_Controller {
                 if($this->input->method() === 'post')
                 {
                     $fecha_pub         = $this->security->xss_clean($this->input->post('fecha_pub'));
-                    $titulo            = $this->security->xss_clean($this->input->post('titulo'));
-                    $descr_mezclada    = $this->security->xss_clean($this->input->post('descr_mezclada'));
+                    $titulo            = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo'),'UTF-8'));
+                    $descr_mezclada    = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_mezclada'),'UTF-8'));
                     $tipo_autor_id     = $this->security->xss_clean($this->input->post('tipo_autor_id'));
-                    $autor             = $this->security->xss_clean($this->input->post('autor'));
+                    $autor             = $this->security->xss_clean(mb_strtoupper($this->input->post('autor'),'UTF-8'));
                     $paises_id         = $this->security->xss_clean($this->input->post('paises_id'));
                     $total_autor       = $this->security->xss_clean($this->input->post('total_autor'));
                     $num_pag           = $this->security->xss_clean($this->input->post('num_pag'));
                     $num_volumen       = $this->security->xss_clean($this->input->post('num_volumen'));
-                    $editores          = $this->security->xss_clean($this->input->post('editores'));
-                    $editorial         = $this->security->xss_clean($this->input->post('editorial'));
+                    $editores          = $this->security->xss_clean(mb_strtoupper($this->input->post('editores'),'UTF-8'));
+                    $editorial         = $this->security->xss_clean(mb_strtoupper($this->input->post('editorial'),'UTF-8'));
                     $campos_id         = $this->security->xss_clean($this->input->post('campos_id'));
                     $disciplina_id     = $this->security->xss_clean($this->input->post('disciplina_id'));
                     $subdisciplina_id  = $this->security->xss_clean($this->input->post('subdisciplina_id'));
-                    $descr_larga       = $this->security->xss_clean($this->input->post('descr_larga'));
-                    $pal_clave01       = $this->security->xss_clean($this->input->post('pal_clave01'));
-                    $pal_clave02       = $this->security->xss_clean($this->input->post('pal_clave02'));
+                    $descr_larga       = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_larga'),'UTF-8'));
+                    $pal_clave01       = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave01'),'UTF-8'));
+                    $pal_clave02       = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave02'),'UTF-8'));
                     $usuario           = $this->security->xss_clean($this->input->post('usuario_id'));
 
 
@@ -1070,6 +1603,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['articulos']      = $this->Personacyt_model->articulos($id);
         $data['autor']          = $this->Personacyt_model->autor();
         $data['estatus']        = $this->Personacyt_model->estatus_articulo();
@@ -1087,19 +1621,19 @@ class Personacyt extends CI_Controller {
                 if($this->input->method() === 'post')
                 {
                     $fecha_pub              = $this->security->xss_clean($this->input->post('fecha_pub'));
-                    $titulo_articulo        = $this->security->xss_clean($this->input->post('titulo_articulo'));
+                    $titulo_articulo        = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo_articulo'),'UTF-8'));
                     $tipo_autor_id          = $this->security->xss_clean($this->input->post('tipo_autor_id'));
-                    $autor                  = $this->security->xss_clean($this->input->post('autor'));
+                    $autor                  = $this->security->xss_clean(mb_strtoupper($this->input->post('autor'),'UTF-8'));;
                     $estatus_articulo_id    = $this->security->xss_clean($this->input->post('estatus_articulo_id'));
                     $paises_id              = $this->security->xss_clean($this->input->post('paises_id'));
                     $total_autor            = $this->security->xss_clean($this->input->post('total_autor'));
                     $num_volumen            = $this->security->xss_clean($this->input->post('num_volumen'));
-                    $coautor                = $this->security->xss_clean($this->input->post('coautor'));
-                    $rev_publicacion        = $this->security->xss_clean($this->input->post('rev_publicacion'));
+                    $coautor                = $this->security->xss_clean(mb_strtoupper($this->input->post('coautores'),'UTF-8'));
+                    $rev_publicacion        = $this->security->xss_clean(mb_strtoupper($this->input->post('rev_publicacion'),'UTF-8'));
                     $campos_id              = $this->security->xss_clean($this->input->post('campos_id'));
                     $disciplina_id          = $this->security->xss_clean($this->input->post('disciplina_id'));
                     $subdisciplina_id       = $this->security->xss_clean($this->input->post('subdisciplina_id'));
-                    $descr_larga            = $this->security->xss_clean($this->input->post('descr_larga'));
+                    $descr_larga            = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_larga'),'UTF-8'));
                     $usuario                = $this->security->xss_clean($this->input->post('usuario_id'));
 
 
@@ -1141,6 +1675,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['libro']          = $this->Personacyt_model->libros($id);
         $data['autor']          = $this->Personacyt_model->autor();
         $data['librox']         = $this->Personacyt_model->librox();
@@ -1161,21 +1696,21 @@ class Personacyt extends CI_Controller {
                     $fecha_pub              = $this->security->xss_clean($this->input->post('fecha_pub'));
                     $tipo_libro_id          = $this->security->xss_clean($this->input->post('tipo_libro_id'));
                     $tipo_autor_id          = $this->security->xss_clean($this->input->post('tipo_autor_id'));
-                    $isbn                   = $this->security->xss_clean($this->input->post('isbn'));
-                    $titulo_libro           = $this->security->xss_clean($this->input->post('titulo_libro'));
+                    $isbn                   = $this->security->xss_clean(mb_strtoupper($this->input->post('isbn'),'UTF-8'));
+                    $titulo_libro           = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo_libro'),'UTF-8'));
                     $total_autor            = $this->security->xss_clean($this->input->post('total_autor'));
-                    $autor                  = $this->security->xss_clean($this->input->post('autor'));
-                    $titulo_libro           = $this->security->xss_clean($this->input->post('titulo_libro'));
+                    $autor                  = $this->security->xss_clean(mb_strtoupper($this->input->post('autor'),'UTF-8'));
+                    $titulo_libro           = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo_libro'),'UTF-8'));
                     $paises_id              = $this->security->xss_clean($this->input->post('paises_id'));
                     $num_pag                = $this->security->xss_clean($this->input->post('num_pag'));
                     $num_volumen            = $this->security->xss_clean($this->input->post('num_volumen'));
                     $lenguaje_id            = $this->security->xss_clean($this->input->post('lenguaje_id'));
-                    $editores               = $this->security->xss_clean($this->input->post('editores'));
-                    $editorial              = $this->security->xss_clean($this->input->post('editorial'));
+                    $editores               = $this->security->xss_clean(mb_strtoupper($this->input->post('editores'),'UTF-8'));
+                    $editorial              = $this->security->xss_clean(mb_strtoupper($this->input->post('editorial'),'UTF-8'));
                     $campos_id              = $this->security->xss_clean($this->input->post('campos_id'));
                     $disciplina_id          = $this->security->xss_clean($this->input->post('disciplina_id'));
                     $subdisciplina_id       = $this->security->xss_clean($this->input->post('subdisciplina_id'));
-                    $descr_larga            = $this->security->xss_clean($this->input->post('descr_larga'));
+                    $descr_larga            = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_larga'),'UTF-8'));
                     $usuario                = $this->security->xss_clean($this->input->post('usuario_id'));
 
 
@@ -1222,6 +1757,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['reporte']        = $this->Personacyt_model->reportes($id);
         $data['autor']          = $this->Personacyt_model->autor();
         $data['librox']         = $this->Personacyt_model->librox();
@@ -1238,15 +1774,15 @@ class Personacyt extends CI_Controller {
             {
                 if($this->input->method() === 'post')
                 {
-                    $titulo_reporte     = $this->security->xss_clean($this->input->post('titulo_reporte'));
-                    $nombre_entidad     = $this->security->xss_clean($this->input->post('nombre_entidad'));
-                    $descr_general      = $this->security->xss_clean($this->input->post('descr_general'));
+                    $titulo_reporte     = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo_reporte'),'UTF-8'));
+                    $nombre_entidad     = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_entidad'),'UTF-8'));
+                    $descr_general      = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_general'),'UTF-8'));
                     $tipo_autor_id      = $this->security->xss_clean($this->input->post('tipo_autor_id'));
                     $fecha_reporte      = $this->security->xss_clean($this->input->post('fecha_reporte'));
                     $num_pag            = $this->security->xss_clean($this->input->post('num_pag'));
                     $total_autores      = $this->security->xss_clean($this->input->post('total_autores'));
-                    $autor              = $this->security->xss_clean($this->input->post('autor'));
-                    $descipcion_larga   = $this->security->xss_clean($this->input->post('descipcion_larga'));
+                    $autor              = $this->security->xss_clean(mb_strtoupper($this->input->post('autor'),'UTF-8'));
+                    $descipcion_larga   = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_larga'),'UTF-8'));
                     $usuario            = $this->security->xss_clean($this->input->post('usuario_id'));
 
 
@@ -1284,7 +1820,8 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
-        $data['resena']         = $this->Personacyt_model->resenas($id);
+        $data['rimm']           = $this->Personacyt_model->rim($id);
+        $data['resenas']        = $this->Personacyt_model->resenas($id);
         $data['autor']          = $this->Personacyt_model->autor();
         $data['publicacion']    = $this->Personacyt_model->tipo_publicacion();
         $data['pais']           = $this->Pages_model->paises();
@@ -1300,20 +1837,20 @@ class Personacyt extends CI_Controller {
             {
                 if($this->input->method() === 'post')
                 {
-                    $titulo                 = $this->security->xss_clean($this->input->post('titulo'));
-                    $autor                  = $this->security->xss_clean($this->input->post('autor'));
+                    $titulo                 = $this->security->xss_clean(mb_strtoupper($this->input->post('titulo'),'UTF-8'));
+                    $autor                  = $this->security->xss_clean(mb_strtoupper($this->input->post('autor'),'UTF-8'));
                     $tipo_autor_id          = $this->security->xss_clean($this->input->post('tipo_autor_id'));
                     $fecha_pub              = $this->security->xss_clean($this->input->post('fecha_pub'));
                     $tipo_publicacion_id    = $this->security->xss_clean($this->input->post('tipo_publicacion_id'));
                     $total_autores          = $this->security->xss_clean($this->input->post('total_autores'));
-                    $comentarios            = $this->security->xss_clean($this->input->post('comentarios'));
+                    $comentarios            = $this->security->xss_clean(mb_strtoupper($this->input->post('comentarios'),'UTF-8'));
                     $paises_id              = $this->security->xss_clean($this->input->post('paises_id'));
-                    $pag_inicio             = $this->security->xss_clean($this->input->post('pag_inicio'));
+                    $pag_inicio             = $this->security->xss_clean($this->input->post('pag_inicial'));
                     $pag_final              = $this->security->xss_clean($this->input->post('pag_final'));
                     $campos_id              = $this->security->xss_clean($this->input->post('campos_id'));
                     $disciplina_id          = $this->security->xss_clean($this->input->post('disciplina_id'));
                     $subdisciplina_id       = $this->security->xss_clean($this->input->post('subdisciplina_id'));
-                    $descripcion_larga      = $this->security->xss_clean($this->input->post('descripcion_larga'));
+                    $descripcion_larga      = $this->security->xss_clean(mb_strtoupper($this->input->post('descripcion_larga'),'UTF-8'));
                     $usuario                = $this->security->xss_clean($this->input->post('usuario_id'));
 
 
@@ -1362,6 +1899,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']               = $this->Personacyt_model->rim($id);
         $data['financiamiento']     = $this->Personacyt_model->financiamientos($id);
         $data['apoyo']              = $this->Personacyt_model->tipo_apoyo();
         $data['programa']           = $this->Personacyt_model->tipo_programa();
@@ -1379,9 +1917,9 @@ class Personacyt extends CI_Controller {
                     $tipo_programa_id   = $this->security->xss_clean($this->input->post('tipo_programa_id'));
                     $fecha_inicio       = $this->security->xss_clean($this->input->post('fecha_inicio'));
                     $fecha_final        = $this->security->xss_clean($this->input->post('fecha_final'));
-                    $palabra_clave_1        = $this->security->xss_clean($this->input->post('palabra_clave_1'));
-                    $palabra_clave_2        = $this->security->xss_clean($this->input->post('palabra_clave_2'));
-                    $palabra_clave_3        = $this->security->xss_clean($this->input->post('palabra_clave_3'));
+                    $palabra_clave_1    = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave01'),'utf-8'));
+                    $palabra_clave_2    = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave02'),'utf-8'));
+                    $palabra_clave_3    = $this->security->xss_clean(mb_strtoupper($this->input->post('pal_clave03'),'utf-8'));
                     $usuario            = $this->security->xss_clean($this->input->post('usuario_id'));
 
 
@@ -1416,10 +1954,12 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['grupos']         = $this->Personacyt_model->grupos($id);
         $data['conocimiento']   = $this->Personacyt_model->conocimiento();
         $data['sector']         = $this->Personacyt_model->sector();
         $data['dependencia']    = $this->Personacyt_model->dependencias();
+        $data['departamento']     = $this->Personacyt_model->departamentos();
 
 
         $this->load->view('theme/header');
@@ -1432,18 +1972,18 @@ class Personacyt extends CI_Controller {
             {
                 if($this->input->method() === 'post')
                 {
-                    $nombre_grupo       = $this->security->xss_clean($this->input->post('nombre_grupo'));
+                    $nombre_grupo       = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_grupo'),'utf-8'));
                     $es_lider           = $this->security->xss_clean($this->input->post('es_lider'));
-                    $nombre_lider       = $this->security->xss_clean($this->input->post('nombre_lider'));
+                    $nombre_lider       = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_lider'),'utf-8'));
                     $sectores_id        = $this->security->xss_clean($this->input->post('sectores_id'));
                     $institucion_resp   = $this->security->xss_clean($this->input->post('institucion_resp'));
                     $dependencia_id     = $this->security->xss_clean($this->input->post('dependencia_id'));
                     $departamento_id    = $this->security->xss_clean($this->input->post('departamento_id'));
-                    $descr_grupo        = $this->security->xss_clean($this->input->post('descr_grupo'));
-                    $logros             = $this->security->xss_clean($this->input->post('logros'));
-                    $actividades        = $this->security->xss_clean($this->input->post('actividades'));
-                    $colaboracion       = $this->security->xss_clean($this->input->post('colaboracion'));
-                    $comentarios        = $this->security->xss_clean($this->input->post('comentarios'));
+                    $descr_grupo        = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_grupo'),'utf-8'));
+                    $logros             = $this->security->xss_clean(mb_strtoupper($this->input->post('logros'),'utf-8'));
+                    $actividades        = $this->security->xss_clean(mb_strtoupper($this->input->post('actividades'),'utf-8'));
+                    $colaboracion       = $this->security->xss_clean(mb_strtoupper($this->input->post('colaboracion'),'utf-8'));
+                    $comentarios        = $this->security->xss_clean(mb_strtoupper($this->input->post('comentarios'),'utf-8'));
                     $usuario            = $this->security->xss_clean($this->input->post('usuario_id'));
 
 
@@ -1483,6 +2023,7 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['patentes']       = $this->Personacyt_model->patentes($id);
         $data['paten']          = $this->Personacyt_model->tipo_patente();
         $data['conocimiento']   = $this->Personacyt_model->conocimiento();
@@ -1501,19 +2042,19 @@ class Personacyt extends CI_Controller {
                 if($this->input->method() === 'post')
                 {
                     $tipo_patente_id        = $this->security->xss_clean($this->input->post('tipo_patente_id'));
-                    $num_registro           = $this->security->xss_clean($this->input->post('num_registro'));
-                    $nombre_patente         = $this->security->xss_clean($this->input->post('nombre_patente'));
-                    $descr_patente          = $this->security->xss_clean($this->input->post('descr_patente'));
+                    $num_registro           = $this->security->xss_clean(mb_strtoupper($this->input->post('num_registro'),'utf-8'));
+                    $nombre_patente         = $this->security->xss_clean(mb_strtoupper($this->input->post('nombre_patente'),'utf-8'));
+                    $descr_patente          = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_patente'),'utf-8'));;
                     $tipo_autor_id          = $this->security->xss_clean($this->input->post('tipo_autor_id'));
                     $total_autor            = $this->security->xss_clean($this->input->post('total_autor'));
-                    $coautor                = $this->security->xss_clean($this->input->post('coautor'));
-                    $descr_beneficiarios    = $this->security->xss_clean($this->input->post('descr_beneficiarios'));
+                    $coautor                = $this->security->xss_clean(mb_strtoupper($this->input->post('coautores'),'utf-8'));;
+                    $descr_beneficiarios    = $this->security->xss_clean(mb_strtoupper($this->input->post('descr_beneficiarios'),'utf-8'));
                     $paises_id              = $this->security->xss_clean($this->input->post('paises_id'));
                     $anio_publicacion       = $this->security->xss_clean($this->input->post('anio_publicacion'));
                     $economico_id           = $this->security->xss_clean($this->input->post('economico_id'));
                     $rama_id                = $this->security->xss_clean($this->input->post('rama_id'));
                     $clase_id               = $this->security->xss_clean($this->input->post('clase_id'));
-                    $descripcion_detallada  = $this->security->xss_clean($this->input->post('descripcion_detallada'));
+                    $descripcion_detallada  = $this->security->xss_clean(mb_strtoupper($this->input->post('descripcion_detallada'),'utf-8'));
                     $usuario                = $this->security->xss_clean($this->input->post('usuario_id'));
 
 
@@ -1556,9 +2097,11 @@ class Personacyt extends CI_Controller {
             redirect('personacyt');
         }
         $id = $this->session->userdata('id_usuario');
+        $data['rimm']           = $this->Personacyt_model->rim($id);
         $data['proyectos']      = $this->Personacyt_model->proyectos($id);
         $data['sector']         = $this->Personacyt_model->sector();
         $data['dependencia']    = $this->Personacyt_model->dependencias();
+        $data['departamento']     = $this->Personacyt_model->departamentos();
         $data['economico']      = $this->Personacyt_model->economico();
         $data['conocimiento']   = $this->Personacyt_model->conocimiento();
         $data['proyecto']       = $this->Personacyt_model->tipo_proyecto();
@@ -1629,19 +2172,7 @@ class Personacyt extends CI_Controller {
             }
 
 
-    public function constancia($slug = null)
-    {
-        $data['registro'] = $this->Personacyt_model->Constancias($slug);
 
-        if (empty($data['registro'])) {
-            //redirect('personacyt/constancia');
-        }
-
-        $this->load->view('theme/header');
-        $this->load->view('theme/nav');
-        $this->load->view('pages/personacyt/constancia');
-        $this->load->view('theme/footer');
-    }
 
 
 

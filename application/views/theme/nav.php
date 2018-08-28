@@ -7,8 +7,8 @@
                     <div class="c-navbar-wrapper clearfix">
                         <div class="c-brand c-pull-left">
                             <a href="<?=base_url();?>" class="c-logo">
-                                <img src="<?=base_url();?>assets/img/infocyt.png" alt="INFOCYT" class="c-desktop-logo" width="250px" heigth="85px">
-                                <img src="<?=base_url();?>assets/img/infocyt.png" alt="INFOCYT" class="c-desktop-logo-inverse" width="120px" heigth="30px">
+                                <img src="<?=base_url();?>assets/img/infocyt.png" alt="INFOCYT" class="c-desktop-logo" width="180px" heigth="60px">
+                                <img src="<?=base_url();?>assets/img/infocyt.png" alt="INFOCYT" class="c-desktop-logo-inverse" width="105px" heigth="30px">
                                 <img src="<?=base_url();?>assets/img/infocyt.png" alt="INFOCYT" class="c-mobile-logo" width="110px" heigth="30px"> 
                             </a>
                             <button class="c-hor-nav-toggler" type="button" data-target=".c-mega-menu">
@@ -43,6 +43,12 @@
                                         <span class="c-arrow c-toggler"></span>
                                     </a>
                                 </li>
+                                <!--
+                                <li>
+                                    <a href="<?=base_url('contacto');?>" class="c-link dropdown-toggle">CONTACTO
+                                        <span class="c-arrow c-toggler"></span>
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="<?=base_url('consultas');?>" class="c-link dropdown-toggle">CONSULTAS
                                         <span class="c-arrow c-toggler"></span>
@@ -58,6 +64,7 @@
                                         <span class="c-arrow c-toggler"></span>
                                     </a>
                                 </li>
+                                -->
                                 <li>
                                     <a href="<?=base_url('contacto');?>" class="c-link dropdown-toggle">CONTACTO
                                         <span class="c-arrow c-toggler"></span>

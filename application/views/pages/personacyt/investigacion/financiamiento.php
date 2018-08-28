@@ -1,4 +1,4 @@
- <?php
+<?php 
       $user             = $this->session->userdata('id_usuario');
       $nombre           = $this->session->userdata('nombre');
       $a_paterno        = $this->session->userdata('a_paterno');
@@ -9,60 +9,256 @@
       $rim              = $this->session->userdata('num_rim');
       $nombre_completo  = $nombre .' '.$a_paterno .' '.$a_materno;
 
-
-$rim_u = 1;
-    $fecha1="2018";
-    $fecha="12-08-2017";
-    $diff = strtotime($fecha) - strtotime(date('d-m-Y'));
-    $dias = $diff/(60*60*24);
-    $ano = $fecha - date('Y');
-
-    $a = intval($ano);
-    $d = intval($dias); 
-
-    if ($a >= 0) 
-    {
-        if ($a == 1 AND $rim_u == 1) {
-            $verificacion = " En: <b>". $a ." Año</b>"; 
-            $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-        } else {
-            $verificacion = " En: <b>". $a ." Años</b>"; 
-            $u_rim = '<i class="fas fa-check"></i><b class="text-green">Aprobado: </b> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-        }
-
-        
-    }
-    if ($a <= 0) {
-        if ($d == 1 AND $rim_u == 1) {
-            $verificacion = " En: <b>". $d ." Día</b>";
-            $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-        } else {
-            $verificacion = " En: <b>". $d ." Dias</b>";
-            $u_rim = '<i class="fas fa-check"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-        }
-    }
-
-    if ($d == 0) {
-        $verificacion = "<b class='text-orange'>Hoy último día</b>";
-        $u_rim = '<i class="fas fa-times"></i><span class="text-green"> Aprobado: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-    } else if($d <= 0 AND $rim_u == 1) {
-        $verificacion = "<i class='fas fa-times'></i> <span class='text-red'> Vencido</span>";
-        $u_rim = '<i class="fas fa-times"></i><span class="text-red"> Vencido: </span> <a href="#" target="_blank">RIM_'.$rim.'</a>';
-    }
-
-      
-
-      if ( $a >= 0 AND $a <= 0 AND $d == 0) {
-          
-      }else if ($rim_u == 2) {
-          $u_rim = '<i class="fas fa-times"></i> <b class="text-orange"> Pendiente: </b> RIM_'.$rim;
-      }
-
     if(!$user)
     {
       redirect('login','refresh');
       exit();
     }
+
+    if($rimm !== FALSE) 
+    {
+      foreach ($rimm as $r) 
+      {
+        $rim = $r->num_rim;
+        $aprobacion = $r->fecha_aprobacion;
+        $vigencia = $r->fecha_vigencia;
+        $estado_rim = $r->status_rim;
+      }
+    }
+
+///////////////////////////////////////////////////////////////////////////
+//
+// OPCIONES PARA FECHAS
+//
+///////////////////////////////////////////////////////////////////////////
+
+      $fecha = $vigencia;
+      $diff = strtotime($fecha) - strtotime(date('d-m-Y'));
+      $dias = $diff/(60*60*24);
+      $fech = date("Y", strtotime($fecha));
+      $ano = $fech - date('Y');
+      $a = intval($ano);
+      $d = intval($dias);
+      setlocale(LC_ALL,"es_ES");
+      $vigencia = strftime("%d %B %Y", strtotime(str_replace('-','/', $vigencia)));
+
+///////////////////////////////////////////////////////////////////////////
+//
+// OPCIONES DE AVISO REIM A USUARIO
+//
+///////////////////////////////////////////////////////////////////////////
+
+
+//--------------------------------------------------------------------------
+// MUESTRA LOS AVISOS DE VIGENCIA SEGUN EL ESTADO REIM
+//--------------------------------------------------------------------------
+
+
+// MUESTRA LOS AVISOS SI LA OPCIÓN ES PENDIENTE = 1
+
+    if ($estado_rim == 1)
+    {
+    
+      if ($aprobacion === '0000-00-00' && $fecha === '0000-00-00') 
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> Pendiente: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-clock"></i> [Pendiente]';
+        $dura = '<i class="far fa-clock"></i> [Pendiente]';
+        $info = 'Estimado usuario, el registro de investigador se encuentra Pendiente de aprobación, le sugerimos esté pendiente del mismo.';
+        $color = 'yellow-1';
+
+      }
+      else if ($aprobacion != '0000-00-00' && $fecha === '0000-00-00') 
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> Pendiente: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $dura = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $info = 'Estimado usuario, el registro de investigador se encuentra Pendiente de aprobación, le sugerimos esté pendiente del mismo.';
+        $color = 'yellow-1';
+      }
+      else if ($aprobacion == '0000-00-00' && $fecha != '0000-00-00') 
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> Pendiente: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $dura = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $info = 'Estimado usuario, el registro de investigador se encuentra Pendiente de aprobación, le sugerimos esté pendiente del mismo.';
+        $color = 'yellow-1';
+      }
+      else
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> Pendiente: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $dura = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $info = 'Estimado usuario, el registro de investigador se encuentra Pendiente de aprobación, le sugerimos esté pendiente del mismo.';
+        $color = 'yellow-1';      
+      }
+
+// MUESTRA LOS AVISOS SI LA OPCIÓN ES APROBADO = 2
+  
+    }
+    elseif ($estado_rim == 2) 
+    {
+      
+        if ($aprobacion == '0000-00-00' && $fecha == '0000-00-00') 
+        {
+          $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> No confirmado:</span> REIM_'.$rim;
+          $verificacion = '<i class="far fa-calendar-alt"></i> [No Confirmado]';
+          $dura = '<i class="far fa-calendar-alt"></i> [No Confirmado]';
+          $info = 'Estimado usuario, el registro de investigador aún no está confirmado, le sugerimos esté pendiente del mismo.';
+          $color = 'yellow-3';       
+        }
+        else if ($aprobacion != '0000-00-00' && $fecha == '0000-00-00') 
+        {
+          $u_rim = '<i class="fas fa-check"></i><span class="text-green">Aprobado: <a href="#" target="_blank">REIM_'.$rim.'</a>';
+          $dura = '<i class="far fa-calendar-alt"></i>  ' . date("Y", strtotime($aprobacion)) . ' - <i class="far fa-question-circle"></i>'; 
+          $verificacion = '<i class="far fa-calendar-alt"></i> [No Confirmado]';
+          $info = 'Estimado usuario, el registro de investigador está aprobado, peró no cuenta con vigencía, le sugerimos esté pendiente del mismo.';
+          $color = 'green-1';            
+        }
+        else if ($aprobacion == '0000-00-00' && $fecha != '0000-00-00') 
+        {
+          $u_rim = '<i class="far fa-clock"></i><span class="text-orange"> No confirmado:</span> REIM_'.$rim;
+          $dura = '<i class="far fa-calendar-alt"></i>  <i class="far fa-question-circle"></i> - ' . date("Y", strtotime($fecha));
+          $verificacion = '<i class="far fa-clock"></i> [No Confirmado]';
+          $info = 'Estimado usuario, el registro de investigador actualmente cuenta con vigencia pero aún no está confirmado, le sugerimos esté pendiente del mismo.';
+          $color = 'yellow-2';   
+        }else
+        {
+
+            if ($a > 0) 
+            {
+                if ($a != 1) 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green">Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = " En: <b>". $a ." Años</b>";
+                   
+                }
+                else
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green">Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = 'En: <b>'. $a . ' Año</b>';
+                }
+          }
+
+            if ($a <= 0) 
+            {
+                if ($d > 1) 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = " En: <b>". $d ." Dias</b>"; 
+                }
+                else 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = " En: <b>". $d ." Día</b>";
+                }
+
+
+                if ($d == 0) 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-green"> Aprobado: </span> <a href="#" target="_blank">REIM_'.$rim.'</a>';
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>'; 
+                    $verificacion = "<span class='text-orange'>Hoy último día</span>";
+                }
+                else if ($d < 0) 
+                {
+                    $u_rim = '<i class="far fa-id-badge"></i>   <span class="text-red"> Vencida: </span> REIM_'.$rim;
+                    $dura = '<i class="far fa-calendar-alt"></i>   <b>' . date("Y", strtotime($aprobacion)) . '</b> a <b>' . date("Y", strtotime($fecha)) . '</b>';
+                    $verificacion = '<i class="far fa-calendar"></i> Vencio el: <br><span class="text-red">'.$vigencia.'</span>';
+                    $info = 'Estimado usuario, el registro de investigador actualmente perdio su vigencia, le sugerimos realize la renovación.';
+                    $color = 'red-1';
+                     
+                }
+
+            }//FIN DEL if ($a <= 0)        
+
+        }//FIN DEL ELSE EN EL IF 2
+    }// FIN DEL elseif ($estado_rim == 2) 
+    elseif ($estado_rim == 3) 
+    {
+
+      // MUESTRA LOS AVISOS SI LA OPCIÓN ES VENCIDO = 3
+      if ($aprobacion === '0000-00-00' && $fecha === '0000-00-00') 
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-danger"> Vencido: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-clock"></i> [Vencida]';
+        $dura = '<i class="far fa-clock"></i> [Vencida]';
+        $info = 'Estimado usuario, el registro de investigador actualmente no cuenta con vigencia, le sugerimos realize una renovación del mismo.';
+        $color = 'red-1';
+      }
+      else if ($aprobacion != '0000-00-00' && $fecha === '0000-00-00') 
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-danger"> Vencido: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $dura = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $info = 'Estimado usuario, el registro de investigador actualmente no cuenta con vigencia, le sugerimos realize una renovación del mismo.';
+        $color = 'red-1';
+      }
+      else if ($aprobacion == '0000-00-00' && $fecha != '0000-00-00') 
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-danger"> Vencido: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $dura = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $info = 'Estimado usuario, el registro de investigador actualmente no cuenta con vigencia, le sugerimos realize una renovación del mismo.';
+        $color = 'red-1';
+      }
+      else
+      {
+        $u_rim = '<i class="far fa-clock"></i><span class="text-danger"> Vencido: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $dura = '<i class="far fa-calendar-alt"></i> [Por Confirmar]';
+        $info = 'Estimado usuario, el registro de investigador actualmente no cuenta con vigencia, le sugerimos realize una renovación del mismo.';
+        $color = 'red-1';      
+      } 
+
+    }// FIN DEL elseif ($estado_rim == 3) 
+    elseif ($estado_rim == 4)
+    {
+      // MUESTRA LOS AVISOS SI LA OPCIÓN ES CANCELADO = 4
+      if ($aprobacion === '0000-00-00' && $fecha === '0000-00-00') 
+      {
+        $u_rim = '<i class="fas fa-ban"></i><span class="text-default"> Cancelado: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="fas fa-ban"></i> [Cancelado]';
+        $dura = '<i class="fas fa-ban"></i> [Cancelado]';
+        $info = 'Estimado usuario, el registro de investigador está cancelado, le sugerimos realize una renovación del mismo ó solicite asesoría.';
+        $color = 'grey-3';
+      }
+      else if ($aprobacion != '0000-00-00' && $fecha === '0000-00-00') 
+      {
+        $u_rim = '<i class="fas fa-ban"></i><span class="text-default"> Cancelado: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="fas fa-ban"></i> [Cancelado]';
+        $dura = '<i class="fas fa-ban"></i> [Cancelado]';
+        $info = 'Estimado usuario, el registro de investigador está cancelado, le sugerimos realize una renovación del mismo ó solicite asesoría.';
+        $color = 'grey-3';
+      }
+      else if ($aprobacion == '0000-00-00' && $fecha != '0000-00-00') 
+      {
+        $u_rim = '<i class="fas fa-ban"></i><span class="text-default"> Cancelado: REIM_'.$rim.'</span>';
+        $verificacion = '<i class="fas fa-ban"></i> [Cancelado]';
+        $dura = '<i class="fas fa-ban"></i> [Cancelado]';
+        $info = 'Estimado usuario, el registro de investigador está cancelado, le sugerimos realize una renovación del mismo ó solicite asesoría.';
+        $color = 'grey-3';
+      }
+      else
+      {
+        $u_rim = '<i class="fas fa-ban"></i>   <span class="text-default"> Cancelado: </span> REIM_'.$rim;
+        $verificacion = '<i class="fas fa-ban"></i> [Cancelado]';
+        $dura = '<i class="fas fa-ban"></i> [Cancelado]';
+        $info = 'Estimado usuario, el registro de investigador está cancelado, le sugerimos realize una renovación del mismo ó solicite asesoría.';
+        $color = 'grey-3';
+      }     
+
+    }// FIN DEL elseif ($estado_rim == 4)
+    else
+    {
+        $u_rim = '<i class="fas fa-times"></i>   <span class="text-default"> ERROR </span>';
+        $verificacion = '<i class="fas fa-times"></i> ERROR';
+        $dura = '<i class="fas fa-times"></i> ERROR';
+    }// FIN DEL ELSE
 ?>
 <!-- BEGIN: PAGE CONTAINER -->
 <div class="c-layout-page">
@@ -87,7 +283,7 @@ $rim_u = 1;
             <?php if($this->session->flashdata('success')){ ?>
 
                     <!-- BEGIN: CONTENT/MISC/COOKIES-5 -->
-                    <div class="c-cookies-bar c-cookies-bar-2 c-cookies-bar-top-left c-theme-bg c-rounded wow animate fadeInLeft" data-wow-delay=".5s" data-wow-duration="2s">
+                    <div class="c-cookies-bar c-cookies-bar-2 c-cookies-bar-top-left c-theme-bg c-rounded wow animate fadeInLeft" data-wow-delay=".5s">
                         <div class="c-cookies-bar-container">
                             <div class="row">
                                 <div class="col-md-9">
@@ -185,9 +381,8 @@ $rim_u = 1;
                             <table class="table display responsive no-wrap" width="100%" id="tablePersonacyt">
                                  <thead>
                              <tr>
-                                <th><i class='fas fa-calendar' aria-hidden='true'></i> FECHA</th>
                                 <th><i class='fas fa-list-ul' aria-hidden='true'></i> APOYO</th>
-                                <th><i class='fas fa-list-ul' aria-hidden='true'></i> PROGRAMA</th>
+                                <th><i class='fas fa-bookmark' aria-hidden='true'></i> PROGRAMA</th>
                                 <th><i class='fas fa-file-pdf' aria-hidden='true'></i> CONSTANCIA</th>
                              </tr>
                              </thead>
@@ -201,10 +396,9 @@ $rim_u = 1;
 
                                 echo '
                                     <tr>
-                                        <td>'.$t->fecha_inicio.' | '.$t->fecha_final.'</td>
                                         <td>'.$t->nombre_apoyo.'</td>
                                         <td>'.$t->nombre_programa.'</td>
-                                        <td class="center"><a href="'.base_url('pdf/').$t->id_financiamiento.'" target="_blank"><button type="button" class="btn btn-md c-btn-red c-btn-square c-btn-border-2x btn-block" data-toggle="tooltip" data-placement="bottom" title="'.$t->tipo_apoyo_id.'"><i class="far fa-file-pdf" aria-hidden="true"></i></button></a></td>
+                                        <td class="center"><a href="'.base_url('financiamiento_pdf/').$t->id_financiamiento.'" target="_blank"><button type="button" class="btn btn-md c-btn-red c-btn-square c-btn-border-2x btn-block" data-toggle="tooltip" data-placement="bottom" title="'.$t->tipo_apoyo_id.'"><i class="far fa-file-pdf" aria-hidden="true"></i></button></a></td>
                                     </tr>
                                 ';
                             }
@@ -248,7 +442,7 @@ $rim_u = 1;
             <!-- Modal Body -->
             <div class="modal-body">
                 
-                <?php $atrib = array('id' => 'registro', 'autocomplete'=> 'off');
+                <?php $atrib = array('id' => 'registro_personacyt', 'autocomplete'=> 'off');
                             echo form_open('personacyt/alta_financiamiento', $atrib); ?>
                      <div class="row">
                         <div class="col-md-6">
@@ -264,26 +458,26 @@ $rim_u = 1;
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-text" for="otorgante">FECHA DE INICIO:</label>
-                            <input type="date" min="1960" max="2025" step="1" class="form-control c-theme c-square input-lg" id="fecha_inicio" name="fecha_inicio" placeholder="2021"/>
+                            <input type="text" class="form-control c-theme c-square input-lg" id="fecha_inicio" name="fecha_inicio" placeholder="YYYY/MM/DD"/>
                         </div>
                         <div class="col-md-6">
                             <label class="form-text" for="otorgante">FECHA DE FINALIZACIÓN:</label>
-                            <input type="date" min="1960" max="2025" step="1" class="form-control c-theme c-square input-lg" id="fecha_final" name="fecha_final" placeholder="2021"/>
+                            <input type="text" class="form-control c-theme c-square input-lg" id="fecha_final" name="fecha_final" placeholder="YYYY/MM/DD"/>
                         </div>
                     </div>
                     <br>
                     <div class="row">    
                         <div class="col-md-4">
                             <label class="form-text" for="otorgante">PALABRAS CLAVE 1:</label>
-                            <textarea rows="4" maxlength="250" class="form-control c-theme c-square input-lg" id="palabra_clave_1" name="palabra_clave_1" style="text-transform: uppercase;"/></textarea>
+                            <textarea rows="4" maxlength="250" class="form-control c-theme c-square input-lg" id="pal_clave01" name="pal_clave01" style="text-transform: uppercase;"/></textarea>
                         </div>
                         <div class="col-md-4">
                             <label class="form-text" for="otorgante">PALABRAS CLAVE 2:</label>
-                            <textarea rows="4" maxlength="250" class="form-control c-theme c-square input-lg" id="palabra_clave_2" name="palabra_clave_2" style="text-transform: uppercase;"/></textarea>
+                            <textarea rows="4" maxlength="250" class="form-control c-theme c-square input-lg" id="pal_clave02" name="pal_clave02" style="text-transform: uppercase;"/></textarea>
                         </div>
                         <div class="col-md-4">
                             <label class="form-text" for="otorgante">PALABRAS CLAVE 3:</label>
-                            <textarea rows="4" maxlength="250" class="form-control c-theme c-square input-lg" id="palabra_clave_3" name="palabra_clave_3" style="text-transform: uppercase;"/></textarea>
+                            <textarea rows="4" maxlength="250" class="form-control c-theme c-square input-lg" id="pal_clave03" name="pal_clave03" style="text-transform: uppercase;"/></textarea>
                         </div>
                     </div>
                     <br>

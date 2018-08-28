@@ -96,7 +96,7 @@ class Personacyt_model extends CI_Model {
     public function congresos($id)
     {
         $this->db->select('*');
-        $this->db->from('congresos');
+        $this->db->from('reg_congresos');
         $this->db->join('paises p','paises_id = p.id_paises','inner');
         $this->db->where('usuario_id',$id);
 
@@ -114,14 +114,14 @@ class Personacyt_model extends CI_Model {
     //REGISTRA EL CONTENIDO PARA LOS CONGRESOS
     public function alta_congreso($data)
     {
-        return $this->db->insert('congresos', $data);
+        return $this->db->insert('reg_congresos', $data);
     }
 
     //ELIMINA EL CONTENIDO PARA LOS CONGRESOS
     public function delete_congreso($id)
     {
         $this->db->where('id_congresos',$id);
-        $this->db->delete('congresos');
+        $this->db->delete('reg_congresos');
         return true;
     }
 
@@ -131,7 +131,7 @@ class Personacyt_model extends CI_Model {
     public function reconocimientos($id)
     {
         $this->db->select('*');
-        $this->db->from('reconocimientos');
+        $this->db->from('reg_reconocimientos');
         $this->db->join('paises p','paises_id = p.id_paises','inner');
         $this->db->where('usuario_id',$id);
 
@@ -149,7 +149,7 @@ class Personacyt_model extends CI_Model {
             //REGISTRA EL CONTENIDO PARA LOS RECONOCIMIENTOS
             public function alta_reconocimientos($data)
             {
-                return $this->db->insert('reconocimientos', $data);
+                return $this->db->insert('reg_reconocimientos', $data);
             }
 
 
@@ -157,7 +157,7 @@ class Personacyt_model extends CI_Model {
     public function idiomas($id)
     {
         $this->db->select('*');
-        $this->db->from('idiomas');
+        $this->db->from('reg_idiomas');
         $this->db->join('lenguaje l','lenguaje_id = l.id_lenguaje','inner');
         $this->db->where('usuario_id',$id);
 
@@ -187,7 +187,7 @@ class Personacyt_model extends CI_Model {
             //REGISTRA EL CONTENIDO PARA LOS RECONOCIMIENTOS
             public function alta_idiomas($data)
             {
-                return $this->db->insert('idiomas', $data);
+                return $this->db->insert('reg_idiomas', $data);
             }
 
 
@@ -273,13 +273,15 @@ class Personacyt_model extends CI_Model {
                 return $data;
             }
 
-            function departamentos($dependencia_id)
+            //REGISTRA EL CONTENIDO PARA LOS DEPARTAMENTOS
+            public function departamentos()
             {
-                return $this->db->select('id_departamentos, descr_departamentos')
-                                ->from('departamentos')
-                                ->where(array('dependencia_id' => $dependencia_id) )
-                                ->order_by('descr_departamentos','ASC')
-                                ->get()->result();
+                $sql = $this->db->query('SELECT id_departamentos, descr_departamentos FROM departamentos ORDER BY descr_departamentos ASC');
+                foreach ($sql->result() as $reg)
+                {
+                    $data[$reg->id_departamentos] = $reg->descr_departamentos;
+                }
+                return $data;
             }
 
             //REGISTRA EL CONTENIDO PARA LOS RECONOCIMIENTOS
@@ -294,7 +296,7 @@ class Personacyt_model extends CI_Model {
     public function investigacion($id)
     {
         $this->db->select('*');
-        $this->db->from('investigacion');
+        $this->db->from('reg_investigacion');
         $this->db->join('empleadoras','entidad_empleadora_id = id_empleadoras','inner');
         $this->db->join('sector','sector_estancia_id = id_sector','inner');
         $this->db->join('dependencias','dependencia_id = id_dependencias','inner');
@@ -321,7 +323,7 @@ class Personacyt_model extends CI_Model {
             //REGISTRA EL CONTENIDO PARA LOS RECONOCIMIENTOS
             public function alta_investigacion($data)
             {
-                return $this->db->insert('investigacion', $data);
+                return $this->db->insert('reg_investigacion', $data);
             }
 
 
@@ -481,7 +483,7 @@ class Personacyt_model extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('reg_experiencia');
-        $this->db->join('empleadoras','entidad_id = id_empleadoras','inner');
+        $this->db->join('dirigido_sector','id_dirigido_sector = entidad_id','LEFT');
         $this->db->where('usuario_id',$id);
 
         $query = $this->db->get();
@@ -688,6 +690,42 @@ class Personacyt_model extends CI_Model {
             }
 
 
+    //LISTA TODAS LAS RESEÑAS
+    public function resenas($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_resenas');
+        $this->db->join('tipo_publicacion','id_tipo_publicacion = tipo_publicacion_id','LEFT');
+        $this->db->where('usuario_id',$id);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+            //LISTA EL CONTENIDO PARA EL TIPO DE PUBLICACIÓN
+            public function tipo_publicacion()
+            {
+                $sql = $this->db->query('SELECT * FROM tipo_publicacion ORDER BY nombre_publicacion ASC');
+                foreach ($sql->result() as $reg)
+                {
+                    $data[$reg->id_tipo_publicacion] = $reg->nombre_publicacion;
+                }
+                return $data;
+            }
+
+            //REGISTRA EL CONTENIDO PARA REPORTE TÉCNICO
+            public function alta_resenas($data)
+            {
+                return $this->db->insert('reg_resenas', $data);
+            }
+
     //LISTA TODOS LOS FINANCIAMIENTOS
     public function financiamientos($id)
     {
@@ -741,6 +779,7 @@ class Personacyt_model extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('reg_grupos');
+       $this->db->join('dirigido_sector','id_dirigido_sector = sectores_id','inner');
         $this->db->where('usuario_id',$id);
 
         $query = $this->db->get();
@@ -784,10 +823,10 @@ class Personacyt_model extends CI_Model {
             //LISTA EL CONTENIDO PARA EL TIPO DE PATENTE
             public function tipo_patente()
             {
-                $sql = $this->db->query('SELECT * FROM tipo_patente ORDER BY nombre_tipo ASC');
+                $sql = $this->db->query('SELECT * FROM tipo_patente ORDER BY nombres_tipo ASC');
                 foreach ($sql->result() as $reg)
                 {
-                    $data[$reg->id_tipo_patente] = $reg->nombre_tipo;
+                    $data[$reg->id_tipo_patente] = $reg->nombres_tipo;
                 }
                 return $data;
             }
@@ -798,7 +837,8 @@ class Personacyt_model extends CI_Model {
                 return $this->db->insert('reg_patente', $data);
             }
 
-    //LISTA TODAS LAS PROYECTOS
+
+    //LISTA TODOS LAS PROYECTOS
     public function proyectos($id)
     {
         $this->db->select('*');
@@ -838,18 +878,539 @@ class Personacyt_model extends CI_Model {
 
 
 
-    public function Constancias($slug = FALSE)
+    public function congreso_pdf($id)
     {
-        $this->db->select('*');
-        $this->db->from('usuarios');
-        $this->db->join('paises p','pais_id = p.id_paises','inner');
-        $this->db->join('estado_civil','estado_civil = id_civil','inner');
-        $this->db->join('nacionalidad','nacionalidad = id_nacionalidad','inner');
-        $this->db->join('estado','estado_id = id_estado','inner');
-        $this->db->join('municipio','municipio_id = id_municipio','inner');
-        $this->db->where('id_usuario',$slug);
+        $this->db->select('id_congresos, id_usuario, nombre, a_paterno, a_materno, nombre_sni, correo_personal, titulo, anio_publicacion, descr_mezcla, fecha_inicio, fecha_final, nombre_organizador, nombre_pa, fecha_captura');
+        $this->db->from('reg_congresos');
+        $this->db->join('usuarios','id_usuario = usuario_id','inner');
+        $this->db->join('status_sni','id_sni = estado_sni','inner');
+        $this->db->join('paises','id_paises = paises_id','inner');
+        $this->db->where('id_congresos',$id);
 
         $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function reconocimiento_pdf($id)
+    {
+        $this->db->select('id_reconocimientos, id_usuario, nombre, a_paterno, a_materno, correo_personal, descripcion, anio_reconocimiento, inst_otorga, nombre_pa, dependencia');
+        $this->db->from('reg_reconocimientos');
+        $this->db->join('usuarios','id_usuario = usuario_id','inner');
+        $this->db->join('paises','id_paises = paises_id','inner');
+        $this->db->where('id_reconocimientos',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function idioma_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_idiomas');
+        $this->db->join('usuarios','id_usuario = usuario_id','inner');
+        $this->db->join('lenguaje','id_lenguaje = lenguaje_id','inner');
+        $this->db->join('niveles','id_niveles = nivel_habla_id','inner');
+        $this->db->where('id_idiomas',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function academica_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_academica');
+        $this->db->join('usuarios','id_usuario = usuario_id','left');
+        $this->db->join('grado','id_grado = grado_id','left');
+        $this->db->join('paises','id_paises = paises_id','left');
+        $this->db->join('estado','id_estado = estados_id','left');
+        $this->db->join('campo_conocimiento','id_conocimiento = campo_id','left');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','left');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','left');
+        $this->db->join('estatus_grado','id_est_grado = estatus_id','left');
+        $this->db->join('sector','id_sector = sector_id','left');
+        $this->db->where('id_academica',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function investigacion_pdf($id)
+    {
+        $this->db->select('id_usuario, id_investigacion, nombre, a_paterno, a_materno, fecha_inicio,fecha_fin,nombre_ent,nom_empleador,descrp_entidad,descr_sector,institucion_empleadora,descr_dependencia,descr_departamentos,descrp_estancia');
+        $this->db->from('reg_investigacion');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('empleadoras','id_empleadoras = entidad_empleadora_id','LEFT');
+        $this->db->join('sector','id_sector = sector_estancia_id','LEFT');
+        $this->db->join('dependencias','id_dependencias = dependencia_id','LEFT');
+        $this->db->join('departamentos','id_departamentos = departamento_id','LEFT');
+        $this->db->where('id_investigacion',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+
+    public function adscripcion_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_adscripciones');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('empleadoras','id_empleadoras = entidad_empleadora_id','LEFT');
+        $this->db->join('sector','id_sector = sector_estancia_id','LEFT');
+        $this->db->join('estado','id_estado = estados_id','LEFT');
+        $this->db->join('municipio','id_municipio = municipio_id','LEFT');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('dependencias','id_dependencias = dependencia_id','LEFT');
+        $this->db->join('departamentos','id_departamentos = departamento_id','LEFT');
+        $this->db->where('id_adscripcion',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+
+    public function desarrollos_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_desarrollos_tecnologicos');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_autor','id_tipo = tipo_autor_id','LEFT');
+        $this->db->join('sector','id_sector = sector_id','LEFT');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('dependencias','id_dependencias = dependencia_id','LEFT');
+        $this->db->join('departamentos','id_departamentos = departamento_id','LEFT');
+        $this->db->join('campo_conocimiento','id_conocimiento = campos_id','LEFT');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','LEFT');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','LEFT');
+        $this->db->join('sector_economico','id_economico = economico_id','LEFT');
+        $this->db->join('rama_economica','id_rama = rama_id','LEFT');
+        $this->db->join('clase_economica','id_clase = clase_id','LEFT');
+        $this->db->where('id_desarrollos',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function difusion_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_difusion');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_participacion','id_tipo_participacion = participacion_id','LEFT');
+        $this->db->join('dirigido_sector','id_dirigido_sector = dirigido_id','LEFT');
+        $this->db->where('id_difusion',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function experiencia_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_experiencia');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('dirigido_sector','id_dirigido_sector = entidad_id','LEFT');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('campo_conocimiento','id_conocimiento = campos_id','LEFT');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','LEFT');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','LEFT');
+        $this->db->join('sector','id_sector = sectores_id','LEFT');
+        $this->db->join('dependencias','id_dependencias = dependencia_id','LEFT');
+        $this->db->join('departamentos','id_departamentos = departamento_id','LEFT');
+        $this->db->join('sector_economico','id_economico = economico_id','LEFT');
+        $this->db->join('rama_economica','id_rama = rama_id','LEFT');
+        $this->db->join('clase_economica','id_clase = clase_id','LEFT');
+
+        
+        $this->db->where('id_experiencia',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+
+    public function docencia_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_docencia');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('empleadoras','entidad_empleadora_id = id_empleadoras','inner');
+        $this->db->join('sector','id_sector = sectores_id','LEFT');
+        $this->db->join('dependencias','id_dependencias = dependencia_id','LEFT');
+        $this->db->join('departamentos','id_departamentos = departamento_id','LEFT');
+        $this->db->join('grado','grado_id = id_grado','inner');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('campo_conocimiento','id_conocimiento = campos_id','LEFT');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','LEFT');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','LEFT');
+        $this->db->where('id_docencia',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+
+    public function tesis_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_tesis');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('grado','grado_id = id_grado','inner');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('empleadoras','entidad_empleadora_id = id_empleadoras','inner');
+        $this->db->join('sector','id_sector = sectores_id','LEFT');
+        $this->db->join('dependencias','id_dependencias = dependencia_id','LEFT');
+        $this->db->join('departamentos','id_departamentos = departamento_id','LEFT');
+        $this->db->join('campo_conocimiento','id_conocimiento = campos_id','LEFT');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','LEFT');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','LEFT');
+        $this->db->where('id_tesis',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function capitulo_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_capitulo');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_autor','id_tipo = tipo_autor_id','LEFT');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('campo_conocimiento','id_conocimiento = campos_id','LEFT');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','LEFT');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','LEFT');
+        $this->db->where('id_capitulos',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function articulos_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_articulos');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_autor','id_tipo = tipo_autor_id','LEFT');
+        $this->db->join('estatus_articulo','id_estatus_articulos = estatus_articulo_id','LEFT');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('campo_conocimiento','id_conocimiento = campos_id','LEFT');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','LEFT');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','LEFT');
+        $this->db->where('id_articulos',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function libro_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_libros');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_libro','id_libros = tipo_libro_id','LEFT');
+        $this->db->join('tipo_autor','id_tipo = tipo_autor_id','LEFT');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('campo_conocimiento','id_conocimiento = campos_id','LEFT');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','LEFT');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','LEFT');
+        $this->db->join('lenguaje','id_lenguaje = lenguaje_id','LEFT');
+        $this->db->where('id_libros',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function reporte_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_reporte_tecnico');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_autor','id_tipo = tipo_autor_id','LEFT');
+        $this->db->where('id_reporte',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function resena_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_resenas');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_autor','id_tipo = tipo_autor_id','LEFT');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('tipo_publicacion','id_tipo_publicacion = tipo_publicacion_id','LEFT');
+        $this->db->join('campo_conocimiento','id_conocimiento = campos_id','LEFT');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','LEFT');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','LEFT');
+        $this->db->where('id_resena',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+
+    public function financiamiento_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_financiamiento');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_apoyo','id_tipo_apoyo = tipo_apoyo_id','LEFT');
+        $this->db->join('tipo_programa','id_tipo_programa = tipo_programa_id','LEFT');
+        $this->db->where('id_financiamiento',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function grupos_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_grupos');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('dirigido_sector','id_dirigido_sector = sectores_id','LEFT');
+        $this->db->join('dependencias','id_dependencias = dependencia_id','LEFT');
+        $this->db->join('departamentos','id_departamentos = departamento_id','LEFT');
+        $this->db->where('id_grupos',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function patentes_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_patente');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_patente','id_tipo_patente = tipo_patente_id','LEFT');
+        $this->db->join('tipo_autor','id_tipo = tipo_autor_id','LEFT');
+        $this->db->join('paises','id_paises = paises_id','LEFT');
+        $this->db->join('sector_economico','id_economico = economico_id','LEFT');
+        $this->db->join('rama_economica','id_rama = rama_id','LEFT');
+        $this->db->join('clase_economica','id_clase = clase_id','LEFT');
+        $this->db->where('id_patente',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function proyectos_pdf($id)
+    {
+        $this->db->select('*');
+        $this->db->from('reg_proyectos');
+        $this->db->join('usuarios','id_usuario = usuario_id','INNER');
+        $this->db->join('tipo_proyecto','tipo_proyecto_id = id_tipo_proyecto','LEFT');
+        $this->db->join('empleadoras','id_empleadoras = entidad_empleadora_id','LEFT');
+        $this->db->join('sector','id_sector = sector_id','LEFT');
+        $this->db->join('dependencias','id_dependencias = dependencia_id','LEFT');
+        $this->db->join('departamentos','id_departamentos = departamento_id','LEFT');
+        $this->db->join('campo_conocimiento','id_conocimiento = campos_id','LEFT');
+        $this->db->join('disciplinas','id_disciplina = disciplina_id','LEFT');
+        $this->db->join('subdisciplinas','id_subdisciplinas = subdisciplina_id','LEFT');
+        $this->db->join('sector_economico','id_economico = economico_id','LEFT');
+        $this->db->join('rama_economica','id_rama = rama_id','LEFT');
+        $this->db->join('clase_economica','id_clase = clase_id','LEFT');
+        $this->db->where('id_proyectos',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+
+    public function datoss_pdf($id)
+    {
+        $this->db->select('c.id_usuario, c.nombre, c.a_paterno, c.a_materno, b.nombre_entidad, c.rfc, a.institucion');
+        $this->db->from('reg_academica a','reg_adscripciones b','usuarios c');
+        $this->db->from('reg_adscripciones b');
+        $this->db->from('usuarios c');
+        $this->db->limit('1');
+        $this->db->where('id_usuario',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0 ) 
+        {
+            return $query->result();
+
+        }else{
+
+            return false;
+        }
+    }
+
+    public function datos_pdf($id)
+    {
+        $this->db->select('c.id_usuario, c.nombre, c.a_paterno, c.a_materno,c.rfc, d.descr_grado, a.institucion');
+        $this->db->from('reg_academica a');
+        $this->db->join('usuarios c','c.id_usuario = a.usuario_id','INNER');
+        $this->db->join('grado d','d.id_grado = a.grado_id','INNER');
+        $this->db->limit('1');
+        $this->db->where('id_usuario = 1');
+
+        $query = $this->db->get();
+
         if ($query->num_rows() > 0 ) 
         {
             return $query->result();
