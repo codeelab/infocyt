@@ -302,7 +302,7 @@ class CI_Config {
 	 * @param	string	$protocol
 	 * @return	string
 	 */
-	public function base_url($uri = '', $protocol = NULL)
+	public function ''base_url($uri = '', $protocol = NULL)
 	{
 		$base_url = $this->slash_item('base_url');
 
